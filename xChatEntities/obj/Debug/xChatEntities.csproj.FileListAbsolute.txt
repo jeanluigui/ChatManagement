@@ -1,0 +1,6 @@
+D:\SolucionesVS\Chat\xChatAPI\xChatEntities\bin\Debug\xChatEntities.dll
+D:\SolucionesVS\Chat\xChatAPI\xChatEntities\bin\Debug\xChatEntities.pdb
+D:\SolucionesVS\Chat\xChatAPI\xChatEntities\obj\Debug\xChatEntities.csprojAssemblyReference.cache
+D:\SolucionesVS\Chat\xChatAPI\xChatEntities\obj\Debug\xChatEntities.csproj.CoreCompileInputs.cache
+D:\SolucionesVS\Chat\xChatAPI\xChatEntities\obj\Debug\xChatEntities.dll
+D:\SolucionesVS\Chat\xChatAPI\xChatEntities\obj\Debug\xChatEntities.pdb
