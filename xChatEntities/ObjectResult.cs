@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace xChatEntities
 {
+    /// <summary>
+    /// Objeto que devuelve el resultado de una operación.
+    /// </summary>
     public class ObjectResult
     {
         public int Id { get; set; }

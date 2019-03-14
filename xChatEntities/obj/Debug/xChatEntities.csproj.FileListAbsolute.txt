@@ -4,3 +4,9 @@ D:\SolucionesVS\Chat\xChatAPI\xChatEntities\obj\Debug\xChatEntities.csprojAssemb
 D:\SolucionesVS\Chat\xChatAPI\xChatEntities\obj\Debug\xChatEntities.csproj.CoreCompileInputs.cache
 D:\SolucionesVS\Chat\xChatAPI\xChatEntities\obj\Debug\xChatEntities.dll
 D:\SolucionesVS\Chat\xChatAPI\xChatEntities\obj\Debug\xChatEntities.pdb
+D:\GitRepositories\xChat\xChatEntities\bin\Debug\xChatEntities.dll
+D:\GitRepositories\xChat\xChatEntities\bin\Debug\xChatEntities.pdb
+D:\GitRepositories\xChat\xChatEntities\obj\Debug\xChatEntities.csprojAssemblyReference.cache
+D:\GitRepositories\xChat\xChatEntities\obj\Debug\xChatEntities.csproj.CoreCompileInputs.cache
+D:\GitRepositories\xChat\xChatEntities\obj\Debug\xChatEntities.dll
+D:\GitRepositories\xChat\xChatEntities\obj\Debug\xChatEntities.pdb
