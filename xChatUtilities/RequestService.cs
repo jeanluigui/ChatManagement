@@ -16,9 +16,9 @@ namespace xChatUtilities
         /// <param name="metodo"></param>
         /// <param name="objectRequest"></param>
         /// <returns></returns>
-        public ObjectResult Execute<T>(string url, string metodo, T objectRequest)
+        public ObjectResult<T> Execute<T>(string url, string metodo, T objectRequest)
         {
-            ObjectResult objectResult = new ObjectResult();
+            ObjectResult<T> objectResult = new ObjectResult<T>();
 
             string result = string.Empty;
 
@@ -46,7 +46,7 @@ namespace xChatUtilities
                     result = oStreamReader.ReadToEnd();
                 }
 
-                objectResult = JsonConvert.DeserializeObject<ObjectResult>(result);
+                objectResult = JsonConvert.DeserializeObject<ObjectResult<T>>(result);
             }
             catch (TimeoutException te)
             {
