@@ -4,15 +4,12 @@ using System.IO;
 using System.Net;
 using xChatEntities;
 
-namespace xChatWeb.Utils
+namespace xChatUtilities
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class RequestService
     {
         /// <summary>
-        /// 
+        /// Utilidad que permite ejecutar un servicio API.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="url"></param>
@@ -22,7 +19,6 @@ namespace xChatWeb.Utils
         public ObjectResult Execute<T>(string url, string metodo, T objectRequest)
         {
             ObjectResult objectResult = new ObjectResult();
-            objectResult.Id = 0;
 
             string result = string.Empty;
 
@@ -34,8 +30,8 @@ namespace xChatWeb.Utils
 
                 request.Method = metodo;
                 request.PreAuthenticate = true;
-                request.ContentType = "application/json;charset=utf-8";
-                request.Timeout = 15000;
+                request.ContentType = Constants.ApiContentType;
+                request.Timeout = Constants.ApiTimeOut;
 
                 using (var oStreamWriter = new StreamWriter(request.GetRequestStream()))
                 {
@@ -54,16 +50,17 @@ namespace xChatWeb.Utils
             }
             catch (TimeoutException te)
             {
-                objectResult.Id = 2;
-                objectResult.Message = $"tiempo expirado: {te.Message}";
+                objectResult.Id = (Int32)CustomExceptionEnum.TimeOutException;
+                objectResult.Message = te.Message;
             }
             catch (Exception ex)
             {
-                objectResult.Id = 2;
+                objectResult.Id = (Int32)CustomExceptionEnum.NotControllerException;
                 objectResult.Message = ex.Message;
             }
 
             return objectResult;
         }
     }
+
 }

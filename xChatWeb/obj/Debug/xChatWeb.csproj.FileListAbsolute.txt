@@ -176,3 +176,16 @@ D:\GitRepositories\xChat\xChatWeb\obj\Debug\xChatWeb.csproj.CoreCompileInputs.ca
 D:\GitRepositories\xChat\xChatWeb\obj\Debug\xChatWeb.csproj.CopyComplete
 D:\GitRepositories\xChat\xChatWeb\obj\Debug\xChatWeb.dll
 D:\GitRepositories\xChat\xChatWeb\obj\Debug\xChatWeb.pdb
+D:\GitRepositories\xChat\xChatWeb\bin\Microsoft.AspNet.SignalR.Core.dll
+D:\GitRepositories\xChat\xChatWeb\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+D:\GitRepositories\xChat\xChatWeb\bin\Microsoft.Owin.dll
+D:\GitRepositories\xChat\xChatWeb\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\GitRepositories\xChat\xChatWeb\bin\Microsoft.Owin.Security.dll
+D:\GitRepositories\xChat\xChatWeb\bin\Owin.dll
+D:\GitRepositories\xChat\xChatWeb\bin\Microsoft.AspNet.SignalR.Core.pdb
+D:\GitRepositories\xChat\xChatWeb\bin\Microsoft.AspNet.SignalR.Core.xml
+D:\GitRepositories\xChat\xChatWeb\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+D:\GitRepositories\xChat\xChatWeb\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+D:\GitRepositories\xChat\xChatWeb\bin\Microsoft.Owin.xml
+D:\GitRepositories\xChat\xChatWeb\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\GitRepositories\xChat\xChatWeb\bin\Microsoft.Owin.Security.xml

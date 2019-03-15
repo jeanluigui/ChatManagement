@@ -5,12 +5,13 @@ namespace xChatAPI.Controllers
 {
     public class UserController : ApiController
     {
-        public ObjectResult Saludar()
+        public ObjectResult ConversationRequest(ConversationRequestEntity conversationRequestEntity)
         {
-            ObjectResult result = new ObjectResult();
-
-            result.Id = 100;
-            result.Message = "Hola Mundo...";
+            ObjectResult result = new ObjectResult
+            {
+                Id = 100,
+                Message = "Hola Mundo..."
+            };
 
             return result;
         }
