@@ -9,7 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -27,7 +27,7 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div>*@
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -39,5 +39,25 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script src="~/Scripts/jquery.signalR-2.4.0.js"></script>
+    <script src="@xChatEntities.Constants.Url.SignalRHub"></script>
+
+    <script>
+        $(function ()
+        {
+            $.support.cors = true;
+            $.connection.hub.url = "@xChatEntities.Constants.Url.SignalR";
+            var Counter = $.connection.counterHub;
+
+            Counter.client.enterUser = function () {
+                alert("entro alguien!");
+            };
+
+            $.connection.hub.start().done();
+
+        });
+    </script>
+
 </body>
 </html>

@@ -152,3 +152,5 @@ D:\GitRepositories\xChat\xChatAPI\bin\Microsoft.Owin.xml
 D:\GitRepositories\xChat\xChatAPI\bin\Microsoft.Owin.Cors.xml
 D:\GitRepositories\xChat\xChatAPI\bin\Microsoft.Owin.Host.SystemWeb.xml
 D:\GitRepositories\xChat\xChatAPI\bin\Microsoft.Owin.Security.xml
+D:\GitRepositories\xChat\xChatAPI\bin\Newtonsoft.Json.pdb
+D:\GitRepositories\xChat\xChatAPI\bin\Microsoft.Web.Infrastructure.dll

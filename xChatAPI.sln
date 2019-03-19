@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xChatEntities", "xChatEntit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xChatUtilities", "xChatUtilities\xChatUtilities.csproj", "{24F0CAB0-0B14-4D8D-9F17-098406E00F22}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xSqlService", "xSqlService\xSqlService.csproj", "{74B038BD-9859-4C45-A494-FBFB4C3E05A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{24F0CAB0-0B14-4D8D-9F17-098406E00F22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24F0CAB0-0B14-4D8D-9F17-098406E00F22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24F0CAB0-0B14-4D8D-9F17-098406E00F22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74B038BD-9859-4C45-A494-FBFB4C3E05A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74B038BD-9859-4C45-A494-FBFB4C3E05A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74B038BD-9859-4C45-A494-FBFB4C3E05A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74B038BD-9859-4C45-A494-FBFB4C3E05A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

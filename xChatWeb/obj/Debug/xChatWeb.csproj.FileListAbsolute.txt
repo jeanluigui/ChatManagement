@@ -189,3 +189,6 @@ D:\GitRepositories\xChat\xChatWeb\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
 D:\GitRepositories\xChat\xChatWeb\bin\Microsoft.Owin.xml
 D:\GitRepositories\xChat\xChatWeb\bin\Microsoft.Owin.Host.SystemWeb.xml
 D:\GitRepositories\xChat\xChatWeb\bin\Microsoft.Owin.Security.xml
+D:\GitRepositories\xChat\xChatWeb\bin\xChatUtilities.dll
+D:\GitRepositories\xChat\xChatWeb\bin\xChatUtilities.pdb
+D:\GitRepositories\xChat\xChatWeb\bin\Newtonsoft.Json.pdb

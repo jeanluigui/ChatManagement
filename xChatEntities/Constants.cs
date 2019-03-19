@@ -43,7 +43,17 @@ namespace xChatEntities
             /// </summary>
             public static string Listen
             {
-                get { return URL_API_CHAT + ""; }
+                get { return URL_API_CHAT + "api/user/"; }
+            }
+
+            public static string SignalR
+            {
+                get { return URL_API_CHAT + "signalr/"; }
+            }
+
+            public static string SignalRHub
+            {
+                get { return URL_API_CHAT + "signalr/hubs"; }
             }
         }
     }
