@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{63FB9923-832C-4950-AF53-123CA43B0622}</ProjectGuid>
+    <ProjectGuid>{84D86335-88FD-479F-805E-2EB3E3452E99}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>xChatEntities</RootNamespace>
-    <AssemblyName>xChatEntities</AssemblyName>
+    <RootNamespace>xChatBusiness</RootNamespace>
+    <AssemblyName>xChatBusiness</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,9 +32,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,17 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountManager.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="ConversationEntity.cs" />
-    <Compile Include="ConversationRequestEntity.cs" />
-    <Compile Include="Enumerators.cs" />
-    <Compile Include="ConversationResponseEntity.cs" />
-    <Compile Include="ListConversationResponseEntity.cs" />
-    <Compile Include="ObjectResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SecurityAccessRequest.cs" />
-    <Compile Include="SecurityAccessResponseEntity.cs" />
+    <Compile Include="ServiceChatBL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\xChatDAO\xChatDAO.csproj">
+      <Project>{10f2e5dc-e95e-4538-b057-57cc520170d6}</Project>
+      <Name>xChatDAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\xChatEntities\xChatEntities.csproj">
+      <Project>{63FB9923-832C-4950-AF53-123CA43B0622}</Project>
+      <Name>xChatEntities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

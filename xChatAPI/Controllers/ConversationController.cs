@@ -2,7 +2,6 @@
 using System.Data;
 using System.Web.Http;
 using xChatEntities;
-using xSqlService;
 
 namespace xChatAPI.Controllers
 {

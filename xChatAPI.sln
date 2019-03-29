@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xChatUtilities", "xChatUtil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xSqlService", "xSqlService\xSqlService.csproj", "{74B038BD-9859-4C45-A494-FBFB4C3E05A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xChatBusiness", "xChatBusiness\xChatBusiness.csproj", "{84D86335-88FD-479F-805E-2EB3E3452E99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xChatDAO", "xChatDAO\xChatDAO.csproj", "{10F2E5DC-E95E-4538-B057-57CC520170D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{74B038BD-9859-4C45-A494-FBFB4C3E05A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74B038BD-9859-4C45-A494-FBFB4C3E05A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74B038BD-9859-4C45-A494-FBFB4C3E05A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84D86335-88FD-479F-805E-2EB3E3452E99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84D86335-88FD-479F-805E-2EB3E3452E99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84D86335-88FD-479F-805E-2EB3E3452E99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84D86335-88FD-479F-805E-2EB3E3452E99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10F2E5DC-E95E-4538-B057-57CC520170D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10F2E5DC-E95E-4538-B057-57CC520170D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10F2E5DC-E95E-4538-B057-57CC520170D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10F2E5DC-E95E-4538-B057-57CC520170D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

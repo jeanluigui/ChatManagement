@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
+using xChatBusiness;
+using xChatEntities;
 
 namespace xChatAPI
 {
@@ -17,13 +15,50 @@ namespace xChatAPI
             //               puede ser cualquier nombre, siempre en conntacion Cammell (minúscula, mayúscula).
             Clients.All.enterUser();
 
+            string connectId = Context.ConnectionId;
+
+            string name = Context.User.Identity.Name;
+
             return base.OnConnected();
         }
 
-        public void Send(int accountManagerId, string userName, int userId, string message)
+        public void SendToManager(ConversationEntity conversationEntity)
         {
-            string fecha = DateTime.Now.ToString();
-            Clients.All.sendChat(userName, message, fecha, userId);
+            if (conversationEntity.ChatId.Equals(0))
+            {
+                conversationEntity.UserToken = Context.ConnectionId;
+                conversationEntity.ChatId = ServiceChatBL
+                    .Instancia
+                    .ChatCreate(conversationEntity);
+            }
+
+            ServiceChatBL.Instancia.ChatMessageCreate(conversationEntity);
+
+            Clients.Client(conversationEntity.ManagerToken).receivedFromUser(conversationEntity);
+            Clients.Caller.receivedFromManager(conversationEntity);
         }
+
+        public void SendToUser(ConversationEntity conversationEntity)
+        {
+            ServiceChatBL.Instancia.ChatMessageCreate(conversationEntity);
+
+            Clients.Client(conversationEntity.UserToken).receivedFromManager(conversationEntity);
+            Clients.Caller.receivedFromUser(conversationEntity);
+        }
+
+        public void AccountManagerConnect(AccountManagerEntity accountManagerEntity)
+        {
+            accountManagerEntity.Token = Context.ConnectionId;
+            ServiceChatBL.Instancia.AccountManagerConnect(accountManagerEntity);
+            Clients.Caller.sucessConnect(Context.ConnectionId);
+        }
+
+        public void AccountManagerDisconnect(AccountManagerEntity accountManagerEntity)
+        {
+            accountManagerEntity.Token = Context.ConnectionId;
+            ServiceChatBL.Instancia.AccountManagerDisconnect(accountManagerEntity);
+            
+        }
+
     }
 }

@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
@@ -118,7 +119,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Business\SecurityAccessBL.cs" />
     <Compile Include="Controllers\ConversationController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="CounterHub.cs" />
@@ -142,13 +142,13 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\xChatBusiness\xChatBusiness.csproj">
+      <Project>{84D86335-88FD-479F-805E-2EB3E3452E99}</Project>
+      <Name>xChatBusiness</Name>
+    </ProjectReference>
     <ProjectReference Include="..\xChatEntities\xChatEntities.csproj">
       <Project>{63fb9923-832c-4950-af53-123ca43b0622}</Project>
       <Name>xChatEntities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\xSqlService\xSqlService.csproj">
-      <Project>{74b038bd-9859-4c45-a494-fbfb4c3e05a0}</Project>
-      <Name>xSqlService</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

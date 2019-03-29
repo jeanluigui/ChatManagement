@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Broadcast</title>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.0.js"></script>
+    <script src="http://localhost:58002/signalr/hubs"></script>
+
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        $(function () {
+
+            $.support.cors = true;
+
+            $.connection.hub.url = "http://localhost:58002/signalr/";
+
+            var broadcaster = $.connection.counterHub;
+
+            broadcaster.client.sendChat = function (text) {
+                $('#messages').append('<li class="list-group-item">' + text + '</li>');
+            };
+
+            $.connection.hub.start().done(function () {
+                $("#broadcast").click(function () {
+                    broadcaster.server.Send($('#msg').val());
+                    $("#msg").val("").focus();
+                });
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <div class="jumbotron text-center">
+        <h1>ASP.NET SignalR</h1>
+        <p>Broadcast usando Hubs</p>
+    </div>
+    <div class="container">
+        <input type="text" id="msg" class="form-control" />
+        <input type="button" id="broadcast" value="Broadcast" class="btn btn-success" />
+
+        <ul id="messages" class="list-group border"></ul>
+    </div>
+</body>
+</html>

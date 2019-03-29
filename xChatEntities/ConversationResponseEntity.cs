@@ -9,6 +9,8 @@ namespace xChatEntities
 {
     public class ConversationResponseEntity
     {
+        public ConversationResponseEntity() { }
+
         public ConversationResponseEntity(DataRow item)
         {
             if (item == null) return;

@@ -12,6 +12,7 @@ namespace xChatEntities
         public int AccountManagerId { get; set; }
         public string User { get; set; }
         public string Email { get; set; }
+        public string Message { get; set; }
         public DateTime DateMessage { get; set; }
     }
 }

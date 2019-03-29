@@ -11,29 +11,7 @@ namespace xChatWeb.Controllers
         {
             ViewBag.error = "";
 
-            try
-            {
-                ConversationRequestEntity conversationRequestEntity;
 
-                conversationRequestEntity = new ConversationRequestEntity()
-                {
-                    User = "Jesus"
-                    ,
-                    Email = "jhurtado73@hotmail.com"
-                    ,
-                    ModuleAppId = 1
-                    ,
-                    AccountManagerId = 0
-                    ,
-                    DateMessage = DateTime.Now
-                };
-
-                ObjectResult result = RequestService.Execute(Constants.Url.Listen, "post", conversationRequestEntity);
-            }
-            catch(Exception ex)
-            {
-                ViewBag.error = ex.Message;
-            }
 
             return View();
         }
