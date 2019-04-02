@@ -49,10 +49,12 @@
     <Compile Include="Enumerators.cs" />
     <Compile Include="ConversationResponseEntity.cs" />
     <Compile Include="ListConversationResponseEntity.cs" />
+    <Compile Include="ListUserConnect.cs" />
     <Compile Include="ObjectResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityAccessRequest.cs" />
     <Compile Include="SecurityAccessResponseEntity.cs" />
+    <Compile Include="UserConnect.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

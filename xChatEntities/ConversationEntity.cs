@@ -13,6 +13,7 @@ namespace xChatEntities
         public string DateMessage { get; set; }
         public string UserToken { get; set; }
         public string ManagerToken { get; set; }
+        public short IsSendUser { get; set; }
 
         public ConversationEntity() { }
     }

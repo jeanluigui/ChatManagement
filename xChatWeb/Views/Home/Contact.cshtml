@@ -15,10 +15,41 @@
         <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
         <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
     </address>*@
+@Model xChatEntities.ListUserConnect;
 
 @{
     ViewBag.Title = "Home Page";
 }
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-4">
+
+            @foreach (var userConnect in Model.Elementos)
+            {
+                <p>@userConnect.UserName</p>
+            }
+
+            @*<div class="list-group-item-info" id="item1">
+                <div class="titulo"><p>User 01</p></div>
+            </div>
+            <div class="list-group-item-info" id="item2">
+                <div class="titulo"><p>User 01</p></div>
+            </div>
+            <div class="list-group-item-info" id="item3">
+                <div class="titulo"><p>User 01</p></div>
+            </div>
+            <div class="list-group-item-info" id="item4">
+                <div class="titulo"><p>User 01</p></div>
+            </div>*@
+        </div>
+        <div class="col-lg-8">
+
+        </div>
+    </div>
+
+</div>
 
 <div class="container">
     <div class="row">

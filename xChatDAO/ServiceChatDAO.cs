@@ -51,6 +51,7 @@ namespace xChatDAO
                 htparam["@p_chatid"] = conversationEntity.ChatId;
                 htparam["@p_chatmessagesentry"] = conversationEntity.Message;
                 htparam["@p_chatdate"] = DateTime.Now;
+                htparam["@p_chatmessageisusersend"] = conversationEntity.IsSendUser;
 
                 DataRow drresult = xSqlService.XirectServiceSQL.Instancia.EjecutarRegistro("chat.ChatMessages", "Insert", htparam);
 
