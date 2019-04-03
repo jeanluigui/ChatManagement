@@ -62,6 +62,7 @@ namespace xChatUtilities
 
             return objectResult;
         }
+
     }
 
 }

@@ -9,7 +9,7 @@ namespace xChatEntities
 {
     public class UserConnect
     {
-        public int UserId { get; set; }
+        public int ChatId { get; set; }
         public string UserToken { get; set; }
         public string UserName { get; set; }
         public string UserEmail { get; set; }
@@ -20,10 +20,10 @@ namespace xChatEntities
         {
             if (drow == null) return;
 
-            UserId = Convert.ToInt32(drow["userid"]);
-            UserToken = drow["usertoken"].ToString();
-            UserName = drow["username"].ToString();
-            UserEmail = drow["useremail"].ToString();
+            ChatId = Convert.ToInt32(drow["ChatId"]);
+            UserToken = drow["UserToken"].ToString();
+            UserName = drow["UserName"].ToString();
+            UserEmail = drow["UserEMail"].ToString();
         }
 
     }

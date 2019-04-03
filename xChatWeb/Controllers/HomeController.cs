@@ -27,13 +27,22 @@ namespace xChatWeb.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            ObjectRequest objectRequest = new ObjectRequest()
+            {
+                SenderObject = 1
+            };
+
+            ObjectResult result = RequestService.Execute(Constants.UrlApiService.GetListUserConnectByAccountManagerId
+                , "POST"
+                , objectRequest);
+
             ListUserConnect listUserConnect = new ListUserConnect
             {
                 Elementos = new System.Collections.Generic.List<UserConnect>
             {
                 new UserConnect()
                 {
-                    UserId = 1,
+                    ChatId = 1,
                     UserEmail = "correo1@correo.com",
                     UserName = "Anonimo 01",
                     UserToken = "token12345678"
@@ -41,7 +50,7 @@ namespace xChatWeb.Controllers
 
                 new UserConnect()
                 {
-                    UserId = 1,
+                    ChatId = 1,
                     UserEmail = "correo2@correo.com",
                     UserName = "Anonimo 02",
                     UserToken = "token12345678"
@@ -49,7 +58,7 @@ namespace xChatWeb.Controllers
 
                 new UserConnect()
                 {
-                    UserId = 1,
+                    ChatId = 1,
                     UserEmail = "correo3@correo.com",
                     UserName = "Anonimo 03",
                     UserToken = "token12345678"
@@ -57,7 +66,7 @@ namespace xChatWeb.Controllers
 
                 new UserConnect()
                 {
-                    UserId = 1,
+                    ChatId = 1,
                     UserEmail = "correo4@correo.com",
                     UserName = "Anonimo 04",
                     UserToken = "token12345678"
@@ -65,7 +74,7 @@ namespace xChatWeb.Controllers
 
                 new UserConnect()
                 {
-                    UserId = 1,
+                    ChatId = 1,
                     UserEmail = "correo5@correo.com",
                     UserName = "Anonimo 05",
                     UserToken = "token12345678"

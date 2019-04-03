@@ -50,6 +50,7 @@
     <Compile Include="ConversationResponseEntity.cs" />
     <Compile Include="ListConversationResponseEntity.cs" />
     <Compile Include="ListUserConnect.cs" />
+    <Compile Include="ObjectRequest.cs" />
     <Compile Include="ObjectResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityAccessRequest.cs" />

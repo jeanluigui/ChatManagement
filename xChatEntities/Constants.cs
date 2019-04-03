@@ -33,6 +33,11 @@ namespace xChatEntities
             get { return ConfigurationManager.AppSettings["url_apichat"].ToString(); }
         }
 
+        public static string URL_API_SERVICE
+        {
+            get { return ConfigurationManager.AppSettings["url_apiservice"].ToString(); }
+        }
+
         /// <summary>
         /// Clase que gestiona los métodos del API.
         /// </summary>
@@ -54,6 +59,14 @@ namespace xChatEntities
             public static string SignalRHub
             {
                 get { return URL_API_CHAT + "signalr/hubs"; }
+            }
+        }
+
+        public class UrlApiService
+        {
+            public static string GetListUserConnectByAccountManagerId
+            {
+                get { return URL_API_SERVICE + "api/Conversation/GetListUserConnectByAccountManagerId/"; }
             }
         }
     }

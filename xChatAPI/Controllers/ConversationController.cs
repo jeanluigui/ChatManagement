@@ -1,65 +1,58 @@
 ﻿using System;
 using System.Data;
 using System.Web.Http;
+using xChatBusiness;
 using xChatEntities;
 
 namespace xChatAPI.Controllers
 {
     public class ConversationController : ApiController
     {
+        /// <summary>
+        /// Devuelve la lista de usuarios conectados asociados al Account Manager.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
         [HttpPost]
-        public ObjectResult SecurityAccess(SecurityAccessRequestEntity securityAccessReq)
+        [ActionName("GetListUserConnectByAccountManagerId")]
+        [Route("api/Conversation/GetListUserConnectByAccountManagerId/")]
+        public ListUserConnect GetListUserConnectByAccountManagerId(ObjectRequest objectRequest)
         {
-            DataTable dtresultado = new DataTable();
-
-            SecurityAccessResponseEntity response = new SecurityAccessResponseEntity
-            {
-                Token = Guid.NewGuid().ToString()
-            };
-
-            ObjectResult result = new ObjectResult
-            {
-                Data = response
-            };
-
-            return result;
-        }
-
-        [HttpPost]
-        protected ObjectResult ValidateAccess(SecurityAccessRequestEntity securityAccessReq)
-        {
-            DataTable dtresultado = new DataTable();
-
-            SecurityAccessResponseEntity response = new SecurityAccessResponseEntity
-            {
-                Token = Guid.NewGuid().ToString()
-            };
-
-            ObjectResult result = new ObjectResult
-            {
-                Data = response
-            };
-
-            return result;
-        }
-
-        [HttpPost]
-        public ObjectResult ListConversation(ConversationRequestEntity conversationRequest)
-        {
-            ObjectResult result = new ObjectResult();
-            ListConversationResponseEntity listConversations = new ListConversationResponseEntity();
+            ListUserConnect listUserConnect = new ListUserConnect();
 
             try
             {
-
-                result.Data = listConversations;
+                listUserConnect = ServiceChatManagerBL.Instancia.GetListUserConnectByAccountManagerId(objectRequest);
             }
             catch(Exception ex)
             {
-
+                throw ex;
             }
 
-            return result;
+            return listUserConnect;
         }
+
+        /// <summary>
+        /// Devuelve la conversación de un ChatId.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ListConversationResponseEntity GetListConversationByChatId(ObjectRequest objectRequest)
+        {
+            ListConversationResponseEntity listUserConnect = new ListConversationResponseEntity();
+
+            try
+            {
+                listUserConnect = ServiceChatManagerBL.Instancia.GetListConversationByChatId(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return listUserConnect;
+        }
+
     }
 }
