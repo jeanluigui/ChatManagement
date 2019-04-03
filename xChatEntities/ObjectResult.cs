@@ -9,11 +9,11 @@ namespace xChatEntities
     /// <summary>
     /// Objeto que devuelve el resultado de una operación.
     /// </summary>
-    public class ObjectResult
+    public class ObjectResult<T>
     {
         public int Id { get; set; }
         public string Message { get; set; }
-        public object Data { get; set; }
+        public T Data { get; set; }
 
         public ObjectResult()
         {

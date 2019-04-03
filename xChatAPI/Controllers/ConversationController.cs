@@ -16,7 +16,7 @@ namespace xChatAPI.Controllers
         [HttpPost]
         [ActionName("GetListUserConnectByAccountManagerId")]
         [Route("api/Conversation/GetListUserConnectByAccountManagerId/")]
-        public ListUserConnect GetListUserConnectByAccountManagerId(ObjectRequest objectRequest)
+        public ObjectResult<ListUserConnect> GetListUserConnectByAccountManagerId(ObjectRequest<int> objectRequest)
         {
             ListUserConnect listUserConnect = new ListUserConnect();
 
@@ -29,7 +29,14 @@ namespace xChatAPI.Controllers
                 throw ex;
             }
 
-            return listUserConnect;
+            ObjectResult<ListUserConnect> list = new ObjectResult<ListUserConnect>()
+            {
+                Data = listUserConnect,
+                Id = 0,
+                Message = string.Empty
+            };
+
+            return list;
         }
 
         /// <summary>
@@ -38,7 +45,7 @@ namespace xChatAPI.Controllers
         /// <param name="objectRequest"></param>
         /// <returns></returns>
         [HttpPost]
-        public ListConversationResponseEntity GetListConversationByChatId(ObjectRequest objectRequest)
+        public ListConversationResponseEntity GetListConversationByChatId(ObjectRequest<int> objectRequest)
         {
             ListConversationResponseEntity listUserConnect = new ListConversationResponseEntity();
 

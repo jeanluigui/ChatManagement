@@ -13,7 +13,7 @@ namespace xChatBusiness
             get { return _service; }
         }
 
-        public ListUserConnect GetListUserConnectByAccountManagerId(ObjectRequest objectRequest)
+        public ListUserConnect GetListUserConnectByAccountManagerId(ObjectRequest<int> objectRequest)
         {
             ListUserConnect result = new ListUserConnect();
 
@@ -29,7 +29,7 @@ namespace xChatBusiness
             return result;
         }
 
-        public ListConversationResponseEntity GetListConversationByChatId(ObjectRequest objectRequest)
+        public ListConversationResponseEntity GetListConversationByChatId(ObjectRequest<int> objectRequest)
         {
             ListConversationResponseEntity result = new ListConversationResponseEntity();
 

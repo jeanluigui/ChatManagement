@@ -14,7 +14,7 @@ namespace xChatDAO
             get { return _service; }
         }
 
-        public ListUserConnect GetListUserConnectByAccountManagerId(ObjectRequest objectRequest)
+        public ListUserConnect GetListUserConnectByAccountManagerId(ObjectRequest<int> objectRequest)
         {
             ListUserConnect listUserConnect = new ListUserConnect();
 
@@ -36,7 +36,7 @@ namespace xChatDAO
             return listUserConnect;
         }
 
-        public ListConversationResponseEntity GetListConversationByChatId(ObjectRequest objectRequest)
+        public ListConversationResponseEntity GetListConversationByChatId(ObjectRequest<int> objectRequest)
         {
             ListConversationResponseEntity listUserConnect = new ListConversationResponseEntity();
 

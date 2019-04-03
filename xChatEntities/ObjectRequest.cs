@@ -1,6 +1,6 @@
 ﻿namespace xChatEntities
 {
-    public class ObjectRequest
+    public class ObjectRequest<TRequest>
     {
         /// <summary>
         /// Código de seguridad
@@ -15,7 +15,7 @@
         /// <summary>
         /// Entidad Genérica
         /// </summary>
-        public object SenderObject { get; set; }
+        public TRequest SenderObject { get; set; }
 
     }
 }
