@@ -45,22 +45,27 @@
                     </div>
                 </div>
                 <div class="row inbox_chat">
-                    <div class="col-md-12 chat_list active_chat">
-                        <div class="chat_people">
-                            <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                            <div class="chat_ib">
-                                <h5>Juan Perez <span class="chat_date">Dec 25</span></h5>
+                    @for (int i = 0; i < ViewBag.UserActive.Elementos.Count; i++)
+                    {
+                        <div class="col-md-12 chat_list">
+                            <div class="chat_people">
+                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="fotoUser"> </div>
+                                <div class="chat_ib">
+                                    <h5>@ViewBag.UserActive.Elementos[i].UserEmail</h5>
+                                    <span class="chat_date">@ViewBag.UserActive.Elementos[i].UserName</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 chat_list">
-                        <div class="chat_people">
-                            <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                            <div class="chat_ib">
-                                <h5>Mario Gonzales <span class="chat_date">Dec 25</span></h5>
-                            </div>
-                        </div>
-                    </div>
+                    }
+
+                    @*<div class="col-md-12 chat_list active_chat">
+            <div class="chat_people">
+                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                <div class="chat_ib">
+                    <h5>Mario Gonzales <span class="chat_date">Dec 25</span></h5>
+                </div>
+            </div>
+        </div>*@
                 </div>
             </div>
             <div class="col-md-8 mesgs">

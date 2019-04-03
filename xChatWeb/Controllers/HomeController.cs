@@ -57,7 +57,24 @@ namespace xChatWeb.Controllers
             }
             };
 
+                new UserConnect()
+                {
+                    ChatId = 1,
+                    UserEmail = "correo4@correo.com",
+                    UserName = "Anonimo 04",
+                    UserToken = "token12345678"
+                },
 
+                new UserConnect()
+                {
+                    ChatId = 1,
+                    UserEmail = "correo5@correo.com",
+                    UserName = "Anonimo 05",
+                    UserToken = "token12345678"
+                }
+            }
+            };
+            ViewBag.UserActive = listUserConnect;
             return View();
         }
 
