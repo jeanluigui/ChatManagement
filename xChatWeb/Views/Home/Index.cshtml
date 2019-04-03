@@ -28,6 +28,109 @@
 <input type="hidden" id="chatId" value="0" />
 <input type="hidden" id="managerToken" value="" />
 
+<div id="container">
+    <div class="row" id="chat">
+        <div class="col-md-12">
+            <div class="title">
+                <h3 class="text-center">Chat Online</h3>
+            </div>
+        </div>
+        <div class="col-md-12 inbox_msg">
+            <div class="col-md-4 inbox_people">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="recent_heading">
+                            <h4 class="title-user">Usuarios</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row inbox_chat">
+                    <div class="col-md-12 chat_list active_chat">
+                        <div class="chat_people">
+                            <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                            <div class="chat_ib">
+                                <h5>Juan Perez <span class="chat_date">Dec 25</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 chat_list">
+                        <div class="chat_people">
+                            <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                            <div class="chat_ib">
+                                <h5>Mario Gonzales <span class="chat_date">Dec 25</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 mesgs">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="manager_heading">
+                            <h4 class="title-user">Manager</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row msg_history">
+                    <div class="col-md-12 incoming_msg">
+                        <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                        <div class="received_msg">
+                            <div class="received_withd_msg">
+                                <p>
+                                    Test which is a new approach to have all
+                                    solutions
+                                </p>
+                                <span class="time_date"> 11:01 AM    |    June 9</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 incoming_msg">
+                        <div class="outgoing_msg">
+                            <div class="sent_msg">
+                                <p>
+                                    Test which is a new approach to have all
+                                    solutions
+                                </p>
+                                <span class="time_date"> 11:01 AM    |    June 9</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 incoming_msg">
+                        <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                        <div class="received_msg">
+                            <div class="received_withd_msg">
+                                <p>
+                                    Test which is a new approach to have all
+                                    solutions
+                                </p>
+                                <span class="time_date"> 11:01 AM    |    June 9</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 incoming_msg">
+                        <div class="outgoing_msg">
+                            <div class="sent_msg">
+                                <p>
+                                    Test which is a new approach to have all
+                                    solutions
+                                </p>
+                                <span class="time_date"> 11:01 AM    |    June 9</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row type_msg">
+                    <div class="col-md-12 input_msg_write">
+                        <input type="text" class="write_msg" placeholder="Escribe tu mensaje" aria-label="Escribe tu mensaje" aria-describedby="basic-addon2" />
+                        <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @section scripts{
 
     <script src="~/Scripts/jquery.signalR-2.4.0.js"></script>
