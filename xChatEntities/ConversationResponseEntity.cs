@@ -24,6 +24,6 @@ namespace xChatEntities
         public string ChatMessagesId { get; set; }
         public string Message { get; set; }
         public DateTime Date { get; set; }
-        private short IsUser { get; set; } 
+        public short IsUser { get; set; } 
     }
 }

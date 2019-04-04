@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using xChatEntities;
 using xChatUtilities;
+using xChatWeb.Models;
 
 namespace xChatWeb.Controllers
 {
@@ -10,8 +13,6 @@ namespace xChatWeb.Controllers
         public ActionResult Index()
         {
             ViewBag.error = "";
-
-
             //ListUserConnect listUserConnect = new ListUserConnect
             //{
             //    Elementos = new System.Collections.Generic.List<UserConnect>
@@ -58,7 +59,9 @@ namespace xChatWeb.Controllers
             //}
             //};
 
-
+            // ----------------------------------------------
+            // Obtener lista de usuarios conectados.
+            // ----------------------------------------------
             ObjectRequest<int> objectRequest = new ObjectRequest<int>()
             {
                 SenderObject = 1
@@ -69,9 +72,50 @@ namespace xChatWeb.Controllers
                 , objectRequest);
 
             ListUserConnect lista = result.Data;
-
             ViewBag.UserActive = lista;
+
+            // ----------------------------------------------
+            // Obtener conversación.
+            // ----------------------------------------------
+            objectRequest = new ObjectRequest<int>() { SenderObject = 3 };
+
+            ObjectResult<ListConversationResponseEntity> listConversations = RequestService.Execute<ListConversationResponseEntity, int>(Constants.UrlApiService.GetListConversationByChatId
+                , "POST"
+                , objectRequest);
+
+            ViewBag.Prueba = lista;
+
             return View();
+        }
+
+        [HttpPost]
+        public JsonResult MyConversationShow(String data)
+        {
+            ObjectResult<ListConversationResponseEntity> listConversations = null;
+            try
+            {
+                VMUserConnect modelData = JsonConvert.DeserializeObject<VMUserConnect>(data);
+                
+                if (modelData.UserConnect.ChatId > 0)
+                {
+                    
+                    ObjectRequest<int> objectRequest = new ObjectRequest<int>()
+                    {
+                        SenderObject = modelData.UserConnect.ChatId
+                    };
+
+                    listConversations  = RequestService.Execute<ListConversationResponseEntity, int>(Constants.UrlApiService.GetListConversationByChatId
+                    , "POST"
+                    , objectRequest);
+                }
+              
+
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            return Json(listConversations);
         }
 
         public ActionResult About()
@@ -88,6 +132,7 @@ namespace xChatWeb.Controllers
             // ----------------------------------------------
             // Obtener lista de usuarios conectados.
             // ----------------------------------------------
+
             ObjectRequest<int> objectRequest = new ObjectRequest<int>() { SenderObject = 1 };
 
             ObjectResult<ListUserConnect> lista = RequestService.Execute<ListUserConnect, int>(Constants.UrlApiService.GetListUserConnectByAccountManagerId
