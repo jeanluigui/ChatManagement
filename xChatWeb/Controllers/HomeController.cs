@@ -84,7 +84,7 @@ namespace xChatWeb.Controllers
             // ----------------------------------------------
             // Obtener conversación.
             // ----------------------------------------------
-            objectRequest = new ObjectRequest<int>() { SenderObject = 1 };
+            objectRequest = new ObjectRequest<int>() { SenderObject = 3 };
 
             ObjectResult<ListConversationResponseEntity> listConversations = RequestService.Execute<ListConversationResponseEntity, int>(Constants.UrlApiService.GetListConversationByChatId
                 , "POST"
