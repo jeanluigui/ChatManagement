@@ -44,11 +44,11 @@
     width: 40%;
 }
 
-    .manager_heading h4 {
-        color: #05728f;
-        font-size: 21px;
-        margin: auto;
-    }
+.manager_heading h4 {
+    color: #05728f;
+    font-size: 21px;
+    margin: auto;
+}
 
 .inbox_chat {
     height: 600px;
@@ -59,6 +59,11 @@
     border-bottom: 1px solid #c4c4c4;
     margin: 0;
     padding: 18px 16px 10px;
+    background-color: #f8f8f8;
+}
+
+.chat_list:hover {
+    background: #C5DDEB;
 }
 
 .active_chat {
