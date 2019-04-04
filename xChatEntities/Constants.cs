@@ -68,6 +68,10 @@ namespace xChatEntities
             {
                 get { return URL_API_SERVICE + "api/Conversation/GetListUserConnectByAccountManagerId/"; }
             }
+            public static string GetListConversationByChatId
+            {
+                get { return URL_API_SERVICE + "api/Conversation/GetListConversationByChatId/"; }
+            }
         }
     }
 

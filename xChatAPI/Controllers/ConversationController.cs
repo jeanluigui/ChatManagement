@@ -18,23 +18,26 @@ namespace xChatAPI.Controllers
         [Route("api/Conversation/GetListUserConnectByAccountManagerId/")]
         public ObjectResult<ListUserConnect> GetListUserConnectByAccountManagerId(ObjectRequest<int> objectRequest)
         {
-            ListUserConnect listUserConnect = new ListUserConnect();
+            ObjectResult<ListUserConnect> list = new ObjectResult<ListUserConnect>();
 
             try
             {
-                listUserConnect = ServiceChatManagerBL.Instancia.GetListUserConnectByAccountManagerId(objectRequest);
+                list = new ObjectResult<ListUserConnect>()
+                {
+                    Data = ServiceChatManagerBL.Instancia.GetListUserConnectByAccountManagerId(objectRequest),
+                    Id = 0,
+                    Message = string.Empty
+                };
             }
             catch(Exception ex)
             {
-                throw ex;
+                list = new ObjectResult<ListUserConnect>()
+                {
+                    Data = null,
+                    Id = 1,
+                    Message = ex.Message
+                };
             }
-
-            ObjectResult<ListUserConnect> list = new ObjectResult<ListUserConnect>()
-            {
-                Data = listUserConnect,
-                Id = 0,
-                Message = string.Empty
-            };
 
             return list;
         }
@@ -45,20 +48,32 @@ namespace xChatAPI.Controllers
         /// <param name="objectRequest"></param>
         /// <returns></returns>
         [HttpPost]
-        public ListConversationResponseEntity GetListConversationByChatId(ObjectRequest<int> objectRequest)
+        [ActionName("GetListConversationByChatId")]
+        [Route("api/Conversation/GetListConversationByChatId/")]
+        public ObjectResult<ListConversationResponseEntity>  GetListConversationByChatId(ObjectRequest<int> objectRequest)
         {
-            ListConversationResponseEntity listUserConnect = new ListConversationResponseEntity();
+            ObjectResult<ListConversationResponseEntity> list = new ObjectResult<ListConversationResponseEntity>();
 
             try
             {
-                listUserConnect = ServiceChatManagerBL.Instancia.GetListConversationByChatId(objectRequest);
+                list = new ObjectResult<ListConversationResponseEntity>()
+                {
+                    Data = ServiceChatManagerBL.Instancia.GetListConversationByChatId(objectRequest),
+                    Id = 0,
+                    Message = string.Empty
+                };
             }
             catch (Exception ex)
             {
-                throw ex;
+                list = new ObjectResult<ListConversationResponseEntity>()
+                {
+                    Data = null,
+                    Id = 1,
+                    Message = ex.Message
+                };
             }
 
-            return listUserConnect;
+            return list;
         }
 
     }

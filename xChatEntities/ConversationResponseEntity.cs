@@ -15,15 +15,15 @@ namespace xChatEntities
         {
             if (item == null) return;
 
-            AccountManagerName = item["AccountManagerName"].ToString();
-            Message = item["Message"].ToString();
-            DateMessage = Convert.ToDateTime(item["DateMessage"]);
-            Type = Convert.ToInt16(item["Type"]);
+            ChatMessagesId = item["ChatMessagesId"].ToString();
+            Message = item["ChatMessagesEntry"].ToString();
+            Date = Convert.ToDateTime(item["ChatMessagesDate"]);
+            IsUser = Convert.ToInt16(item["ChatMessageIsUserSend"]);
         }
 
-        public string AccountManagerName { get; set; }
+        public string ChatMessagesId { get; set; }
         public string Message { get; set; }
-        public DateTime DateMessage { get; set; }
-        private short Type { get; set; } // (1) Propietario-derecha (2) No Propietario-izquierda
+        public DateTime Date { get; set; }
+        private short IsUser { get; set; } 
     }
 }
