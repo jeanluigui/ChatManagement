@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Web.Http;
 using xChatBusiness;
 using xChatEntities;
@@ -29,7 +28,7 @@ namespace xChatAPI.Controllers
                     Message = string.Empty
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 list = new ObjectResult<ListUserConnect>()
                 {
@@ -50,31 +49,105 @@ namespace xChatAPI.Controllers
         [HttpPost]
         [ActionName("GetListConversationByChatId")]
         [Route("api/Conversation/GetListConversationByChatId/")]
-        public ObjectResult<ListConversationResponseEntity>  GetListConversationByChatId(ObjectRequest<int> objectRequest)
+        public ObjectResultList<ConversationResponseEntity> GetListConversationByChatId(ObjectRequest<int> objectRequest)
         {
-            ObjectResult<ListConversationResponseEntity> list = new ObjectResult<ListConversationResponseEntity>();
+            ObjectResultList<ConversationResponseEntity> list = new ObjectResultList<ConversationResponseEntity>();
 
             try
             {
-                list = new ObjectResult<ListConversationResponseEntity>()
+                list = ServiceChatManagerBL.Instancia.GetListConversationByChatId(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                list.Id = 1;
+                list.Message = ex.Message;
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Mueve una conversación hacia otro Agente.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ActionName("ConversationMoveTo")]
+        [Route("api/Conversation/ConversationMoveTo/")]
+        public ObjectResult<int> ConversationMoveTo(ObjectRequest<ConversationMoveEntity> objectRequest)
+        {
+            ObjectResult<int> result = new ObjectResult<int>();
+
+            try
+            {
+                result = new ObjectResult<int>()
                 {
-                    Data = ServiceChatManagerBL.Instancia.GetListConversationByChatId(objectRequest),
+                    Data = ServiceChatManagerBL.Instancia.ConversationMoveTo(objectRequest),
                     Id = 0,
                     Message = string.Empty
                 };
             }
             catch (Exception ex)
             {
-                list = new ObjectResult<ListConversationResponseEntity>()
+                result = new ObjectResult<int>()
                 {
-                    Data = null,
+                    Data = 0,
                     Id = 1,
                     Message = ex.Message
                 };
             }
 
-            return list;
+            return result;
         }
 
+        /// <summary>
+        /// Retorna lista de agentes conectados de un determinado módulo.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ActionName("GetListAccountManagerConnectByModuleAppId")]
+        [Route("api/Conversation/GetListAccountManagerConnectByModuleAppId/")]
+        public ObjectResultList<AccountManagerConnect> GetListAccountManagerConnectByModuleAppId(ObjectRequest<int> objectRequest)
+        {
+            ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
+
+            try
+            {
+                result = ServiceChatManagerBL.Instancia.GetListAccountManagerConnectByModuleAppId(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Permite desconectar a un agente.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ActionName("AccountManagerDisconnect")]
+        [Route("api/Conversation/AccountManagerDisconnect/")]
+        public ObjectResult<bool> AccountManagerDisconnect(ObjectRequest<int> objectRequest)
+        {
+            ObjectResult<bool> result = new ObjectResult<bool>();
+
+            try
+            {
+                result = ServiceChatManagerBL.Instancia.AccountManagerDisconnect(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+            }
+
+            return result;
+        }
     }
 }

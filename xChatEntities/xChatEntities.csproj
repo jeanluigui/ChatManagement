@@ -43,12 +43,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountManager.cs" />
+    <Compile Include="AccountManagerConnect.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ConversationEntity.cs" />
+    <Compile Include="ConversationMoveEntity.cs" />
     <Compile Include="ConversationRequestEntity.cs" />
+    <Compile Include="EntityBaseClass.cs" />
     <Compile Include="Enumerators.cs" />
     <Compile Include="ConversationResponseEntity.cs" />
-    <Compile Include="ListConversationResponseEntity.cs" />
+    <Compile Include="ObjectResultList.cs" />
     <Compile Include="ListUserConnect.cs" />
     <Compile Include="ObjectRequest.cs" />
     <Compile Include="ObjectResult.cs" />
@@ -56,6 +59,7 @@
     <Compile Include="SecurityAccessRequest.cs" />
     <Compile Include="SecurityAccessResponseEntity.cs" />
     <Compile Include="UserConnect.cs" />
+    <Compile Include="UtilEntity.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

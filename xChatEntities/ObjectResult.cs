@@ -18,7 +18,7 @@ namespace xChatEntities
         public ObjectResult()
         {
             Id = 0;
-            Message = string.Empty;
+            Message = "sucess.";
         }
     }
 }

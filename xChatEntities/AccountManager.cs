@@ -1,4 +1,6 @@
-﻿namespace xChatEntities
+﻿using System.Data;
+
+namespace xChatEntities
 {
     public class AccountManagerEntity
     {
@@ -9,5 +11,11 @@
         public string Token { get; set; }
 
         public AccountManagerEntity() { }
+
+        public AccountManagerEntity(DataRow dataRow)
+        {
+            if (dataRow == null) return;
+        }
+
     }
 }
