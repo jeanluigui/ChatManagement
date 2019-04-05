@@ -47,25 +47,18 @@
                 <div class="row inbox_chat">
                     @for (int i = 0; i < ViewBag.UserActive.Elementos.Count; i++)
                     {
-                        <div class="col-md-12 chat_list">
-                            <div class="chat_people">
-                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="fotoUser"> </div>
-                                <div class="chat_ib">
-                                    <h5>@ViewBag.UserActive.Elementos[i].UserEmail</h5>
-                                    <span class="chat_date">@ViewBag.UserActive.Elementos[i].UserName</span>
+                        <a href="#" class="listUser" id="@ViewBag.UserActive.Elementos[i].ChatId">
+                            <div class="col-md-12 chat_list" data-id="@ViewBag.UserActive.Elementos[i].ChatId" id="lstUserData">
+                                <div class="chat_people">
+                                    <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="fotoUser"> </div>
+                                    <div class="chat_ib">
+                                        <h5>@ViewBag.UserActive.Elementos[i].UserEmail</h5>
+                                        <span class="chat_date">@ViewBag.UserActive.Elementos[i].UserName</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     }
-
-                    @*<div class="col-md-12 chat_list active_chat">
-            <div class="chat_people">
-                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                <div class="chat_ib">
-                    <h5>Mario Gonzales <span class="chat_date">Dec 25</span></h5>
-                </div>
-            </div>
-        </div>*@
                 </div>
             </div>
             <div class="col-md-8 mesgs">
@@ -77,51 +70,8 @@
                     </div>
                 </div>
                 <div class="row msg_history">
-                    <div class="col-md-12 incoming_msg">
-                        <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                        <div class="received_msg">
-                            <div class="received_withd_msg">
-                                <p>
-                                    Test which is a new approach to have all
-                                    solutions
-                                </p>
-                                <span class="time_date"> 11:01 AM    |    June 9</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 incoming_msg">
-                        <div class="outgoing_msg">
-                            <div class="sent_msg">
-                                <p>
-                                    Test which is a new approach to have all
-                                    solutions
-                                </p>
-                                <span class="time_date"> 11:01 AM    |    June 9</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 incoming_msg">
-                        <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                        <div class="received_msg">
-                            <div class="received_withd_msg">
-                                <p>
-                                    Test which is a new approach to have all
-                                    solutions
-                                </p>
-                                <span class="time_date"> 11:01 AM    |    June 9</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 incoming_msg">
-                        <div class="outgoing_msg">
-                            <div class="sent_msg">
-                                <p>
-                                    Test which is a new approach to have all
-                                    solutions
-                                </p>
-                                <span class="time_date"> 11:01 AM    |    June 9</span>
-                            </div>
-                        </div>
+                    <div id="smsConversation">
+                       
                     </div>
                 </div>
                 <div class="row type_msg">
@@ -142,6 +92,74 @@
     <script src="@xChatEntities.Constants.Url.SignalRHub"></script>
 
     <script type="text/javascript">
+
+        $(function () {
+            Fn_Init();
+        });
+        function Fn_Init() {
+            Fn_Bind();
+        }
+
+        function Fn_Bind() {
+            $(".listUser").on("click", function () {
+                $("#lstUserData").removeClass("active_chat");
+                $($(this).children()[0]).addClass("active_chat");
+                var chatid = $(this).attr("id")
+                Fn_MessageUser(chatid)
+            });
+        }
+      
+        function Fn_MessageUser(chatid)
+        {
+            var lstMessageUser = [];
+            var lstMessageManager = [];
+            var lstChat = [];
+            if (chatid == undefined || chatid <= 0)
+            {
+                Fn_ShowToastMessage("info", messages.INFORMATION_INPUT_NAME);
+                return;
+            }
+            var objChat =
+            {
+                ChatId: chatid
+            };
+
+            var objData = JSON.stringify({ UserConnect: objChat});
+            success = function (response) {
+                try {
+                    lstChat = response.Data.Elementos;
+                    if (lstChat != "") {
+                        $("#smsConversation div").remove();
+                        for (var i = 0; i < lstChat.length; i++) {
+                            if (lstChat[i].IsUser == 1) {
+                                lstMessageUser = [];
+                                lstMessageUser.push({
+                                    message: lstChat[i].Message,
+                                });
+                                $("#smsConversation").append(Fn_LoadHandlebars("messageUser", { lstMessageUser }));
+                            }
+                            else {
+                                lstMessageManager = [];
+                                lstMessageManager.push({
+                                    message: lstChat[i].Message,
+                                });
+                                $("#smsConversation").append(Fn_LoadHandlebars("messageManager", { lstMessageManager }));
+                            }
+                         }
+                     } else {
+                         Fn_ShowToastMessage("warning", messages.ERROR_OCCURRED_SENDING_DATA);
+                     }
+                }
+                catch (e) {
+                    Fn_ShowToastMessage("error", messages.ERROR_OCCURRED_LOADING_DATA);
+                }
+            };
+            error = function (xhr, ajaxOptions, thrownError) {
+                Fn_ShowToastMessage("error", messages.ERROR_OCCURRED_LOADING_DATA);
+            };
+
+            Fn_CallMethod("@(Url.Action("MyConversationShow", "Home"))", { data: objData }, success, error);
+        }
 
         $(function ()
         {

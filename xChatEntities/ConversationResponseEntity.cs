@@ -22,5 +22,13 @@ namespace xChatEntities
             Date = Convert.ToDateTime(dataRow["ChatMessagesDate"]);
             IsUser = Convert.ToInt16(dataRow["ChatMessageIsUserSend"]);
         }
+<<<<<<< HEAD
+=======
+
+        public string ChatMessagesId { get; set; }
+        public string Message { get; set; }
+        public DateTime Date { get; set; }
+        public short IsUser { get; set; } 
+>>>>>>> ca8ba881623bfa2c5c8b6f4c280444977fe6d0a8
     }
 }
