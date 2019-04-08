@@ -79,7 +79,7 @@ namespace xChatWeb.Controllers
             // ----------------------------------------------
             objectRequest = new ObjectRequest<int>() { SenderObject = 3 };
 
-            ObjectResult<ListConversationResponseEntity> listConversations = RequestService.Execute<ListConversationResponseEntity, int>(Constants.UrlApiService.GetListConversationByChatId
+            ObjectResultList<ConversationResponseEntity> listConversations = RequestService.ExecuteList<ConversationResponseEntity, int>(Constants.UrlApiService.GetListConversationByChatId
                 , "POST"
                 , objectRequest);
 
@@ -91,7 +91,7 @@ namespace xChatWeb.Controllers
         [HttpPost]
         public JsonResult MyConversationShow(String data)
         {
-            ObjectResult<ListConversationResponseEntity> listConversations = null;
+            ObjectResultList<ConversationResponseEntity> listConversations = null;
             try
             {
                 VMUserConnect modelData = JsonConvert.DeserializeObject<VMUserConnect>(data);
@@ -104,7 +104,7 @@ namespace xChatWeb.Controllers
                         SenderObject = modelData.UserConnect.ChatId
                     };
 
-                    listConversations  = RequestService.Execute<ListConversationResponseEntity, int>(Constants.UrlApiService.GetListConversationByChatId
+                    listConversations  = RequestService.ExecuteList<ConversationResponseEntity, int>(Constants.UrlApiService.GetListConversationByChatId
                     , "POST"
                     , objectRequest);
                 }
@@ -144,7 +144,7 @@ namespace xChatWeb.Controllers
             // ----------------------------------------------
             objectRequest = new ObjectRequest<int>() { SenderObject = 3 };
 
-            ObjectResult<ListConversationResponseEntity> listConversations = RequestService.Execute<ListConversationResponseEntity, int>(Constants.UrlApiService.GetListConversationByChatId
+            ObjectResultList<ConversationResponseEntity> listConversations = RequestService.ExecuteList<ConversationResponseEntity, int>(Constants.UrlApiService.GetListConversationByChatId
                 , "POST"
                 , objectRequest);
 
