@@ -60,30 +60,47 @@ namespace xChatWeb.Controllers
             //};
 
             // ----------------------------------------------
-            // Obtener lista de usuarios conectados.
+            // Obtener lista de agentes conectados de un determinado módulo.
             // ----------------------------------------------
             ObjectRequest<int> objectRequest = new ObjectRequest<int>()
             {
                 SenderObject = 1
             };
-
-            ObjectResult<ListUserConnect> result = RequestService.Execute<ListUserConnect, int>(Constants.UrlApiService.GetListUserConnectByAccountManagerId
+            ObjectResultList<AccountManagerConnect> lstAgents = RequestService.ExecuteList<AccountManagerConnect, int>(Constants.UrlApiService.GetListAccountManagerConnectByModuleAppId
                 , "POST"
-                , objectRequest);
+                , objectRequest
+                );
 
-            ListUserConnect lista = result.Data;
-            ViewBag.UserActive = lista;
+            ObjectResultList<AccountManagerConnect> lstAgentResult = lstAgents;
+            ViewBag.AgentActive = lstAgentResult;
+
+            // ----------------------------------------------
+            // Obtener lista de usuarios conectados.
+            // ----------------------------------------------
+            //objectRequest = new ObjectRequest<int>()
+            //{
+            //    SenderObject = 1
+            //};
+
+            //ObjectResult<ListUserConnect> result = RequestService.Execute<ListUserConnect, int>(Constants.UrlApiService.GetListUserConnectByAccountManagerId
+            //    , "POST"
+            //    , objectRequest);
+
+            //ListUserConnect lista = result.Data;
+            //ViewBag.UserActive = lista;
 
             // ----------------------------------------------
             // Obtener conversación.
             // ----------------------------------------------
-            objectRequest = new ObjectRequest<int>() { SenderObject = 3 };
-
+            objectRequest = new ObjectRequest<int>()
+            {
+                SenderObject = 3
+            };
             ObjectResultList<ConversationResponseEntity> listConversations = RequestService.ExecuteList<ConversationResponseEntity, int>(Constants.UrlApiService.GetListConversationByChatId
                 , "POST"
                 , objectRequest);
 
-            ViewBag.Prueba = lista;
+            ViewBag.Prueba = listConversations;
 
             return View();
         }
@@ -116,6 +133,36 @@ namespace xChatWeb.Controllers
                 
             }
             return Json(listConversations);
+        }
+
+        [HttpPost]
+        public JsonResult MyUserActiveShow(String data)
+        {
+            ObjectResultList<UserConnect> lstUserConnect = null;
+            try
+            {
+                VMAccountManager modelData = JsonConvert.DeserializeObject<VMAccountManager>(data);
+
+                if (modelData.AccountManagerEntity.AccountManagerId > 0)
+                {
+
+                    ObjectRequest<int> objectRequest = new ObjectRequest<int>()
+                    {
+                        SenderObject = modelData.AccountManagerEntity.AccountManagerId
+                    };
+
+                    lstUserConnect = RequestService.ExecuteList<UserConnect, int>(Constants.UrlApiService.GetListUserConnectByAccountManagerId
+                    , "POST"
+                    , objectRequest);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Json(lstUserConnect);
         }
 
         public ActionResult About()

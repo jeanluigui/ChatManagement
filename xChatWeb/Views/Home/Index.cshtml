@@ -10,7 +10,7 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <input type="text" class="form-control" id="message" />
+            <input type="text" class="form-control" id="messages" />
         </div>
     </div>
     <div class="row">
@@ -24,36 +24,35 @@
     </div>
 </div>
 
-<input type="hidden" id="displayname" />
+@*<input type="hidden" id="displayname" />
 <input type="hidden" id="chatId" value="0" />
-<input type="hidden" id="managerToken" value="" />
+<input type="hidden" id="managerToken" value="" />*@
 
 <div id="container">
     <div class="row" id="chat">
-        <div class="col-md-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left:0px;padding-right:0px;">
             <div class="title">
                 <h3 class="text-center">Chat Online</h3>
             </div>
         </div>
-        <div class="col-md-12 inbox_msg">
-            <div class="col-md-4 inbox_people">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  inbox_msg" style="padding-left:0px;padding-right:0px;">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 inbox_people">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 color-title">
                         <div class="recent_heading">
-                            <h4 class="title-user">Usuarios</h4>
+                            <h4 class="title-user">Agents</h4>
                         </div>
                     </div>
                 </div>
                 <div class="row inbox_chat">
-                    @for (int i = 0; i < ViewBag.UserActive.Elementos.Count; i++)
+                    @for (int i = 0; i < ViewBag.AgentActive.Elements.Count; i++)
                     {
-                        <a href="#" class="listUser" id="@ViewBag.UserActive.Elementos[i].ChatId">
-                            <div class="col-md-12 chat_list" data-id="@ViewBag.UserActive.Elementos[i].ChatId" id="lstUserData">
+                        <a href="#" class="listAgent" id="@ViewBag.AgentActive.Elements[i].AccountManagerId">
+                            <div class="col-md-12 chat_list" data-id="@ViewBag.AgentActive.Elements[i].AccountManagerId" id="lstAgentData">
                                 <div class="chat_people">
                                     <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="fotoUser"> </div>
                                     <div class="chat_ib">
-                                        <h5>@ViewBag.UserActive.Elementos[i].UserEmail</h5>
-                                        <span class="chat_date">@ViewBag.UserActive.Elementos[i].UserName</span>
+                                        <h5>@ViewBag.AgentActive.Elements[i].AccountManagerName</h5>
                                     </div>
                                 </div>
                             </div>
@@ -61,23 +60,49 @@
                     }
                 </div>
             </div>
-            <div class="col-md-8 mesgs">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 inbox_people">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="manager_heading">
-                            <h4 class="title-user">Manager</h4>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 color-title">
+                        <div class="recent_heading">
+                            <h4 class="title-user">Usuarios</h4>
                         </div>
                     </div>
                 </div>
-                <div class="row msg_history">
+                <div class="row inbox_chat" id="userActiveShow">
+                    @*@for (int i = 0; i < ViewBag.UserActive.Elementos.Count; i++)
+                        {
+                            <a href="#" class="listUser" id="@ViewBag.UserActive.Elementos[i].ChatId">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 chat_list" data-number="@ViewBag.UserActive.Elementos[i].ChatId" id="lstUserData">
+                                    <div class="chat_people">
+                                        <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="fotoUser"> </div>
+                                        <div class="chat_ib">
+                                            <h5>@ViewBag.UserActive.Elementos[i].UserEmail</h5>
+                                            <span class="chat_date">@ViewBag.UserActive.Elementos[i].UserName</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        }*@
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 color-title">
+                        <div class="manager_heading">
+                            <h4 class="title-user">Conversation</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row msg_history" id="ContentChat">
                     <div id="smsConversation">
-                       
+
                     </div>
                 </div>
                 <div class="row type_msg">
                     <div class="col-md-12 input_msg_write">
-                        <input type="text" class="write_msg" placeholder="Escribe tu mensaje" aria-label="Escribe tu mensaje" aria-describedby="basic-addon2" />
-                        <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                        @*<textarea type="text" class="write_msg" id="message" placeholder="Escribe tu mensaje" aria-label="Escribe tu mensaje" aria-describedby="basic-addon2"></textarea>*@
+                        <textarea type="text" id="message" name="message" placeholder="Escriba su mensaje ..." class="form-control"></textarea>
+                        <button class="msg_send_btn" type="button" id="btnsendmessage"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
@@ -85,6 +110,15 @@
     </div>
 </div>
 
+<input type="hidden" id="displayname" value="" />
+<input type="hidden" id="AgentId" value="0" />
+<input type="hidden" id="ChatId" value="0" />
+<input type="hidden" id="AccountManagerId" value="0" />
+<input type="hidden" id="ModuleAppId" value="0" />
+<input type="hidden" id="UserName" value="" />
+<input type="hidden" id="UserEmail" value="" />
+<input type="hidden" id="UserToken" value="" />
+<input type="hidden" id="ManagerToken" value="" />
 
 @section scripts{
 
@@ -92,7 +126,7 @@
     <script src="@xChatEntities.Constants.Url.SignalRHub"></script>
 
     <script type="text/javascript">
-
+        var Counter;
         $(function () {
             Fn_Init();
         });
@@ -101,14 +135,84 @@
         }
 
         function Fn_Bind() {
-            $(".listUser").on("click", function () {
-                $("#lstUserData").removeClass("active_chat");
+
+            $(".listAgent").on("click", function (e) {
+                e.preventDefault();
+                $('.listAgent div').each(function (i, e) {
+                    $(e).removeClass('active_chat');
+                });
+                $($(this).children()[0]).addClass("active_chat");
+                var agentId = $(this).attr("id")
+                $("#AgentId").val(agentId);
+                Fn_UserActiveByAgent(agentId)
+            });
+
+            $(".listUser").on("click", function (e) {
+                e.preventDefault();
+                $('.listUser div').each(function (i, e) {
+                    $(e).removeClass('active_chat');
+                });
                 $($(this).children()[0]).addClass("active_chat");
                 var chatid = $(this).attr("id")
                 Fn_MessageUser(chatid)
             });
+
         }
-      
+
+        function Fn_UserActiveByAgent(agentId) {
+            var lstUserActive = [];
+            var lstUsers = [];
+            if (agentId == undefined || agentId <= 0) {
+                alert("Error ");
+                return;
+            }
+            var objUserConnect =
+            {
+                AccountManagerId: agentId
+            };
+
+            var objData = JSON.stringify({ AccountManagerEntity: objUserConnect});
+            success = function (response) {
+                try {
+                    lstUserActive = response.Elements;
+                    if (lstUserActive != "") {
+                        $("#userActiveShow a").remove();
+                        lstUsers = [];
+                        for (var i = 0; i < lstUserActive.length; i++) {
+                            lstUsers = [];
+                            lstUsers.push({
+                                userId: lstUserActive[i].ChatId,
+                                userName: lstUserActive[i].UserName,
+                                userEmail: lstUserActive[i].UserEmail,
+                            });
+                            $("#userActiveShow").append(Fn_LoadHandlebars("userActive", { lstUsers }));
+                        }
+                        Fn_Bind();
+                        var obj = {
+                            AccountManagerId: agentId,
+                            ModuloAppId: 1,
+                            EMail: "jhurtado@xirectss.com",
+                            Password: "12345678",
+                            Token: ""
+                        };
+
+                        Counter.server.accountManagerConnect(obj);
+
+                     } else {
+                         alert("Error ");
+                     }
+                }
+                catch (e) {
+                    alert("Error ");
+                }
+            };
+            error = function (xhr, ajaxOptions, thrownError) {
+                alert("Error ");
+            };
+
+            Fn_CallMethod("@(Url.Action("MyUserActiveShow", "Home"))", { data: objData }, success, error);
+        }
+
         function Fn_MessageUser(chatid)
         {
             var lstMessageUser = [];
@@ -116,7 +220,7 @@
             var lstChat = [];
             if (chatid == undefined || chatid <= 0)
             {
-                Fn_ShowToastMessage("info", messages.INFORMATION_INPUT_NAME);
+                alert("Error ");
                 return;
             }
             var objChat =
@@ -127,7 +231,7 @@
             var objData = JSON.stringify({ UserConnect: objChat});
             success = function (response) {
                 try {
-                    lstChat = response.Data.Elementos;
+                    lstChat = response.Elements;
                     if (lstChat != "") {
                         $("#smsConversation div").remove();
                         for (var i = 0; i < lstChat.length; i++) {
@@ -137,6 +241,7 @@
                                     message: lstChat[i].Message,
                                 });
                                 $("#smsConversation").append(Fn_LoadHandlebars("messageUser", { lstMessageUser }));
+                                $("#ContentChat").scrollTop($("#ContentChat")[0].scrollHeight);
                             }
                             else {
                                 lstMessageManager = [];
@@ -144,18 +249,26 @@
                                     message: lstChat[i].Message,
                                 });
                                 $("#smsConversation").append(Fn_LoadHandlebars("messageManager", { lstMessageManager }));
+                                $("#ContentChat").scrollTop($("#ContentChat")[0].scrollHeight);
                             }
-                         }
+                            $("#ChatId").val(lstChat[i].ChatId);
+                            $("#AccountManagerId").val(lstChat[i].AccountManagerId);
+                            $("#ModuleAppId").val(lstChat[i].ModuleAppId);
+                            $("#UserName").val(lstChat[i].UserName);
+                            $("#UserEmail").val(lstChat[i].UserEmail);
+                            $("#UserToken").val(lstChat[i].UserToken);
+                            $("#ManagerToken").val(lstChat[i].AccountManagerToken);
+                        }
                      } else {
-                         Fn_ShowToastMessage("warning", messages.ERROR_OCCURRED_SENDING_DATA);
+                        alert("Error ");
                      }
                 }
                 catch (e) {
-                    Fn_ShowToastMessage("error", messages.ERROR_OCCURRED_LOADING_DATA);
+                    alert("Error ");
                 }
             };
             error = function (xhr, ajaxOptions, thrownError) {
-                Fn_ShowToastMessage("error", messages.ERROR_OCCURRED_LOADING_DATA);
+                alert("Error ");
             };
 
             Fn_CallMethod("@(Url.Action("MyConversationShow", "Home"))", { data: objData }, success, error);
@@ -163,47 +276,101 @@
 
         $(function ()
         {
-            $.support.cors = true;
+             $.support.cors = true;
 
             $.connection.hub.url = "@xChatEntities.Constants.Url.SignalR";
 
-            var Counter = $.connection.counterHub;
+            Counter = $.connection.counterHub;
 
-            Counter.client.receivedFromManager = function (obj) {
-
-                var divName = $("<div />").text(obj.UserName).html();
-                var divMessage = $("<div />").text(obj.Message).html();
-
-                $("#chatId").val(obj.ChatId);
-                $("#managerToken").val(obj.ManagerToken);
-
-                $("#discussion").append("<li><strong>" + divName + ": </strong> " + divMessage + "</li>");
-
-                //alert("entro alguien!");
+            // Chat recibido del usuario.
+            Counter.client.receivedFromUser = function (obj) {
+                if (obj.ChatId > 0) {
+                    if (obj.IsSendUser == 1) {
+                        lstMessageUser = [];
+                        lstMessageUser.push({
+                            message: obj.Message,
+                        });
+                        $("#smsConversation").append(Fn_LoadHandlebars("messageUser", { lstMessageUser }));
+                        $("#ContentChat").scrollTop($("#ContentChat")[0].scrollHeight);
+                    }
+                    else {
+                        lstMessageManager = [];
+                        lstMessageManager.push({
+                            message: obj.Message,
+                        });
+                        $("#smsConversation").append(Fn_LoadHandlebars("messageManager", { lstMessageManager }));
+                        $("#ContentChat").scrollTop($("#ContentChat")[0].scrollHeight);
+                    }
+                    $("#chatId").val(obj.ChatId);
+                    $("#AccountManagerId").val(obj.AccountManagerId);
+                    $("#ModuleAppId").val(obj.ModuleAppId);
+                    $("#UserName").val(obj.UserName);
+                    $("#UserEmail").val(obj.UserEmail);
+                    $("#UserToken").val(obj.UserToken);
+                    $("#ManagerToken").val(obj.AccountManagerToken);
+                }
+                Fn_UserActiveByAgent($("#AgentId").val())
             };
 
+            // Conexión Satisfactoria.
+            Counter.client.sucessConnect = function (token) {
+
+                //var divToken = $("<div />").text(token).html();
+
+                //$("#discussion").append("<li><strong>" + divToken + ": </strong></li>");
+            };
+
+            // Iniciar conexión con Concentrador.
             $.connection.hub.start().done(function () {
 
-                $("#sendmessage").click(function () {
+                // Botón Login Connect Account Manager.
+                $("#btnconnect").click(function () {
 
                     var obj = {
-                        ChatId: $("#chatId").val(),
-                        ModuleAppId: "1",
-                        UserName: $("#name").val(),
-                        UserEmail: "jhurtado73@hotmail.com",
-                        Message: $("#message").val(),
-                        DateMessage: "",
-                        ManagerToken: $("#managerToken").val()
+                        AccountManagerId: $("#AccountManagerId").val(),
+                        ModuloAppId: $("#ModuloAppId").val(),
+                        EMail: $("#UserEmail").val(),
+                        Password: "12345678",
+                        Token: ""
                     };
 
-                    Counter.server.sendToManager(obj);
-
-                    $("#message").val("").focus();
+                    Counter.server.accountManagerConnect(obj);
 
                 });
 
+                // Botón chatear.
+                $("#btnsendmessage").click(function () {
+                    Fn_SendMenssage();
+                });
+
+                $('#message').keypress(function (e) {
+                    var keycode = (e.keyCode ? e.keyCode : e.which);
+                    if (keycode == '13') {
+                        Fn_SendMenssage();
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+
+                function Fn_SendMenssage() {
+                    var objChat = {
+                        ChatId: $("#ChatId").val(),
+                        ModuleAppId: $("#ModuleAppId").val(),
+                        AccountManagerId: $("#AccountManagerId").val(),
+                        UserName: $("#UserName").val(),
+                        UserEmail: $("#UserEmail").val(),
+                        Message: $("#message").val(),
+                        DateMessage: "",
+                        UserToken: $("#UserToken").val(),
+                        ManagerToken: $("#ManagerToken").val(),
+                    };
+                    Counter.server.sendToUser(objChat);
+                    $("#message").text("");
+                }
+
             });
 
+            
         });
 
     </script>

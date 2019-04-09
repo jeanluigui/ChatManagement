@@ -13,9 +13,9 @@ namespace xChatBusiness
             get { return _service; }
         }
 
-        public ListUserConnect GetListUserConnectByAccountManagerId(ObjectRequest<int> objectRequest)
+        public ObjectResultList<UserConnect> GetListUserConnectByAccountManagerId(ObjectRequest<int> objectRequest)
         {
-            ListUserConnect result = new ListUserConnect();
+            ObjectResultList<UserConnect> result = new ObjectResultList<UserConnect>();
 
             try
             {
@@ -23,7 +23,8 @@ namespace xChatBusiness
             }
             catch(Exception ex)
             {
-                throw ex;
+                result.Id = 1;
+                result.Message = ex.Message;
             }
 
             return result;

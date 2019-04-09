@@ -15,30 +15,21 @@ namespace xChatAPI.Controllers
         [HttpPost]
         [ActionName("GetListUserConnectByAccountManagerId")]
         [Route("api/Conversation/GetListUserConnectByAccountManagerId/")]
-        public ObjectResult<ListUserConnect> GetListUserConnectByAccountManagerId(ObjectRequest<int> objectRequest)
+        public ObjectResultList<UserConnect> GetListUserConnectByAccountManagerId(ObjectRequest<int> objectRequest)
         {
-            ObjectResult<ListUserConnect> list = new ObjectResult<ListUserConnect>();
+            ObjectResultList<UserConnect> result = new ObjectResultList<UserConnect>();
 
             try
             {
-                list = new ObjectResult<ListUserConnect>()
-                {
-                    Data = ServiceChatManagerBL.Instancia.GetListUserConnectByAccountManagerId(objectRequest),
-                    Id = 0,
-                    Message = string.Empty
-                };
+                result = ServiceChatManagerBL.Instancia.GetListUserConnectByAccountManagerId(objectRequest);
             }
             catch (Exception ex)
             {
-                list = new ObjectResult<ListUserConnect>()
-                {
-                    Data = null,
-                    Id = 1,
-                    Message = ex.Message
-                };
+                result.Id = 1;
+                result.Message = ex.Message;
             }
 
-            return list;
+            return result;
         }
 
         /// <summary>

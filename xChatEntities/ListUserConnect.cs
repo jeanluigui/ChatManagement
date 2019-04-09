@@ -18,10 +18,10 @@ namespace xChatEntities
             if (dtable == null || dtable.Rows == null || dtable.Rows.Count == 0)
                 return;
 
-            Elementos = new List<UserConnect>();
+            //Elementos = new List<UserConnect>();
 
-            foreach (DataRow registro in dtable.Rows)
-                Elementos.Add(new UserConnect(registro));
+            //foreach (DataRow registro in dtable.Rows)
+            //    Elementos.Add(new UserConnect(registro));
         }
     }
 }

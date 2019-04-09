@@ -14,9 +14,9 @@ namespace xChatDAO
             get { return _service; }
         }
 
-        public ListUserConnect GetListUserConnectByAccountManagerId(ObjectRequest<int> objectRequest)
+        public ObjectResultList<UserConnect> GetListUserConnectByAccountManagerId(ObjectRequest<int> objectRequest)
         {
-            ListUserConnect listUserConnect = new ListUserConnect();
+            ObjectResultList<UserConnect> listUserConnect = new ObjectResultList<UserConnect>();
 
             try
             {
@@ -27,11 +27,12 @@ namespace xChatDAO
 
                 DataTable dtresult = xSqlService.XirectServiceSQL.Instancia.EjecutarTabla("chat.AccountManager", "GetListUserConnect", htparam);
 
-                listUserConnect = new ListUserConnect(dtresult);
+                listUserConnect = new ObjectResultList<UserConnect>(dtresult);
             }
             catch (Exception ex)
             {
-                throw ex;
+                listUserConnect.Id = 1;
+                listUserConnect.Message = ex.Message;
             }
 
             return listUserConnect;
