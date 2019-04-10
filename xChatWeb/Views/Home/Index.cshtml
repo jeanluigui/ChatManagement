@@ -119,6 +119,7 @@
 <input type="hidden" id="UserEmail" value="" />
 <input type="hidden" id="UserToken" value="" />
 <input type="hidden" id="ManagerToken" value="" />
+<input type="hidden" id="AccountManagerName" value="" />
 
 @section scripts{
 
@@ -258,6 +259,7 @@
                             $("#UserEmail").val(lstChat[i].UserEmail);
                             $("#UserToken").val(lstChat[i].UserToken);
                             $("#ManagerToken").val(lstChat[i].AccountManagerToken);
+                            $("#AccountManagerName").val(lstChat[i].AccountManagerName);
                         }
                      } else {
                         alert("Error ");
@@ -308,6 +310,7 @@
                     $("#UserEmail").val(obj.UserEmail);
                     $("#UserToken").val(obj.UserToken);
                     $("#ManagerToken").val(obj.AccountManagerToken);
+                    //$("#AccountManagerName").val(obj.AccountManagerName);
                 }
                 Fn_UserActiveByAgent($("#AgentId").val())
             };
@@ -363,6 +366,7 @@
                         DateMessage: "",
                         UserToken: $("#UserToken").val(),
                         ManagerToken: $("#ManagerToken").val(),
+                        AccountManagerName: $("#AccountManagerName").val(),
                     };
                     Counter.server.sendToUser(objChat);
                     $("#message").text("");
