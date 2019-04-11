@@ -286,49 +286,14 @@
 
             Counter = $.connection.counterHub;
 
-            // Chat recibido del usuario.
-            Counter.client.receivedFromUser = function (obj) {
-                if (obj.ChatId > 0) {
-                    if (obj.IsSendUser == 1) {
-                        lstMessageUser = [];
-                        lstMessageUser.push({
-                            message: obj.Message,
-                        });
-                        $("#smsConversation").append(Fn_LoadHandlebars("messageUser", { lstMessageUser }));
-                        $("#ContentChat").scrollTop($("#ContentChat")[0].scrollHeight);
-                    }
-                    else {
-                        lstMessageManager = [];
-                        lstMessageManager.push({
-                            message: obj.Message,
-                        });
-                        $("#smsConversation").append(Fn_LoadHandlebars("messageManager", { lstMessageManager }));
-                        $("#ContentChat").scrollTop($("#ContentChat")[0].scrollHeight);
-                    }
-                    $("#chatId").val(obj.ChatId);
-                    $("#AccountManagerId").val(obj.AccountManagerId);
-                    $("#ModuleAppId").val(obj.ModuleAppId);
-                    $("#UserName").val(obj.UserName);
-                    $("#UserEmail").val(obj.UserEmail);
-                    $("#UserToken").val(obj.UserToken);
-                    $("#ManagerToken").val(obj.AccountManagerToken);
-                    //$("#AccountManagerName").val(obj.AccountManagerName);
-                }
-                Fn_UserActiveByAgent($("#AgentId").val())
-            };
-
-            // Conexión Satisfactoria.
-            Counter.client.sucessConnect = function (token) {
-
-                //var divToken = $("<div />").text(token).html();
-
-                //$("#discussion").append("<li><strong>" + divToken + ": </strong></li>");
-            };
-
+            // ------------------------------------------------
             // Iniciar conexión con Concentrador.
+            // ------------------------------------------------
             $.connection.hub.start().done(function () {
 
+                // ---------------------------------------------------
                 // Botón Login Connect Account Manager.
+                // ---------------------------------------------------
                 $("#btnconnect").click(function () {
 
                     var obj = {
@@ -339,11 +304,35 @@
                         Token: ""
                     };
 
-                    Counter.server.accountManagerConnect(obj);
+                    //Counter.server.accountManagerConnect(obj);
 
                 });
 
+                // ----------------------------------------------------------------
+                // Botón para deconectar un usuario cuando la conversación acaba.
+                // ----------------------------------------------------------------
+                $("#btndisconnectuser").click(function () {
+
+                    var objChat = {
+                        ChatId: $("#ChatId").val(),
+                        ModuleAppId: $("#ModuleAppId").val(),
+                        AccountManagerId: $("#AccountManagerId").val(),
+                        UserName: $("#UserName").val(),
+                        UserEmail: $("#UserEmail").val(),
+                        Message: $("disconect...").val(),
+                        DateMessage: "",
+                        UserToken: $("#UserToken").val(),
+                        ManagerToken: $("#ManagerToken").val(),
+                        AccountManagerName: $("#AccountManagerName").val(),
+                    };
+
+                    Counter.server.userDisconnectForMangaer(obj);
+
+                });
+
+                // ---------------------------------------------------
                 // Botón chatear.
+                // ---------------------------------------------------
                 $("#btnsendmessage").click(function () {
                     Fn_SendMenssage();
                 });
@@ -375,6 +364,80 @@
                 }
 
             });
+
+
+            // ----------------------------------------
+            // Chat recibido del usuario.
+            // ----------------------------------------
+            Counter.client.receivedFromUser = function (obj) {
+                if (obj.ChatId > 0) {
+                    if (obj.IsSendUser == 1) {
+                        lstMessageUser = [];
+                        lstMessageUser.push({
+                            message: obj.Message,
+                        });
+                        $("#smsConversation").append(Fn_LoadHandlebars("messageUser", { lstMessageUser }));
+                        $("#ContentChat").scrollTop($("#ContentChat")[0].scrollHeight);
+                    }
+                    else {
+                        lstMessageManager = [];
+                        lstMessageManager.push({
+                            message: obj.Message,
+                        });
+                        $("#smsConversation").append(Fn_LoadHandlebars("messageManager", { lstMessageManager }));
+                        $("#ContentChat").scrollTop($("#ContentChat")[0].scrollHeight);
+                    }
+                    $("#chatId").val(obj.ChatId);
+                    $("#AccountManagerId").val(obj.AccountManagerId);
+                    $("#ModuleAppId").val(obj.ModuleAppId);
+                    $("#UserName").val(obj.UserName);
+                    $("#UserEmail").val(obj.UserEmail);
+                    $("#UserToken").val(obj.UserToken);
+                    $("#ManagerToken").val(obj.AccountManagerToken);
+                    //$("#AccountManagerName").val(obj.AccountManagerName);
+                }
+                Fn_UserActiveByAgent($("#AgentId").val())
+            };
+
+            // ------------------------------------
+            // Conexión Satisfactoria.
+            // ------------------------------------
+            Counter.client.sucessConnect = function (token) {
+
+                //var divToken = $("<div />").text(token).html();
+
+                //$("#discussion").append("<li><strong>" + divToken + ": </strong></li>");
+            };
+
+            Counter.client.receivedFromUserDisconnect = function (obj) {
+                if (obj.ChatId > 0) {
+                    if (obj.IsSendUser == 1) {
+                        lstMessageUser = [];
+                        lstMessageUser.push({
+                            message: obj.Message,
+                        });
+                        $("#smsConversation").append(Fn_LoadHandlebars("messageUser", { lstMessageUser }));
+                        $("#ContentChat").scrollTop($("#ContentChat")[0].scrollHeight);
+                    }
+                    else {
+                        lstMessageManager = [];
+                        lstMessageManager.push({
+                            message: obj.Message,
+                        });
+                        $("#smsConversation").append(Fn_LoadHandlebars("messageManager", { lstMessageManager }));
+                        $("#ContentChat").scrollTop($("#ContentChat")[0].scrollHeight);
+                    }
+                    $("#chatId").val(obj.ChatId);
+                    $("#AccountManagerId").val(obj.AccountManagerId);
+                    $("#ModuleAppId").val(obj.ModuleAppId);
+                    $("#UserName").val(obj.UserName);
+                    $("#UserEmail").val(obj.UserEmail);
+                    $("#UserToken").val(obj.UserToken);
+                    $("#ManagerToken").val(obj.AccountManagerToken);
+                    //$("#AccountManagerName").val(obj.AccountManagerName);
+                }
+                Fn_UserActiveByAgent($("#AgentId").val())
+            };
 
             
         });

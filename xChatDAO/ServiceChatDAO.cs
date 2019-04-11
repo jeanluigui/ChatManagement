@@ -33,7 +33,7 @@ namespace xChatDAO
                 parameters.Add("@p_moduleappid", conversationEntity.ModuleAppId);
                 parameters.Add("@p_accountmanagerconnectid", GetAccountManagerConnectId(conversationEntity));
 
-                CommandParameter queryCommand = new CommandParameter("chat.Chat_Insert_Sp", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.Chat_Insert_pa", parameters);
                 DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
 
                 chatId = Convert.ToInt32(rowResult["ChatId"]);
