@@ -29,6 +29,8 @@
 <input type="hidden" id="managerToken" value="" />*@
 
 <div id="container">
+    <div id="message_row">
+    </div>
     <div class="row" id="chat">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left:0px;padding-right:0px;">
             <div class="title">
@@ -176,7 +178,7 @@
             success = function (response) {
                 try {
                     lstUserActive = response.Elements;
-                    if (lstUserActive != "") {
+                    if (lstUserActive != "" && lstUserActive != null) {
                         $("#userActiveShow a").remove();
                         lstUsers = [];
                         for (var i = 0; i < lstUserActive.length; i++) {
@@ -200,15 +202,15 @@
                         Counter.server.accountManagerConnect(obj);
 
                      } else {
-                         alert("Error ");
+                        fn_message("i", "No tiene Usuarios activos.");
                      }
                 }
                 catch (e) {
-                    alert("Error ");
+                    fn_message("e", "Se produjo un error al cargar datos.");
                 }
             };
             error = function (xhr, ajaxOptions, thrownError) {
-                alert("Error ");
+                fn_message("e", "Se produjo un error al cargar datos.");
             };
 
             Fn_CallMethod("@(Url.Action("MyUserActiveShow", "Home"))", { data: objData }, success, error);

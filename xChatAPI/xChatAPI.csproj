@@ -143,7 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\xChatBusiness\xChatBusiness.csproj">
-      <Project>{84D86335-88FD-479F-805E-2EB3E3452E99}</Project>
+      <Project>{84d86335-88fd-479f-805e-2eb3e3452e99}</Project>
       <Name>xChatBusiness</Name>
     </ProjectReference>
     <ProjectReference Include="..\xChatEntities\xChatEntities.csproj">
