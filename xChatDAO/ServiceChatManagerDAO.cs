@@ -2,127 +2,167 @@
 using System.Collections;
 using System.Data;
 using xChatEntities;
+using xss.ConnectionManager;
+using xss.Logger.Enums;
+using xss.Logger.Factory;
+using xss.Logger.Interfaces;
 
 namespace xChatDAO
 {
-    public class ServiceChatManagerDAO
+    public static class ServiceChatManagerDAO
     {
-        private static readonly ServiceChatManagerDAO _service = new ServiceChatManagerDAO();
+        private static ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.DataAccessLayer);
 
-        public static ServiceChatManagerDAO Instancia
-        {
-            get { return _service; }
-        }
-
-        public ObjectResultList<UserConnect> GetListUserConnectByAccountManagerId(ObjectRequest<int> objectRequest)
+        public static ObjectResultList<UserConnect> GetListUserConnectByAccountManagerId(ObjectRequest<int> objectRequest)
         {
             ObjectResultList<UserConnect> listUserConnect = new ObjectResultList<UserConnect>();
 
             try
             {
-                Hashtable htparam = new Hashtable
-                {
-                    ["@p_accountmanagerid"] = objectRequest.SenderObject
-                };
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@p_accountmanagerid", objectRequest.SenderObject);
 
-                DataTable dtresult = xSqlService.XirectServiceSQL.Instancia.EjecutarTabla("chat.AccountManager", "GetListUserConnect", htparam);
+                CommandParameter queryCommand = new CommandParameter("chat.AccountManager_GetListUserConnect_pa", parameters);
+                DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
+
+                ListUserConnect list2 = new ListUserConnect(dtresult);
 
                 listUserConnect = new ObjectResultList<UserConnect>(dtresult);
+
+            }
+            catch (TimeoutException tout)
+            {
+                listUserConnect.Id = 2;
+                listUserConnect.Message = tout.Message;
+
+                log.Save(EnumLogLevel.Fatal, tout.Message);
             }
             catch (Exception ex)
             {
                 listUserConnect.Id = 1;
                 listUserConnect.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
             }
 
             return listUserConnect;
         }
 
-        public ObjectResultList<ConversationResponseEntity> GetListConversationByChatId(ObjectRequest<int> objectRequest)
+        public static ObjectResultList<ConversationResponseEntity> GetListConversationByChatId(ObjectRequest<int> objectRequest)
         {
             ObjectResultList<ConversationResponseEntity> listUserConnect = new ObjectResultList<ConversationResponseEntity>();
 
             try
             {
-                Hashtable htparam = new Hashtable
-                {
-                    ["@p_chatid"] = objectRequest.SenderObject
-                };
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@p_chatid", objectRequest.SenderObject);
 
-                DataTable dtresult = xSqlService.XirectServiceSQL.Instancia.EjecutarTabla("chat.AccountManager", "GetListConversationsByChatId", htparam);
+                CommandParameter queryCommand = new CommandParameter("chat.AccountManager_GetListConversationsByChatId_pa", parameters);
+                DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
 
                 listUserConnect = new ObjectResultList<ConversationResponseEntity>(dtresult);
+            }
+            catch (TimeoutException tout)
+            {
+                listUserConnect.Id = 2;
+                listUserConnect.Message = tout.Message;
+
+                log.Save(EnumLogLevel.Fatal, tout.Message);
             }
             catch (Exception ex)
             {
                 listUserConnect.Id = 1;
                 listUserConnect.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
             }
 
             return listUserConnect;
         }
 
-        public void ConversationMoveTo(ObjectRequest<ConversationMoveEntity> objectRequest)
+        public static void ConversationMoveTo(ObjectRequest<ConversationMoveEntity> objectRequest)
         {
             try
             {
-                Hashtable htparam = new Hashtable
-                {
-                    ["@p_chatidsource"] = objectRequest.SenderObject.ChatIdSource,
-                    ["@p_chatidtarget"] = objectRequest.SenderObject.ChatIdTarget
-                };
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@p_chatidsource", objectRequest.SenderObject.ChatIdSource);
+                parameters.Add("@p_chatidtarget", objectRequest.SenderObject.ChatIdTarget);
 
-                xSqlService.XirectServiceSQL.Instancia.EjecutarComando("chat.Conversation", "MoveTo", htparam);
+                CommandParameter queryCommand = new CommandParameter("chat.Conversation_MoveTo_pa", parameters);
 
+                DbManager.Instance.ExecuteCommand(queryCommand);
+            }
+            catch (TimeoutException tout)
+            {
+                log.Save(EnumLogLevel.Fatal, tout.Message);
             }
             catch (Exception ex)
             {
-                throw ex;
+                log.Save(EnumLogLevel.Fatal, ex);
             }
+
         }
 
-        public bool AccountManagerDisconnect(ObjectRequest<int> objectRequest)
+        public static bool AccountManagerDisconnect(ObjectRequest<int> objectRequest)
         {
+            bool result = false;
+
             try
             {
-                Hashtable htparam = new Hashtable
-                {
-                    ["@p_accountmanagerid"] = objectRequest.SenderObject
-                };
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@p_accountmanagerid", objectRequest.SenderObject);
 
-                xSqlService.XirectServiceSQL.Instancia.EjecutarComando("chat.AccountManager", "Disconnect", htparam);
+                CommandParameter queryCommand = new CommandParameter("chat.AccountManager_Disconnect_pa", parameters);
+
+                DbManager.Instance.ExecuteCommand(queryCommand);
+
+                result = true;
+            }
+            catch (TimeoutException tout)
+            {
+                log.Save(EnumLogLevel.Fatal, tout.Message);
             }
             catch (Exception ex)
             {
-                throw ex;
+                log.Save(EnumLogLevel.Fatal, ex);
             }
 
-            return true;
+            return result;
         }
 
-        public ObjectResultList<AccountManagerConnect> GetListAccountManagerConnectByModuleAppId(ObjectRequest<int> objectRequest)
+        public static ObjectResultList<AccountManagerConnect> GetListAccountManagerConnectByModuleAppId(ObjectRequest<int> objectRequest)
         {
             ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
 
             try
             {
-                Hashtable htparam = new Hashtable
-                {
-                    ["@p_moduleappid"] = objectRequest.SenderObject
-                };
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@p_moduleappid", objectRequest.SenderObject);
 
-                DataTable dtresult = xSqlService.XirectServiceSQL.Instancia.EjecutarTabla("chat.AccountManagerConnect", "GetList", htparam);
+                CommandParameter queryCommand = new CommandParameter("chat.AccountManagerConnect_GetList_pa",parameters);
+                DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
 
                 result = new ObjectResultList<AccountManagerConnect>(dtresult);
+
+                ListAccountManagerConnect listAMC = new ListAccountManagerConnect(dtresult);
+
+            }
+            catch (TimeoutException tout)
+            {
+                result.Id = 2;
+                result.Message = tout.Message;
+
+                log.Save(EnumLogLevel.Fatal, tout.Message);
             }
             catch (Exception ex)
             {
                 result.Id = 1;
                 result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
             }
 
             return result;
-
         }
 
     }

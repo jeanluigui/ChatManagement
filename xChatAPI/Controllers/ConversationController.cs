@@ -7,6 +7,8 @@ namespace xChatAPI.Controllers
 {
     public class ConversationController : ApiController
     {
+        //private static ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.BusinessLayer);
+
         /// <summary>
         /// Devuelve la lista de usuarios conectados asociados al Account Manager.
         /// </summary>

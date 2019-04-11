@@ -1,11 +1,16 @@
 ﻿using System;
 using xChatDAO;
 using xChatEntities;
+using xss.Logger.Enums;
+using xss.Logger.Factory;
+using xss.Logger.Interfaces;
 
 namespace xChatBusiness
 {
     public class ServiceChatBL
     {
+        private static ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.BusinessLayer);
+
         private static readonly ServiceChatBL _service = new ServiceChatBL();
 
         public static ServiceChatBL Instancia
@@ -13,33 +18,33 @@ namespace xChatBusiness
             get { return _service; }
         }
 
-        public Int32 ChatCreate(ConversationEntity conversationEntity)
+        public int ChatCreate(ConversationEntity conversationEntity)
         {
-            Int32 chatId = 0;
+            int chatId = 0;
 
             try
             {
-                chatId = ServiceChatDAO.Instancia.ChatCreate(conversationEntity);
+                chatId = ServiceChatDAO.ChatCreate(conversationEntity);
             }
             catch(Exception ex)
             {
-                throw ex;
+                log.Save(EnumLogLevel.Fatal, ex);
             }
 
             return chatId;
         }
 
-        public Int32 ChatMessageCreate(ConversationEntity conversationEntity)
+        public int ChatMessageCreate(ConversationEntity conversationEntity)
         {
-            Int32 result = 0;
+            int result = 0;
 
             try
             {
-                result = ServiceChatDAO.Instancia.ChatMessageCreate(conversationEntity);
+                result = ServiceChatDAO.ChatMessageCreate(conversationEntity);
             }
             catch(Exception ex)
             {
-                throw ex;
+                log.Save(EnumLogLevel.Fatal, ex);
             }
 
             return result;
@@ -49,11 +54,11 @@ namespace xChatBusiness
         {
             try
             {
-                ServiceChatDAO.Instancia.AccountManagerConnect(accountManagerEntity);
+                ServiceChatDAO.AccountManagerConnect(accountManagerEntity);
             }
             catch (Exception ex)
             {
-                throw ex;
+                log.Save(EnumLogLevel.Fatal, ex);
             }
         }
 
@@ -63,11 +68,11 @@ namespace xChatBusiness
 
             try
             {
-                managerToken = ServiceChatDAO.Instancia.GetManagerToken(conversationEntity);
+                managerToken = ServiceChatDAO.GetManagerToken(conversationEntity);
             }
             catch (Exception ex)
             {
-                throw ex;
+                log.Save(EnumLogLevel.Fatal, ex);
             }
 
             return managerToken;
@@ -77,11 +82,11 @@ namespace xChatBusiness
         {
             try
             {
-                ServiceChatDAO.Instancia.AccountManagerDisconnect(accountManagerEntity);
+                ServiceChatDAO.AccountManagerDisconnect(accountManagerEntity);
             }
             catch (Exception ex)
             {
-                throw ex;
+                log.Save(EnumLogLevel.Fatal, ex);
             }
         }
     }

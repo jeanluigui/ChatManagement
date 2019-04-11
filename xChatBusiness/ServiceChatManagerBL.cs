@@ -1,11 +1,15 @@
 ﻿using System;
 using xChatDAO;
 using xChatEntities;
+using xss.Logger.Enums;
+using xss.Logger.Factory;
+using xss.Logger.Interfaces;
 
 namespace xChatBusiness
 {
     public class ServiceChatManagerBL
     {
+        private static ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.BusinessLayer);
         private static readonly ServiceChatManagerBL _service = new ServiceChatManagerBL();
 
         public static ServiceChatManagerBL Instancia
@@ -19,12 +23,14 @@ namespace xChatBusiness
 
             try
             {
-                result = ServiceChatManagerDAO.Instancia.GetListUserConnectByAccountManagerId(objectRequest);
+                result = ServiceChatManagerDAO.GetListUserConnectByAccountManagerId(objectRequest);
             }
             catch(Exception ex)
             {
                 result.Id = 1;
                 result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
             }
 
             return result;
@@ -36,12 +42,14 @@ namespace xChatBusiness
 
             try
             {
-                result = ServiceChatManagerDAO.Instancia.GetListConversationByChatId(objectRequest);
+                result = ServiceChatManagerDAO.GetListConversationByChatId(objectRequest);
             }
             catch (Exception ex)
             {
                 result.Id = 1;
                 result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
             }
 
             return result;
@@ -51,11 +59,11 @@ namespace xChatBusiness
         {
             try
             {
-                ServiceChatManagerDAO.Instancia.ConversationMoveTo(objectRequest);
+                ServiceChatManagerDAO.ConversationMoveTo(objectRequest);
             }
             catch (Exception ex)
             {
-                throw ex;
+                log.Save(EnumLogLevel.Fatal, ex);
             }
 
             return 1;
@@ -67,12 +75,14 @@ namespace xChatBusiness
 
             try
             {
-                result = ServiceChatManagerDAO.Instancia.GetListAccountManagerConnectByModuleAppId(objectRequest);
+                result = ServiceChatManagerDAO.GetListAccountManagerConnectByModuleAppId(objectRequest);
             }
             catch (Exception ex)
             {
                 result.Id = 1;
                 result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
             }
 
             return result;
@@ -84,12 +94,14 @@ namespace xChatBusiness
 
             try
             {
-                result.Data = ServiceChatManagerDAO.Instancia.AccountManagerDisconnect(objectRequest);
+                result.Data = ServiceChatManagerDAO.AccountManagerDisconnect(objectRequest);
             }
             catch (Exception ex)
             {
                 result.Id = 1;
                 result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
             }
 
             return result;

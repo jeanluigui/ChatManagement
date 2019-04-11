@@ -29,4 +29,27 @@ namespace xChatEntities
         }
 
     }
+
+    public class ListAccountManagerConnect
+    {
+        public List<AccountManagerConnect> Elements { get; set; }
+
+        public ListAccountManagerConnect()
+        {
+
+        }
+
+        public ListAccountManagerConnect(DataTable dataTable)
+        {
+            Elements = new List<AccountManagerConnect>();
+
+            foreach (DataRow item in dataTable.Rows)
+            {
+                AccountManagerConnect entidad = new AccountManagerConnect();
+                entidad.Fill(item);
+
+                Elements.Add(entidad);
+            }
+        }
+    }
 }

@@ -2,143 +2,171 @@
 using System.Collections;
 using System.Data;
 using xChatEntities;
+using xss.ConnectionManager;
+using xss.Logger.Enums;
+using xss.Logger.Factory;
+using xss.Logger.Interfaces;
 
 namespace xChatDAO
 {
-    public class ServiceChatDAO
+    public static class ServiceChatDAO
     {
-        private static readonly ServiceChatDAO _service = new ServiceChatDAO();
+        //private static readonly ServiceChatDAO _service = new ServiceChatDAO();
 
-        public static ServiceChatDAO Instancia
-        {
-            get { return _service; }
-        }
+        //public static ServiceChatDAO Instancia
+        //{
+        //    get { return _service; }
+        //}
+        
+        private static ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.DataAccessLayer);
 
-        public Int32 ChatCreate(ConversationEntity conversationEntity)
+        public static int ChatCreate(ConversationEntity conversationEntity)
         {
             Int32 chatId = 0;
 
             try
             {
-                Hashtable htparam = new Hashtable();
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@p_username", conversationEntity.UserName);
+                parameters.Add("@p_useremail", conversationEntity.UserEmail);
+                parameters.Add("@p_usertoken", conversationEntity.UserToken);
+                parameters.Add("@p_moduleappid", conversationEntity.ModuleAppId);
+                parameters.Add("@p_accountmanagerconnectid", GetAccountManagerConnectId(conversationEntity));
 
-                htparam["@p_username"] = conversationEntity.UserName;
-                htparam["@p_useremail"] = conversationEntity.UserEmail;
-                htparam["@p_usertoken"] = conversationEntity.UserToken;
-                htparam["@p_moduleappid"] = conversationEntity.ModuleAppId;
-                htparam["@p_accountmanagerconnectid"] = this.GetAccountManagerConnectId(conversationEntity);
-                         
-                DataRow drresult = xSqlService.XirectServiceSQL.Instancia.EjecutarRegistro("chat.Chat", "Insert", htparam);
+                CommandParameter queryCommand = new CommandParameter("chat.Chat_Insert_Sp", parameters);
+                DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
 
-                chatId = Convert.ToInt32(drresult["ChatId"]);
+                chatId = Convert.ToInt32(rowResult["ChatId"]);
+            }
+            catch(TimeoutException tout)
+            {
+                log.Save(EnumLogLevel.Fatal, tout.Message);
             }
             catch (Exception ex)
             {
-                throw ex;
+                log.Save(EnumLogLevel.Fatal, ex);
             }
 
             return chatId;
         }
 
-        public Int32 ChatMessageCreate(ConversationEntity conversationEntity)
+        public static int ChatMessageCreate(ConversationEntity conversationEntity)
         {
-            Int32 chatMessageId = 0;
+            int chatMessageId = 0;
 
             try
             {
-                Hashtable htparam = new Hashtable();
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@p_chatid", conversationEntity.ChatId);
+                parameters.Add("@p_chatmessagesentry", conversationEntity.Message);
+                parameters.Add("@p_chatdate", DateTime.Now);
+                parameters.Add("@p_chatmessageisusersend", conversationEntity.IsSendUser);
 
-                htparam["@p_chatid"] = conversationEntity.ChatId;
-                htparam["@p_chatmessagesentry"] = conversationEntity.Message;
-                htparam["@p_chatdate"] = DateTime.Now;
-                htparam["@p_chatmessageisusersend"] = conversationEntity.IsSendUser;
+                CommandParameter queryCommand = new CommandParameter("chat.ChatMessages_Insert_pa", parameters);
+                DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
 
-                DataRow drresult = xSqlService.XirectServiceSQL.Instancia.EjecutarRegistro("chat.ChatMessages", "Insert", htparam);
+                chatMessageId = Convert.ToInt32(rowResult["chatMessageId"]);
 
-                chatMessageId = Convert.ToInt32(drresult["chatMessageId"]);
-
-                conversationEntity.UserToken = drresult["UserToken"].ToString();
-                conversationEntity.ManagerToken = drresult["AccountManagerToken"].ToString();
+                conversationEntity.UserToken = rowResult["UserToken"].ToString();
+                conversationEntity.ManagerToken = rowResult["AccountManagerToken"].ToString();
+            }
+            catch (TimeoutException tout)
+            {
+                log.Save(EnumLogLevel.Fatal, tout.Message);
             }
             catch (Exception ex)
             {
-                throw ex;
+                log.Save(EnumLogLevel.Fatal, ex);
             }
 
             return chatMessageId;
         }
 
-        public string GetManagerToken(ConversationEntity conversationEntity)
+        public static string GetManagerToken(ConversationEntity conversationEntity)
         {
             string managerToken = string.Empty;
 
             try
             {
-                Hashtable htparam = new Hashtable();
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@p_chatid", conversationEntity.ChatId);
 
-                htparam["@p_chatid"] = conversationEntity.ChatId;
+                CommandParameter queryCommand = new CommandParameter("chat.ManagerAccountConnect_GetTokenActive_pa", parameters);
+                DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
 
-                DataRow drresult = xSqlService.XirectServiceSQL.Instancia.EjecutarRegistro("chat.ManagerAccountConnect", "GetTokenActive", htparam);
-
-                managerToken = drresult["AccountManagerToken"].ToString();
+                managerToken = rowResult["AccountManagerToken"].ToString();
+            }
+            catch (TimeoutException tout)
+            {
+                log.Save(EnumLogLevel.Fatal, tout.Message);
             }
             catch (Exception ex)
             {
-                throw ex;
+                log.Save(EnumLogLevel.Fatal, ex);
             }
 
             return managerToken;
         }
 
-        public void AccountManagerDisconnect(AccountManagerEntity accountManagerEntity)
+        public static void AccountManagerDisconnect(AccountManagerEntity accountManagerEntity)
         {
             try
             {
-                Hashtable htparam = new Hashtable();
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@p_accountmanagerid", accountManagerEntity.AccountManagerId);
+                parameters.Add("@p_moduleappid", accountManagerEntity.ModuloAppId);
 
-                htparam["@p_accountmanagerid"] = accountManagerEntity.AccountManagerId;
-                htparam["@p_moduleappid"] = accountManagerEntity.ModuloAppId;
+                CommandParameter queryCommand = new CommandParameter("chat.ManagerAccountConnect_GetTokenActive_pa", parameters);
 
-                xSqlService.XirectServiceSQL.Instancia.EjecutarComando("chat.AccountManagerConnect", "Disable", htparam);
-
+                DbManager.Instance.ExecuteCommand(queryCommand);
+            }
+            catch (TimeoutException tout)
+            {
+                log.Save(EnumLogLevel.Fatal, tout.Message);
             }
             catch (Exception ex)
             {
-                throw ex;
+                log.Save(EnumLogLevel.Fatal, ex);
             }
         }
 
-        public void AccountManagerConnect(AccountManagerEntity accountManagerEntity)
+        public static void AccountManagerConnect(AccountManagerEntity accountManagerEntity)
         {
             try
             {
-                Hashtable htparam = new Hashtable();
 
-                htparam["@p_moduleappid"] = accountManagerEntity.ModuloAppId;
-                htparam["@p_accountmanagerid"] = accountManagerEntity.AccountManagerId;
-                htparam["@p_accountmanagertoken"] = accountManagerEntity.Token;
-                htparam["@p_accountmanagerconnectdatestart"] = DateTime.Now;
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@p_moduleappid", accountManagerEntity.ModuloAppId);
+                parameters.Add("@p_accountmanagerid", accountManagerEntity.AccountManagerId);
+                parameters.Add("@p_accountmanagertoken", accountManagerEntity.Token);
+                parameters.Add("@p_accountmanagerconnectdatestart", DateTime.Now);
 
-                xSqlService.XirectServiceSQL.Instancia.EjecutarComando("chat.AccountManagerConnect", "Insert", htparam);
+                CommandParameter queryCommand = new CommandParameter("chat.AccountManagerConnect_Insert_pa", parameters);
 
+                DbManager.Instance.ExecuteCommand(queryCommand);
+            }
+            catch (TimeoutException tout)
+            {
+                log.Save(EnumLogLevel.Fatal, tout.Message);
             }
             catch (Exception ex)
             {
-                throw ex;
+                log.Save(EnumLogLevel.Fatal, ex);
             }
         }
 
-        public Int32 GetAccountManagerConnectId(ConversationEntity conversationEntity)
+        public static Int32 GetAccountManagerConnectId(ConversationEntity conversationEntity)
         {
             Int32 accountManagerConnectId = 0;
 
             try
             {
-                Hashtable htparam = new Hashtable();
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@p_moduleappid", conversationEntity.ModuleAppId);
 
-                htparam["@p_moduleappid"] = conversationEntity.ModuleAppId;
+                CommandParameter queryCommand = new CommandParameter("chat.AccountManager_SearchByModulo_pa", parameters);
 
-                DataRow drresult= xSqlService.XirectServiceSQL.Instancia.EjecutarRegistro("chat.AccountManager", "SearchByModulo", htparam);
+                DataRow drresult = DbManager.Instance.ExecuteRegister(queryCommand);
 
                 if (drresult != null && !drresult.IsNull("AccountManagerConnectId"))
                 {
@@ -146,9 +174,13 @@ namespace xChatDAO
                     conversationEntity.ManagerToken = drresult["accountmanagertoken"].ToString();
                 }
             }
+            catch (TimeoutException tout)
+            {
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
             catch (Exception ex)
             {
-                throw ex;
+                log.Save(EnumLogLevel.Fatal, ex);
             }
 
             return accountManagerConnectId;
