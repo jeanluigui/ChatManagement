@@ -22,6 +22,10 @@ namespace xChatAPI
             return base.OnConnected();
         }
 
+        /// <summary>
+        /// Evento que es lanzado desde el User para enviar un mensaje al Manager.
+        /// </summary>
+        /// <param name="conversationEntity"></param>
         public void SendToManager(ConversationEntity conversationEntity)
         {
             conversationEntity.IsSendUser = 1;
@@ -60,6 +64,10 @@ namespace xChatAPI
             Clients.Caller.receivedFromManager(conversationEntity);
         }
 
+        /// <summary>
+        /// Evento que es lanzado por el Manager para enviar un mensaje al User.
+        /// </summary>
+        /// <param name="conversationEntity"></param>
         public void SendToUser(ConversationEntity conversationEntity)
         {
             conversationEntity.IsSendUser = 0;
@@ -106,9 +114,25 @@ namespace xChatAPI
         /// <summary>
         /// Método que se ejecuta cuando el MANAGER desconecta a un usuario.
         /// </summary>
-        public void UserDisconnectForMangaer()
+        /// <param name="conversationEntity"></param>
+        public void UserDisconnectForMangaer(ConversationEntity conversationEntity)
         {
+            conversationEntity.IsSendUser = 0;
 
+            // ------------------------------------------------------------
+            // Registrar mensaje en la DB.
+            // ------------------------------------------------------------
+            ServiceChatBL.Instancia.UserDisconnectForManager(conversationEntity);
+
+            // ------------------------------------------------------------
+            // Se lanza el método de los mensajes en el front del Usuario.
+            // ------------------------------------------------------------
+            Clients.Client(conversationEntity.UserToken).serverOrderDisconnect();
+
+            // ------------------------------------------------------------
+            // Se lanza el método de los mensajes en el front del Manager.
+            // ------------------------------------------------------------
+            Clients.Caller.receivedFromUserDisconnect(conversationEntity);
         }
     }
 }

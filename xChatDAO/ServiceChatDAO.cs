@@ -82,6 +82,31 @@ namespace xChatDAO
             return chatMessageId;
         }
 
+        /// <summary>
+        /// Registrar desconexión de un usuario.
+        /// </summary>
+        /// <param name="conversationEntity"></param>
+        public static void UserDisconnectForManager(ConversationEntity conversationEntity)
+        {
+            try
+            {
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@p_chatid", conversationEntity.ChatId);
+                parameters.Add("@p_chatdate", DateTime.Now);
+
+                CommandParameter queryCommand = new CommandParameter("chat.Chat_UserDisconnect_pa", parameters);
+                DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
+            }
+            catch (TimeoutException tout)
+            {
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+        }
+
         public static string GetManagerToken(ConversationEntity conversationEntity)
         {
             string managerToken = string.Empty;

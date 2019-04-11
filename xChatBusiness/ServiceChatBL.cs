@@ -89,5 +89,17 @@ namespace xChatBusiness
                 log.Save(EnumLogLevel.Fatal, ex);
             }
         }
+
+        public void UserDisconnectForManager(ConversationEntity conversationEntity)
+        {
+            try
+            {
+                ServiceChatDAO.UserDisconnectForManager(conversationEntity);
+            }
+            catch (Exception ex)
+            {
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+        }
     }
 }
