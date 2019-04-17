@@ -10,6 +10,35 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <style type="text/css">
+        .haveMessageActive {
+            background-color: #69b74f !important;
+            border-radius: 50% !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 8px !important;
+        }
+        .online_icon {
+            position: absolute;
+            height: 15px;
+            width: 15px;
+            background-color: #4cd137;
+            border-radius: 50%;
+            bottom: 0.2em;
+            right: 0.4em;
+            border: 1.5px solid white;
+        }
+        .Disconectonline_icon {
+            position: absolute;
+            height: 15px;
+            width: 15px;
+            background-color: red;
+            border-radius: 50%;
+            bottom: 0.2em;
+            right: 0.4em;
+            border: 1.5px solid white;
+        }
+    </style>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -89,11 +118,30 @@
         </script>*@
 
     <script type="text/x-handlebars-template" id="messageUser">
+        @*{{# each lstMessageUser}}
+            <div class="col-md-12 incoming_msg">
+                <div class="received_msg">
+                    <div class="received_withd_msg">
+                        <p>{{message}}</p>
+                    </div>
+                </div>
+            </div>
+            {{/each}}*@
         {{# each lstMessageUser}}
-        <div class="col-md-12 incoming_msg">
-            <div class="received_msg">
-                <div class="received_withd_msg">
-                    <p>{{message}}</p>
+        <div class="row message-previous">
+            <div class="col-sm-12 previous">
+
+            </div>
+        </div>
+        <div class="row message-body">
+            <div class="col-sm-12 message-main-receiver">
+                <div class="receiver">
+                    <div class="message-text">
+                        {{message}}
+                    </div>
+                    <span class="message-time pull-right">
+                        @*Sun*@
+                    </span>
                 </div>
             </div>
         </div>
@@ -101,11 +149,25 @@
     </script>
 
     <script type="text/x-handlebars-template" id="messageManager">
+        @*{{# each lstMessageManager}}
+            <div class="col-md-12 incoming_msg">
+                <div class="outgoing_msg">
+                    <div class="sent_msg">
+                        <p>{{message}}</p>
+                    </div>
+                </div>
+            </div>
+            {{/each}}*@
         {{# each lstMessageManager}}
-        <div class="col-md-12 incoming_msg">
-            <div class="outgoing_msg">
-                <div class="sent_msg">
-                    <p>{{message}}</p>
+        <div class="row message-body">
+            <div class="col-sm-12 message-main-sender">
+                <div class="sender">
+                    <div class="message-text">
+                        {{message}}
+                    </div>
+                    <span class="message-time pull-right">
+                        @*Sun*@
+                    </span>
                 </div>
             </div>
         </div>
@@ -115,16 +177,48 @@
     <script type="text/x-handlebars-template" id="userActive">
         {{# each lstUsers}}
         <a href="#" class="listUser" id="{{userId}}">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 chat_list" data-number="{{userId}}" id="lstUserData">
-                <div class="chat_people">
-                    <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="fotoUser"> </div>
-                    <div class="chat_ib">
-                        <h5>{{userEmail}}</h5>
-                        <span class="chat_date">{{userName}}</span>
+            <div class="row sideBar-body" data-number="{{userId}}" id="lstUserData">
+                <div class="col-sm-3 col-xs-3 sideBar-avatar">
+                    <div class="avatar-icon">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                    </div>
+                </div>
+                <div class="col-sm-9 col-xs-9 sideBar-main">
+                    <div class="row">
+                        <div class="col-sm-8 col-xs-8 sideBar-name">
+                            <span class="name-meta">
+                                {{userName}}
+                            </span>
+                        </div>
+                        {{#if ChatIsReadForManager}}
+                             <div class="col-sm-4 col-xs-4 pull-right sideBar-time" style="margin-top: 10px;">
+                                 <span class="time-meta pull-right">
+                                     @*{{ChatIsReadForManager}}*@
+                                 </span>
+                             </div>
+                        {{else}}
+                              <div class="col-sm-4 col-xs-4 pull-right sideBar-time haveMessageActive" style="margin-top: 10px;">
+                                  <span class="time-meta pull-right">
+                                      @*{{ChatIsReadForManager}}*@
+                                  </span>
+                              </div>
+                        {{/if}}
                     </div>
                 </div>
             </div>
         </a>
+
+        @*<a href="#" class="listUser" id="{{userId}}">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 chat_list" data-number="{{userId}}" id="lstUserData">
+                    <div class="chat_people">
+                        <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="fotoUser"> </div>
+                        <div class="chat_ib">
+                            <h5>{{userEmail}}</h5>
+                            <span class="chat_date">{{userName}}</span>
+                        </div>
+                    </div>
+                </div>
+            </a>*@
         {{/each}}
     </script>
 

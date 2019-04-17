@@ -134,5 +134,30 @@ namespace xChatAPI
             // ------------------------------------------------------------
             Clients.Caller.receivedFromUserDisconnect(conversationEntity);
         }
+
+        /// <summary>
+        /// Establecer el CHATID como Leído por el MANAGER.
+        /// Se notifica al Agente y Usuario que el mensaje ha sido Leído.
+        /// </summary>
+        /// <param name="conversationEntity"></param>
+        public void SetMessageReadForManager(ConversationEntity conversationEntity)
+        {
+            conversationEntity.IsSendUser = 0;
+
+            // ------------------------------------------------------------
+            // Establecer chatID como Leído.
+            // ------------------------------------------------------------
+            ServiceChatBL.Instancia.SetMessageReadForManager(conversationEntity);
+
+            // ------------------------------------------------------------
+            // Se lanza el método de los mensajes en el front del Usuario.
+            // ------------------------------------------------------------
+            //Clients.Client(conversationEntity.UserToken).MessageRead();
+
+            // ------------------------------------------------------------
+            // Se lanza el método de los mensajes en el front del Manager.
+            // ------------------------------------------------------------
+            //Clients.Caller.MessageRead(conversationEntity);
+        }
     }
 }
