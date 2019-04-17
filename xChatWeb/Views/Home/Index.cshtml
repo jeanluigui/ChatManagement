@@ -427,6 +427,7 @@
 
             // Chat recibido del usuario.
             Counter.client.receivedFromUser = function (obj) {
+                
                 if (obj.ChatId > 0) {
 
                      chatIdCurrent = $("#ChatId").val();
@@ -461,7 +462,6 @@
                         $("#UserEmail").val(obj.UserEmail);
                         $("#UserToken").val(obj.UserToken);
                         $("#ManagerToken").val(obj.AccountManagerToken);
-
                         //llamar al evento marcar como leido
                         //mandar dentro de un objeto el ChatId
                         //desmarcar el check para confirmar q se leyo
