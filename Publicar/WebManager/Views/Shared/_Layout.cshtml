@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/stylechat.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Chat Manager", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+    <script type="text/javascript">
+        function Fn_CallMethod(url, data, success, error, complete) {
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: data,
+                datatype: "json",
+                success: success,
+                error: error,
+                complete: complete,
+                cache: false,
+                traditional: true
+            });
+        }
+        function Fn_LoadHandlebars(templateId, context) {
+            var source = document.getElementById(templateId).innerHTML;
+            var template = Handlebars.compile(source);
+            return template(context);
+        }
+    </script>
+    <script src="~/Scripts/Base.js"></script>
+    <script src="~/Content/handlebars/handlebars-v4.0.12.js"></script>
+    @RenderSection("scripts", required: false)
+
+    @*<script src="~/Scripts/jquery.signalR-2.4.0.js"></script>
+        <script src="@xChatEntities.Constants.Url.SignalRHub"></script>*@
+
+    @*<script>
+            $(function ()
+            {
+                $.support.cors = true;
+
+                $.connection.hub.url = "@xChatEntities.Constants.Url.SignalR";
+
+                var Counter = $.connection.counterHub;
+
+                Counter.client.enterUser = function () {
+                    alert("entro alguien!");
+                };
+
+                $.connection.hub.start().done();
+
+            });
+        </script>*@
+
+    <script type="text/x-handlebars-template" id="messageUser">
+        {{# each lstMessageUser}}
+        <div class="col-md-12 incoming_msg">
+            <div class="received_msg">
+                <div class="received_withd_msg">
+                    <p>{{message}}</p>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </script>
+
+    <script type="text/x-handlebars-template" id="messageManager">
+        {{# each lstMessageManager}}
+        <div class="col-md-12 incoming_msg">
+            <div class="outgoing_msg">
+                <div class="sent_msg">
+                    <p>{{message}}</p>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </script>
+
+    <script type="text/x-handlebars-template" id="userActive">
+        {{# each lstUsers}}
+        <a href="#" class="listUser" id="{{userId}}">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 chat_list" data-number="{{userId}}" id="lstUserData">
+                <div class="chat_people">
+                    <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="fotoUser"> </div>
+                    <div class="chat_ib">
+                        <h5>{{userEmail}}</h5>
+                        <span class="chat_date">{{userName}}</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {{/each}}
+    </script>
+
+    @*<li style="margin-top:5px">
+            <label class="radio" style="font-weight: 500;">
+                <input id="radioWarehouse" type="radio" name="radioWarehouse" value="{{warehouseId}}" data-stock="{{stockWarehouse}}" data-nameAddress="{{addressWarehouse}}" data-namewarehouse="{{nameWarehouse}}">
+                <span id="nameWarehouse" class="outer"><span class="inner"></span></span>{{nameWarehouse}}
+            </label>
+            <label style="margin-left:27px">
+                <label id="warehouseId" style="display:none">{{warehouseId}}</label>
+                <label id="idAddressWarehouse">{{addressWarehouse}}</label><br />
+                <label id="idStockWarehouse">@ViewBag.ProductAvailable: {{stockWarehouse}} </label>
+            </label>
+
+        </li>*@
+</body>
+</html>

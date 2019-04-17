@@ -69,7 +69,7 @@ namespace xChatBusiness
             return 1;
         }
 
-        public ObjectResultList<AccountManagerConnect> GetListAccountManagerConnectByModuleAppId(ObjectRequest<int> objectRequest)
+        public ObjectResultList<AccountManagerConnect> GetListAccountManagerConnectByModuleAppId(ObjectRequest<string> objectRequest)
         {
             ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
 

@@ -101,5 +101,17 @@ namespace xChatBusiness
                 log.Save(EnumLogLevel.Fatal, ex);
             }
         }
+
+        public void SetMessageReadForManager(ConversationEntity conversationEntity)
+        {
+            try
+            {
+                ServiceChatDAO.SetMessageReadForManager(conversationEntity);
+            }
+            catch (Exception ex)
+            {
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+        }
     }
 }

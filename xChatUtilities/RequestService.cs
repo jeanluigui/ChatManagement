@@ -6,7 +6,7 @@ using xChatEntities;
 
 namespace xChatUtilities
 {
-    public class RequestService
+    public sealed class RequestService
     {
         /// <summary>
         /// Utilidad que permite ejecutar un servicio API.

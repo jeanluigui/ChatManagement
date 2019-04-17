@@ -25,8 +25,6 @@ namespace xChatDAO
                 CommandParameter queryCommand = new CommandParameter("chat.AccountManager_GetListUserConnect_pa", parameters);
                 DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
 
-                ListUserConnect list2 = new ListUserConnect(dtresult);
-
                 listUserConnect = new ObjectResultList<UserConnect>(dtresult);
 
             }
@@ -130,14 +128,16 @@ namespace xChatDAO
             return result;
         }
 
-        public static ObjectResultList<AccountManagerConnect> GetListAccountManagerConnectByModuleAppId(ObjectRequest<int> objectRequest)
+        public static ObjectResultList<AccountManagerConnect> GetListAccountManagerConnectByModuleAppId(ObjectRequest<string> objectRequest)
         {
             ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
 
             try
             {
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_moduleappid", objectRequest.SenderObject);
+                parameters.Add("@p_moduleappid", objectRequest.SenderObject.Split(';')[0].ToString());
+                parameters.Add("@p_userid", objectRequest.SenderObject.Split(';')[1].ToString());
+                parameters.Add("@p_rolid", objectRequest.SenderObject.Split(';')[2].ToString());
 
                 CommandParameter queryCommand = new CommandParameter("chat.AccountManagerConnect_GetList_pa",parameters);
                 DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);

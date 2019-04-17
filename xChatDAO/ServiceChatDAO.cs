@@ -83,6 +83,31 @@ namespace xChatDAO
         }
 
         /// <summary>
+        /// Establece el CHATID como Leído por el Manager
+        /// </summary>
+        /// <param name="conversationEntity"></param>
+        public static void SetMessageReadForManager(ConversationEntity conversationEntity)
+        {
+            try
+            {
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@p_chatid", conversationEntity.ChatId);
+                parameters.Add("@p_chatdate", DateTime.Now);
+
+                CommandParameter queryCommand = new CommandParameter("chat.Chat_SetMessageReadForManager_pa", parameters);
+                DbManager.Instance.ExecuteCommand(queryCommand);
+            }
+            catch (TimeoutException tout)
+            {
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+        }
+
+        /// <summary>
         /// Registrar desconexión de un usuario.
         /// </summary>
         /// <param name="conversationEntity"></param>
@@ -95,7 +120,7 @@ namespace xChatDAO
                 parameters.Add("@p_chatdate", DateTime.Now);
 
                 CommandParameter queryCommand = new CommandParameter("chat.Chat_UserDisconnect_pa", parameters);
-                DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
+                DbManager.Instance.ExecuteCommand(queryCommand);
             }
             catch (TimeoutException tout)
             {

@@ -1,27 +1,39 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using xChatEntities;
 using xChatUtilities;
 using xChatWeb.Models;
+using xss.EncryptionHandler;
 
 namespace xChatWeb.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string paramId, string paramAppId, string paramRolId)
         {
+            // ----------------------------------------------
+            // el parámetro paramId recibe el identificador del usuario
+            // de corporate.
+            // debe ser descriptado.
+            // ----------------------------------------------
+
+            String originalParamId = Encryption.Decrypt(HttpUtility.UrlDecode(paramId));
+            String originalParamAppId = Encryption.Decrypt(HttpUtility.UrlDecode(paramAppId));
+            String originalParamRolId = Encryption.Decrypt(HttpUtility.UrlDecode(paramRolId));
+
             ViewBag.error = "";
 
             // ----------------------------------------------
             // Obtener lista de agentes conectados de un determinado módulo.
             // ----------------------------------------------
-            ObjectRequest<int> objectRequest = new ObjectRequest<int>()
+            ObjectRequest<string> objectRequest = new ObjectRequest<string>()
             {
-                SenderObject = 1
+                SenderObject = $"{originalParamId};{originalParamAppId};{paramRolId}"
             };
-            ObjectResultList<AccountManagerConnect> lstAgents = RequestService.ExecuteList<AccountManagerConnect, int>(Constants.UrlApiService.GetListAccountManagerConnectByModuleAppId
+
+            ObjectResultList<AccountManagerConnect> lstAgents = RequestService.ExecuteList<AccountManagerConnect, string>(Constants.UrlApiService.GetListAccountManagerConnectByModuleAppId
                 , "POST"
                 , objectRequest
                 );
