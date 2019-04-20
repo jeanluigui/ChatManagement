@@ -41,7 +41,7 @@
     </style>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="display:none">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -63,7 +63,7 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
+        <footer style="display:none">
             <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
         </footer>
     </div>
@@ -208,31 +208,8 @@
             </div>
         </a>
 
-        @*<a href="#" class="listUser" id="{{userId}}">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 chat_list" data-number="{{userId}}" id="lstUserData">
-                    <div class="chat_people">
-                        <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="fotoUser"> </div>
-                        <div class="chat_ib">
-                            <h5>{{userEmail}}</h5>
-                            <span class="chat_date">{{userName}}</span>
-                        </div>
-                    </div>
-                </div>
-            </a>*@
         {{/each}}
     </script>
 
-    @*<li style="margin-top:5px">
-            <label class="radio" style="font-weight: 500;">
-                <input id="radioWarehouse" type="radio" name="radioWarehouse" value="{{warehouseId}}" data-stock="{{stockWarehouse}}" data-nameAddress="{{addressWarehouse}}" data-namewarehouse="{{nameWarehouse}}">
-                <span id="nameWarehouse" class="outer"><span class="inner"></span></span>{{nameWarehouse}}
-            </label>
-            <label style="margin-left:27px">
-                <label id="warehouseId" style="display:none">{{warehouseId}}</label>
-                <label id="idAddressWarehouse">{{addressWarehouse}}</label><br />
-                <label id="idStockWarehouse">@ViewBag.ProductAvailable: {{stockWarehouse}} </label>
-            </label>
-
-        </li>*@
 </body>
 </html>

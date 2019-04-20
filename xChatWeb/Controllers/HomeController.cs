@@ -11,7 +11,7 @@ namespace xChatWeb.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index(/*string paramId, string paramAppId, string paramRolId*/)
+        public ActionResult Index(string paramId, string paramAppId, string paramRolId)
         {
             // ----------------------------------------------
             // el parámetro paramId recibe el identificador del usuario
@@ -19,9 +19,9 @@ namespace xChatWeb.Controllers
             // debe ser descriptado.
             // ----------------------------------------------
 
-            //String originalParamId = Encryption.Decrypt(HttpUtility.UrlDecode(paramId));
-            //String originalParamAppId = Encryption.Decrypt(HttpUtility.UrlDecode(paramAppId));
-            //String originalParamRolId = Encryption.Decrypt(HttpUtility.UrlDecode(paramRolId));
+            String originalParamId = Encryption.Decrypt(HttpUtility.UrlDecode(paramId));
+            String originalParamAppId = Encryption.Decrypt(HttpUtility.UrlDecode(paramAppId));
+            String originalParamRolId = Encryption.Decrypt(HttpUtility.UrlDecode(paramRolId));
 
             ViewBag.error = "";
 
@@ -31,7 +31,7 @@ namespace xChatWeb.Controllers
             ObjectRequest<string> objectRequest = new ObjectRequest<string>()
             {
                             //usuario-aplicacion-rol manager
-                SenderObject = $"{1};{1};{86}"
+                SenderObject = $"{originalParamId};{originalParamAppId};{originalParamRolId}"
             };
 
             ObjectResultList<AccountManagerConnect> lstAgents = RequestService.ExecuteList<AccountManagerConnect, string>(Constants.UrlApiService.GetListAccountManagerConnectByModuleAppId
