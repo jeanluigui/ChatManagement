@@ -13,31 +13,34 @@
                     Agentes
                 </div>
                 <div class="row sideBar" style=" overflow-y: scroll;height: 760px;">
-                    @for (int i = 0; i < ViewBag.AgentActive.Elements.Count; i++)
+                    @if (ViewBag.AgentActive.Elements != null && ViewBag.AgentActive.Elements.Count > 0)
                     {
-                        <a href="#" class="listAgent" id="@ViewBag.AgentActive.Elements[i].AccountManagerId">
-                            <div class="row sideBar-body" data-id="@ViewBag.AgentActive.Elements[i].AccountManagerId" id="lstAgentData">
-                                <div class="col-sm-3 col-xs-3 sideBar-avatar">
-                                    <div class="avatar-icon">
-                                        <img src="https://ptetutorials.com/images/user-profile.png">
-                                        <span id="idOnline" class="Disconectonline_icon"></span>
-                                    </div>
-                                </div>
-                                <div class="col-sm-9 col-xs-9 sideBar-main">
-                                    <div class="row">
-                                        <div class="col-sm-8 col-xs-8 sideBar-name">
-                                            <span class="name-meta">
-                                                @ViewBag.AgentActive.Elements[i].AccountManagerName
-                                            </span>
-                                        </div>
-                                        <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
-                                            <span class="time-meta pull-right">
-                                            </span>
+                        for (int i = 0; i < ViewBag.AgentActive.Elements.Count; i++)
+                        {
+                            <a href="#" class="listAgent" id="@ViewBag.AgentActive.Elements[i].AccountManagerId">
+                                <div class="row sideBar-body" data-id="@ViewBag.AgentActive.Elements[i].AccountManagerId" id="lstAgentData">
+                                    <div class="col-sm-3 col-xs-3 sideBar-avatar">
+                                        <div class="avatar-icon">
+                                            <img src="https://ptetutorials.com/images/user-profile.png">
+                                            <span id="idOnline" class="Disconectonline_icon"></span>
                                         </div>
                                     </div>
+                                    <div class="col-sm-9 col-xs-9 sideBar-main">
+                                        <div class="row">
+                                            <div class="col-sm-8 col-xs-8 sideBar-name">
+                                                <span class="name-meta">
+                                                    @ViewBag.AgentActive.Elements[i].AccountManagerName
+                                                </span>
+                                            </div>
+                                            <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
+                                                <span class="time-meta pull-right">
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        }
                     }
 
                 </div>
