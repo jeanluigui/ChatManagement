@@ -14,6 +14,7 @@ namespace xChatEntities
         public string AccountManagerName { get; set; }
         public string AccountManagerConnectDateStart { get; set; }
         public int AccountManagerConnecChatActive { get; set; }
+        public short AccountManagerIsActive { get; set; }
 
         public AccountManagerConnect() { }
 
@@ -26,6 +27,7 @@ namespace xChatEntities
             AccountManagerName = Convert.ToString(dataRow["AccountManagerName"]);
             AccountManagerConnectDateStart = Convert.ToString(dataRow["AccountManagerConnectDateStart"]);
             AccountManagerConnecChatActive = Convert.ToInt32(dataRow["AccountManagerConnecChatActive"]);
+            AccountManagerIsActive = Convert.ToInt16(dataRow["AccountManagerIsActive"]);
         }
 
     }
