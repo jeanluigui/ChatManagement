@@ -17,7 +17,7 @@
                     {
                         for (int i = 0; i < ViewBag.AgentActive.Elements.Count; i++)
                         {
-                            <a href="#" class="listAgent" id="@ViewBag.AgentActive.Elements[i].AccountManagerId">
+                            <a href="#" class="listAgent" id="btnconnect" data-AgentValueId="@ViewBag.AgentActive.Elements[i].AccountManagerId" >
                                 <div class="row sideBar-body" data-id="@ViewBag.AgentActive.Elements[i].AccountManagerId" id="lstAgentData">
                                     <div class="col-sm-3 col-xs-3 sideBar-avatar">
                                         <div class="avatar-icon">
@@ -27,14 +27,13 @@
                                     </div>
                                     <div class="col-sm-9 col-xs-9 sideBar-main">
                                         <div class="row">
-                                            <div class="col-sm-8 col-xs-8 sideBar-name">
+                                            <div class="col-sm-7 col-xs-7 sideBar-name">
                                                 <span class="name-meta">
                                                     @ViewBag.AgentActive.Elements[i].AccountManagerName
                                                 </span>
                                             </div>
-                                            <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
-                                                <span class="time-meta pull-right">
-                                                </span>
+                                            <div class="col-sm-5 col-xs-5 pull-right sideBar-time">
+                                                    <span id="idConnect" data-AgentValueId="@ViewBag.AgentActive.Elements[i].AccountManagerId" type="button" class="btn btn-danger btn-xs pull-right">Conectar</span>
                                             </div>
                                         </div>
                                     </div>
@@ -124,22 +123,7 @@
         }
 
         function Fn_Bind() {
-
-            $(".listAgent").on("click", function (e) {
-                e.preventDefault();
-                $('.listAgent div').each(function (i, e) {
-                    $(e).removeClass('active_chat');
-                    $(e).find('#idOnline').removeClass()
-                });
-                $($(this).children()[0]).addClass("active_chat");
-                $($(this).children()[0]).find('#idOnline').addClass('online_icon')
-                var agentId = $(this).attr("id")
-                $("#AgentId").val(agentId);
-                Fn_UserActiveByAgent(agentId)
-
-                
-            });
-
+            
             $(".listUser").on("click", function (e) {
                 e.preventDefault();
                 $('.listUser div').each(function (i, e) {
@@ -204,7 +188,7 @@
                             AccountManagerId: agentId,
                             ModuloAppId: 1,
                             EMail: "jhurtado@xirectss.com",
-                            Password: "12345678",
+                            Password: "",
                             Token: ""
                         };
 
@@ -309,17 +293,31 @@
                 .done(function () {
 
                     // Botón Login Connect Account Manager.
-                    $("#btnconnect").click(function () {
-
+                $(document).on('click', '#btnconnect', function () {
                         var obj = {
-                            AccountManagerId: $("#AccountManagerId").val(),
-                            ModuloAppId: $("#ModuloAppId").val(),
+                        AccountManagerId: $(this).attr("data-agentvalueid"),
+                        ModuloAppId: 1,
                             EMail: $("#UserEmail").val(),
-                            Password: "12345678",
+                        Password: "",
                             Token: ""
                         };
 
                         Counter.server.accountManagerConnect(obj);
+
+                    $('.listAgent').each(function (i, e) {
+                        $(e).find("#lstAgentData").removeClass("active_chat")
+                        $(e).find('#idOnline').removeClass();
+                        $(e).find("#idConnect").removeClass('btn btn-success btn-xs pull-right');
+                    });
+                    //$($(this).children()[0]).find('#idOnline').removeClass('Disconectonline_icon')
+                    $($(this).children()[0]).find("#idConnect").addClass('btn btn-success btn-xs pull-right');
+                    $($(this).children()[0]).addClass("active_chat");
+                    $($(this).children()[0]).find('#idOnline').addClass('online_icon')
+
+
+                    var agentId = $(this).attr("data-agentvalueid")
+                    $("#AgentId").val(agentId);
+                    Fn_UserActiveByAgent(agentId)
 
                     });
 
@@ -356,10 +354,9 @@
                         $("#message").text("");
                     }
 
-                })
-                .fail(function () {
+            })
+            .fail(function () { alert('No fue posible establecer la conexion'); });
                     console.log('Could not Connect!');
-                });
 
             // Chat recibido del usuario.
             Counter.client.receivedFromUser = function (obj) {
