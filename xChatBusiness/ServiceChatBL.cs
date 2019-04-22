@@ -34,6 +34,22 @@ namespace xChatBusiness
             return chatId;
         }
 
+        public ObjectResultList<ChatToken> ChatDisconnected(string connectionId)
+        {
+            ObjectResultList<ChatToken> tokenDestino = new ObjectResultList<ChatToken>();
+
+            try
+            {
+                tokenDestino = ServiceChatDAO.ChatDisconnected(connectionId);
+            }
+            catch (Exception ex)
+            {
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return tokenDestino;
+        }
+
         public int ChatMessageCreate(ConversationEntity conversationEntity)
         {
             int result = 0;
