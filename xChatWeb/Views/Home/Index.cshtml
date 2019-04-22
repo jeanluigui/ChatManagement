@@ -289,19 +289,20 @@
             Counter = $.connection.counterHub;
 
             // Iniciar conexión con Concentrador.
-            $.connection.hub.start().done(function () {
+            $.connection.hub.start()
+                .done(function () {
 
-                // Botón Login Connect Account Manager.
+                    // Botón Login Connect Account Manager.
                 $(document).on('click', '#btnconnect', function () {
-                    var obj = {
+                        var obj = {
                         AccountManagerId: $(this).attr("data-agentvalueid"),
                         ModuloAppId: 1,
-                        EMail: $("#UserEmail").val(),
+                            EMail: $("#UserEmail").val(),
                         Password: "",
-                        Token: ""
-                    };
+                            Token: ""
+                        };
 
-                    Counter.server.accountManagerConnect(obj);
+                        Counter.server.accountManagerConnect(obj);
 
                     $('.listAgent').each(function (i, e) {
                         $(e).find("#lstAgentData").removeClass("active_chat")
@@ -318,43 +319,44 @@
                     $("#AgentId").val(agentId);
                     Fn_UserActiveByAgent(agentId)
 
-                });
+                    });
 
-                // Botón chatear.
-                $("#btnsendmessage").click(function () {
-                    Fn_SendMenssage();
-                    $("#message").val("");
-                });
-
-                $('#message').keypress(function (e) {
-                    var keycode = (e.keyCode ? e.keyCode : e.which);
-                    if (keycode == '13') {
+                    // Botón chatear.
+                    $("#btnsendmessage").click(function () {
                         Fn_SendMenssage();
-                        e.preventDefault();
                         $("#message").val("");
-                        return false;
-                    }
-                });
+                    });
 
-                function Fn_SendMenssage() {
-                    var objChat = {
-                        ChatId: $("#ChatId").val(),
-                        ModuleAppId: $("#ModuleAppId").val(),
-                        AccountManagerId: $("#AccountManagerId").val(),
-                        UserName: $("#UserName").val(),
-                        UserEmail: $("#UserEmail").val(),
-                        Message: $("#message").val(),
-                        DateMessage: "",
-                        UserToken: $("#UserToken").val(),
-                        ManagerToken: $("#ManagerToken").val(),
-                        AccountManagerName: $("#AccountManagerName").val(),
-                    };
-                    Counter.server.sendToUser(objChat);
-                    $("#message").text("");
-                }
+                    $('#message').keypress(function (e) {
+                        var keycode = (e.keyCode ? e.keyCode : e.which);
+                        if (keycode == '13') {
+                            Fn_SendMenssage();
+                            e.preventDefault();
+                            $("#message").val("");
+                            return false;
+                        }
+                    });
+
+                    function Fn_SendMenssage() {
+                        var objChat = {
+                            ChatId: $("#ChatId").val(),
+                            ModuleAppId: $("#ModuleAppId").val(),
+                            AccountManagerId: $("#AccountManagerId").val(),
+                            UserName: $("#UserName").val(),
+                            UserEmail: $("#UserEmail").val(),
+                            Message: $("#message").val(),
+                            DateMessage: "",
+                            UserToken: $("#UserToken").val(),
+                            ManagerToken: $("#ManagerToken").val(),
+                            AccountManagerName: $("#AccountManagerName").val(),
+                        };
+                        Counter.server.sendToUser(objChat);
+                        $("#message").text("");
+                    }
 
             })
             .fail(function () { alert('No fue posible establecer la conexion'); });
+                    console.log('Could not Connect!');
 
             // Chat recibido del usuario.
             Counter.client.receivedFromUser = function (obj) {

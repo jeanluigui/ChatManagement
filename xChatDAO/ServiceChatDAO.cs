@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using xChatEntities;
 using xss.ConnectionManager;
@@ -27,6 +28,7 @@ namespace xChatDAO
             try
             {
                 ListParameters parameters = new ListParameters();
+                parameters.Add("@p_distributorid", conversationEntity.DistributorId);
                 parameters.Add("@p_username", conversationEntity.UserName);
                 parameters.Add("@p_useremail", conversationEntity.UserEmail);
                 parameters.Add("@p_usertoken", conversationEntity.UserToken);
@@ -48,6 +50,32 @@ namespace xChatDAO
             }
 
             return chatId;
+        }
+
+        public static ObjectResultList<ChatToken> ChatDisconnected(string connectionId)
+        {
+            ObjectResultList<ChatToken> tokenDestino = new ObjectResultList<ChatToken>();
+
+            try
+            {
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@p_chattoken", connectionId);
+
+                CommandParameter queryCommand = new CommandParameter("chat.Chat_Disconnected_pa", parameters);
+                DataTable dataTable = DbManager.Instance.ExecuteTable(queryCommand);
+
+                tokenDestino = new ObjectResultList<ChatToken>(dataTable);
+            }
+            catch (TimeoutException tout)
+            {
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return tokenDestino;
         }
 
         public static int ChatMessageCreate(ConversationEntity conversationEntity)

@@ -5,6 +5,7 @@ namespace xChatEntities
     public class ConversationEntity
     {
         public int ChatId { get; set; }
+        public int DistributorId { get; set; }
         public int ModuleAppId { get; set; }
         public int AccountManagerId { get; set; }
         public string UserName { get; set; }

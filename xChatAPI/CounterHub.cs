@@ -7,6 +7,31 @@ namespace xChatAPI
 {
     public class CounterHub : Hub
     {
+
+        /// <summary>
+        /// Se ejecuta cuando algun cliente se desconecta de forma no controlada, por ejemplo
+        /// se cierra el navegador o la PC/Laptop entra en estado de hibernación.
+        /// En este caso se debe desconectar de la DB.
+        /// </summary>
+        /// <param name="stopCalled"></param>
+        /// <returns></returns>
+        public override Task OnDisconnected(bool stopCalled)
+        {
+            ObjectResultList<ChatToken> tokenDestino = ServiceChatBL.Instancia.ChatDisconnected(Context.ConnectionId);
+
+            foreach (ChatToken item in tokenDestino.Elements)
+            {
+                // Tipo 1: Usuario desconectado.  Notificar a Manager.
+                // Tipo 2: Manager desconectado.  Notificar a Usuarios.
+                if (item.TypeToken.Equals(1))
+                    Clients.Client(item.Token).chatUserDisconnect();
+                else
+                    Clients.Client(item.Token).chatManagerDisconnect();
+            }
+
+            return base.OnDisconnected(stopCalled);
+        }
+
         public override Task OnConnected()
         {
             // Clients = es un método que hereda de la clase Hub.
