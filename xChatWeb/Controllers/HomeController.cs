@@ -19,9 +19,9 @@ namespace xChatWeb.Controllers
             // debe ser descriptado.
             // ----------------------------------------------
 
-            String originalParamId = Encryption.Decrypt(HttpUtility.UrlDecode(paramId));
-            String originalParamAppId = Encryption.Decrypt(HttpUtility.UrlDecode(paramAppId));
-            String originalParamRolId = Encryption.Decrypt(HttpUtility.UrlDecode(paramRolId));
+            String originalParamId = paramId; // Encryption.Decrypt(HttpUtility.UrlDecode(paramId));
+            String originalParamAppId = paramAppId;// Encryption.Decrypt(HttpUtility.UrlDecode(paramAppId));
+            String originalParamRolId = paramRolId; // Encryption.Decrypt(HttpUtility.UrlDecode(paramRolId));
 
             ViewBag.error = "";
 

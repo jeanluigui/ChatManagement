@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Data;
+using System.Web;
 using xChatEntities;
 using xss.ConnectionManager;
+using xss.EncryptionHandler;
 using xss.Logger.Enums;
 using xss.Logger.Factory;
 using xss.Logger.Interfaces;
@@ -135,9 +137,9 @@ namespace xChatDAO
             try
             {
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_moduleappid", objectRequest.SenderObject.Split(';')[0].ToString());
-                parameters.Add("@p_userid", objectRequest.SenderObject.Split(';')[1].ToString());
-                parameters.Add("@p_rolid", objectRequest.SenderObject.Split(';')[2].ToString());
+                parameters.Add("@p_userid", Encryption.Decrypt(HttpUtility.UrlDecode(objectRequest.SenderObject.Split(';')[0].ToString())));
+                parameters.Add("@p_moduleappid", Encryption.Decrypt(HttpUtility.UrlDecode(objectRequest.SenderObject.Split(';')[1].ToString())));
+                parameters.Add("@p_rolid", Encryption.Decrypt(HttpUtility.UrlDecode(objectRequest.SenderObject.Split(';')[2].ToString())));
 
                 CommandParameter queryCommand = new CommandParameter("chat.AccountManagerConnect_GetList_pa",parameters);
                 DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
