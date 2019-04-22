@@ -69,6 +69,7 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -77,6 +78,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="xss.ConnectionManager, Version=1.5.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\xss.ConnectionManager.1.5.6\lib\netstandard2.0\xss.ConnectionManager.dll</HintPath>
+    </Reference>
+    <Reference Include="xss.EncryptionHandler, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\xss.EncryptionHandler.1.0.7\lib\netstandard2.0\xss.EncryptionHandler.dll</HintPath>
     </Reference>
     <Reference Include="xss.Enumeration, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\xss.Enumeration.1.2.2\lib\netstandard2.0\xss.Enumeration.dll</HintPath>
