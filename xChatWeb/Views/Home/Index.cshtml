@@ -17,7 +17,7 @@
                     {
                         for (int i = 0; i < ViewBag.AgentActive.Elements.Count; i++)
                         {
-                            <a href="#" class="listAgent" id="btnconnect" data-AgentValueId="@ViewBag.AgentActive.Elements[i].AccountManagerId" >
+                            <a href="#" class="listAgent" id="btnconnect" data-AgentValueId="@ViewBag.AgentActive.Elements[i].AccountManagerId" data-IsAgent="@ViewBag.AgentActive.Elements[i].AccountManagerIsAgent">
                                 <div class="row sideBar-body" data-id="@ViewBag.AgentActive.Elements[i].AccountManagerId" id="lstAgentData">
                                     <div class="col-sm-3 col-xs-3 sideBar-avatar">
                                         <div class="avatar-icon">
@@ -33,7 +33,14 @@
                                                 </span>
                                             </div>
                                             <div class="col-sm-5 col-xs-5 pull-right sideBar-time">
+                                                @*@if (ViewBag.AgentActive.Elements[i].AccountManagerIsActive == 1)
+                                                {
+                                                    <span id="idConnect" data-AgentValueId="@ViewBag.AgentActive.Elements[i].AccountManagerId" type="button" class="btn btn-success btn-xs pull-right">Conectar</span>
+                                                }
+                                                else
+                                                {
                                                     <span id="idConnect" data-AgentValueId="@ViewBag.AgentActive.Elements[i].AccountManagerId" type="button" class="btn btn-danger btn-xs pull-right">Conectar</span>
+                                                }*@
                                             </div>
                                         </div>
                                     </div>
@@ -44,6 +51,7 @@
 
                 </div>
             </div>
+            <div id="loader" style="display:none"></div>
         </div>
         <div class="col-sm-3 side">
             <div class="side-one">
@@ -82,7 +90,7 @@
                         <i class="fa fa-smile-o fa-2x"></i>
                     </div>*@
                 <div class="col-sm-9 col-xs-9 col-lg-11 reply-main">
-                    <textarea class="form-control" rows="1" id="message" name="message" placeholder="Escriba su mensaje ..." style="overflow-y: scroll"></textarea>
+                    <textarea class="form-control" rows="1" id="message" name="message"  placeholder="Escriba su mensaje ..." style="overflow-y: scroll"></textarea>
                 </div>
                 @*<div class="col-sm-1 col-xs-1 reply-recording">
                         <i class="fa fa-microphone fa-2x" aria-hidden="true"></i>
@@ -157,6 +165,7 @@
                 try {
                     //ChatIsReadForManager si es 1 es leido si es 0 no leido (agregar marca)
                     lstUserActive = response.Elements;
+                  
                     if (lstUserActive != "" && lstUserActive != null) {
                         $("#userActiveShow a").remove();
                         lstUsers = [];
@@ -198,12 +207,12 @@
                                 $($($(e)[0]).children()[0]).addClass("active_chat")
                             }
                         });
-
-                        Counter.server.accountManagerConnect(obj);
-
                         
 
-                     } else {
+                    } else {
+                        $("#userActiveShow").append(Fn_LoadHandlebars("userActive", { lstUsers }));
+                        $("#userActiveShow").empty();
+                        $("#conversation div").remove();
                         fn_message("i", "No tiene Usuarios activos.");
                      }
                 }
@@ -289,74 +298,82 @@
             Counter = $.connection.counterHub;
 
             // Iniciar conexión con Concentrador.
-            $.connection.hub.start()
-                .done(function () {
+            $.connection.hub.start().done(function () {
 
-                    // Botón Login Connect Account Manager.
-                $(document).on('click', '#btnconnect', function () {
+                // Botón Login Connect Account Manager.
+                $(document).on('click', '#btnconnect', function ()
+                {
+                    if ($(this).attr("data-IsAgent") == "True")
+                    {
+                        $("#loader").css('display', 'block');
                         var obj = {
-                        AccountManagerId: $(this).attr("data-agentvalueid"),
-                        ModuloAppId: 1,
+                            AccountManagerId: $(this).attr("data-agentvalueid"),
+                            ModuloAppId: 1,
                             EMail: $("#UserEmail").val(),
-                        Password: "",
+                            Password: "",
                             Token: ""
                         };
 
                         Counter.server.accountManagerConnect(obj);
-
-                    $('.listAgent').each(function (i, e) {
-                        $(e).find("#lstAgentData").removeClass("active_chat")
-                        $(e).find('#idOnline').removeClass();
-                        $(e).find("#idConnect").removeClass('btn btn-success btn-xs pull-right');
-                    });
-                    //$($(this).children()[0]).find('#idOnline').removeClass('Disconectonline_icon')
-                    $($(this).children()[0]).find("#idConnect").addClass('btn btn-success btn-xs pull-right');
-                    $($(this).children()[0]).addClass("active_chat");
-                    $($(this).children()[0]).find('#idOnline').addClass('online_icon')
-
-
-                    var agentId = $(this).attr("data-agentvalueid")
-                    $("#AgentId").val(agentId);
-                    Fn_UserActiveByAgent(agentId)
-
-                    });
-
-                    // Botón chatear.
-                    $("#btnsendmessage").click(function () {
-                        Fn_SendMenssage();
-                        $("#message").val("");
-                    });
-
-                    $('#message').keypress(function (e) {
-                        var keycode = (e.keyCode ? e.keyCode : e.which);
-                        if (keycode == '13') {
-                            Fn_SendMenssage();
-                            e.preventDefault();
-                            $("#message").val("");
-                            return false;
-                        }
-                    });
-
-                    function Fn_SendMenssage() {
-                        var objChat = {
-                            ChatId: $("#ChatId").val(),
-                            ModuleAppId: $("#ModuleAppId").val(),
-                            AccountManagerId: $("#AccountManagerId").val(),
-                            UserName: $("#UserName").val(),
-                            UserEmail: $("#UserEmail").val(),
-                            Message: $("#message").val(),
-                            DateMessage: "",
-                            UserToken: $("#UserToken").val(),
-                            ManagerToken: $("#ManagerToken").val(),
-                            AccountManagerName: $("#AccountManagerName").val(),
-                        };
-                        Counter.server.sendToUser(objChat);
-                        $("#message").text("");
+                        var agentId = $(this).attr("data-agentvalueid")
+                        $("#AgentId").val(agentId);
                     }
+                    else
+                    {
+                        //$("#loader").css('display', 'block');
+                        var obj = {
+                            AccountManagerId: $(this).attr("data-agentvalueid"),
+                            ModuloAppId: 1,
+                            EMail: $("#UserEmail").val(),
+                            Password: "",
+                            Token: ""
+                        };
+                        
+                        var agentId = $(this).attr("data-agentvalueid")
+                        $("#AgentId").val(agentId);
+                        Fn_UserActiveByAgent($("#AgentId").val())
+                    }
+                });
 
-            })
-            .fail(function () { alert('No fue posible establecer la conexion'); });
-                    console.log('Could not Connect!');
+                // Botón chatear.
+                $("#btnsendmessage").click(function () {
+                    Fn_SendMenssage();
+                    $("#message").val("");
+                });
+
+                $('#message').keypress(function (e) {
+                    var keycode = (e.keyCode ? e.keyCode : e.which);
+                    if (keycode == '13') {
+                        Fn_SendMenssage();
+                        e.preventDefault();
+                        $("#message").val("");
+                        return false;
+                    }
+                });
+
+                function Fn_SendMenssage() {
+                    if ($("#message").val().trim() == "") {
+                        return false;
+                    }
+                    var objChat = {
+                        ChatId: $("#ChatId").val(),
+                        ModuleAppId: $("#ModuleAppId").val(),
+                        AccountManagerId: $("#AccountManagerId").val(),
+                        UserName: $("#UserName").val(),
+                        UserEmail: $("#UserEmail").val(),
+                        Message: $("#message").val(),
+                        DateMessage: "",
+                        UserToken: $("#UserToken").val(),
+                        ManagerToken: $("#ManagerToken").val(),
+                        AccountManagerName: $("#AccountManagerName").val(),
+                    };
+                    Counter.server.sendToUser(objChat);
+                    $("#message").text("");
+                }
+
+            });
+            //.fail(function () { alert('No fue posible establecer la conexion'); });
+            //        console.log('Could not Connect!');
 
             // Chat recibido del usuario.
             Counter.client.receivedFromUser = function (obj) {
@@ -410,6 +427,7 @@
 
                 Fn_UserActiveByAgent($("#AgentId").val())
             };
+
             Counter.client.receivedFromUserDisconnect = function (obj) {
                 if (obj.ChatId > 0) {
                     if (obj.IsSendUser == 1) {
@@ -442,9 +460,20 @@
             // Conexión Satisfactoria.
             Counter.client.sucessConnect = function (token) {
 
-                //var divToken = $("<div />").text(token).html();
+                if (token != undefined && token != "") {
+                    $('.listAgent').each(function (i, e) {
+                        if ($($(e)[0]).attr("data-agentvalueid") == $("#AgentId").val()) {
+                            //$($($(e)[0]).children()[0]).find("#idConnect").addClass('btn btn-success btn-xs pull-right')
+                            $($($(e)[0]).children()[0]).addClass("active_chat");
+                            $($($(e)[0]).children()[0]).find('#idOnline').removeClass();
+                            $($($(e)[0]).children()[0]).find('#idOnline').addClass('online_icon')
+                        }
+                    });
 
-                //$("#discussion").append("<li><strong>" + divToken + ": </strong></li>");
+                    Fn_UserActiveByAgent($("#AgentId").val()) 
+                }  
+                $("#ChatId").val("0");
+                $("#loader").css('display', 'none');
             };
 
         });

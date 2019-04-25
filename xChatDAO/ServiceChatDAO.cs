@@ -21,7 +21,7 @@ namespace xChatDAO
         
         private static ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.DataAccessLayer);
 
-        public static int ChatCreate(ConversationEntity conversationEntity)
+        public static int ChatCreate(ConversationEntity conversationEntity, Int32 accountManagerConnectId)
         {
             Int32 chatId = 0;
 
@@ -33,7 +33,7 @@ namespace xChatDAO
                 parameters.Add("@p_useremail", conversationEntity.UserEmail);
                 parameters.Add("@p_usertoken", conversationEntity.UserToken);
                 parameters.Add("@p_moduleappid", conversationEntity.ModuleAppId);
-                parameters.Add("@p_accountmanagerconnectid", GetAccountManagerConnectId(conversationEntity));
+                parameters.Add("@p_accountmanagerconnectid", accountManagerConnectId);
 
                 CommandParameter queryCommand = new CommandParameter("chat.Chat_Insert_pa", parameters);
                 DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);

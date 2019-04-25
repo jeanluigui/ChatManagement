@@ -24,7 +24,17 @@ namespace xChatBusiness
 
             try
             {
-                chatId = ServiceChatDAO.ChatCreate(conversationEntity);
+
+                Int32 accountManagerConnectId = ServiceChatDAO.GetAccountManagerConnectId(conversationEntity);
+
+                if (accountManagerConnectId == 0)
+                {
+                    chatId = -1;
+                }
+                else
+                {
+                    chatId = ServiceChatDAO.ChatCreate(conversationEntity, accountManagerConnectId);
+                }
             }
             catch(Exception ex)
             {

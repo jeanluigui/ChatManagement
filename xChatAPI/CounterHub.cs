@@ -18,16 +18,19 @@ namespace xChatAPI
         public override Task OnDisconnected(bool stopCalled)
         {
             ObjectResultList<ChatToken> tokenDestino = ServiceChatBL.Instancia.ChatDisconnected(Context.ConnectionId);
-
-            foreach (ChatToken item in tokenDestino.Elements)
+            if (tokenDestino != null && tokenDestino.Elements != null && tokenDestino.Elements.Count > 0)
             {
-                // Tipo 1: Usuario desconectado.  Notificar a Manager.
-                // Tipo 2: Manager desconectado.  Notificar a Usuarios.
-                if (item.TypeToken.Equals(1))
-                    Clients.Client(item.Token).chatUserDisconnect();
-                else
-                    Clients.Client(item.Token).chatManagerDisconnect();
+                foreach (ChatToken item in tokenDestino.Elements)
+                {
+                    // Tipo 1: Usuario desconectado.  Notificar a Manager.
+                    // Tipo 2: Manager desconectado.  Notificar a Usuarios.
+                    if (item.TypeToken.Equals(1))
+                        Clients.Client(item.Token).chatUserDisconnect();
+                    else
+                        Clients.Client(item.Token).chatManagerDisconnect("The agent has been disconnected...");
+                }
             }
+            
 
             return base.OnDisconnected(stopCalled);
         }
@@ -65,6 +68,14 @@ namespace xChatAPI
                 conversationEntity.ChatId = ServiceChatBL
                     .Instancia
                     .ChatCreate(conversationEntity);
+
+                // ------------------------------------------------------------
+                // Si el valor del chatid = -1 es porque no existe agente disponible
+                // ------------------------------------------------------------
+                if (conversationEntity.ChatId.Equals(-1)) {
+                    Clients.Caller.chatManagerDisconnect("At this time there are no agents available....");
+                    return;
+                }
 
                 // ------------------------------------------------------------
                 // Se lanza método en el front del Manager para agregar
