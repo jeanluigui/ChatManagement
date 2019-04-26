@@ -19,10 +19,10 @@
                         {
                             <a href="#" class="listAgent" id="btnconnect" data-AgentValueId="@ViewBag.AgentActive.Elements[i].AccountManagerId" data-IsAgent="@ViewBag.AgentActive.Elements[i].AccountManagerIsAgent">
                                 <div class="row sideBar-body" data-id="@ViewBag.AgentActive.Elements[i].AccountManagerId" id="lstAgentData">
-                                    <div class="col-sm-3 col-xs-3 sideBar-avatar">
+                                    <div class="col-sm-3 col-xs-3 sideBar-avatar" style="width: 42px;">
                                         <div class="avatar-icon">
                                             <img src="https://ptetutorials.com/images/user-profile.png">
-                                            <span id="idOnline" class="Disconectonline_icon"></span>
+                                            <span id="idOnline" class="Disconectonline_icon" style="margin-right: -8px;"></span>
                                         </div>
                                     </div>
                                     <div class="col-sm-9 col-xs-9 sideBar-main">
@@ -34,13 +34,13 @@
                                             </div>
                                             <div class="col-sm-5 col-xs-5 pull-right sideBar-time">
                                                 @*@if (ViewBag.AgentActive.Elements[i].AccountManagerIsActive == 1)
-                                                {
-                                                    <span id="idConnect" data-AgentValueId="@ViewBag.AgentActive.Elements[i].AccountManagerId" type="button" class="btn btn-success btn-xs pull-right">Conectar</span>
-                                                }
-                                                else
-                                                {
-                                                    <span id="idConnect" data-AgentValueId="@ViewBag.AgentActive.Elements[i].AccountManagerId" type="button" class="btn btn-danger btn-xs pull-right">Conectar</span>
-                                                }*@
+                                                    {
+                                                        <span id="idConnect" data-AgentValueId="@ViewBag.AgentActive.Elements[i].AccountManagerId" type="button" class="btn btn-success btn-xs pull-right">Conectar</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span id="idConnect" data-AgentValueId="@ViewBag.AgentActive.Elements[i].AccountManagerId" type="button" class="btn btn-danger btn-xs pull-right">Conectar</span>
+                                                    }*@
                                             </div>
                                         </div>
                                     </div>
@@ -65,20 +65,25 @@
         </div>
         <div class="col-sm-6 conversation">
             <div class="row heading" style="font-weight: 700">
-                Chat
-                @*<div class="col-sm-2 col-md-1 col-xs-3 heading-avatar">
+                
                 <div class="heading-avatar-icon">
-                    <img src="~/Content/Imagenes/imgMessage.png" />
-                </div>
-            </div>
-                <a class="heading-name-meta" id="idNameUser">
                     Chat
-                </a>
-                <span class="heading-online"></span>
-            </div>*@
-                @*<div class="col-sm-1 col-xs-1  heading-dot pull-right">
-                <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true"></i>
-            </div>*@
+                    <img src="~/Content/Imagenes/imgMessage.png" />
+                    <div class="col-sm-1 col-xs-1  heading-dot pull-right">
+                        <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true"></i>
+                    </div>
+                </div>
+                @*<div class="col-sm-2 col-md-1 col-xs-3 heading-avatar">
+            <div class="heading-avatar-icon">
+                <img src="~/Content/Imagenes/imgMessage.png" />
+            </div>
+        </div>
+            <a class="heading-name-meta" id="idNameUser">
+                Chat
+            </a>
+            <span class="heading-online"></span>
+        </div>*@
+               
             </div>
 
             <div class="row message" id="conversation" style=" overflow-y: scroll;">
@@ -87,14 +92,14 @@
 
             <div class="row reply">
                 @*<div class="col-sm-1 col-xs-1 reply-emojis">
-                <i class="fa fa-smile-o fa-2x"></i>
-            </div>*@
+                        <i class="fa fa-smile-o fa-2x"></i>
+                    </div>*@
                 <div class="col-sm-9 col-xs-9 col-lg-11 reply-main">
                     <textarea class="form-control" rows="1" id="message" name="message" placeholder="Escriba su mensaje ..." style="overflow-y: scroll"></textarea>
                 </div>
                 @*<div class="col-sm-1 col-xs-1 reply-recording">
-                <i class="fa fa-microphone fa-2x" aria-hidden="true"></i>
-            </div>*@
+                        <i class="fa fa-microphone fa-2x" aria-hidden="true"></i>
+                    </div>*@
                 <div class="col-sm-1 col-xs-1 reply-send">
                     <i class="fa fa-send fa-2x" aria-hidden="true" id="btnsendmessage"></i>
                 </div>
@@ -131,14 +136,14 @@
         }
 
         function Fn_Bind() {
-            
+
             $(".listUser").on("click", function (e) {
                 e.preventDefault();
                 $('.listUser div').each(function (i, e) {
                     $(e).removeClass('active_chat');
                 });
                 $($(this).children()[0]).addClass("active_chat");
-                var chatid = $(this).attr("id")  
+                var chatid = $(this).attr("id")
                 Fn_MessageUser(chatid)
 
                 var conversationEntity = { ChatId: chatid }
@@ -165,7 +170,7 @@
                 try {
                     //ChatIsReadForManager si es 1 es leido si es 0 no leido (agregar marca)
                     lstUserActive = response.Elements;
-                  
+
                     if (lstUserActive != "" && lstUserActive != null) {
                         $("#userActiveShow a").remove();
                         lstUsers = [];
@@ -189,7 +194,7 @@
                                     ChatIsReadForManager: lstUserActive[i].ChatIsReadForManager
                                 });
                             }
-                            
+
                             $("#userActiveShow").append(Fn_LoadHandlebars("userActive", { lstUsers }));
                         }
                         Fn_Bind();
@@ -207,7 +212,7 @@
                                 $($($(e)[0]).children()[0]).addClass("active_chat")
                             }
                         });
-                        
+
 
                     } else {
                         $("#userActiveShow").append(Fn_LoadHandlebars("userActive", { lstUsers }));
@@ -328,7 +333,7 @@
                             Password: "",
                             Token: ""
                         };
-                        
+
                         var agentId = $(this).attr("data-agentvalueid")
                         $("#AgentId").val(agentId);
                         Fn_UserActiveByAgent($("#AgentId").val())
@@ -377,7 +382,7 @@
 
             // Chat recibido del usuario.
             Counter.client.receivedFromUser = function (obj) {
-                
+
                 if (obj.ChatId > 0) {
 
                      chatIdCurrent = $("#ChatId").val();
@@ -470,8 +475,8 @@
                         }
                     });
 
-                    Fn_UserActiveByAgent($("#AgentId").val()) 
-                }  
+                    Fn_UserActiveByAgent($("#AgentId").val())
+                }
                 $("#ChatId").val("0");
                 $("#loader").css('display', 'none');
             };
