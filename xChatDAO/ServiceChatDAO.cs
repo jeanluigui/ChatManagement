@@ -233,7 +233,7 @@ namespace xChatDAO
             }
         }
 
-        public static Int32 GetAccountManagerConnectId(ConversationEntity conversationEntity)
+        public static int GetAccountManagerConnectId(ConversationEntity conversationEntity)
         {
             Int32 accountManagerConnectId = 0;
 

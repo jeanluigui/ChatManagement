@@ -11,6 +11,13 @@
     @Scripts.Render("~/bundles/modernizr")
 
     <style type="text/css">
+        html, body {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+            width: 100%;
+        }
+
         .haveMessageActive {
             background-color: #69b74f !important;
             border-radius: 50% !important;
@@ -42,7 +49,7 @@
         }
     </style>
 
-    <style>
+    @*<style>
         /* Center the loader */
         #loader {
             position: absolute;
@@ -118,10 +125,12 @@
             display: none;
             text-align: center;
         }
-    </style>
+
+
+    </style>*@
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" style="display:none">
+    @*<div class="navbar navbar-inverse navbar-fixed-top" style="display:none">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -139,13 +148,13 @@
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
+    </div>*@
+    <div style="width:100%; height:100%; position:absolute">
         @RenderBody()
-        <hr />
-        <footer style="display:none">
+        @*<hr />*@
+        @*<footer style="display:none">
             <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-        </footer>
+        </footer>*@
     </div>
 
     @Scripts.Render("~/bundles/jquery")

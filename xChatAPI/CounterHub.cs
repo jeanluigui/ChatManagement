@@ -74,6 +74,7 @@ namespace xChatAPI
                 // ------------------------------------------------------------
                 if (conversationEntity.ChatId.Equals(-1)) {
                     Clients.Caller.chatManagerDisconnect("At this time there are no agents available....");
+                    //SendNotification(conversationEntity);
                     return;
                 }
 
