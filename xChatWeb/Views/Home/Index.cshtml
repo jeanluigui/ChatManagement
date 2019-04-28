@@ -65,41 +65,50 @@
         </div>
         <div class="col-sm-6 conversation">
             <div class="row heading" style="font-weight: 700">
-                
+
                 <div class="heading-avatar-icon">
                     Chat
                     <img src="~/Content/Imagenes/imgMessage.png" />
                     <div class="col-sm-1 col-xs-1  heading-dot pull-right">
-                        <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true"></i>
+                        <span id="action_menu_btn">
+                            <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true"></i>
+                        </span>
+
                     </div>
                 </div>
                 @*<div class="col-sm-2 col-md-1 col-xs-3 heading-avatar">
-            <div class="heading-avatar-icon">
-                <img src="~/Content/Imagenes/imgMessage.png" />
+                <div class="heading-avatar-icon">
+                    <img src="~/Content/Imagenes/imgMessage.png" />
+                </div>
             </div>
-        </div>
-            <a class="heading-name-meta" id="idNameUser">
-                Chat
-            </a>
-            <span class="heading-online"></span>
-        </div>*@
-               
-            </div>
+                <a class="heading-name-meta" id="idNameUser">
+                    Chat
+                </a>
+                <span class="heading-online"></span>
+            </div>*@
 
+            </div>
+            <div class="action_menu" style="display: none;">
+                <ul>
+                    <li>Opcion 1</li>
+                    <li>Opcion 2</li>
+                    <li>Opcion 3</li>
+                </ul>
+            </div>
             <div class="row message" id="conversation" style=" overflow-y: scroll;">
 
             </div>
 
             <div class="row reply">
                 @*<div class="col-sm-1 col-xs-1 reply-emojis">
-                        <i class="fa fa-smile-o fa-2x"></i>
-                    </div>*@
+                <i class="fa fa-smile-o fa-2x"></i>
+            </div>*@
                 <div class="col-sm-9 col-xs-9 col-lg-11 reply-main">
                     <textarea class="form-control" rows="1" id="message" name="message" placeholder="Escriba su mensaje ..." style="overflow-y: scroll"></textarea>
                 </div>
                 @*<div class="col-sm-1 col-xs-1 reply-recording">
-                        <i class="fa fa-microphone fa-2x" aria-hidden="true"></i>
-                    </div>*@
+                <i class="fa fa-microphone fa-2x" aria-hidden="true"></i>
+            </div>*@
                 <div class="col-sm-1 col-xs-1 reply-send">
                     <i class="fa fa-send fa-2x" aria-hidden="true" id="btnsendmessage"></i>
                 </div>
@@ -150,7 +159,9 @@
                 Counter.server.setMessageReadForManager(conversationEntity);
                 $(this).find('.haveMessageActive').removeClass();
             });
-
+            $('#action_menu_btn').click(function () {
+                $('.action_menu').toggle();
+            });
         }
 
         function Fn_UserActiveByAgent(agentId) {
