@@ -7,6 +7,7 @@ namespace xChatAPI
 {
     public class CounterHub : Hub
     {
+        IServiceNotificationBL _serviceNotification = new ServiceNotificationBL();
 
         /// <summary>
         /// Se ejecuta cuando algun cliente se desconecta de forma no controlada, por ejemplo
@@ -35,6 +36,10 @@ namespace xChatAPI
             return base.OnDisconnected(stopCalled);
         }
 
+        /// <summary>
+        /// Evento que se ejecuta cuando alguien se conecta.
+        /// </summary>
+        /// <returns></returns>
         public override Task OnConnected()
         {
             // Clients = es un método que hereda de la clase Hub.
@@ -74,7 +79,12 @@ namespace xChatAPI
                 // ------------------------------------------------------------
                 if (conversationEntity.ChatId.Equals(-1)) {
                     Clients.Caller.chatManagerDisconnect("At this time there are no agents available....");
-                    //SendNotification(conversationEntity);
+
+                    // ------------------------------------------------------------
+                    // Envía notificación por correo.
+                    // ------------------------------------------------------------
+                    _serviceNotification.Send(conversationEntity);
+
                     return;
                 }
 

@@ -1,15 +1,62 @@
-﻿namespace xChatBusiness
+﻿using System;
+using System.Threading.Tasks;
+using xChatDAO;
+using xChatEntities;
+using xss.EmailProvider;
+using xss.Logger.Enums;
+using xss.Logger.Factory;
+using xss.Logger.Interfaces;
+
+namespace xChatBusiness
 {
-    public class ServiceNotificationBL : IServiceNotification
+    /// <summary>
+    /// Clase que gestiona el envío de correo.
+    /// </summary>
+    public class ServiceNotificationBL : IServiceNotificationBL
     {
-        public void Send((string from, string to, string subject, string body) notifyParam)
+        IServiceNotificationDAO _serviceNotificationDAO = new ServiceNotificationDAO();
+
+        private static ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.BusinessLayer);
+
+        /// <summary>
+        /// Constructor donde se inicializa el DAO asociado a la clase.
+        /// </summary>
+        public ServiceNotificationBL()
         {
-            
+        }
+
+        /// <summary>
+        /// Método que gestiona el envío del correo.
+        /// </summary>
+        /// <param name="conversationEntity"></param>
+        public async Task Send(ConversationEntity conversationEntity)
+        {
+            try
+            {
+                // -----------------------------------------------------------------
+                // Se obtiene de la DB la información para el envío de correo.
+                // -----------------------------------------------------------------
+                var (emailTo, emailSubject, emailBody) = _serviceNotificationDAO.GetEmailTo(conversationEntity);
+
+                if (string.IsNullOrEmpty(emailTo) || string.IsNullOrEmpty(emailSubject) || string.IsNullOrEmpty(emailBody))
+                {
+                    throw new Exception("No se configurado parámetros para envío de correo de Chat.");
+                }
+
+                // -----------------------------------------------------------------
+                // Método del NUGET para envío de correo.
+                // -----------------------------------------------------------------
+                EmailProvider.SendEmailAsync(emailTo, emailBody, emailSubject);
+            }
+            catch(Exception ex)
+            {
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
         }
     }
 
-    public interface IServiceNotification
+    public interface IServiceNotificationBL
     {
-        void Send((string from, string to, string subject, string body) notifyParam);
+        Task Send(ConversationEntity conversationEntity);
     }
 }
