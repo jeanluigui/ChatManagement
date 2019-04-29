@@ -88,10 +88,10 @@
             </div>*@
 
             </div>
-            <div class="action_menu" style="display: none;">
-                <ul>
-                    <li>Cerrar Chat</li>
-                    <li>Mover a un Manager</li>
+            <div class="action_menu selected" style="display: none;">
+                <ul id="optionMenu">
+                    <li data-input="1">Cerrar Chat</li>
+                    <li data-input="2">Mover a un Manager</li>
                 </ul>
             </div>
             <div class="row message" id="conversation" style=" overflow-y: scroll;">
@@ -385,6 +385,11 @@
                     Counter.server.sendToUser(objChat);
                     $("#message").text("");
                 }
+
+                $(document).on('click', '#optionMenu li', function (){
+                    alert($(this).attr('data-input'));	// this will alert data-input value.
+
+                });
 
             });
             //.fail(function () { alert('No fue posible establecer la conexion'); });
