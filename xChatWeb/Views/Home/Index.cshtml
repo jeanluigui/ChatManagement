@@ -6,13 +6,14 @@
 <link href="~/Content/StyleWhatsapp/styleWhatsapp.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div style="width:100%; height:100%">
-    <div class="row app-one" style="overflow-y:scroll;">
+    <div class="app-one" style="overflow-y:scroll;">
         <div class="col-sm-3 side">
             <div class="side-one">
                 <div class="row heading" style="font-weight: 700">
                     Agentes
                 </div>
-                <div class="row sideBar" style=" overflow-y: scroll;">
+                <div class="sideBar" style=" overflow-y: scroll;">
+
                     @if (ViewBag.AgentActive.Elements != null && ViewBag.AgentActive.Elements.Count > 0)
                     {
                         for (int i = 0; i < ViewBag.AgentActive.Elements.Count; i++)
@@ -58,13 +59,13 @@
                 <div class="row heading" style="font-weight: 700">
                     Usuarios
                 </div>
-                <div class="row sideBar" id="userActiveShow" style=" overflow-y: scroll;">
+                <div class="sideBar" id="userActiveShow" style=" overflow-y: scroll;">
 
                 </div>
             </div>
         </div>
         <div class="col-sm-6 conversation">
-            <div class="row heading" style="font-weight: 700">
+            <div class="heading" style="font-weight: 700">
 
                 <div class="heading-avatar-icon">
                     Chat
@@ -94,11 +95,11 @@
                     <li data-input="2">Mover a un Manager</li>
                 </ul>
             </div>
-            <div class="row message" id="conversation" style=" overflow-y: scroll;">
+            <div class="message" id="conversation" style=" overflow-y: scroll;">
 
             </div>
 
-            <div class="row reply">
+            <div class="reply">
                 @*<div class="col-sm-1 col-xs-1 reply-emojis">
                 <i class="fa fa-smile-o fa-2x"></i>
             </div>*@
@@ -136,9 +137,9 @@
     <script type="text/javascript">
         var Counter;
         var chatIdCurrent;
-        $(function () {
-            Fn_Init();
-        });
+        
+            
+        
         function Fn_Init() {
             Fn_Bind();
         }
@@ -158,11 +159,51 @@
                 Counter.server.setMessageReadForManager(conversationEntity);
                 $(this).find('.haveMessageActive').removeClass();
             });
-            $('#action_menu_btn').click(function () {
-                $('.action_menu').toggle();
-            });
+
+            //$(document).on('click', '#action_menu_btn', function () {
+            //    $('.action_menu').toggle();
+            //});
         }
 
+        // ------------------------------------------------
+        // Funcion para cerrar chat de un usuario.
+        // ------------------------------------------------
+        function Fn_CloseChatUser() {
+
+            var chatId = $("#ChatId").val();
+
+            if (chatId == "0") {
+                alert("No hay chat disponible");
+                return;
+            }
+
+            var objChat = {
+                ChatId: $("#ChatId").val(),
+                ModuleAppId: $("#ModuleAppId").val(),
+                AccountManagerId: $("#AccountManagerId").val(),
+                UserName: $("#UserName").val(),
+                UserEmail: $("#UserEmail").val(),
+                Message: $("#message").val(),
+                DateMessage: "",
+                UserToken: $("#UserToken").val(),
+                ManagerToken: $("#ManagerToken").val(),
+                AccountManagerName: $("#AccountManagerName").val(),
+            };
+
+            Counter.server.userDisconnectForMangaer(objChat);
+
+        }
+
+        // ------------------------------------------------
+        // Funcion para mover un chat a un Manager.
+        // ------------------------------------------------
+        function Fn_MoveChatToManager(objChat) {
+
+        }
+
+        // ------------------------------------------------
+        // Pinta nuevamente la lista de usuarios.
+        // ------------------------------------------------
         function Fn_UserActiveByAgent(agentId) {
             var lstUserActive = [];
             var lstUsers = [];
@@ -306,6 +347,8 @@
 
         $(function ()
         {
+            Fn_Init();
+
              $.support.cors = true;
 
             $.connection.hub.url = "@xChatEntities.Constants.Url.SignalR";
@@ -320,6 +363,11 @@
                 {
                     if ($(this).attr("data-IsAgent") == "True")
                     {
+                        if (Counter == undefined) {
+                            alert("No existe conexión al servidor...");
+                            return;
+                        }
+
                         $("#loader").css('display', 'block');
                         var obj = {
                             AccountManagerId: $(this).attr("data-agentvalueid"),
@@ -366,6 +414,10 @@
                     }
                 });
 
+                $(document).on('click', '#action_menu_btn', function () {
+                    $('.action_menu').toggle();
+                });
+
                 function Fn_SendMenssage() {
                     if ($("#message").val().trim() == "") {
                         return false;
@@ -386,8 +438,15 @@
                     $("#message").text("");
                 }
 
-                $(document).on('click', '#optionMenu li', function (){
-                    alert($(this).attr('data-input'));	// this will alert data-input value.
+                $(document).on('click', '#optionMenu li', function () {
+
+                    //alert($(this).attr('data-input'));	// this will alert data-input value.
+
+                    var optionId = $(this).attr('data-input');
+                    $('.action_menu').toggle()
+                    if (optionId == 1)
+                        Fn_CloseChatUser();
+
 
                 });
 

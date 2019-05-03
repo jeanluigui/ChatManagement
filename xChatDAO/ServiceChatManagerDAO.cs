@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Data;
-using System.Web;
 using xChatEntities;
 using xss.ConnectionManager;
 using xss.EncryptionHandler;
@@ -101,6 +99,73 @@ namespace xChatDAO
                 log.Save(EnumLogLevel.Fatal, ex);
             }
 
+        }
+
+        public static ObjectResultList<ConversationResponseEntity> GetListConversationByReport(string senderObject)
+        {
+            ObjectResultList<ConversationResponseEntity> listUserConnect = new ObjectResultList<ConversationResponseEntity>();
+
+            try
+            {
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@p_agentid", senderObject.Split(';')[0]);
+                parameters.Add("@p_userid", senderObject.Split(';')[1]);
+                parameters.Add("@p_datestart", senderObject.Split(';')[2]);
+                parameters.Add("@p_dateend", senderObject.Split(';')[3]);
+
+                CommandParameter queryCommand = new CommandParameter("chat.ChatReport_GetListConversations_pa", parameters);
+
+                DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
+
+                listUserConnect = new ObjectResultList<ConversationResponseEntity>(dtresult);
+            }
+            catch (TimeoutException tout)
+            {
+                listUserConnect.Id = 2;
+                listUserConnect.Message = tout.Message;
+
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                listUserConnect.Id = 1;
+                listUserConnect.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return listUserConnect;
+        }
+
+        public static ObjectResultList<ReportChat> GetReport(ReportFilter senderObject)
+        {
+            ObjectResultList<ReportChat> result = new ObjectResultList<ReportChat>();
+
+            try
+            {
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@p_agentid", senderObject.AgentId);
+                parameters.Add("@p_userid", senderObject.UserId);
+                parameters.Add("@p_marketid", senderObject.MarketId);
+                parameters.Add("@p_datestart", senderObject.ConversationDateStart);
+                parameters.Add("@p_dateend", senderObject.ConversationDateEnd);
+
+                CommandParameter queryCommand = new CommandParameter("chat.ChatReport_GetByFilter_pa", parameters);
+
+                DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
+
+                result = new ObjectResultList<ReportChat>(dtresult);
+            }
+            catch (TimeoutException tout)
+            {
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return result;
         }
 
         public static bool AccountManagerDisconnect(ObjectRequest<int> objectRequest)

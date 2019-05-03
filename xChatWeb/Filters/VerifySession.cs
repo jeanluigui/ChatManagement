@@ -14,27 +14,27 @@ namespace xChatWeb.Filters
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            try
-            {
-                base.OnActionExecuting(filterContext);
+            //    try
+            //    {
+            //        base.OnActionExecuting(filterContext);
 
-                if (HttpContext.Current.Session["User"]==null)
-                {
-                    // ----------------------------------------------------------
-                    // Solo la página Home es Libre.
-                    // Se debe agregar todas las páginas que son libres.
-                    // ----------------------------------------------------------
+            //        if (HttpContext.Current.Session["User"]==null)
+            //        {
+            //            // ----------------------------------------------------------
+            //            // Solo la página Home es Libre.
+            //            // Se debe agregar todas las páginas que son libres.
+            //            // ----------------------------------------------------------
 
-                    if (filterContext.Controller is HomeController == false)
-                    {
-                        filterContext.HttpContext.Response.Redirect("Home/Login");
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
+            //            if (filterContext.Controller is HomeController == false)
+            //            {
+            //                filterContext.HttpContext.Response.Redirect("Home/Login");
+            //            }
+            //        }
+            //    }
+            //    catch(Exception ex)
+            //    {
+            //        throw ex;
+            //    }
         }
     }
 }

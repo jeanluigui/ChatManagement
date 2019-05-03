@@ -78,12 +78,13 @@ namespace xChatAPI
                 // Si el valor del chatid = -1 es porque no existe agente disponible
                 // ------------------------------------------------------------
                 if (conversationEntity.ChatId.Equals(-1)) {
-                    Clients.Caller.chatManagerDisconnect("At this time there are no agents available....");
 
                     // ------------------------------------------------------------
                     // Envía notificación por correo.
                     // ------------------------------------------------------------
                     _serviceNotification.Send(conversationEntity);
+
+                    Clients.Caller.chatManagerDisconnect("At this time there are no agents available....");
 
                     return;
                 }
@@ -174,7 +175,7 @@ namespace xChatAPI
             // ------------------------------------------------------------
             // Se lanza el método de los mensajes en el front del Usuario.
             // ------------------------------------------------------------
-            Clients.Client(conversationEntity.UserToken).serverOrderDisconnect();
+            Clients.Client(conversationEntity.UserToken).serverOrderDisconnect("Gracias por su gentil atención.");
 
             // ------------------------------------------------------------
             // Se lanza el método de los mensajes en el front del Manager.

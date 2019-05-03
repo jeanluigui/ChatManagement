@@ -88,6 +88,25 @@ namespace xChatBusiness
             return result;
         }
 
+        public ObjectResultList<ConversationResponseEntity> GetListConversationByReport(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<ConversationResponseEntity> result = new ObjectResultList<ConversationResponseEntity>();
+
+            try
+            {
+                result = ServiceChatManagerDAO.GetListConversationByReport(objectRequest.SenderObject);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return result;
+        }
+
         public ObjectResult<bool> AccountManagerDisconnect(ObjectRequest<int> objectRequest)
         {
             ObjectResult<bool> result = new ObjectResult<bool>();
@@ -95,6 +114,25 @@ namespace xChatBusiness
             try
             {
                 result.Data = ServiceChatManagerDAO.AccountManagerDisconnect(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return result;
+        }
+
+        public ObjectResultList<ReportChat> GetReport(ObjectRequest<ReportFilter> objectRequest)
+        {
+            ObjectResultList<ReportChat> result = new ObjectResultList<ReportChat>();
+
+            try
+            {
+                result = ServiceChatManagerDAO.GetReport(objectRequest.SenderObject);
             }
             catch (Exception ex)
             {

@@ -168,6 +168,15 @@ body {
     height: calc(100% - 120px);
 }
 
+.sideBarReady {
+    padding: 0 !important;
+    margin: 0 !important;
+    background-color: #fff;
+    overflow-y: auto;
+    border: 1px solid #f7f7f7;
+    height: calc(100% - 0px);
+}
+
 .sideBar-body {
     position: relative;
     padding: 10px !important;

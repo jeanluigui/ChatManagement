@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace xChatEntities
 {
@@ -72,8 +68,22 @@ namespace xChatEntities
             {
                 get { return URL_API_SERVICE + "api/Conversation/GetListConversationByChatId/"; }
             }
+            public static string GetListConversationByReport
+            {
+                get { return URL_API_SERVICE + "api/Conversation/GetListConversationByReport/"; }
+            }
             public static string GetListAccountManagerConnectByModuleAppId {
                 get { return URL_API_SERVICE + "api/Conversation/GetListAccountManagerConnectByModuleAppId/"; }
+            }
+
+            public static string GetListEntityMaster
+            {
+                get { return URL_API_SERVICE + "api/ManagerMasterEntity/GetListByEntityName/"; }
+            }
+
+            public static string GetReportChat
+            {
+                get { return URL_API_SERVICE + "api/Conversation/GetReport/"; }
             }
         }
     }

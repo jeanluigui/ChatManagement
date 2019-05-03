@@ -11,4 +11,9 @@ namespace xChatEntities
         TimeOutException = 99,
         NotControllerException = 100,
     }
+
+    public enum EntityMasterEnum
+    {
+        Market,
+    }
 }

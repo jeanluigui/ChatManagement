@@ -60,6 +60,32 @@ namespace xChatAPI.Controllers
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ActionName("GetListConversationByReport")]
+        [Route("api/Conversation/GetListConversationByReport/")]
+        public ObjectResultList<ConversationResponseEntity> GetListConversationByReport(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<ConversationResponseEntity> list = new ObjectResultList<ConversationResponseEntity>();
+
+            try
+            {
+                list = ServiceChatManagerBL.Instancia.GetListConversationByReport(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                list.Id = 1;
+                list.Message = ex.Message;
+            }
+
+            return list;
+        }
+
+
+        /// <summary>
         /// Mueve una conversación hacia otro Agente.
         /// </summary>
         /// <param name="objectRequest"></param>
@@ -165,6 +191,31 @@ namespace xChatAPI.Controllers
                     UserName = "Juan Perez",
                     Message = "Hola, tengo problemas con mi correoo..",
                 });
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Reporte Main.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ActionName("GetReport")]
+        [Route("api/Conversation/GetReport/")]
+        public ObjectResultList<ReportChat> GetReport(ObjectRequest<ReportFilter> objectRequest)
+        {
+            ObjectResultList<ReportChat> result = new ObjectResultList<ReportChat>();
+
+            try
+            {
+                result = ServiceChatManagerBL.Instancia.GetReport(objectRequest);
             }
             catch (Exception ex)
             {

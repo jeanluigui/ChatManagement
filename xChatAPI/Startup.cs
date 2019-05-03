@@ -27,6 +27,7 @@ namespace xChatAPI
                 map.RunSignalR(hubConfiguration);
 
             });
+
         }
     }
 }

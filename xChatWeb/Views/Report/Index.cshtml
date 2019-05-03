@@ -1,0 +1,119 @@
+﻿@model xChatWeb.Models.VMReportFilter
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    var marketList = new List<SelectListItem>();
+
+    foreach (var list in (List<xChatEntities.EntityMaster>)ViewBag.ListMarket)
+    {
+        marketList.Add(new SelectListItem() { Text = list.EntityMasterName, Value = list.EntityMasterId });
+    }
+
+}
+
+<h2>Report Main</h2>
+
+<hr />
+
+<div class="container row">
+
+    <div class="col-md-4">
+        @using (Html.BeginForm())
+        {
+            <div class="card">
+                <div class="card-header">
+                    @Html.LabelFor(model => model.TituloFiltro, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="card-body">
+                    <div>
+                        @*Filtro Mercado.*@
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MarketId, htmlAttributes: new { @class = "control-label" })
+                            <div>
+                                @Html.DropDownListFor(model => model.MarketId, marketList, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        @*@*Filtro Fecha Inicio.*@
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ConversationDateStart, htmlAttributes: new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.ConversationDateStart, new { htmlAttributes = new { @class = "form-control" } })
+                                @*@Html.ValidationMessageFor(model => model.ConversationDateStart, "", new { @class = "form-control" })*@
+                            </div>
+                        </div>
+
+                        @*Filtro Fecha Final.*@
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ConversationDateEnd, htmlAttributes: new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.ConversationDateEnd, new { htmlAttributes = new { @class = "form-control" } })
+                                @*@Html.ValidationMessageFor(model => model.ConversationDateEnd, "", new { @class = "form-control" })*@
+                            </div>
+                        </div>
+
+                        @*Aplicar.*@
+                        <div class="form-group">
+                            <div>
+                                <input type="submit" value="Apply" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                    @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+                </div>
+            </div>
+        }
+        </div>
+
+        <div class="col-md-8">
+
+            <table class="table">
+                <tr>
+                    <th>@Html.LabelFor(model => model.ColumnReport.Agente)</th>
+                    <th>@Html.LabelFor(model => model.ColumnReport.Usuario)</th>
+                    <th>@Html.LabelFor(model => model.ColumnReport.FechaUltimoMensaje)</th>
+                </tr>
+                <tbody>
+                    @if (Model.ReportMain != null)
+                    {
+                        foreach (xChatEntities.ReportChat d in Model.ReportMain)
+                        {
+                    <tr>
+                        <td>@d.AccountManagerName</td>
+
+                        <td>
+                            @Html.ActionLink(@d.UserName, "ConversationDetail", new
+                               {
+                                   agentId = d.AccountManagerId
+                                   , userId = d.UserId
+                                   , dateStart = Model.ConversationDateStart.ToString("yyyyMMdd")
+                                   , dateEnd = Model.ConversationDateEnd.ToString("yyyyMMdd")
+                                   , agentName = d.AccountManagerName
+                                   , userName = d.UserName
+                               })
+                    </td>
+
+                    <td>@d.LastMessageDate</td>
+                    </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+    <div id="resultado">
+
+
+    </div>
+</div>
+
+@section scripts{
+    
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+}
+

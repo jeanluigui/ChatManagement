@@ -29,26 +29,37 @@ namespace xChatBusiness
         /// Método que gestiona el envío del correo.
         /// </summary>
         /// <param name="conversationEntity"></param>
-        public async Task Send(ConversationEntity conversationEntity)
+        public void Send(ConversationEntity conversationEntity)
         {
+            log.Save(EnumLogLevel.Fatal, "Ingresando a método para envío de correo....");
+
             try
             {
                 // -----------------------------------------------------------------
                 // Se obtiene de la DB la información para el envío de correo.
                 // -----------------------------------------------------------------
+                log.Save(EnumLogLevel.Info, "Obteniendo información de correo....");
+
                 var (emailTo, emailSubject, emailBody) = _serviceNotificationDAO.GetEmailTo(conversationEntity);
+
+                log.Save(EnumLogLevel.Info, "Validando información....");
 
                 if (string.IsNullOrEmpty(emailTo) || string.IsNullOrEmpty(emailSubject) || string.IsNullOrEmpty(emailBody))
                 {
                     throw new Exception("No se configurado parámetros para envío de correo de Chat.");
                 }
 
+                log.Save(EnumLogLevel.Info, "Enviando correo....");
+
                 // -----------------------------------------------------------------
                 // Método del NUGET para envío de correo.
                 // -----------------------------------------------------------------
                 EmailProvider.SendEmailAsync(emailTo, emailBody, emailSubject);
+
+                log.Save(EnumLogLevel.Info, "FIN Enviando correo.");
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 log.Save(EnumLogLevel.Fatal, ex);
             }
@@ -57,6 +68,6 @@ namespace xChatBusiness
 
     public interface IServiceNotificationBL
     {
-        Task Send(ConversationEntity conversationEntity);
+        void Send(ConversationEntity conversationEntity);
     }
 }
