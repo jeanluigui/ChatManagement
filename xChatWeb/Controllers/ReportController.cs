@@ -27,6 +27,18 @@ namespace xChatWeb.Controllers
         public ActionResult Index(VMReportFilter vmreport)
         {
             // ----------------------------------------------
+            // Obtener Lista Maestra para Mercados.
+            // ----------------------------------------------
+
+            ViewBag.ListMarket = MasterContainer.GetList(EntityMasterEnum.Market);
+
+            return View(filter);
+        }
+
+        [HttpPost]
+        public PartialViewResult ExecuteReport(VMReportFilter vmreport)
+        {
+            // ----------------------------------------------
             // Obtener Report.
             // ----------------------------------------------
 
@@ -45,13 +57,14 @@ namespace xChatWeb.Controllers
                 , "POST"
                 , objectRequest).Elements;
 
-            ViewBag.ListMarket = MasterContainer.GetList(EntityMasterEnum.Market);
+            //ViewBag.ListMarket = MasterContainer.GetList(EntityMasterEnum.Market);
 
-            return View(vmreport);
+            return PartialView("_ReportList", vmreport);
         }
 
         #endregion
 
+        [HttpPost]
         public ActionResult ConversationDetail(string agentId, string userId, string dateStart, string dateEnd, string agentName, string userName)
         {
             ObjectResultList<ConversationResponseEntity> listConversations = null;

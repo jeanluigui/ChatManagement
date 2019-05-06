@@ -7,10 +7,10 @@
 @*<h2>Conversation Details</h2>*@
 
 @*<hr />*@
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link href="~/Content/StyleWhatsapp/styleChatReady.css" rel="stylesheet" />
-<link href="~/Content/StyleWhatsapp/styleWhatsapp.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@*<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">*@
+@*<link href="~/Content/StyleWhatsapp/styleChatReady.css" rel="stylesheet" />
+<link href="~/Content/StyleWhatsapp/styleWhatsapp.css" rel="stylesheet" />*@
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
 
 <script type="text/javascript">
 
@@ -40,34 +40,22 @@
 
 </script>
 
-<div style="width:100%; height:100%">
+<div style="height:100%; margin:0px; overflow-y: scroll;">
 
-    <div class="row app-one" >
+    <div >
 
-        <div class="col-md-4 side">
-
-            <div class="card w-100">
-                @*<div class="card-header">
-                    Summary
-                </div>*@
-                <div class="card-body">
-                    <h3>@ViewBag.UserName</h3>
-                    <p>@ViewBag.AgentName</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="divMaster" class="col-md-8 side">
-            <div id="divMaster2" class="messaging sideBarReady">
-                @*<div class="row heading" style="font-weight: 700">
-                    Chat
-                </div>*@
+        <div id="divMaster" >
+            @*<p style="background-color:gray">
+                Conversation between Kevin Alama and Usuario
+                251 mensajes intercambiados
+            </p>*@
+            <div id="divMaster2" >
                 <div  id="userActiveShow" >
 
-                    <div class="inbox_msg">
+                    <div >
 
-                        <div class="mesgs">
-                            <div class="msg_history">
+                        <div >
+                            <div >
 
                                 @if (Model != null)
                                 {
@@ -76,14 +64,14 @@
                                     {
                                         if (item.IsUser.Equals(1))
                                         {
-                                            <div class="incoming_msg">
-                                                <div class="incoming_msg_img"> <img src="~/Content/Imagenes/user-profile.png" alt="sunil"> </div>
-                                                <div class="received_msg">
-                                                    <div class="received_withd_msg">
+                                            <div >
+                                                @*<div class="incoming_msg_img"> <img src="~/Content/Imagenes/user-profile.png" alt="sunil"> </div>*@
+                                                <div style="text-align:left">
+                                                    <div style="background-color:lightgreen">
                                                         <p>
                                                             @item.Message
                                                         </p>
-                                                        <span class="time_date"> @item.Date.ToLongDateString() - @item.Date.ToLongTimeString()</span>
+                                                        <p style="color:darkgrey; font-size:smaller" > @item.Date.ToLongDateString() - @item.Date.ToLongTimeString()</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -91,12 +79,12 @@
                                         }
                                         else
                                         {
-                                            <div class="outgoing_msg">
-                                                <div class="sent_msg">
-                                                    <p>
+                                            <div style="text-align:right">
+                                                <div style="background-color:antiquewhite;">
+                                                    <p >
                                                         @item.Message
                                                     </p>
-                                                    <span class="time_date"> @item.Date.ToLongDateString() - @item.Date.ToLongTimeString()</span>
+                                                    <p style="color:darkgrey; font-size:smaller" > @item.Date.ToLongDateString() - @item.Date.ToLongTimeString()</p>
                                                 </div>
                                             </div>
                                         }
@@ -116,45 +104,5 @@
             </div>
 
 
-
-
-
-
-
-
-
-
-
-            @*<div class="col-md-8 side">
-                <div class="side-one">
-                    <div class="row heading" style="font-weight: 700">
-                        Chat
-                    </div>
-                    <div class="sideBar" id="userActiveShow" style=" overflow-y: scroll;">
-
-                        @foreach (var item in Model)
-                        {
-                            if (item.IsUser.Equals(1))
-                            {
-                                <div class="container_chat">
-                                    <img src="/w3images/bandmember.jpg" alt="Avatar" style="width:100%;">
-                                    <p>@item.Message</p>
-                                    <span class="time-right">11:00</span>
-                                </div>
-
-                            }
-                            else
-                            {
-                                <div class="container_chat darker_chat">
-                                    <img src="/w3images/avatar_g2.jpg" alt="Avatar" class="right" style="width:100%;">
-                                    <p>@item.Message</p>
-                                    <span class="time-left">11:01</span>
-                                </div>
-                            }
-                        }
-
-                    </div>
-                </div>
-            </div>*@
         </div>
     </div>

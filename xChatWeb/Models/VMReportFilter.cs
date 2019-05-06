@@ -33,7 +33,7 @@ namespace xChatWeb.Models
         {
             //MarketId = 159;
             ConversationDateEnd = DateTime.Now.Date;
-            ConversationDateStart = DateTime.Now.Date;
+            ConversationDateStart = DateTime.Now.Date.AddDays(-15);
         }
     }
 }

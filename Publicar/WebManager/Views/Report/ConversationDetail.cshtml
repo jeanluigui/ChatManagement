@@ -1,0 +1,108 @@
+﻿@model List<xChatEntities.ConversationResponseEntity>
+
+@{
+    ViewBag.Title = "Conversation Detail";
+}
+
+@*<h2>Conversation Details</h2>*@
+
+@*<hr />*@
+@*<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">*@
+@*<link href="~/Content/StyleWhatsapp/styleChatReady.css" rel="stylesheet" />
+<link href="~/Content/StyleWhatsapp/styleWhatsapp.css" rel="stylesheet" />*@
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
+
+<script type="text/javascript">
+
+    function toTop(id) {
+        document.getElementById(id).scrollTop = 0
+    }
+
+    defaultStep = 1
+    step = defaultStep
+    function scrollDivDown(id) {
+        document.getElementById(id).scrollTop += step
+        timerDown = setTimeout("scrollDivDown('" + id + "')", 10)
+    }
+
+    function scrollDivUp(id) {
+        document.getElementById(id).scrollTop -= step
+        timerUp = setTimeout("scrollDivUp('" + id + "')", 10)
+    }
+
+    function toBottom(id) {
+        document.getElementById(id).scrollTop = document.getElementById(id).scrollHeight
+    }
+
+    function toPoint(id) {
+        document.getElementById(id).scrollTop = 100
+    }
+
+</script>
+
+<div style="height:100%; margin:0px; overflow-y: scroll;">
+
+    <div >
+
+        <div id="divMaster" >
+            @*<p style="background-color:gray">
+                Conversation between Kevin Alama and Usuario
+                251 mensajes intercambiados
+            </p>*@
+            <div id="divMaster2" >
+                <div  id="userActiveShow" >
+
+                    <div >
+
+                        <div >
+                            <div >
+
+                                @if (Model != null)
+                                {
+
+                                    foreach (var item in Model)
+                                    {
+                                        if (item.IsUser.Equals(1))
+                                        {
+                                            <div >
+                                                @*<div class="incoming_msg_img"> <img src="~/Content/Imagenes/user-profile.png" alt="sunil"> </div>*@
+                                                <div style="text-align:left">
+                                                    <div style="background-color:lightgreen">
+                                                        <p>
+                                                            @item.Message
+                                                        </p>
+                                                        <p style="color:darkgrey; font-size:smaller" > @item.Date.ToLongDateString() - @item.Date.ToLongTimeString()</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        }
+                                        else
+                                        {
+                                            <div style="text-align:right">
+                                                <div style="background-color:antiquewhite;">
+                                                    <p >
+                                                        @item.Message
+                                                    </p>
+                                                    <p style="color:darkgrey; font-size:smaller" > @item.Date.ToLongDateString() - @item.Date.ToLongTimeString()</p>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                }
+
+                                <script type="text/javascript">
+                                    toBottom('divMaster2');
+                                </script>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>

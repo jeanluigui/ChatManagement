@@ -1,0 +1,15 @@
+﻿@model  List<xChatEntities.ConversationResponseEntity>
+
+<div>
+    @foreach (var item in Model)
+    {
+        if (item.IsUser.Equals(1))
+        {
+            <div style="text-align:right">@item.Message</div>
+        }
+        else
+        {
+            <div style="text-align:left">@item.Message</div>
+        }
+    }
+</div>

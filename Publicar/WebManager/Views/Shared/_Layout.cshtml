@@ -126,7 +126,77 @@
             text-align: center;
         }
 
+        .action_menu {
+            z-index: 1;
+            position: absolute;
+            padding: 15px 0;
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            border-radius: 15px;
+            top: 35px;
+            right: 15px;
+            display: none;
+        }
+        .action_menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .action_menu ul li {
+            width: 100%;
+            padding: 10px 15px;
+            margin-bottom: 5px;
+        }
+        .action_menu ul li:hover {
+            cursor: pointer;
+            background-color: rgba(0,0,0,0.2);
+        }
 
+        /*param el chat*/
+
+        .container_chat {
+            border: 2px solid #dedede;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            width:auto;
+        }
+
+        .darker_chat {
+            border-color: #ccc;
+            background-color: #ddd;
+        }
+
+        .container_chat::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .container_chat img {
+            float: left;
+            max-width: 60px;
+            width: 100%;
+            margin-right: 20px;
+            border-radius: 50%;
+        }
+
+            .container_chat img.right {
+                float: right;
+                margin-left: 20px;
+                margin-right: 0;
+            }
+
+        .time-right {
+            float: right;
+            color: #aaa;
+        }
+
+        .time-left {
+            float: left;
+            color: #999;
+        }
     </style>
 </head>
 <body>

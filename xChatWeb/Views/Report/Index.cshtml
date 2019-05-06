@@ -18,10 +18,16 @@
 
 <hr />
 
-<div class="container row">
+<div class="container-fluid row" style="height:85%">
 
-    <div class="col-md-4">
-        @using (Html.BeginForm())
+    <div class="col-md-3">
+        @using (Ajax.BeginForm("ExecuteReport", new AjaxOptions()
+        {
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "tblReport",
+            LoadingElementId = "loading"
+        }))
         {
             <div class="card">
                 <div class="card-header">
@@ -66,54 +72,32 @@
                 </div>
             </div>
         }
-        </div>
 
-        <div class="col-md-8">
+        <img src="~/Content/Imagenes/Loading_1.gif" style="display:none" id="loading" />
 
-            <table class="table">
-                <tr>
-                    <th>@Html.LabelFor(model => model.ColumnReport.Agente)</th>
-                    <th>@Html.LabelFor(model => model.ColumnReport.Usuario)</th>
-                    <th>@Html.LabelFor(model => model.ColumnReport.FechaUltimoMensaje)</th>
-                </tr>
-                <tbody>
-                    @if (Model.ReportMain != null)
-                    {
-                        foreach (xChatEntities.ReportChat d in Model.ReportMain)
-                        {
-                    <tr>
-                        <td>@d.AccountManagerName</td>
+    </div>
 
-                        <td>
-                            @Html.ActionLink(@d.UserName, "ConversationDetail", new
-                               {
-                                   agentId = d.AccountManagerId
-                                   , userId = d.UserId
-                                   , dateStart = Model.ConversationDateStart.ToString("yyyyMMdd")
-                                   , dateEnd = Model.ConversationDateEnd.ToString("yyyyMMdd")
-                                   , agentName = d.AccountManagerName
-                                   , userName = d.UserName
-                               })
-                    </td>
-
-                    <td>@d.LastMessageDate</td>
-                    </tr>
-                        }
-                    }
-                </tbody>
-            </table>
-
-        </div>
-
-    <div id="resultado">
+    <div class="col-md-4 w-100" id="tblReport">
 
 
     </div>
+
+    <div class="col-md-5" id="divConversation">
+
+    </div>
+
 </div>
 
+@*<div id="divConversation">
+
+</div>*@
+
+
 @section scripts{
-    
+
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+
 
 }
 
