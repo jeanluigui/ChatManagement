@@ -145,6 +145,31 @@ namespace xChatAPI.Controllers
         }
 
         /// <summary>
+        /// Retorna lista de agentes conectados de un determinado módulo.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ActionName("GetAccountManagerById")]
+        [Route("api/Conversation/GetAccountManagerById/")]
+        public ObjectResultList<AccountManagerConnect> GetAccountManagerById(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
+
+            try
+            {
+                result = ServiceChatManagerBL.Instancia.GetAccountManagerById(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Permite desconectar a un agente.
         /// </summary>
         /// <param name="objectRequest"></param>
@@ -209,13 +234,16 @@ namespace xChatAPI.Controllers
         [HttpPost]
         [ActionName("GetReport")]
         [Route("api/Conversation/GetReport/")]
-        public ObjectResultList<ReportChat> GetReport(ObjectRequest<ReportFilter> objectRequest)
+        public ObjectResult<ListReportChat> GetReport(ObjectRequest<ReportFilter> objectRequest)
         {
-            ObjectResultList<ReportChat> result = new ObjectResultList<ReportChat>();
+            ListReportChat listResult = new ListReportChat();
+            ObjectResult<ListReportChat> result = new ObjectResult<ListReportChat>();
 
             try
             {
-                result = ServiceChatManagerBL.Instancia.GetReport(objectRequest);
+                listResult.Elements = ServiceChatManagerBL.Instancia.GetReport(objectRequest).Elements;
+
+                result.Data = listResult;
             }
             catch (Exception ex)
             {

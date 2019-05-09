@@ -1,12 +1,17 @@
 ﻿@model xChatWeb.Models.VMReportFilter
 
+<link href="~/Content/themes/base/datatables.css" rel="stylesheet" />
+
 <div>
-    <table class="table">
-        <tr>
-            <th>@Html.LabelFor(model => model.ColumnReport.Agente)</th>
-            <th>@Html.LabelFor(model => model.ColumnReport.Usuario)</th>
-            <th>@Html.LabelFor(model => model.ColumnReport.FechaUltimoMensaje)</th>
-        </tr>
+    <table class="table table-striped table-bordered w895 " cellspacing="0" style="width:100%">
+        <thead class="background-light-blue clr-white">
+
+            <tr>
+                <th>@Html.LabelFor(model => model.ColumnReport.Agente)</th>
+                <th>@Html.LabelFor(model => model.ColumnReport.Usuario)</th>
+                <th>@Html.LabelFor(model => model.ColumnReport.FechaUltimoMensaje)</th>
+            </tr>
+            </thead>
         <tbody>
             @if (Model.ReportMain != null)
             {

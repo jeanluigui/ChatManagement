@@ -105,13 +105,26 @@ namespace xChatDAO
         {
             ObjectResultList<ConversationResponseEntity> listUserConnect = new ObjectResultList<ConversationResponseEntity>();
 
+            string strDateStart = senderObject.Split(';')[2];
+            string strDateEnd = senderObject.Split(';')[3];
+
             try
             {
+                if (!DateTime.TryParse(strDateStart, result: out DateTime dateStart))
+                {
+                    throw new Exception("Error en formato de fecha inicio");
+                }
+
+                if (!DateTime.TryParse(strDateEnd, result: out DateTime dateEnd))
+                {
+                    throw new Exception("Error en formato de fecha inicio");
+                }
+
                 ListParameters parameters = new ListParameters();
                 parameters.Add("@p_agentid", senderObject.Split(';')[0]);
                 parameters.Add("@p_userid", senderObject.Split(';')[1]);
-                parameters.Add("@p_datestart", senderObject.Split(';')[2]);
-                parameters.Add("@p_dateend", senderObject.Split(';')[3]);
+                parameters.Add("@p_datestart", dateStart);
+                parameters.Add("@p_dateend", dateEnd);
 
                 CommandParameter queryCommand = new CommandParameter("chat.ChatReport_GetListConversations_pa", parameters);
 
@@ -207,6 +220,43 @@ namespace xChatDAO
                 parameters.Add("@p_rolid", Encryption.Decrypt(objectRequest.SenderObject.Split(';')[2].ToString()));
 
                 CommandParameter queryCommand = new CommandParameter("chat.AccountManagerConnect_GetList_pa",parameters);
+                DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
+
+                result = new ObjectResultList<AccountManagerConnect>(dtresult);
+
+                ListAccountManagerConnect listAMC = new ListAccountManagerConnect(dtresult);
+
+            }
+            catch (TimeoutException tout)
+            {
+                result.Id = 2;
+                result.Message = tout.Message;
+
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return result;
+        }
+
+        public static ObjectResultList<AccountManagerConnect> GetAccountManagerById(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
+
+            try
+            {
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@p_userid", Encryption.Decrypt(objectRequest.SenderObject.Split(';')[0].ToString()));
+                parameters.Add("@p_moduleappid", Encryption.Decrypt(objectRequest.SenderObject.Split(';')[1].ToString()));
+                parameters.Add("@p_rolid", Encryption.Decrypt(objectRequest.SenderObject.Split(';')[2].ToString()));
+
+                CommandParameter queryCommand = new CommandParameter("chat.AccountManagerConnect_GetById_pa", parameters);
                 DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
 
                 result = new ObjectResultList<AccountManagerConnect>(dtresult);

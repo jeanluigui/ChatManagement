@@ -88,6 +88,25 @@ namespace xChatBusiness
             return result;
         }
 
+        public ObjectResultList<AccountManagerConnect> GetAccountManagerById(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
+
+            try
+            {
+                result = ServiceChatManagerDAO.GetAccountManagerById(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return result;
+        }
+
         public ObjectResultList<ConversationResponseEntity> GetListConversationByReport(ObjectRequest<string> objectRequest)
         {
             ObjectResultList<ConversationResponseEntity> result = new ObjectResultList<ConversationResponseEntity>();

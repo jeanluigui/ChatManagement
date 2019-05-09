@@ -22,6 +22,11 @@ namespace xChatEntities
 
         public ReportChat() { }
 
+        public ReportChat(DataRow dataRow)
+        {
+            Fill(dataRow);
+        }
+
         public override void Fill(DataRow dataRow)
         {
             ChatId = Convert.ToInt32(dataRow["ChatId"]);
@@ -34,6 +39,23 @@ namespace xChatEntities
             MarketName = dataRow["MarketName"].ToString();
             MessageNumber = Convert.ToInt32(dataRow["MessageNumber"]);
             LastMessageDate = Convert.ToDateTime(dataRow["LastMessageDate"]);
+        }
+    }
+
+    public class ListReportChat
+    {
+        public List<ReportChat> Elements { get; set; }
+
+        public ListReportChat() { }
+
+        public ListReportChat(DataTable dataTable)
+        {
+            if (dataTable == null || dataTable.Rows == null || dataTable.Rows.Count == 0) return;
+
+            Elements = new List<ReportChat>();
+
+            foreach (DataRow dataRow in dataTable.Rows)
+                Elements.Add(new ReportChat(dataRow));
         }
     }
 }

@@ -16,6 +16,12 @@ namespace xChatWeb.Models
         [Display(Name = "Mercado")]
         public int MarketId { get; set; }
 
+        [Display(Name = "Agente")]
+        public string AgentName { get; set; }
+
+        [Display(Name = "Usuario")]
+        public string UserName { get; set; }
+
         [Display(Name ="Fecha Inicio")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]

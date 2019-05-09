@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using xChatEntities;
 using xChatUtilities;
 using xChatWeb.Models;
@@ -19,6 +20,12 @@ namespace xChatWeb.Controllers
             // ----------------------------------------------
 
             ViewBag.ListMarket = MasterContainer.GetList(EntityMasterEnum.Market);
+
+            //ViewBag.ListMarket = new List<EntityMaster>()
+            //{
+            //    new EntityMaster(){ EntityMasterId = "1", EntityMasterName = "Mexico", EntityMasterTag = string.Empty}
+            //};
+
 
             return View(filter);
         }
@@ -84,6 +91,11 @@ namespace xChatWeb.Controllers
             ViewBag.DateEnd = dateEnd;
 
             return View(listConversations.Elements);
+        }
+
+        public JsonResult SearchAgenteName(string term)
+        {
+            return Json("");
         }
 
         #region Partial

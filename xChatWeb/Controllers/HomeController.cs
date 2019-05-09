@@ -34,7 +34,7 @@ namespace xChatWeb.Controllers
                 SenderObject = $"{originalParamId};{originalParamAppId};{originalParamRolId}"
             };
 
-            ObjectResultList<AccountManagerConnect> lstAgents = RequestService.ExecuteList<AccountManagerConnect, string>(Constants.UrlApiService.GetListAccountManagerConnectByModuleAppId
+            ObjectResultList<AccountManagerConnect> lstAgents = RequestService.ExecuteList<AccountManagerConnect, string>(Constants.UrlApiService.GetAccountManagerById
                 , "POST"
                 , objectRequest
                 );

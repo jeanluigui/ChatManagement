@@ -1,0 +1,119 @@
+﻿@model List<xChatEntities.AccountManagerConnect>
+
+@{
+    ViewBag.Title = "Manager";
+}
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="~/Content/StyleWhatsapp/styleWhatsapp.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div style="width:100%; height:100%">
+
+    <div class="app-one" style="overflow-y:scroll;">
+
+        <div class="col-sm-3 side">
+
+            <div class="side-one">
+
+                <div class="row heading" style="font-weight: 700">
+                    Agentes
+                </div>
+
+                <div class="sideBar" style=" overflow-y: scroll;">
+
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        foreach (xChatEntities.AccountManagerConnect item in Model)
+                        {
+                            @Ajax.ActionLink(@item.AccountManagerName
+                                    , "AgentList"
+                                    , "Manager"
+                                    , new
+                                    {
+                                        AgentId = item.AccountManagerId
+                                    }
+                                    , new AjaxOptions
+                                    {
+                                        HttpMethod = "POST"
+                                    ,
+                                        UpdateTargetId = "divAgents"
+                                    ,
+                                        InsertionMode = InsertionMode.Replace
+                                    ,
+                                        LoadingElementId = "loading"
+                                    }, new { @class = "row sideBar-body sideBar-main sideBar-name" })
+
+                        }
+                    }
+
+                </div>
+            </div>
+            <div id="loader" style="display:none"></div>
+        </div>
+        <div class="col-sm-3 side">
+            <div class="side-one">
+                <div class="row heading" style="font-weight: 700">
+                    Usuarios
+                </div>
+                <div id="divUsuarios" class="sideBar" id="userActiveShow" style=" overflow-y: scroll;">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 conversation">
+            <div class="heading" style="font-weight: 700">
+
+                <div class="heading-avatar-icon">
+                    Chat
+                    <img src="~/Content/Imagenes/imgMessage.png" />
+                    <div class="col-sm-1 col-xs-1  heading-dot pull-right">
+                        <span id="action_menu_btn">
+                            <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true"></i>
+                        </span>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="action_menu selected" style="display: none;">
+                <ul id="optionMenu">
+                    <li data-input="1">Cerrar Chat</li>
+                    <li data-input="2">Mover a un Manager</li>
+                </ul>
+            </div>
+            <div class="message" id="conversation" style=" overflow-y: scroll;">
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+@*<div class="row" style="margin:0px; height:100%">
+        <div class="col-md-3" style="overflow-y:scroll">
+            <div style="background-color:gray">
+                parte 1
+            </div>
+        </div>
+        <div class="col-md-3" style="overflow-y:scroll">
+            <div style="background-color:gray">
+                parte 2
+            </div>
+
+        </div>
+        <div class="col-md-6" style="overflow-y:scroll">
+            <div style="background-color:gray">
+                parte 3
+            </div>
+
+        </div>
+    </div>*@
+
+
+@section scripts{
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+}
