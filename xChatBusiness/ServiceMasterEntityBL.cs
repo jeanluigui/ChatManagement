@@ -44,10 +44,29 @@ namespace xChatBusiness
             return result;
         }
 
+        public ObjectResultList<EntityMaster> SearchMasterGetList(ParamSearchMaster senderObject)
+        {
+            ObjectResultList<EntityMaster> result = new ObjectResultList<EntityMaster>();
+
+            try
+            {
+                result = _serviceMasterEntityDAO.SearchMasterGetList(senderObject.MasterEntity, senderObject.MasterAction, senderObject.MasterParametersSet, senderObject.MasterParametersAdd);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return result;
+        }
     }
 
     public interface IServiceMasterEntityBL
     {
         ObjectResultList<EntityMaster> GetList(EntityMasterEnum entityMasterEnum);
+        ObjectResultList<EntityMaster> SearchMasterGetList(ParamSearchMaster senderObject);
     }
 }
