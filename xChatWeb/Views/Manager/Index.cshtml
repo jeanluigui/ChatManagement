@@ -20,30 +20,35 @@
                     Agentes
                 </div>
 
-                <div class="sideBar" style=" overflow-y: scroll;">
+                <div class="sideBar" style="overflow-y: scroll;">
 
                     @if (Model != null && Model.Count > 0)
                     {
                         foreach (xChatEntities.AccountManagerConnect item in Model)
                         {
-                            @Ajax.ActionLink(@item.AccountManagerName
-                                    , "AgentList"
-                                    , "Manager"
-                                    , new
-                                    {
-                                        AgentId = item.AccountManagerId
-                                    }
-                                    , new AjaxOptions
-                                    {
-                                        HttpMethod = "POST"
-                                    ,
-                                        UpdateTargetId = "divAgents"
-                                    ,
-                                        InsertionMode = InsertionMode.Replace
-                                    ,
-                                        LoadingElementId = "loading"
-                                    }, new { @class = "row sideBar-body sideBar-main sideBar-name" })
-
+                            <div class="sideBar-main sideBar-body">
+                                <div class="js-reload-details row" data-url='@Url.Action("AgentList", "Manager", new { agentId = item.AccountManagerId })'>
+                                    <div class="col-sm-3 col-xs-3 sideBar-avatar" style="width: 42px;">
+                                        <div class="avatar-icon">
+                                            <img src="~/Content/Imagenes/user-profile.png" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-9 col-xs-9 sideBar-main">
+                                        <div class="row">
+                                            <div class="col-sm-7 col-xs-7 sideBar-name">
+                                                <span class="name-meta">
+                                                    @item.AccountManagerName
+                                                </span>
+                                            </div>
+                                            <div class="col-sm-5 col-xs-5 pull-right sideBar-time">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="justify-content:flex-end">
+                                        <a href="#" class="badge badge-primary">Move To</a>                                    
+                                </div>
+                            </div>
                         }
                     }
 
@@ -51,16 +56,19 @@
             </div>
             <div id="loader" style="display:none"></div>
         </div>
+
         <div class="col-sm-3 side">
             <div class="side-one">
                 <div class="row heading" style="font-weight: 700">
                     Usuarios
                 </div>
-                <div id="divUsuarios" class="sideBar" id="userActiveShow" style=" overflow-y: scroll;">
+                <div class="sideBar" id="userActiveShow" style="overflow-y: scroll;">
 
                 </div>
             </div>
+            <div id="loader" style="display:none"></div>
         </div>
+
         <div class="col-sm-6 conversation">
             <div class="heading" style="font-weight: 700">
 
@@ -79,10 +87,12 @@
             <div class="action_menu selected" style="display: none;">
                 <ul id="optionMenu">
                     <li data-input="1">Cerrar Chat</li>
-                    <li data-input="2">Mover a un Manager</li>
+                    <li data-input="2">Mover Chat</li>
+                    <li data-input="3">Capturar Chat</li>
+                    <li data-input="4">Descargar Chat</li>
                 </ul>
             </div>
-            <div class="message" id="conversation" style=" overflow-y: scroll;">
+            <div class="message" id="divConversations" style=" overflow-y: scroll;">
 
             </div>
 
@@ -91,29 +101,32 @@
     </div>
 </div>
 
-@*<div class="row" style="margin:0px; height:100%">
-        <div class="col-md-3" style="overflow-y:scroll">
-            <div style="background-color:gray">
-                parte 1
-            </div>
-        </div>
-        <div class="col-md-3" style="overflow-y:scroll">
-            <div style="background-color:gray">
-                parte 2
-            </div>
-
-        </div>
-        <div class="col-md-6" style="overflow-y:scroll">
-            <div style="background-color:gray">
-                parte 3
-            </div>
-
-        </div>
-    </div>*@
-
-
 @section scripts{
 
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            
+            $('.js-reload-details').on('click', function (evt) {
+                evt.preventDefault();
+                evt.stopPropagation();
+
+                var $detailDiv = $('#userActiveShow'),
+                    url = $(this).data('url');
+
+                $.get(url, function (data) {
+                    $detailDiv.html(data);
+                });
+            });
+
+            $(document).on('click', '#action_menu_btn', function () {
+                $('.action_menu').toggle();
+            });
+
+        });
+
+    </script>
 
 }

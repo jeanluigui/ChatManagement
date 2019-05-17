@@ -7,6 +7,9 @@ using xss.Logger.Interfaces;
 
 namespace xChatBusiness
 {
+    /// <summary>
+    /// Clase que gestiona entidades maestras.
+    /// </summary>
     public class ServiceMasterEntityBL : IServiceMasterEntityBL
     {
         private static readonly ServiceMasterEntityBL _serviceMasterEntityBL = new ServiceMasterEntityBL();
@@ -15,6 +18,9 @@ namespace xChatBusiness
 
         IServiceMasterEntityDAO _serviceMasterEntityDAO;
 
+        /// <summary>
+        /// Patrón Singleton
+        /// </summary>
         public static ServiceMasterEntityBL Instancia
         {
             get { return _serviceMasterEntityBL; }
@@ -25,6 +31,11 @@ namespace xChatBusiness
             _serviceMasterEntityDAO = new ServiceMasterEntityDAO();
         }
 
+        /// <summary>
+        /// Obtener una lista simples
+        /// </summary>
+        /// <param name="entityMasterEnum"></param>
+        /// <returns></returns>
         public ObjectResultList<EntityMaster> GetList(EntityMasterEnum entityMasterEnum)
         {
             ObjectResultList<EntityMaster> result = new ObjectResultList<EntityMaster>();
@@ -44,6 +55,11 @@ namespace xChatBusiness
             return result;
         }
 
+        /// <summary>
+        /// Obtener lista segun parametros.
+        /// </summary>
+        /// <param name="senderObject"></param>
+        /// <returns></returns>
         public ObjectResultList<EntityMaster> SearchMasterGetList(ParamSearchMaster senderObject)
         {
             ObjectResultList<EntityMaster> result = new ObjectResultList<EntityMaster>();
@@ -64,6 +80,9 @@ namespace xChatBusiness
         }
     }
 
+    /// <summary>
+    /// Interfase
+    /// </summary>
     public interface IServiceMasterEntityBL
     {
         ObjectResultList<EntityMaster> GetList(EntityMasterEnum entityMasterEnum);

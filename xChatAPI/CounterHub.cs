@@ -5,6 +5,9 @@ using xChatEntities;
 
 namespace xChatAPI
 {
+    /// <summary>
+    /// Clase que gestiona los eventos de mensajería por WEBSOCKET.
+    /// </summary>
     public class CounterHub : Hub
     {
         IServiceNotificationBL _serviceNotification = new ServiceNotificationBL();
@@ -97,9 +100,21 @@ namespace xChatAPI
             }
 
             // ------------------------------------------------------------
+            // Obtenemos el mensaje en formato original antes de 
+            // encriptarlo.
+            // ------------------------------------------------------------
+            string originalMessage = conversationEntity.Message;
+
+            // ------------------------------------------------------------
             // Registrar mensaje en la DB.
             // ------------------------------------------------------------
+
             ServiceChatBL.Instancia.ChatMessageCreate(conversationEntity);
+
+            // ------------------------------------------------------------
+            // Restablecemos el mensaje.
+            // ------------------------------------------------------------
+            conversationEntity.Message = originalMessage;
 
             // ------------------------------------------------------------
             // Se lanza el método de los mensajes en el front del Manager.
@@ -121,9 +136,20 @@ namespace xChatAPI
             conversationEntity.IsSendUser = 0;
 
             // ------------------------------------------------------------
+            // Obtenemos el mensaje en formato original antes de 
+            // encriptarlo.
+            // ------------------------------------------------------------
+            string originalMessage = conversationEntity.Message;
+
+            // ------------------------------------------------------------
             // Registrar mensaje en la DB.
             // ------------------------------------------------------------
             ServiceChatBL.Instancia.ChatMessageCreate(conversationEntity);
+
+            // ------------------------------------------------------------
+            // Restablecemos el mensaje.
+            // ------------------------------------------------------------
+            conversationEntity.Message = originalMessage;
 
             // ------------------------------------------------------------
             // Se lanza el método de los mensajes en el front del Usuario.

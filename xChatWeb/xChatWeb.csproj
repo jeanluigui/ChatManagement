@@ -194,12 +194,14 @@
     <Compile Include="Models\MasterContainer.cs" />
     <Compile Include="Models\VMAccountManager.cs" />
     <Compile Include="Models\VMBaseEntity.cs" />
+    <Compile Include="Models\VMChatManager.cs" />
     <Compile Include="Models\VMColumnsReport.cs" />
     <Compile Include="Models\VMReport.cs" />
     <Compile Include="Models\VMReportFilter.cs" />
     <Compile Include="Models\VMResultObject.cs" />
     <Compile Include="Models\VMUserConnect.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ServiceIntegrationChat.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -336,6 +338,7 @@
     <Content Include="Views\Report\ConversationDetail.cshtml" />
     <Content Include="Views\Shared\_ReportList.cshtml" />
     <Content Include="Views\Manager\Index.cshtml" />
+    <Content Include="Views\Shared\_ListUsersChat.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

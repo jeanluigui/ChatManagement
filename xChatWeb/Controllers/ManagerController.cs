@@ -5,50 +5,40 @@ using System.Web;
 using System.Web.Mvc;
 using xChatEntities;
 using xChatUtilities;
+using xChatWeb.Services;
 
 namespace xChatWeb.Controllers
 {
+    /// <summary>
+    /// Controlador para la gestión del Manager
+    /// </summary>
     public class ManagerController : Controller
     {
         public ActionResult Index(string paramId, string paramAppId, string paramRolId)
         {
-            // ----------------------------------------------
-            // el parámetro paramId recibe el identificador del usuario
-            // de corporate.
-            // debe ser descriptado.
-            // ----------------------------------------------
+            ObjectResultList<AccountManagerConnect> lstAgents;
 
-            String originalParamId = paramId; // Encryption.Decrypt(HttpUtility.UrlDecode(paramId));
-            String originalParamAppId = paramAppId;// Encryption.Decrypt(HttpUtility.UrlDecode(paramAppId));
-            String originalParamRolId = paramRolId; // Encryption.Decrypt(HttpUtility.UrlDecode(paramRolId));
-
-            ViewBag.error = "";
-
-            // ----------------------------------------------
-            // Obtener lista de agentes conectados de un determinado módulo.
-            // ----------------------------------------------
-            ObjectRequest<string> objectRequest = new ObjectRequest<string>()
-            {
-                //usuario-aplicacion-rol manager
-                SenderObject = $"{originalParamId};{originalParamAppId};{originalParamRolId}"
-            };
-
-            ObjectResultList<AccountManagerConnect> lstAgents = RequestService.ExecuteList<AccountManagerConnect, string>(Constants.UrlApiService.GetListAccountManagerConnectByModuleAppId
-                , "POST"
-                , objectRequest
-                );
-
-            ObjectResultList<AccountManagerConnect> lstAgentResult = lstAgents;
-            ViewBag.AgentActive = lstAgentResult;
+            lstAgents = ServiceIntegrationChat.Instance.GetAccountManager(paramId, paramAppId, paramRolId, true);
 
             return View(lstAgents.Elements);
         }
 
         public ActionResult AgentList(int agentId)
         {
+            ObjectResultList<UserConnect> lstUsers;
 
-            return PartialView();
+            lstUsers = ServiceIntegrationChat.Instance.GetUserConnectByAgentId(agentId);
+
+            return PartialView("_ListUsersChat",lstUsers.Elements);
         }
 
+        public ActionResult GetConversation(int chatId)
+        {
+            ObjectResultList<ConversationResponseEntity> conversation;
+
+            conversation = ServiceIntegrationChat.Instance.GetConversation(chatId);
+
+            return PartialView("_ConversationList", conversation.Elements);
+        }
     }
 }

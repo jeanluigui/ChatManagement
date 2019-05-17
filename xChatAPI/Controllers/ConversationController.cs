@@ -196,37 +196,6 @@ namespace xChatAPI.Controllers
 
 
         /// <summary>
-        /// Permite desconectar a un agente.
-        /// </summary>
-        /// <param name="objectRequest"></param>
-        /// <returns></returns>
-        [HttpGet]
-        [ActionName("DemoTest")]
-        [Route("api/Conversation/DemoTest/")]
-        public ObjectResult<string> DemoTest()
-        {
-            ObjectResult<string> result = new ObjectResult<string>();
-
-            try
-            {
-                IServiceNotificationBL _service = new ServiceNotificationBL();
-
-                _service.Send(new ConversationEntity()
-                {
-                    UserName = "Juan Perez",
-                    Message = "Hola, tengo problemas con mi correoo..",
-                });
-            }
-            catch (Exception ex)
-            {
-                result.Id = 1;
-                result.Message = ex.Message;
-            }
-
-            return result;
-        }
-
-        /// <summary>
         /// Reporte Main.
         /// </summary>
         /// <param name="objectRequest"></param>
@@ -250,6 +219,48 @@ namespace xChatAPI.Controllers
                 result.Id = 1;
                 result.Message = ex.Message;
             }
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// METODO PARA REALZIAR PRUEBAS DIVERSAS.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [ActionName("DemoTest")]
+        [Route("api/Conversation/DemoTest/")]
+        public ObjectResult<string> DemoTest()
+        {
+            ObjectResult<string> result = new ObjectResult<string>();
+
+            #region Probar proceso de encriptación
+
+            ServiceChatBL.Instancia.ProcessSetEncrypMessage();
+
+            #endregion
+
+            #region Probar envío de correo.
+
+            //try
+            //{
+            //    IServiceNotificationBL _service = new ServiceNotificationBL();
+
+            //    _service.Send(new ConversationEntity()
+            //    {
+            //        UserName = "Juan Perez",
+            //        Message = "Hola, tengo problemas con mi correoo..",
+            //    });
+            //}
+            //catch (Exception ex)
+            //{
+            //    result.Id = 1;
+            //    result.Message = ex.Message;
+            //}
+
+            #endregion
 
             return result;
         }

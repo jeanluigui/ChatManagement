@@ -10,17 +10,19 @@ using xss.Logger.Interfaces;
 
 namespace xChatDAO
 {
+    /// <summary>
+    /// Clase gestora de la Capa de Datos.
+    /// </summary>
     public static class ServiceChatDAO
     {
-        //private static readonly ServiceChatDAO _service = new ServiceChatDAO();
-
-        //public static ServiceChatDAO Instancia
-        //{
-        //    get { return _service; }
-        //}
-        
         private static ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.DataAccessLayer);
 
+        /// <summary>
+        /// Crea y genera un ID de un Chat específico.
+        /// </summary>
+        /// <param name="conversationEntity"></param>
+        /// <param name="accountManagerConnectId"></param>
+        /// <returns></returns>
         public static int ChatCreate(ConversationEntity conversationEntity, Int32 accountManagerConnectId)
         {
             Int32 chatId = 0;
@@ -52,6 +54,11 @@ namespace xChatDAO
             return chatId;
         }
 
+        /// <summary>
+        /// Actualiza el estado de un chat como desconectado.
+        /// </summary>
+        /// <param name="connectionId"></param>
+        /// <returns></returns>
         public static ObjectResultList<ChatToken> ChatDisconnected(string connectionId)
         {
             ObjectResultList<ChatToken> tokenDestino = new ObjectResultList<ChatToken>();
@@ -78,6 +85,11 @@ namespace xChatDAO
             return tokenDestino;
         }
 
+        /// <summary>
+        /// Registra mensajes del chat.
+        /// </summary>
+        /// <param name="conversationEntity"></param>
+        /// <returns></returns>
         public static int ChatMessageCreate(ConversationEntity conversationEntity)
         {
             int chatMessageId = 0;
@@ -160,6 +172,11 @@ namespace xChatDAO
             }
         }
 
+        /// <summary>
+        /// Obtener el tocken de un manager.
+        /// </summary>
+        /// <param name="conversationEntity"></param>
+        /// <returns></returns>
         public static string GetManagerToken(ConversationEntity conversationEntity)
         {
             string managerToken = string.Empty;
@@ -186,6 +203,10 @@ namespace xChatDAO
             return managerToken;
         }
 
+        /// <summary>
+        /// Desconectar a un manager.
+        /// </summary>
+        /// <param name="accountManagerEntity"></param>
         public static void AccountManagerDisconnect(AccountManagerEntity accountManagerEntity)
         {
             try
@@ -208,6 +229,10 @@ namespace xChatDAO
             }
         }
 
+        /// <summary>
+        /// Conectar un Manager.
+        /// </summary>
+        /// <param name="accountManagerEntity"></param>
         public static void AccountManagerConnect(AccountManagerEntity accountManagerEntity)
         {
             try
@@ -233,6 +258,11 @@ namespace xChatDAO
             }
         }
 
+        /// <summary>
+        /// Obtener un Account Manager a partir de su ID.
+        /// </summary>
+        /// <param name="conversationEntity"></param>
+        /// <returns></returns>
         public static int GetAccountManagerConnectId(ConversationEntity conversationEntity)
         {
             Int32 accountManagerConnectId = 0;
@@ -263,6 +293,80 @@ namespace xChatDAO
 
             return accountManagerConnectId;
         }
+
+        #region Métodos Util para encriptar las conversaciones.
+
+        /// <summary>
+        /// Obtener todos los mensajes.
+        /// </summary>
+        public static List<ConversationEntity> GetAllMessages()
+        {
+            List<ConversationEntity> result = new List<ConversationEntity>();
+
+            try
+            {
+                ListParameters parameters = new ListParameters();
+
+                CommandParameter queryCommand = new CommandParameter("chat.Chat_GetAllMessages_pa", parameters);
+
+                DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
+
+                foreach (DataRow dataRow in dtresult.Rows)
+                {
+                    result.Add(new ConversationEntity()
+                    {
+                        Message = dataRow["messageAux"].ToString(),
+                        ChatId = Convert.ToInt32(dataRow["chatMessagesId"])
+                    }
+                    );
+                }
+            }
+            catch (TimeoutException tout)
+            {
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Encriptar los mensajes
+        /// </summary>
+        public static void SetEncrypMessages(List<ConversationEntity> listaConversation)
+        {
+            try
+            {
+                ListParameters parameters = new ListParameters();
+
+                foreach (ConversationEntity conversationEntity in listaConversation)
+                {
+                    parameters = new ListParameters();
+
+                    parameters.Add("@p_id", conversationEntity.ChatId);
+                    parameters.Add("@p_message", conversationEntity.Message);
+
+                    CommandParameter queryCommand = new CommandParameter("chat.Chat_SetEncrypMessage_pa", parameters);
+
+                    DbManager.Instance.ExecuteCommand(queryCommand);
+                }
+
+            }
+            catch (TimeoutException tout)
+            {
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+        }
+
+        #endregion
+
     }
 
 }

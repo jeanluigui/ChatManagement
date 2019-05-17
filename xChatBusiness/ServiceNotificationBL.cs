@@ -40,7 +40,7 @@ namespace xChatBusiness
                 // -----------------------------------------------------------------
                 log.Save(EnumLogLevel.Info, "Obteniendo información de correo....");
 
-                var (emailTo, emailSubject, emailBody) = _serviceNotificationDAO.GetEmailTo(conversationEntity);
+                (string emailTo, string emailSubject, string emailBody) = _serviceNotificationDAO.GetEmailTo(conversationEntity);
 
                 log.Save(EnumLogLevel.Info, "Validando información....");
 

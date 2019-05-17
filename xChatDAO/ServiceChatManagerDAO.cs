@@ -9,10 +9,18 @@ using xss.Logger.Interfaces;
 
 namespace xChatDAO
 {
+    /// <summary>
+    /// Clase que gestiona información del Chat.
+    /// </summary>
     public static class ServiceChatManagerDAO
     {
         private static ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.DataAccessLayer);
 
+        /// <summary>
+        /// Obtiene la lista de usuarios conectados de un Agente.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
         public static ObjectResultList<UserConnect> GetListUserConnectByAccountManagerId(ObjectRequest<int> objectRequest)
         {
             ObjectResultList<UserConnect> listUserConnect = new ObjectResultList<UserConnect>();
@@ -46,6 +54,11 @@ namespace xChatDAO
             return listUserConnect;
         }
 
+        /// <summary>
+        /// Devuelve conversación de un Chat.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
         public static ObjectResultList<ConversationResponseEntity> GetListConversationByChatId(ObjectRequest<int> objectRequest)
         {
             ObjectResultList<ConversationResponseEntity> listUserConnect = new ObjectResultList<ConversationResponseEntity>();
@@ -78,6 +91,10 @@ namespace xChatDAO
             return listUserConnect;
         }
 
+        /// <summary>
+        /// Mueve una conversación de un chat a otro.
+        /// </summary>
+        /// <param name="objectRequest"></param>
         public static void ConversationMoveTo(ObjectRequest<ConversationMoveEntity> objectRequest)
         {
             try
@@ -101,6 +118,11 @@ namespace xChatDAO
 
         }
 
+        /// <summary>
+        /// Obtener conversación para un Report.
+        /// </summary>
+        /// <param name="senderObject"></param>
+        /// <returns></returns>
         public static ObjectResultList<ConversationResponseEntity> GetListConversationByReport(string senderObject)
         {
             ObjectResultList<ConversationResponseEntity> listUserConnect = new ObjectResultList<ConversationResponseEntity>();
@@ -150,6 +172,11 @@ namespace xChatDAO
             return listUserConnect;
         }
 
+        /// <summary>
+        /// Obtener información para el Reporte.
+        /// </summary>
+        /// <param name="senderObject"></param>
+        /// <returns></returns>
         public static ObjectResultList<ReportChat> GetReport(ReportFilter senderObject)
         {
             ObjectResultList<ReportChat> result = new ObjectResultList<ReportChat>();
@@ -181,6 +208,11 @@ namespace xChatDAO
             return result;
         }
 
+        /// <summary>
+        /// Desconectar un Agente.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
         public static bool AccountManagerDisconnect(ObjectRequest<int> objectRequest)
         {
             bool result = false;
@@ -208,6 +240,11 @@ namespace xChatDAO
             return result;
         }
 
+        /// <summary>
+        /// Obtener lista de agentes conectados por Aplication ID.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
         public static ObjectResultList<AccountManagerConnect> GetListAccountManagerConnectByModuleAppId(ObjectRequest<string> objectRequest)
         {
             ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
@@ -220,6 +257,7 @@ namespace xChatDAO
                 parameters.Add("@p_rolid", Encryption.Decrypt(objectRequest.SenderObject.Split(';')[2].ToString()));
 
                 CommandParameter queryCommand = new CommandParameter("chat.AccountManagerConnect_GetList_pa",parameters);
+
                 DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
 
                 result = new ObjectResultList<AccountManagerConnect>(dtresult);
@@ -245,6 +283,11 @@ namespace xChatDAO
             return result;
         }
 
+        /// <summary>
+        /// Obtener información de un Agente por su ID.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
         public static ObjectResultList<AccountManagerConnect> GetAccountManagerById(ObjectRequest<string> objectRequest)
         {
             ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
@@ -257,6 +300,7 @@ namespace xChatDAO
                 parameters.Add("@p_rolid", Encryption.Decrypt(objectRequest.SenderObject.Split(';')[2].ToString()));
 
                 CommandParameter queryCommand = new CommandParameter("chat.AccountManagerConnect_GetById_pa", parameters);
+
                 DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
 
                 result = new ObjectResultList<AccountManagerConnect>(dtresult);
