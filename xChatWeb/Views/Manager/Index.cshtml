@@ -27,7 +27,11 @@
                         foreach (xChatEntities.AccountManagerConnect item in Model)
                         {
                             <div class="sideBar-main sideBar-body">
-                                <div class="js-reload-details row" data-url='@Url.Action("AgentList", "Manager", new { agentId = item.AccountManagerId })'>
+
+                                <div class="js-reload-details row" 
+                                     data-agentid="@item.AccountManagerId" 
+                                     data-url='@Url.Action("GetUsers", "Manager", new { agentId = item.AccountManagerId })'>
+
                                     <div class="col-sm-3 col-xs-3 sideBar-avatar" style="width: 42px;">
                                         <div class="avatar-icon">
                                             <img src="~/Content/Imagenes/user-profile.png" />
@@ -46,7 +50,7 @@
                                     </div>
                                 </div>
                                 <div class="row" style="justify-content:flex-end">
-                                        <a href="#" class="badge badge-primary">Move To</a>                                    
+                                    <a href="#" class="badge badge-primary">Move To</a>
                                 </div>
                             </div>
                         }
@@ -101,29 +105,140 @@
     </div>
 </div>
 
+<input type="hidden" id="displayname" value="" />
+<input type="hidden" id="AgentId" value="0" />
+<input type="hidden" id="ChatId" value="0" />
+<input type="hidden" id="AccountManagerId" value="0" />
+<input type="hidden" id="ModuleAppId" value="0" />
+<input type="hidden" id="UserName" value="" />
+<input type="hidden" id="UserEmail" value="" />
+<input type="hidden" id="UserToken" value="" />
+<input type="hidden" id="ManagerToken" value="" />
+<input type="hidden" id="AccountManagerName" value="" />
+
 @section scripts{
 
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.0.js"></script>
+    <script src="@xChatEntities.Constants.Url.SignalRHub"></script>
 
     <script type="text/javascript">
+        var Counter;
+        var chatIdCurrent;
 
-        $(function () {
-            
+        function Fn_Init() {
+
             $('.js-reload-details').on('click', function (evt) {
                 evt.preventDefault();
                 evt.stopPropagation();
 
+                // ---------------------------------------------
+                // guardar parámetros del item seleccionado.
+                // ---------------------------------------------
                 var $detailDiv = $('#userActiveShow'),
-                    url = $(this).data('url');
+                    url = $(this).data('url'),
+                    agentId = $(this).data('agentid');
 
+                alert("agentId: " + agentId);
+
+                $("#AccountManagerId").val(agentId);
+
+                // ----------------------------------------------
+                // llamar al servicio.
+                // ----------------------------------------------
                 $.get(url, function (data) {
                     $detailDiv.html(data);
+
                 });
             });
 
             $(document).on('click', '#action_menu_btn', function () {
                 $('.action_menu').toggle();
             });
+        }
+
+        $(function () {
+
+            Fn_Init();
+
+            $.support.cors = true;
+
+            $.connection.hub.url = "@xChatEntities.Constants.Url.SignalR";
+
+            Counter = $.connection.counterHub;
+
+            // -----------------------------------------
+            // Iniciar conexión con Concentrador.
+            // -----------------------------------------
+            $.connection.hub.start().done(function () {
+
+                // Botón Login Connect Account Manager.
+                $(document).on('click', '#btnconnect', function () {
+                    if ($(this).attr("data-IsAgent") == "True") {
+                        if (Counter == undefined) {
+                            alert("No existe conexión al servidor...");
+                            return;
+                        }
+
+                        $("#loader").css('display', 'block');
+                        var obj = {
+                            AccountManagerId: $(this).attr("data-agentvalueid"),
+                            ModuloAppId: 1,
+                            EMail: $("#UserEmail").val(),
+                            Password: "",
+                            Token: ""
+                        };
+
+                        Counter.server.accountManagerConnect(obj);
+                        var agentId = $(this).attr("data-agentvalueid")
+                        $("#AgentId").val(agentId);
+                    }
+                    else {
+                        //$("#loader").css('display', 'block');
+                        var obj = {
+                            AccountManagerId: $(this).attr("data-agentvalueid"),
+                            ModuloAppId: 1,
+                            EMail: $("#UserEmail").val(),
+                            Password: "",
+                            Token: ""
+                        };
+
+                        var agentId = $(this).attr("data-agentvalueid")
+                        $("#AgentId").val(agentId);
+                        Fn_UserActiveByAgent($("#AgentId").val())
+                    }
+                });
+
+                $(document).on('click', '#action_menu_btn', function () {
+                    $('.action_menu').toggle();
+                });
+
+            });
+
+            // ------------------------------------------------------
+            // Recibe mensajes del usuario.
+            // ------------------------------------------------------
+            Counter.client.monitor_receivedFromUser = function (obj) {
+
+                if (obj.ChatId > 0) {
+
+                    chatIdCurrent = $("#ChatId").val();
+
+                    // Si el ChatID pertenece a la ventana actual
+                    // entonces se muestra la conversación,
+                    // caso contrario se ejecuta lo siguiente:
+                    //  1.- se muestra el mensaje en una ventana emergente en la parte inferior derecha.
+                    //  2.- el item del chatId correspondiente, debe cambiar de color.
+                    if (obj.ChatId == chatIdCurrent) {
+
+                        $("#divConversations").append(Fn_SetConversation(obj));
+                        $("#divConversations").scrollTop($("#divConversations")[0].scrollHeight);
+
+                    }
+                }
+
+                Fn_UserActiveByAgent($("#AgentId").val())
+            };
 
         });
 

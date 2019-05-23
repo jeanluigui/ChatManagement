@@ -18,6 +18,16 @@ namespace xChatEntities
         public short IsSendUser { get; set; }
         public short IsMessageRead { get; set; }
 
+        /// <summary>
+        /// Modulo solicitado por el cliente para chatear.
+        /// </summary>
+        public int ChatBySkillModuleId { get; set; }
+
+        /// <summary>
+        /// Lenguaje solicitado por el cliente para chatear.
+        /// </summary>
+        public int ChatBySkillLanguageId { get; set; }
+
         public ConversationEntity() { }
     }
 }

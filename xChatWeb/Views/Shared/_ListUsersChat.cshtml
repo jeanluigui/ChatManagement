@@ -6,7 +6,11 @@
     {
         <div class="sideBar-main sideBar-body">
 
-            <div class="js-users row" data-url='@Url.Action("GetConversation", "Manager", new { chatId = item.ChatId })'>
+            <div class="js-users row" 
+                 data-chatid="@item.ChatId"
+                 data-chatusertoken="@item.UserToken"
+
+                 data-url='@Url.Action("GetConversation", "Manager", new { chatId = item.ChatId })'>
 
                 <div class="col-sm-3 col-xs-3 sideBar-avatar" style="width: 42px;">
                     <div class="avatar-icon">
@@ -32,26 +36,32 @@
     }
 }
 
-            @*<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>*@
+@*<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>*@
 
-            <script>
+<script>
 
-                $(function () {
+    $(function () {
 
-                    $('.js-users').on('click', function (evt) {
-                        evt.preventDefault();
-                        evt.stopPropagation();
+        $('.js-users').on('click', function (evt) {
+            evt.preventDefault();
+            evt.stopPropagation();
 
-                        var $detailDiv = $('#divConversations'),
-                            url = $(this).data('url');
+            var $detailDiv = $('#divConversations'),
+                url = $(this).data('url'),
+                chatId = $(this).data('chatid'),
+                userToken = $(this).data('chatusertoken');
 
-                        $.get(url, function (data) {
-                            $detailDiv.html(data);
-                        });
-                    });
+            alert("chatid: " + chatId);
 
-                });
+            $("#ChatId").val(chatId);
+            $("#UserToken").val(userToken);
 
+            $.get(url, function (data) {
+                $detailDiv.html(data);
+            });
+        });
 
-            </script>
+    });
+
+</script>
 

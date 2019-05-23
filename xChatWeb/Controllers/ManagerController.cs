@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using xChatEntities;
-using xChatUtilities;
 using xChatWeb.Services;
 
 namespace xChatWeb.Controllers
@@ -23,11 +18,13 @@ namespace xChatWeb.Controllers
             return View(lstAgents.Elements);
         }
 
-        public ActionResult AgentList(int agentId)
+        public ActionResult GetUsers(int agentId)
         {
             ObjectResultList<UserConnect> lstUsers;
 
             lstUsers = ServiceIntegrationChat.Instance.GetUserConnectByAgentId(agentId);
+
+            ViewData["agentId"] = agentId;
 
             return PartialView("_ListUsersChat",lstUsers.Elements);
         }
@@ -37,6 +34,8 @@ namespace xChatWeb.Controllers
             ObjectResultList<ConversationResponseEntity> conversation;
 
             conversation = ServiceIntegrationChat.Instance.GetConversation(chatId);
+
+            ViewData["chatId"] = chatId;
 
             return PartialView("_ConversationList", conversation.Elements);
         }

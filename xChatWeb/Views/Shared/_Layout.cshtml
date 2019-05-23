@@ -233,6 +233,7 @@
 
 
     <script type="text/javascript">
+
         function Fn_CallMethod(url, data, success, error, complete) {
             $.ajax({
                 url: url,
@@ -246,11 +247,39 @@
                 traditional: true
             });
         }
+
         function Fn_LoadHandlebars(templateId, context) {
             var source = document.getElementById(templateId).innerHTML;
             var template = Handlebars.compile(source);
             return template(context);
         }
+
+        function Fn_SetConversation(obj) {
+
+            var class_main = "message-main-sender",
+                class_send = "sender";
+
+            if (obj.IsUser == 1) {
+                class_main = "message-main-receiver";
+                class_send = "receiver";
+            }
+
+            var content = '<div class="row message-body">' + 
+                '<div class="col-sm-12 ' + class_main + '">' + 
+                                    '<div class="' + class_send + '">' +
+                                        '<div class="message-text">' +
+                                            obj.Message
+                                            '</div>' +
+                                        '<span class="message-time pull-right">' +
+                                            'today' + 
+                                        '</span>' + 
+                                    '</div>' + 
+                                '</div>' + 
+                '</div>';
+
+            return content;
+        }
+
     </script>
     <script src="~/Scripts/Base.js"></script>
     <script src="~/Content/handlebars/handlebars-v4.0.12.js"></script>

@@ -125,6 +125,12 @@ namespace xChatAPI
             // Se lanza el método de los mensajes en el front del Usuario.
             // ------------------------------------------------------------
             Clients.Caller.receivedFromManager(conversationEntity);
+
+            // ------------------------------------------------------------
+            // Se lanza el método de los mensajes en el front de los Supervisor.
+            // ------------------------------------------------------------
+            Clients.All.monitor_ReceivedFromUser(conversationEntity);
+
         }
 
         /// <summary>
@@ -160,6 +166,11 @@ namespace xChatAPI
             // Se lanza el método de los mensajes en el front del Manager.
             // ------------------------------------------------------------
             Clients.Caller.receivedFromUser(conversationEntity);
+
+            // ------------------------------------------------------------
+            // Se lanza el método de los mensajes en el front del Supervisor.
+            // ------------------------------------------------------------
+            Clients.Caller.monitor_receivedFromManager(conversationEntity);
         }
 
         /// <summary>

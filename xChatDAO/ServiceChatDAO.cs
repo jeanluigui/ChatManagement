@@ -259,7 +259,46 @@ namespace xChatDAO
         }
 
         /// <summary>
-        /// Obtener un Account Manager a partir de su ID.
+        /// Retorna un identificador de Conexión de Agente que cumpla las habilidades para atender el chat.
+        /// </summary>
+        /// <param name="conversationEntity"></param>
+        /// <param name="MinSkillLevelByModule"></param>
+        /// <param name="MinSkillLevelByLanguage"></param>
+        /// <returns></returns>
+        public static int GetAccountManagerConnectBySkillLevel(ConversationEntity conversationEntity)
+        {
+            Int32 accountManagerConnectId = 0;
+
+            try
+            {
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@p_languageid", conversationEntity.ChatBySkillLanguageId);
+                parameters.Add("@p_moduleid", conversationEntity.ChatBySkillModuleId);
+
+                CommandParameter queryCommand = new CommandParameter("chat.AccountManager_SearchBySkill_pa", parameters);
+
+                DataRow drresult = DbManager.Instance.ExecuteRegister(queryCommand);
+
+                if (drresult != null && !drresult.IsNull("AccountManagerConnectId"))
+                {
+                    accountManagerConnectId = Convert.ToInt32(drresult["AccountManagerConnectId"]);
+                    conversationEntity.ManagerToken = drresult["AccountManagerToken"].ToString();
+                }
+            }
+            catch (TimeoutException tout)
+            {
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return accountManagerConnectId;
+        }
+
+        /// <summary>
+        /// Obtener un Account Manager disponible.
         /// </summary>
         /// <param name="conversationEntity"></param>
         /// <returns></returns>

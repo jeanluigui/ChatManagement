@@ -35,20 +35,32 @@ namespace xChatBusiness
         public int ChatCreate(ConversationEntity conversationEntity)
         {
             int chatId = 0;
+            Int32 accountManagerConnectId = 0;
 
             try
             {
 
-                Int32 accountManagerConnectId = ServiceChatDAO.GetAccountManagerConnectId(conversationEntity);
+                // --------------------------------------------------------------------------------------------
+                // Obtener el identificador de conexión de un Agente Disponible.
+                // Consideraciones:
+                // Si no se envía valores para buscar por conocimiento de Lenguaje y Módulo, 
+                // entonces se obtiene cualquier agente disponible.
+                // caso contrario, se obtiene el agente disponible que cumple con las habilidades requeridas.
+                // --------------------------------------------------------------------------------------------
 
-                if (accountManagerConnectId == 0)
-                {
-                    chatId = -1;
-                }
+                if (conversationEntity.ChatBySkillLanguageId.Equals(0) || conversationEntity.ChatBySkillModuleId.Equals(0))
+                    accountManagerConnectId = ServiceChatDAO.GetAccountManagerConnectId(conversationEntity);
                 else
-                {
+                    accountManagerConnectId = ServiceChatDAO.GetAccountManagerConnectBySkillLevel(conversationEntity);
+
+                // -------------------------------------------------------------
+                // Si no obtiene, entonces se devuelve valor (-1)
+                // caso contrario, se crea el chat.
+                // -------------------------------------------------------------
+                if (accountManagerConnectId == 0)
+                    chatId = -1;
+                else
                     chatId = ServiceChatDAO.ChatCreate(conversationEntity, accountManagerConnectId);
-                }
             }
             catch(Exception ex)
             {
