@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 
 namespace xChatWebApi
 {
+    /// <summary>
+    /// Gestor de configuración WebApiConfig.
+    /// </summary>
     public static class WebApiConfig
     {
+        /// <summary>
+        /// Registrar configuración.
+        /// </summary>
+        /// <param name="config"></param>
         public static void Register(HttpConfiguration config)
         {
             // Configuración y servicios de API web

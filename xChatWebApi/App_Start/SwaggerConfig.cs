@@ -9,8 +9,14 @@ using System.Linq;
 
 namespace xChatWebApi
 {
+    /// <summary>
+    /// Gestor de pruebas Swagger.
+    /// </summary>
     public class SwaggerConfig
     {
+        /// <summary>
+        /// Registro de configuración.
+        /// </summary>
         public static void Register()
         {
             var thisAssembly = typeof(SwaggerConfig).Assembly;
