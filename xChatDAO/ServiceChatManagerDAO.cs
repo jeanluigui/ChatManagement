@@ -12,16 +12,16 @@ namespace xChatDAO
     /// <summary>
     /// Clase que gestiona información del Chat.
     /// </summary>
-    public static class ServiceChatManagerDAO
+    public class ServiceChatManagerDAO : IServiceChatManagerDAO
     {
-        private static ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.DataAccessLayer);
+        private ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.DataAccessLayer);
 
         /// <summary>
         /// Obtiene la lista de usuarios conectados de un Agente.
         /// </summary>
         /// <param name="objectRequest"></param>
         /// <returns></returns>
-        public static ObjectResultList<UserConnect> GetListUserConnectByAccountManagerId(ObjectRequest<int> objectRequest)
+        public ObjectResultList<UserConnect> GetListUserConnectByAccountManagerId(ObjectRequest<int> objectRequest)
         {
             ObjectResultList<UserConnect> listUserConnect = new ObjectResultList<UserConnect>();
 
@@ -59,7 +59,7 @@ namespace xChatDAO
         /// </summary>
         /// <param name="objectRequest"></param>
         /// <returns></returns>
-        public static ObjectResultList<ConversationResponseEntity> GetListConversationByChatId(ObjectRequest<int> objectRequest)
+        public ObjectResultList<ConversationResponseEntity> GetListConversationByChatId(ObjectRequest<int> objectRequest)
         {
             ObjectResultList<ConversationResponseEntity> listUserConnect = new ObjectResultList<ConversationResponseEntity>();
 
@@ -95,7 +95,7 @@ namespace xChatDAO
         /// Mueve una conversación de un chat a otro.
         /// </summary>
         /// <param name="objectRequest"></param>
-        public static void ConversationMoveTo(ObjectRequest<ConversationMoveEntity> objectRequest)
+        public void ConversationMoveTo(ObjectRequest<ConversationMoveEntity> objectRequest)
         {
             try
             {
@@ -123,7 +123,7 @@ namespace xChatDAO
         /// </summary>
         /// <param name="senderObject"></param>
         /// <returns></returns>
-        public static ObjectResultList<ConversationResponseEntity> GetListConversationByReport(string senderObject)
+        public ObjectResultList<ConversationResponseEntity> GetListConversationByReport(string senderObject)
         {
             ObjectResultList<ConversationResponseEntity> listUserConnect = new ObjectResultList<ConversationResponseEntity>();
 
@@ -177,7 +177,7 @@ namespace xChatDAO
         /// </summary>
         /// <param name="senderObject"></param>
         /// <returns></returns>
-        public static ObjectResultList<ReportChat> GetReport(ReportFilter senderObject)
+        public ObjectResultList<ReportChat> GetReport(ReportFilter senderObject)
         {
             ObjectResultList<ReportChat> result = new ObjectResultList<ReportChat>();
 
@@ -213,7 +213,7 @@ namespace xChatDAO
         /// </summary>
         /// <param name="objectRequest"></param>
         /// <returns></returns>
-        public static bool AccountManagerDisconnect(ObjectRequest<int> objectRequest)
+        public bool AccountManagerDisconnect(ObjectRequest<int> objectRequest)
         {
             bool result = false;
 
@@ -245,7 +245,7 @@ namespace xChatDAO
         /// </summary>
         /// <param name="objectRequest"></param>
         /// <returns></returns>
-        public static ObjectResultList<AccountManagerConnect> GetListAccountManagerConnectByModuleAppId(ObjectRequest<string> objectRequest)
+        public ObjectResultList<AccountManagerConnect> GetListAccountManagerConnectByModuleAppId(ObjectRequest<string> objectRequest)
         {
             ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
 
@@ -288,7 +288,7 @@ namespace xChatDAO
         /// </summary>
         /// <param name="objectRequest"></param>
         /// <returns></returns>
-        public static ObjectResultList<AccountManagerConnect> GetAccountManagerById(ObjectRequest<string> objectRequest)
+        public ObjectResultList<AccountManagerConnect> GetAccountManagerById(ObjectRequest<string> objectRequest)
         {
             ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
 

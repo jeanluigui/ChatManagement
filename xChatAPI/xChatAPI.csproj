@@ -123,6 +123,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ConversationController.cs" />
     <Compile Include="Controllers\ManagerMasterEntityController.cs" />
+    <Compile Include="Controllers\SkillAgentController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="CounterHub.cs" />
     <Compile Include="Global.asax.cs">

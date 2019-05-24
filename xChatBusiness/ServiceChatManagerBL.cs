@@ -1,7 +1,6 @@
 ﻿using System;
 using xChatDAO;
 using xChatEntities;
-using xChatUtilities;
 using xss.Logger.Enums;
 using xss.Logger.Factory;
 using xss.Logger.Interfaces;
@@ -12,17 +11,19 @@ namespace xChatBusiness
     /// <summary>
     /// Clase que gestiona las operaciones del chat.
     /// </summary>
-    public class ServiceChatManagerBL
+    public class ServiceChatManagerBL : IServiceChatManagerBL
     {
         private static ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.BusinessLayer);
-        private static readonly ServiceChatManagerBL _service = new ServiceChatManagerBL();
+
+        private IServiceChatManagerDAO _IServiceChatManagerDAO;
 
         /// <summary>
-        /// Patrón Singleton.
+        /// Constructor para injección de dependencia.
         /// </summary>
-        public static ServiceChatManagerBL Instancia
+        /// <param name="serviceChatManagerDAO"></param>
+        public ServiceChatManagerBL(IServiceChatManagerDAO serviceChatManagerDAO)
         {
-            get { return _service; }
+            _IServiceChatManagerDAO = serviceChatManagerDAO;
         }
 
         /// <summary>
@@ -36,7 +37,7 @@ namespace xChatBusiness
 
             try
             {
-                result = ServiceChatManagerDAO.GetListUserConnectByAccountManagerId(objectRequest);
+                result = _IServiceChatManagerDAO.GetListUserConnectByAccountManagerId(objectRequest);
             }
             catch(Exception ex)
             {
@@ -60,7 +61,12 @@ namespace xChatBusiness
 
             try
             {
-                result = ServiceChatManagerDAO.GetListConversationByChatId(objectRequest);
+                if (objectRequest.SenderObject < 1)
+                {
+                    throw new Exception("Debe especificar valor para ChatId.");
+                }
+
+                result = _IServiceChatManagerDAO.GetListConversationByChatId(objectRequest);
 
                 result.Elements.ForEach(x => x.Message = encryp.Encryption.Decrypt(x.Message));
             }
@@ -84,7 +90,17 @@ namespace xChatBusiness
         {
             try
             {
-                ServiceChatManagerDAO.ConversationMoveTo(objectRequest);
+                if (objectRequest.SenderObject.ChatIdSource < 1)
+                {
+                    throw new Exception("Debe especificar valor para ChatIdSource.");
+                }
+
+                if (objectRequest.SenderObject.ChatIdTarget < 1)
+                {
+                    throw new Exception("Debe especificar valor para ChatIdTarget.");
+                }
+
+                _IServiceChatManagerDAO.ConversationMoveTo(objectRequest);
             }
             catch (Exception ex)
             {
@@ -105,7 +121,12 @@ namespace xChatBusiness
 
             try
             {
-                result = ServiceChatManagerDAO.GetListAccountManagerConnectByModuleAppId(objectRequest);
+                if (string.IsNullOrEmpty(objectRequest.SenderObject))
+                {
+                    throw new Exception("Debe especificar valor de filtro.");
+                }
+
+                result = _IServiceChatManagerDAO.GetListAccountManagerConnectByModuleAppId(objectRequest);
             }
             catch (Exception ex)
             {
@@ -129,7 +150,12 @@ namespace xChatBusiness
 
             try
             {
-                result = ServiceChatManagerDAO.GetAccountManagerById(objectRequest);
+                if (string.IsNullOrEmpty(objectRequest.SenderObject))
+                {
+                    throw new Exception("Debe especificar valor de filtro.");
+                }
+
+                result = _IServiceChatManagerDAO.GetAccountManagerById(objectRequest);
             }
             catch (Exception ex)
             {
@@ -153,7 +179,12 @@ namespace xChatBusiness
 
             try
             {
-                result = ServiceChatManagerDAO.GetListConversationByReport(objectRequest.SenderObject);
+                if (string.IsNullOrEmpty(objectRequest.SenderObject))
+                {
+                    throw new Exception("Debe especificar valor de filtro.");
+                }
+
+                result = _IServiceChatManagerDAO.GetListConversationByReport(objectRequest.SenderObject);
 
                 result.Elements.ForEach(x => x.Message = encryp.Encryption.Decrypt(x.Message));
             }
@@ -179,7 +210,12 @@ namespace xChatBusiness
 
             try
             {
-                result.Data = ServiceChatManagerDAO.AccountManagerDisconnect(objectRequest);
+                if (objectRequest.SenderObject < 1)
+                {
+                    throw new Exception("Debe especificar valor de filtro.");
+                }
+
+                result.Data = _IServiceChatManagerDAO.AccountManagerDisconnect(objectRequest);
             }
             catch (Exception ex)
             {
@@ -203,7 +239,12 @@ namespace xChatBusiness
 
             try
             {
-                result = ServiceChatManagerDAO.GetReport(objectRequest.SenderObject);
+                if (objectRequest.SenderObject.MarketId < 1)
+                {
+                    throw new Exception("Debe especificar valor de MarketId.");
+                }
+
+                result = _IServiceChatManagerDAO.GetReport(objectRequest.SenderObject);
             }
             catch (Exception ex)
             {

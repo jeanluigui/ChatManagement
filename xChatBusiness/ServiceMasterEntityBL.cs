@@ -12,23 +12,16 @@ namespace xChatBusiness
     /// </summary>
     public class ServiceMasterEntityBL : IServiceMasterEntityBL
     {
-        private static readonly ServiceMasterEntityBL _serviceMasterEntityBL = new ServiceMasterEntityBL();
+        private IServiceMasterEntityDAO _serviceMasterEntityDAO;
 
         private static ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.BusinessLayer);
-
-        IServiceMasterEntityDAO _serviceMasterEntityDAO;
 
         /// <summary>
         /// Patrón Singleton
         /// </summary>
-        public static ServiceMasterEntityBL Instancia
+        public ServiceMasterEntityBL(IServiceMasterEntityDAO serviceMasterEntityDAO)
         {
-            get { return _serviceMasterEntityBL; }
-        }
-
-        private ServiceMasterEntityBL()
-        {
-            _serviceMasterEntityDAO = new ServiceMasterEntityDAO();
+            _serviceMasterEntityDAO = serviceMasterEntityDAO;
         }
 
         /// <summary>
@@ -66,6 +59,12 @@ namespace xChatBusiness
 
             try
             {
+                if (string.IsNullOrEmpty(senderObject.MasterEntity))
+                    throw new Exception("Debe indicar valor para la propiedad MasterEntity");
+
+                if (string.IsNullOrEmpty(senderObject.MasterAction))
+                    throw new Exception("Debe indicar valor para la propiedad MasterAction");
+
                 result = _serviceMasterEntityDAO.SearchMasterGetList(senderObject.MasterEntity, senderObject.MasterAction, senderObject.MasterParametersSet, senderObject.MasterParametersAdd);
             }
             catch (Exception ex)
@@ -80,12 +79,4 @@ namespace xChatBusiness
         }
     }
 
-    /// <summary>
-    /// Interfase
-    /// </summary>
-    public interface IServiceMasterEntityBL
-    {
-        ObjectResultList<EntityMaster> GetList(EntityMasterEnum entityMasterEnum);
-        ObjectResultList<EntityMaster> SearchMasterGetList(ParamSearchMaster senderObject);
-    }
 }

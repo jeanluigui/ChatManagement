@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using xChatDAO;
 using xChatEntities;
 using xss.EmailProvider;
@@ -66,8 +65,4 @@ namespace xChatBusiness
         }
     }
 
-    public interface IServiceNotificationBL
-    {
-        void Send(ConversationEntity conversationEntity);
-    }
 }

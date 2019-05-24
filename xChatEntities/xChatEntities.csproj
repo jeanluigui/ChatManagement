@@ -63,6 +63,10 @@
     <Compile Include="ReportFilter.cs" />
     <Compile Include="SecurityAccessRequest.cs" />
     <Compile Include="SecurityAccessResponseEntity.cs" />
+    <Compile Include="SkillAgent.cs" />
+    <Compile Include="SkillAgentFilter.cs" />
+    <Compile Include="SkillAgentLanguage.cs" />
+    <Compile Include="SkillAgentModule.cs" />
     <Compile Include="UserConnect.cs" />
     <Compile Include="UtilEntity.cs" />
   </ItemGroup>

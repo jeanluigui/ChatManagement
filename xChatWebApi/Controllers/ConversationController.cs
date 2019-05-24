@@ -3,12 +3,24 @@ using System.Web.Http;
 using xChatBusiness;
 using xChatEntities;
 
-namespace xChatAPI.Controllers
+namespace xChatWebApi.Controllers
 {
-    /*
+    /// <summary>
+    /// Controlador para llamadas al API.
+    /// </summary>
     public class ConversationController : ApiController
     {
         //private static ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.BusinessLayer);
+        private IServiceChatManagerBL _serviceChatManagerBL;
+
+        /// <summary>
+        /// Constructor para injectar instancia de clase de negocio.
+        /// </summary>
+        /// <param name="serviceChatManagerBL"></param>
+        public ConversationController(IServiceChatManagerBL serviceChatManagerBL)
+        {
+            _serviceChatManagerBL = serviceChatManagerBL;
+        }
 
         /// <summary>
         /// Devuelve la lista de usuarios conectados asociados al Account Manager.
@@ -24,7 +36,7 @@ namespace xChatAPI.Controllers
 
             try
             {
-                result = ServiceChatManagerBL.Instancia.GetListUserConnectByAccountManagerId(objectRequest);
+                result = _serviceChatManagerBL.GetListUserConnectByAccountManagerId(objectRequest);
             }
             catch (Exception ex)
             {
@@ -49,7 +61,7 @@ namespace xChatAPI.Controllers
 
             try
             {
-                list = ServiceChatManagerBL.Instancia.GetListConversationByChatId(objectRequest);
+                list = _serviceChatManagerBL.GetListConversationByChatId(objectRequest);
             }
             catch (Exception ex)
             {
@@ -74,7 +86,7 @@ namespace xChatAPI.Controllers
 
             try
             {
-                list = ServiceChatManagerBL.Instancia.GetListConversationByReport(objectRequest);
+                list = _serviceChatManagerBL.GetListConversationByReport(objectRequest);
             }
             catch (Exception ex)
             {
@@ -102,19 +114,16 @@ namespace xChatAPI.Controllers
             {
                 result = new ObjectResult<int>()
                 {
-                    Data = ServiceChatManagerBL.Instancia.ConversationMoveTo(objectRequest),
+                    Data = _serviceChatManagerBL.ConversationMoveTo(objectRequest),
                     Id = 0,
                     Message = string.Empty
                 };
             }
             catch (Exception ex)
             {
-                result = new ObjectResult<int>()
-                {
-                    Data = 0,
-                    Id = 1,
-                    Message = ex.Message
-                };
+                result.Data = 0;
+                result.Id = 1;
+                result.Message = ex.Message;
             }
 
             return result;
@@ -134,7 +143,7 @@ namespace xChatAPI.Controllers
 
             try
             {
-                result = ServiceChatManagerBL.Instancia.GetListAccountManagerConnectByModuleAppId(objectRequest);
+                result = _serviceChatManagerBL.GetListAccountManagerConnectByModuleAppId(objectRequest);
             }
             catch (Exception ex)
             {
@@ -159,7 +168,7 @@ namespace xChatAPI.Controllers
 
             try
             {
-                result = ServiceChatManagerBL.Instancia.GetAccountManagerById(objectRequest);
+                result = _serviceChatManagerBL.GetAccountManagerById(objectRequest);
             }
             catch (Exception ex)
             {
@@ -184,7 +193,7 @@ namespace xChatAPI.Controllers
 
             try
             {
-                result = ServiceChatManagerBL.Instancia.AccountManagerDisconnect(objectRequest);
+                result = _serviceChatManagerBL.AccountManagerDisconnect(objectRequest);
             }
             catch (Exception ex)
             {
@@ -211,7 +220,7 @@ namespace xChatAPI.Controllers
 
             try
             {
-                listResult.Elements = ServiceChatManagerBL.Instancia.GetReport(objectRequest).Elements;
+                listResult.Elements = _serviceChatManagerBL.GetReport(objectRequest).Elements;
 
                 result.Data = listResult;
             }
@@ -228,7 +237,6 @@ namespace xChatAPI.Controllers
         /// <summary>
         /// METODO PARA REALZIAR PRUEBAS DIVERSAS.
         /// </summary>
-        /// <param name="objectRequest"></param>
         /// <returns></returns>
         [HttpGet]
         [ActionName("DemoTest")]
@@ -239,7 +247,7 @@ namespace xChatAPI.Controllers
 
             #region Probar proceso de encriptación
 
-            ServiceChatBL.Instancia.ProcessSetEncrypMessage();
+            //ServiceChatBL.Instancia.ProcessSetEncrypMessage();
 
             #endregion
 
@@ -266,5 +274,4 @@ namespace xChatAPI.Controllers
             return result;
         }
     }
-    */
 }
