@@ -125,12 +125,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IServiceChatManagerBL.cs" />
+    <Compile Include="IServiceFaqBL.cs" />
     <Compile Include="IServiceMasterEntityBL.cs" />
     <Compile Include="IServiceNotificationBL.cs" />
     <Compile Include="IServiceSkillAgentBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceChatBL.cs" />
     <Compile Include="ServiceChatManagerBL.cs" />
+    <Compile Include="ServiceFaqBL.cs" />
     <Compile Include="ServiceMasterEntityBL.cs" />
     <Compile Include="ServiceNotificationBL.cs" />
     <Compile Include="ServiceSkillAgentBL.cs" />

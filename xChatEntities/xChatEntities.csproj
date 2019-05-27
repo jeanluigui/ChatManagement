@@ -53,6 +53,7 @@
     <Compile Include="EntityMaster.cs" />
     <Compile Include="Enumerators.cs" />
     <Compile Include="ConversationResponseEntity.cs" />
+    <Compile Include="FaqEntity.cs" />
     <Compile Include="ObjectResultList.cs" />
     <Compile Include="ListUserConnect.cs" />
     <Compile Include="ObjectRequest.cs" />

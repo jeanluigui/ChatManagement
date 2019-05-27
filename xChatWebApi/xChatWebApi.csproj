@@ -128,6 +128,7 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ConversationController.cs" />
+    <Compile Include="Controllers\FAQController.cs" />
     <Compile Include="Controllers\ManagerMasterEntityController.cs" />
     <Compile Include="Controllers\SkillAgentController.cs" />
     <Compile Include="Global.asax.cs">
@@ -137,6 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

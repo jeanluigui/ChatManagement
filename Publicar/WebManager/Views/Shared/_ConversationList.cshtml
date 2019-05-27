@@ -5,11 +5,41 @@
     {
         if (item.IsUser.Equals(1))
         {
-            <div style="text-align:right">@item.Message</div>
+            <div class="row message-body">
+                <div class="col-sm-12 message-main-receiver">
+                    <div class="receiver">
+                        <div class="message-text">
+                            @item.Message
+                        </div>
+                        <span class="message-time pull-right">
+                            @item.Date.ToString("dd/MM/yyyy HH:mm:ss")
+                        </span>
+                    </div>
+                </div>
+            </div>
         }
         else
         {
-            <div style="text-align:left">@item.Message</div>
+            <div class="row message-body">
+                <div class="col-sm-12 message-main-sender">
+                    <div class="sender">
+                        <div class="message-text">
+                            @item.Message
+                        </div>
+                        <span class="message-time pull-right">
+                            @item.Date.ToString("dd/MM/yyyy HH:mm:ss")
+                        </span>
+                    </div>
+                </div>
+            </div>
         }
     }
 </div>
+
+<script>
+
+    $(function () {
+
+    });
+
+</script>
