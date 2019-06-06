@@ -212,5 +212,59 @@ namespace xChatWebApi.Controllers
 
             return result;
         }
+
+        /// <summary>
+        /// Valida si agente esta asignado a modulo.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        /// 
+        [HttpPost]
+        [ActionName("ValidateSkillByAgentModule")]
+        [Route("api/SkillAgent/ValidateSkillByAgentModule/")]
+        public ObjectResult<Boolean> ValidateSkillByAgentModule(ObjectRequest<SkillAgentModule> objectRequest)
+        {
+            ObjectResult<Boolean> result = new ObjectResult<Boolean>();
+            
+            try
+            {
+                result = _IServiceSkillAgentBL.ValidateSkillByAgentModule(objectRequest);
+                result.Data = true;
+            }
+            catch (Exception ex)
+            {
+                result.Id = -1;
+                result.Message = ex.Message;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Valida si agente esta asignado a Lenguage.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        /// 
+        [HttpPost]
+        [ActionName("ValidateSkillByAgentLanguage")]
+        [Route("api/SkillAgent/ValidateSkillByAgentLanguage/")]
+        public ObjectResult<Boolean> ValidateSkillByAgentLanguage(ObjectRequest<SkillAgentLanguage> objectRequest)
+        {
+            ObjectResult<Boolean> result = new ObjectResult<Boolean>();
+
+            try
+            {
+                result = _IServiceSkillAgentBL.ValidateSkillByAgentLanguage(objectRequest);
+                result.Data = true;
+            }
+            catch (Exception ex)
+            {
+                result.Id = -1;
+                result.Message = ex.Message;
+            }
+
+            return result;
+        }
     }
 }

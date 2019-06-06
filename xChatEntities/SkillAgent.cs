@@ -11,6 +11,7 @@ namespace xChatEntities
         public int AccountManagerId { get; set; }
         public int TipoId { get; set; }
         public int KeyControlId { get; set; }
+        public int Item { get; set; }
 
         public override void Fill(DataRow dataRow)
         {
@@ -20,6 +21,7 @@ namespace xChatEntities
             AccountManagerId = Convert.ToInt32(dataRow["AccountManagerId"]);
             TipoId = Convert.ToInt32(dataRow["TipoId"]);
             KeyControlId = Convert.ToInt32(dataRow["keyControlId"]);
+            Item = Convert.ToInt32(dataRow["Item"]);
         }
     }
 }

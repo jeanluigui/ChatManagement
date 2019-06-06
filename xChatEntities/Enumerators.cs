@@ -15,5 +15,9 @@ namespace xChatEntities
     public enum EntityMasterEnum
     {
         Market,
+        Language,
+        Module,
+        UserAgent,
+        Perspective
     }
 }

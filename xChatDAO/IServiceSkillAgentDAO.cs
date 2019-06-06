@@ -1,4 +1,5 @@
-﻿using xChatEntities;
+﻿using System;
+using xChatEntities;
 
 namespace xChatDAO
 {
@@ -11,5 +12,7 @@ namespace xChatDAO
         ObjectResultList<SkillAgent> GetListSkillByAgent(ObjectRequest<SkillAgentFilter> objectRequest);
         void UpdateSkillLanguage(ObjectRequest<SkillAgentLanguage> objectRequest);
         void UpdateSkillModule(ObjectRequest<SkillAgentModule> objectRequest);
+        ObjectResult<Boolean> ValidateSkillByAgentModule(ObjectRequest<SkillAgentModule> objectRequest);
+        ObjectResult<Boolean> ValidateSkillByAgentLanguage(ObjectRequest<SkillAgentLanguage> objectRequest);
     }
 }

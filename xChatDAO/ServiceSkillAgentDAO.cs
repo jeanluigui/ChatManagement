@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
+using System.Data.SqlClient;
 using xChatEntities;
 using xss.ConnectionManager;
 
@@ -45,6 +47,7 @@ namespace xChatDAO
             parameters.Add("@p_moduleid", objectRequest.SenderObject.ModuleId);
             parameters.Add("@p_skilllevel", objectRequest.SenderObject.SkillLevel);
             parameters.Add("@p_prioritylevel", objectRequest.SenderObject.PriorityLevel);
+            parameters.Add("@p_Status", objectRequest.SenderObject.StatusId);
             parameters.Add("@p_createdby", objectRequest.SenderObject.CreateBy);
 
             CommandParameter queryCommand = new CommandParameter("chat.AgentSkillModule_Insert_pa", parameters);
@@ -63,6 +66,7 @@ namespace xChatDAO
             parameters.Add("@p_languageid", objectRequest.SenderObject.LanguageId);
             parameters.Add("@p_skilllevel", objectRequest.SenderObject.SkillLevel);
             parameters.Add("@p_prioritylevel", objectRequest.SenderObject.PriorityLevel);
+            parameters.Add("@p_Status", objectRequest.SenderObject.StatusId);
             parameters.Add("@p_createdby", objectRequest.SenderObject.CreateBy);
 
             CommandParameter queryCommand = new CommandParameter("chat.AgentSkillLanguage_Insert_pa", parameters);
@@ -81,7 +85,7 @@ namespace xChatDAO
             parameters.Add("@p_moduleid", objectRequest.SenderObject.ModuleId);
             parameters.Add("@p_skilllevel", objectRequest.SenderObject.SkillLevel);
             parameters.Add("@p_prioritylevel", objectRequest.SenderObject.PriorityLevel);
-            parameters.Add("@p_createdby", objectRequest.SenderObject.CreateBy);
+            parameters.Add("@p_UpdatedBy", objectRequest.SenderObject.CreateBy);
 
             CommandParameter queryCommand = new CommandParameter("chat.AgentSkillModule_Update_pa", parameters);
 
@@ -99,7 +103,7 @@ namespace xChatDAO
             parameters.Add("@p_languageid", objectRequest.SenderObject.LanguageId);
             parameters.Add("@p_skilllevel", objectRequest.SenderObject.SkillLevel);
             parameters.Add("@p_prioritylevel", objectRequest.SenderObject.PriorityLevel);
-            parameters.Add("@p_createdby", objectRequest.SenderObject.CreateBy);
+            parameters.Add("@p_UpdatedBy", objectRequest.SenderObject.CreateBy);
 
             CommandParameter queryCommand = new CommandParameter("chat.AgentSkillLanguage_Update_pa", parameters);
 
@@ -115,8 +119,8 @@ namespace xChatDAO
             ListParameters parameters = new ListParameters();
             parameters.Add("@p_agentid", objectRequest.SenderObject.AgentId);
             parameters.Add("@p_moduleid", objectRequest.SenderObject.ModuleId);
-            parameters.Add("@p_statusid", objectRequest.SenderObject.StatusId);
-            parameters.Add("@p_createdby", objectRequest.SenderObject.CreateBy);
+            parameters.Add("@p_status", objectRequest.SenderObject.StatusId);
+            parameters.Add("@p_UpdatedBy", objectRequest.SenderObject.CreateBy);
 
             CommandParameter queryCommand = new CommandParameter("chat.AgentSkill_ChangeStatusModule_pa", parameters);
 
@@ -132,12 +136,68 @@ namespace xChatDAO
             ListParameters parameters = new ListParameters();
             parameters.Add("@p_agentid", objectRequest.SenderObject.AgentId);
             parameters.Add("@p_languageid", objectRequest.SenderObject.LanguageId);
-            parameters.Add("@p_statusid", objectRequest.SenderObject.StatusId);
-            parameters.Add("@p_createdby", objectRequest.SenderObject.CreateBy);
+            parameters.Add("@p_status", objectRequest.SenderObject.StatusId);
+            parameters.Add("@p_UpdatedBy", objectRequest.SenderObject.CreateBy);
 
             CommandParameter queryCommand = new CommandParameter("chat.AgentSkill_ChangeStatusLanguage_pa", parameters);
 
             DbManager.Instance.ExecuteCommand(queryCommand);
+        }
+    
+        public ObjectResult<Boolean> ValidateSkillByAgentModule(ObjectRequest<SkillAgentModule> objectRequest)
+        {
+            SqlCommand ObjCmd = null;
+            ObjectResult<Boolean> result = new ObjectResult<Boolean>();
+            try
+            {
+                using (ObjCmd = new SqlCommand("chat.AgentSkill_ExistAgentByModule", DbManager.Instance.OpenConnection()))
+                {
+                    ObjCmd.CommandType = CommandType.StoredProcedure;
+                    ObjCmd.CommandTimeout = 0;
+                    #region ParametersOutPut
+                    SqlParameter outputParam = ObjCmd.Parameters.Add("@existOutput", SqlDbType.Int);
+                    outputParam.Direction = ParameterDirection.Output;
+                    #endregion ParametersOutPut
+                    ObjCmd.Parameters.AddWithValue("@userId", objectRequest.SenderObject.AgentId);
+                    ObjCmd.Parameters.AddWithValue("@moduleId", objectRequest.SenderObject.ModuleId);
+                    ObjCmd.ExecuteNonQuery();
+                    result.Id = Convert.ToInt32(ObjCmd.Parameters["@existOutput"].Value);
+                };
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+                result.Id = -1;
+            }
+            return result;
+        }
+
+        public ObjectResult<Boolean> ValidateSkillByAgentLanguage(ObjectRequest<SkillAgentLanguage> objectRequest)
+        {
+            SqlCommand ObjCmd = null;
+            ObjectResult<Boolean> result = new ObjectResult<Boolean>();
+            try
+            {
+                using (ObjCmd = new SqlCommand("chat.AgentSkill_ExistAgentByLanguage", DbManager.Instance.OpenConnection()))
+                {
+                    ObjCmd.CommandType = CommandType.StoredProcedure;
+                    ObjCmd.CommandTimeout = 0;
+                    #region ParametersOutPut
+                    SqlParameter outputParam = ObjCmd.Parameters.Add("@existOutput", SqlDbType.Int);
+                    outputParam.Direction = ParameterDirection.Output;
+                    #endregion ParametersOutPut
+                    ObjCmd.Parameters.AddWithValue("@userId", objectRequest.SenderObject.AgentId);
+                    ObjCmd.Parameters.AddWithValue("@languageId", objectRequest.SenderObject.LanguageId);
+                    ObjCmd.ExecuteNonQuery();
+                    result.Id = Convert.ToInt32(ObjCmd.Parameters["@existOutput"].Value);
+                };
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+                result.Id = -1;
+            }
+            return result;
         }
     }
 }

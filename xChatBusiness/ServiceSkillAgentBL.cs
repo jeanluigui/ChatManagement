@@ -217,5 +217,53 @@ namespace xChatBusiness
                 throw new Exception(ex.Message);
             }
         }
+
+        public ObjectResult<Boolean> ValidateSkillByAgentModule(ObjectRequest<SkillAgentModule> objectRequest)
+        {
+            ObjectResult<Boolean> result = new ObjectResult<Boolean>();
+            try
+            {
+                if (objectRequest.SenderObject.AgentId < 1)
+                    throw new Exception("Debe enviar un valor para el AgentId.");
+
+                if (objectRequest.SenderObject.ModuleId < 1)
+                    throw new Exception("Debe enviar un valor para el LanguageId.");
+
+                result = _serviceSkillAgentDAO.ValidateSkillByAgentModule(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                result.Id = -1;
+                result.Message = "NoOk";
+                log.Save(EnumLogLevel.Fatal, ex);
+
+                throw new Exception(ex.Message);
+            }
+            return result;
+        }
+
+        public ObjectResult<Boolean> ValidateSkillByAgentLanguage(ObjectRequest<SkillAgentLanguage> objectRequest)
+        {
+            ObjectResult<Boolean> result = new ObjectResult<Boolean>();
+            try
+            {
+                if (objectRequest.SenderObject.AgentId < 1)
+                    throw new Exception("Debe enviar un valor para el AgentId.");
+
+                if (objectRequest.SenderObject.LanguageId < 1)
+                    throw new Exception("Debe enviar un valor para el LanguageId.");
+
+                result = _serviceSkillAgentDAO.ValidateSkillByAgentLanguage(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                result.Id = -1;
+                result.Message = "NoOk";
+                log.Save(EnumLogLevel.Fatal, ex);
+
+                throw new Exception(ex.Message);
+            }
+            return result;
+        }
     }
 }
