@@ -202,6 +202,7 @@ namespace xChatDAO
             }
             catch (Exception ex)
             {
+                result.Id = 1;
                 log.Save(EnumLogLevel.Fatal, ex);
             }
 
