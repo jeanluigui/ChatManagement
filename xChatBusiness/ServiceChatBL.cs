@@ -59,6 +59,8 @@ namespace xChatBusiness
                 // -------------------------------------------------------------
                 if (accountManagerConnectId == 0)
                     chatId = -1;
+                else if (accountManagerConnectId == -2)
+                    chatId = -2;
                 else
                     chatId = ServiceChatDAO.ChatCreate(conversationEntity, accountManagerConnectId);
             }

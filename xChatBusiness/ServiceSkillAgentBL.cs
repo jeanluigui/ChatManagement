@@ -111,11 +111,11 @@ namespace xChatBusiness
                 if (objectRequest.SenderObject.LanguageId < 1)
                     throw new Exception("Debe enviar un valor para el LanguageId.");
 
-                if (objectRequest.SenderObject.SkillLevel < 1)
-                    throw new Exception("Debe enviar un valor para el SkillLevel.");
+                //if (objectRequest.SenderObject.SkillLevel < 1)
+                //    throw new Exception("Debe enviar un valor para el SkillLevel.");
 
-                if (objectRequest.SenderObject.PriorityLevel < 1)
-                    throw new Exception("Debe enviar un valor para el PriorityLevel.");
+                //if (objectRequest.SenderObject.PriorityLevel < 1)
+                //    throw new Exception("Debe enviar un valor para el PriorityLevel.");
 
                 _serviceSkillAgentDAO.CreateSkillLanguage(objectRequest);
             }
@@ -141,11 +141,11 @@ namespace xChatBusiness
                 if (objectRequest.SenderObject.ModuleId < 1)
                     throw new Exception("Debe enviar un valor para el LanguageId.");
 
-                if (objectRequest.SenderObject.SkillLevel < 1)
-                    throw new Exception("Debe enviar un valor para el SkillLevel.");
+                //if (objectRequest.SenderObject.SkillLevel < 1)
+                //    throw new Exception("Debe enviar un valor para el SkillLevel.");
 
-                if (objectRequest.SenderObject.PriorityLevel < 1)
-                    throw new Exception("Debe enviar un valor para el PriorityLevel.");
+                //if (objectRequest.SenderObject.PriorityLevel < 1)
+                //    throw new Exception("Debe enviar un valor para el PriorityLevel.");
 
                 _serviceSkillAgentDAO.CreateSkillModule(objectRequest);
             }
@@ -171,11 +171,11 @@ namespace xChatBusiness
                 if (objectRequest.SenderObject.LanguageId < 1)
                     throw new Exception("Debe enviar un valor para el LanguageId.");
 
-                if (objectRequest.SenderObject.SkillLevel < 1)
-                    throw new Exception("Debe enviar un valor para el SkillLevel.");
+                //if (objectRequest.SenderObject.SkillLevel < 1)
+                //    throw new Exception("Debe enviar un valor para el SkillLevel.");
 
-                if (objectRequest.SenderObject.PriorityLevel < 1)
-                    throw new Exception("Debe enviar un valor para el PriorityLevel.");
+                //if (objectRequest.SenderObject.PriorityLevel < 1)
+                //    throw new Exception("Debe enviar un valor para el PriorityLevel.");
 
                 _serviceSkillAgentDAO.UpdateSkillLanguage(objectRequest);
             }
@@ -201,11 +201,11 @@ namespace xChatBusiness
                 if (objectRequest.SenderObject.ModuleId < 1)
                     throw new Exception("Debe enviar un valor para el LanguageId.");
 
-                if (objectRequest.SenderObject.SkillLevel < 1)
-                    throw new Exception("Debe enviar un valor para el SkillLevel.");
+                //if (objectRequest.SenderObject.SkillLevel < 1)
+                //    throw new Exception("Debe enviar un valor para el SkillLevel.");
 
-                if (objectRequest.SenderObject.PriorityLevel < 1)
-                    throw new Exception("Debe enviar un valor para el PriorityLevel.");
+                //if (objectRequest.SenderObject.PriorityLevel < 1)
+                //    throw new Exception("Debe enviar un valor para el PriorityLevel.");
 
 
                 _serviceSkillAgentDAO.UpdateSkillModule(objectRequest);

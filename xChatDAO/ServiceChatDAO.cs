@@ -267,7 +267,7 @@ namespace xChatDAO
         /// <returns></returns>
         public static int GetAccountManagerConnectBySkillLevel(ConversationEntity conversationEntity)
         {
-            Int32 accountManagerConnectId = 0;
+            Int32 accountManagerConnectId = -2;
 
             try
             {

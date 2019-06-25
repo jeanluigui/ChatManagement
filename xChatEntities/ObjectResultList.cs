@@ -9,7 +9,11 @@ namespace xChatEntities
         public int Id { get; set; }
         public string Message { get; set; }
 
-        public List<TEntity> Elements { get; set; }
+        private List<TEntity> _elements;
+        public List<TEntity> Elements {
+            get { return _elements; }
+            set { if (_elements == null) _elements = new List<TEntity>();  else _elements = value; }
+        }
 
         public ObjectResultList()
         {

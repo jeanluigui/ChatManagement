@@ -80,7 +80,8 @@ namespace xChatAPI
                 // ------------------------------------------------------------
                 // Si el valor del chatid = -1 es porque no existe agente disponible
                 // ------------------------------------------------------------
-                if (conversationEntity.ChatId.Equals(-1)) {
+                if (conversationEntity.ChatId.Equals(-1))
+                {
 
                     // ------------------------------------------------------------
                     // Envía notificación por correo.
@@ -88,6 +89,17 @@ namespace xChatAPI
                     _serviceNotification.Send(conversationEntity);
 
                     Clients.Caller.chatManagerDisconnect("At this time there are no agents available....");
+
+                    return;
+                }
+                // ------------------------------------------------------------
+                // Si el valor del chatid = -2 es porque no se encontro ningun agente con las habilidades especificadas
+                // ------------------------------------------------------------
+                else if (conversationEntity.ChatId.Equals(-2))
+                {
+                    _serviceNotification.Send(conversationEntity);
+
+                    Clients.Caller.chatManagerNoFoundAgentBySkills("Agent not found with assigned skills....");
 
                     return;
                 }
