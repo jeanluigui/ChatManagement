@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using xChatDAO;
 using xChatEntities;
 using xss.EmailProvider;
@@ -53,8 +54,10 @@ namespace xChatBusiness
                 // -----------------------------------------------------------------
                 // Método del NUGET para envío de correo.
                 // -----------------------------------------------------------------
-                EmailProvider.SendEmailAsync(emailTo, emailBody, emailSubject);
+                //EmailProvider.SendEmailAsync(emailTo, emailBody, emailSubject);
+                new Task(() => { EmailProvider.SendEmailAsync(emailTo, emailBody, emailSubject); }).Start();
 
+           
                 log.Save(EnumLogLevel.Info, "FIN Enviando correo.");
 
             }

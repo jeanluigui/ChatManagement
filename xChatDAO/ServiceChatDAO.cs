@@ -37,6 +37,9 @@ namespace xChatDAO
                 parameters.Add("@p_moduleappid", conversationEntity.ModuleAppId);
                 parameters.Add("@p_accountmanagerconnectid", accountManagerConnectId);
 
+                parameters.Add("@p_language", conversationEntity.ChatBySkillLanguageId);
+                parameters.Add("@p_module", conversationEntity.ChatBySkillModuleId);
+
                 CommandParameter queryCommand = new CommandParameter("chat.Chat_Insert_pa", parameters);
                 DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
 

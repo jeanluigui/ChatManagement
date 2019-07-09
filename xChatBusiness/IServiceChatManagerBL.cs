@@ -1,4 +1,5 @@
 ﻿using xChatEntities;
+using static xChatEntities.clsTypeList;
 
 namespace xChatBusiness
 {
@@ -12,5 +13,6 @@ namespace xChatBusiness
         ObjectResultList<ConversationResponseEntity> GetListConversationByReport(ObjectRequest<string> objectRequest);
         ObjectResultList<UserConnect> GetListUserConnectByAccountManagerId(ObjectRequest<int> objectRequest);
         ObjectResultList<ReportChat> GetReport(ObjectRequest<ReportFilter> objectRequest);
+        ObjectResultList<ConversationResponseEntity> GetListConversationByFilter(ObjectRequest<ConversationResponseEntity> objectRequest);
     }
 }

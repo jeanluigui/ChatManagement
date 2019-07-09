@@ -105,7 +105,7 @@
       <HintPath>..\packages\xss.ConnectionManager.1.5.6\lib\netstandard2.0\xss.ConnectionManager.dll</HintPath>
     </Reference>
     <Reference Include="xss.EmailProvider, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\xss.EmailProvider.1.0.4\lib\netstandard2.0\xss.EmailProvider.dll</HintPath>
+      <HintPath>..\packages\xss.EmailProvider.1.0.5\lib\net472\xss.EmailProvider.dll</HintPath>
     </Reference>
     <Reference Include="xss.EncryptionHandler, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\xss.EncryptionHandler.1.0.7\lib\netstandard2.0\xss.EncryptionHandler.dll</HintPath>

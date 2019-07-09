@@ -4,6 +4,7 @@ using xChatEntities;
 using xss.Logger.Enums;
 using xss.Logger.Factory;
 using xss.Logger.Interfaces;
+using static xChatEntities.clsTypeList;
 using encryp = xss.EncryptionHandler;
 
 namespace xChatBusiness
@@ -245,6 +246,72 @@ namespace xChatBusiness
                 }
 
                 result = _IServiceChatManagerDAO.GetReport(objectRequest.SenderObject);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Obtener una conversación para el Reporte Chat.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        public ObjectResultList<ConversationResponseEntity> GetListConversationByFilter(ObjectRequest<ConversationResponseEntity> objectRequest)
+        {
+            ObjectResultList<ConversationResponseEntity> result = new ObjectResultList<ConversationResponseEntity>();
+
+            try
+            {
+                if (objectRequest ==  null)
+                {
+                    throw new Exception("Debe especificar valor de filtro.");
+                }
+
+                tBaseProducFiltersList ListMarkets = new tBaseProducFiltersList();
+                tBaseProducFiltersList ListAgents = new tBaseProducFiltersList();
+
+                if (objectRequest.SenderObject.ListIdsMarkets != null)
+                {                   
+                    foreach (Int32 item in objectRequest.SenderObject.ListIdsMarkets)
+                    {
+                        ListMarkets.Add(new srProductFilters
+                        {
+                            Id = item,
+                        });
+                    }
+                }
+                else
+                {
+                    ListMarkets = null;
+                }
+
+                if (objectRequest.SenderObject.ListIdsAgents != null)
+                {                   
+                    foreach (Int32 item in objectRequest.SenderObject.ListIdsAgents)
+                    {
+                        ListAgents.Add(new srProductFilters
+                        {
+                            Id = item,
+                        });
+                    }
+                }
+                else
+                {
+                    ListAgents = null;
+                }
+                objectRequest.SenderObject.ListMarkets = ListMarkets;
+                objectRequest.SenderObject.ListAgents = ListAgents;
+
+                result = _IServiceChatManagerDAO.GetListConversationByFilter(objectRequest);
+
+                result.Elements.ForEach(x => x.Message = encryp.Encryption.Decrypt(x.Message));
             }
             catch (Exception ex)
             {

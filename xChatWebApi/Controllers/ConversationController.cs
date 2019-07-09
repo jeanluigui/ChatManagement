@@ -2,6 +2,7 @@
 using System.Web.Http;
 using xChatBusiness;
 using xChatEntities;
+using static xChatEntities.clsTypeList;
 
 namespace xChatWebApi.Controllers
 {
@@ -272,6 +273,31 @@ namespace xChatWebApi.Controllers
             #endregion
 
             return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ActionName("GetListConversationByFilter")]
+        [Route("api/Conversation/GetListConversationByFilter/")]
+        public ObjectResultList<ConversationResponseEntity> GetListConversationByFilter(ObjectRequest<ConversationResponseEntity> objectRequest)
+        {
+            ObjectResultList<ConversationResponseEntity> list = new ObjectResultList<ConversationResponseEntity>();
+
+            try
+            {
+                list = _serviceChatManagerBL.GetListConversationByFilter(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                list.Id = 1;
+                list.Message = ex.Message;
+            }
+
+            return list;
         }
     }
 }

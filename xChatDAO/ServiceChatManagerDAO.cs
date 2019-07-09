@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Data;
+using System.Data.SqlClient;
 using xChatEntities;
 using xss.ConnectionManager;
 using xss.EncryptionHandler;
 using xss.Logger.Enums;
 using xss.Logger.Factory;
 using xss.Logger.Interfaces;
+using static xChatEntities.clsTypeList;
 
 namespace xChatDAO
 {
@@ -327,5 +329,51 @@ namespace xChatDAO
             return result;
         }
 
+        /// <summary>
+        /// Obtener conversación para un Report.
+        /// </summary>
+        /// <param name="senderObject"></param>
+        /// <returns></returns>
+        public ObjectResultList<ConversationResponseEntity> GetListConversationByFilter(ObjectRequest<ConversationResponseEntity> senderObject)
+        {
+            ObjectResultList<ConversationResponseEntity> listUserConnect = new ObjectResultList<ConversationResponseEntity>();
+            SqlCommand ObjCmd = null;
+            DataTable dt = null;
+            try
+            {
+
+                using (ObjCmd = new SqlCommand("Chatmessage_Getlist_Sp", DbManager.Instance.OpenConnection()))
+                {
+                    ObjCmd.CommandType = CommandType.StoredProcedure;
+                    ObjCmd.CommandTimeout = 0;
+                    ObjCmd.Parameters.AddWithValue("@dateStart", senderObject.SenderObject.DateStart);
+                    ObjCmd.Parameters.AddWithValue("@dateEnd", senderObject.SenderObject.DateEnd);
+                    ObjCmd.Parameters.AddWithValue("@distributorid", senderObject.SenderObject.Distributorid);
+                    ObjCmd.Parameters.AddWithValue("@username", senderObject.SenderObject.UserName);
+                    ObjCmd.Parameters.Add(new SqlParameter { ParameterName = "@type_baseid_market", Value = senderObject.SenderObject.ListMarkets, SqlDbType = SqlDbType.Structured, TypeName = "dbo.TabType_ID" });
+                    ObjCmd.Parameters.Add(new SqlParameter { ParameterName = "@type_baseid_agent", Value = senderObject.SenderObject.ListAgents, SqlDbType = SqlDbType.Structured, TypeName = "dbo.TabType_ID" });
+                    dt = new DataTable();
+                    dt.Load(ObjCmd.ExecuteReader());
+                    listUserConnect = new ObjectResultList<ConversationResponseEntity>(dt);
+                };
+
+            }
+            catch (TimeoutException tout)
+            {
+                listUserConnect.Id = 2;
+                listUserConnect.Message = tout.Message;
+
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                listUserConnect.Id = 1;
+                listUserConnect.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return listUserConnect;
+        }
     }
 }
