@@ -30,9 +30,9 @@ namespace xChatDAO
             try
             {
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_accountmanagerid", objectRequest.SenderObject);
+                parameters.Add("@accountmanagerid", objectRequest.SenderObject);
 
-                CommandParameter queryCommand = new CommandParameter("chat.AccountManager_GetListUserConnect_pa", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.AccountManager_GetListUserConnect_sp", parameters);
                 DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
 
                 listUserConnect = new ObjectResultList<UserConnect>(dtresult);
@@ -68,9 +68,9 @@ namespace xChatDAO
             try
             {
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_chatid", objectRequest.SenderObject);
+                parameters.Add("@chatid", objectRequest.SenderObject);
 
-                CommandParameter queryCommand = new CommandParameter("chat.AccountManager_GetListConversationsByChatId_pa", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.AccountManager_GetListConversationsByChatId_sp", parameters);
                 DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
 
                 listUserConnect = new ObjectResultList<ConversationResponseEntity>(dtresult);
@@ -102,10 +102,10 @@ namespace xChatDAO
             try
             {
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_chatidsource", objectRequest.SenderObject.ChatIdSource);
-                parameters.Add("@p_chatidtarget", objectRequest.SenderObject.ChatIdTarget);
+                parameters.Add("@chatidsource", objectRequest.SenderObject.ChatIdSource);
+                parameters.Add("@chatidtarget", objectRequest.SenderObject.ChatIdTarget);
 
-                CommandParameter queryCommand = new CommandParameter("chat.Conversation_MoveTo_pa", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.Conversation_MoveTo_Sp", parameters);
 
                 DbManager.Instance.ExecuteCommand(queryCommand);
             }
@@ -145,12 +145,12 @@ namespace xChatDAO
                 }
 
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_agentid", senderObject.Split(';')[0]);
-                parameters.Add("@p_userid", senderObject.Split(';')[1]);
-                parameters.Add("@p_datestart", dateStart);
-                parameters.Add("@p_dateend", dateEnd);
+                parameters.Add("@agentid", senderObject.Split(';')[0]);
+                parameters.Add("@userid", senderObject.Split(';')[1]);
+                parameters.Add("@datestart", dateStart);
+                parameters.Add("@dateend", dateEnd);
 
-                CommandParameter queryCommand = new CommandParameter("chat.ChatReport_GetListConversations_pa", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.ChatReport_GetListConversations_Sp", parameters);
 
                 DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
 
@@ -186,13 +186,13 @@ namespace xChatDAO
             try
             {
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_agentid", senderObject.AgentId);
-                parameters.Add("@p_userid", senderObject.UserId);
-                parameters.Add("@p_marketid", senderObject.MarketId);
-                parameters.Add("@p_datestart", senderObject.ConversationDateStart);
-                parameters.Add("@p_dateend", senderObject.ConversationDateEnd);
+                parameters.Add("@agentid", senderObject.AgentId);
+                parameters.Add("@userid", senderObject.UserId);
+                parameters.Add("@marketid", senderObject.MarketId);
+                parameters.Add("@datestart", senderObject.ConversationDateStart);
+                parameters.Add("@dateend", senderObject.ConversationDateEnd);
 
-                CommandParameter queryCommand = new CommandParameter("chat.ChatReport_GetByFilter_pa", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.ChatReport_GetByFilter_Sp", parameters);
 
                 DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
 
@@ -223,9 +223,9 @@ namespace xChatDAO
             try
             {
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_accountmanagerid", objectRequest.SenderObject);
+                parameters.Add("@accountmanagerid", objectRequest.SenderObject);
 
-                CommandParameter queryCommand = new CommandParameter("chat.AccountManager_Disconnect_pa", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.AccountManager_Disconnect_Sp", parameters);
 
                 DbManager.Instance.ExecuteCommand(queryCommand);
 
@@ -255,11 +255,11 @@ namespace xChatDAO
             try
             {
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_userid", Encryption.Decrypt(objectRequest.SenderObject.Split(';')[0].ToString()));
-                parameters.Add("@p_moduleappid", Encryption.Decrypt(objectRequest.SenderObject.Split(';')[1].ToString()));
-                parameters.Add("@p_rolid", Encryption.Decrypt(objectRequest.SenderObject.Split(';')[2].ToString()));
+                parameters.Add("@userid", Encryption.Decrypt(objectRequest.SenderObject.Split(';')[0].ToString()));
+                parameters.Add("@moduleappid", Encryption.Decrypt(objectRequest.SenderObject.Split(';')[1].ToString()));
+                parameters.Add("@rolid", Encryption.Decrypt(objectRequest.SenderObject.Split(';')[2].ToString()));
 
-                CommandParameter queryCommand = new CommandParameter("chat.AccountManagerConnect_GetList_pa",parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.AccountManagerConnect_GetList_Sp", parameters);
 
                 DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
 
@@ -298,11 +298,11 @@ namespace xChatDAO
             try
             {
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_userid", Encryption.Decrypt(objectRequest.SenderObject.Split(';')[0].ToString()));
-                parameters.Add("@p_moduleappid", Encryption.Decrypt(objectRequest.SenderObject.Split(';')[1].ToString()));
-                parameters.Add("@p_rolid", Encryption.Decrypt(objectRequest.SenderObject.Split(';')[2].ToString()));
+                parameters.Add("@userid", Encryption.Decrypt(objectRequest.SenderObject.Split(';')[0].ToString()));
+                parameters.Add("@moduleappid", Encryption.Decrypt(objectRequest.SenderObject.Split(';')[1].ToString()));
+                parameters.Add("@rolid", Encryption.Decrypt(objectRequest.SenderObject.Split(';')[2].ToString()));
 
-                CommandParameter queryCommand = new CommandParameter("chat.AccountManagerConnect_GetById_pa", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.AccountManagerConnect_GetById_Sp", parameters);
 
                 DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
 
@@ -342,7 +342,7 @@ namespace xChatDAO
             try
             {
 
-                using (ObjCmd = new SqlCommand("Chatmessage_Getlist_Sp", DbManager.Instance.OpenConnection()))
+                using (ObjCmd = new SqlCommand("chat.Chatmessage_Getlist_Sp", DbManager.Instance.OpenConnection()))
                 {
                     ObjCmd.CommandType = CommandType.StoredProcedure;
                     ObjCmd.CommandTimeout = 0;

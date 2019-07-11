@@ -16,7 +16,7 @@ namespace xChatDAO
 
             ListParameters parameters = new ListParameters();
 
-            string procedure = $"chat.{entityMasterEnum.ToString()}_GetListMaster_pa";
+            string procedure = $"chat.{entityMasterEnum.ToString()}_GetListMaster_sp";
 
             CommandParameter queryCommand = new CommandParameter(procedure, parameters);
 
@@ -65,7 +65,7 @@ namespace xChatDAO
 
             }
 
-            string procedure = $"chat.SearchMaster{masterEntity}_{masterAction}_pa";
+            string procedure = $"chat.SearchMaster{masterEntity}_{masterAction}_sp";
 
             CommandParameter queryCommand = new CommandParameter(procedure, parameters);
 

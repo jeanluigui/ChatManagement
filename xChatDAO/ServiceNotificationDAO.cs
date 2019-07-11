@@ -28,10 +28,10 @@ namespace xChatDAO
 
             ListParameters parameters = new ListParameters();
 
-            parameters.Add("@p_userName", conversationEntity.UserName);
-            parameters.Add("@p_message", conversationEntity.Message);
+            parameters.Add("@userName", conversationEntity.UserName);
+            parameters.Add("@message", conversationEntity.Message);
 
-            CommandParameter queryCommand = new CommandParameter("chat.Config_GetMailTo_pa", parameters);
+            CommandParameter queryCommand = new CommandParameter("chat.Config_GetMailTo_Sp", parameters);
 
             DataRow drresult = DbManager.Instance.ExecuteRegister(queryCommand);
 

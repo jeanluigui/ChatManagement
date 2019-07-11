@@ -30,22 +30,22 @@ namespace xChatDAO
             try
             {
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_distributorid", conversationEntity.DistributorId);
-                parameters.Add("@p_username", conversationEntity.UserName);
-                parameters.Add("@p_useremail", conversationEntity.UserEmail);
-                parameters.Add("@p_usertoken", conversationEntity.UserToken);
-                parameters.Add("@p_moduleappid", conversationEntity.ModuleAppId);
-                parameters.Add("@p_accountmanagerconnectid", accountManagerConnectId);
+                parameters.Add("@distributorid", conversationEntity.DistributorId);
+                parameters.Add("@username", conversationEntity.UserName);
+                parameters.Add("@useremail", conversationEntity.UserEmail);
+                parameters.Add("@usertoken", conversationEntity.UserToken);
+                parameters.Add("@moduleappid", conversationEntity.ModuleAppId);
+                parameters.Add("@accountmanagerconnectid", accountManagerConnectId);
 
-                parameters.Add("@p_language", conversationEntity.ChatBySkillLanguageId);
-                parameters.Add("@p_module", conversationEntity.ChatBySkillModuleId);
+                parameters.Add("@language", conversationEntity.ChatBySkillLanguageId);
+                parameters.Add("@module", conversationEntity.ChatBySkillModuleId);
 
-                CommandParameter queryCommand = new CommandParameter("chat.Chat_Insert_pa", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.Chat_Insert_Sp", parameters);
                 DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
 
                 chatId = Convert.ToInt32(rowResult["ChatId"]);
             }
-            catch(TimeoutException tout)
+            catch (TimeoutException tout)
             {
                 log.Save(EnumLogLevel.Fatal, tout.Message);
             }
@@ -69,9 +69,9 @@ namespace xChatDAO
             try
             {
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_chattoken", connectionId);
+                parameters.Add("@chattoken", connectionId);
 
-                CommandParameter queryCommand = new CommandParameter("chat.Chat_Disconnected_pa", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.Chat_Disconnected_Sp", parameters);
                 DataTable dataTable = DbManager.Instance.ExecuteTable(queryCommand);
 
                 tokenDestino = new ObjectResultList<ChatToken>(dataTable);
@@ -100,12 +100,12 @@ namespace xChatDAO
             try
             {
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_chatid", conversationEntity.ChatId);
-                parameters.Add("@p_chatmessagesentry", conversationEntity.Message);
-                parameters.Add("@p_chatdate", DateTime.Now);
-                parameters.Add("@p_chatmessageisusersend", conversationEntity.IsSendUser);
+                parameters.Add("@chatid", conversationEntity.ChatId);
+                parameters.Add("@chatmessagesentry", conversationEntity.Message);
+                parameters.Add("@chatdate", DateTime.Now);
+                parameters.Add("@chatmessageisusersend", conversationEntity.IsSendUser);
 
-                CommandParameter queryCommand = new CommandParameter("chat.ChatMessages_Insert_pa", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.ChatMessages_Insert_Sp", parameters);
                 DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
 
                 chatMessageId = Convert.ToInt32(rowResult["chatMessageId"]);
@@ -134,10 +134,10 @@ namespace xChatDAO
             try
             {
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_chatid", conversationEntity.ChatId);
-                parameters.Add("@p_chatdate", DateTime.Now);
+                parameters.Add("@chatid", conversationEntity.ChatId);
+                parameters.Add("@chatdate", DateTime.Now);
 
-                CommandParameter queryCommand = new CommandParameter("chat.Chat_SetMessageReadForManager_pa", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.Chat_SetMessageReadForManager_Sp", parameters);
                 DbManager.Instance.ExecuteCommand(queryCommand);
             }
             catch (TimeoutException tout)
@@ -159,10 +159,10 @@ namespace xChatDAO
             try
             {
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_chatid", conversationEntity.ChatId);
-                parameters.Add("@p_chatdate", DateTime.Now);
+                parameters.Add("@chatid", conversationEntity.ChatId);
+                parameters.Add("@chatdate", DateTime.Now);
 
-                CommandParameter queryCommand = new CommandParameter("chat.Chat_UserDisconnect_pa", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.Chat_UserDisconnect_Sp", parameters);
                 DbManager.Instance.ExecuteCommand(queryCommand);
             }
             catch (TimeoutException tout)
@@ -187,9 +187,9 @@ namespace xChatDAO
             try
             {
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_chatid", conversationEntity.ChatId);
+                parameters.Add("@chatid", conversationEntity.ChatId);
 
-                CommandParameter queryCommand = new CommandParameter("chat.ManagerAccountConnect_GetTokenActive_pa", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.ManagerAccountConnect_GetTokenActive_Sp", parameters);
                 DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
 
                 managerToken = rowResult["AccountManagerToken"].ToString();
@@ -215,10 +215,10 @@ namespace xChatDAO
             try
             {
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_accountmanagerid", accountManagerEntity.AccountManagerId);
-                parameters.Add("@p_moduleappid", accountManagerEntity.ModuloAppId);
+                parameters.Add("@accountmanagerid", accountManagerEntity.AccountManagerId);
+                parameters.Add("@moduleappid", accountManagerEntity.ModuloAppId);
 
-                CommandParameter queryCommand = new CommandParameter("chat.ManagerAccountConnect_GetTokenActive_pa", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.ManagerAccountConnect_GetTokenActive_Sp", parameters);
 
                 DbManager.Instance.ExecuteCommand(queryCommand);
             }
@@ -242,12 +242,12 @@ namespace xChatDAO
             {
 
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_moduleappid", accountManagerEntity.ModuloAppId);
-                parameters.Add("@p_accountmanagerid", accountManagerEntity.AccountManagerId);
-                parameters.Add("@p_accountmanagertoken", accountManagerEntity.Token);
-                parameters.Add("@p_accountmanagerconnectdatestart", DateTime.Now);
+                parameters.Add("@moduleappid", accountManagerEntity.ModuloAppId);
+                parameters.Add("@accountmanagerid", accountManagerEntity.AccountManagerId);
+                parameters.Add("@accountmanagertoken", accountManagerEntity.Token);
+                parameters.Add("@accountmanagerconnectdatestart", DateTime.Now);
 
-                CommandParameter queryCommand = new CommandParameter("chat.AccountManagerConnect_Insert_pa", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.AccountManagerConnect_Insert_Sp", parameters);
 
                 DbManager.Instance.ExecuteCommand(queryCommand);
             }
@@ -275,10 +275,10 @@ namespace xChatDAO
             try
             {
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_languageid", conversationEntity.ChatBySkillLanguageId);
-                parameters.Add("@p_moduleid", conversationEntity.ChatBySkillModuleId);
+                parameters.Add("@languageid", conversationEntity.ChatBySkillLanguageId);
+                parameters.Add("@moduleid", conversationEntity.ChatBySkillModuleId);
 
-                CommandParameter queryCommand = new CommandParameter("chat.AccountManager_SearchBySkill_pa", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.AccountManager_SearchBySkill_Sp", parameters);
 
                 DataRow drresult = DbManager.Instance.ExecuteRegister(queryCommand);
 
@@ -312,9 +312,9 @@ namespace xChatDAO
             try
             {
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@p_moduleappid", conversationEntity.ModuleAppId);
+                parameters.Add("@moduleappid", conversationEntity.ModuleAppId);
 
-                CommandParameter queryCommand = new CommandParameter("chat.AccountManager_SearchByModulo_pa", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.AccountManager_SearchByModulo_Sp", parameters);
 
                 DataRow drresult = DbManager.Instance.ExecuteRegister(queryCommand);
 
@@ -349,7 +349,7 @@ namespace xChatDAO
             {
                 ListParameters parameters = new ListParameters();
 
-                CommandParameter queryCommand = new CommandParameter("chat.Chat_GetAllMessages_pa", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.Chat_GetAllMessages_Sp", parameters);
 
                 DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
 
@@ -388,10 +388,10 @@ namespace xChatDAO
                 {
                     parameters = new ListParameters();
 
-                    parameters.Add("@p_id", conversationEntity.ChatId);
-                    parameters.Add("@p_message", conversationEntity.Message);
+                    parameters.Add("@id", conversationEntity.ChatId);
+                    parameters.Add("@message", conversationEntity.Message);
 
-                    CommandParameter queryCommand = new CommandParameter("chat.Chat_SetEncrypMessage_pa", parameters);
+                    CommandParameter queryCommand = new CommandParameter("chat.Chat_SetEncrypMessage_Sp", parameters);
 
                     DbManager.Instance.ExecuteCommand(queryCommand);
                 }

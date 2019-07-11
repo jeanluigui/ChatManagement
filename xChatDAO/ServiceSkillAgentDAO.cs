@@ -21,14 +21,14 @@ namespace xChatDAO
             ObjectResultList<SkillAgent> listUserConnect = new ObjectResultList<SkillAgent>();
 
             ListParameters parameters = new ListParameters();
-            parameters.Add("@p_perspectiveid", objectRequest.SenderObject.PerspectiveId);
-            parameters.Add("@p_agentid", objectRequest.SenderObject.AgentId);
-            parameters.Add("@p_moduleid", objectRequest.SenderObject.ModuleId);
-            parameters.Add("@p_languageid", objectRequest.SenderObject.LanguageId);
-            parameters.Add("@p_skillLevelModule", objectRequest.SenderObject.SkillLevelModule);
-            parameters.Add("@p_skillLevelLanguage", objectRequest.SenderObject.SkillLevelLanguage);
+            parameters.Add("@perspectiveid", objectRequest.SenderObject.PerspectiveId);
+            parameters.Add("@agentid", objectRequest.SenderObject.AgentId);
+            parameters.Add("@moduleid", objectRequest.SenderObject.ModuleId);
+            parameters.Add("@languageid", objectRequest.SenderObject.LanguageId);
+            parameters.Add("@skillLevelModule", objectRequest.SenderObject.SkillLevelModule);
+            parameters.Add("@skillLevelLanguage", objectRequest.SenderObject.SkillLevelLanguage);
 
-            CommandParameter queryCommand = new CommandParameter("chat.ChatReportSkill_GetByPerspective_pa", parameters);
+            CommandParameter queryCommand = new CommandParameter("chat.ChatReportSkill_GetByPerspective_Sp", parameters);
             DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
 
             listUserConnect = new ObjectResultList<SkillAgent>(dtresult);
@@ -43,14 +43,14 @@ namespace xChatDAO
         public void CreateSkillModule(ObjectRequest<SkillAgentModule> objectRequest)
         {
             ListParameters parameters = new ListParameters();
-            parameters.Add("@p_agentid", objectRequest.SenderObject.AgentId);
-            parameters.Add("@p_moduleid", objectRequest.SenderObject.ModuleId);
-            parameters.Add("@p_skilllevel", objectRequest.SenderObject.SkillLevel);
-            parameters.Add("@p_prioritylevel", objectRequest.SenderObject.PriorityLevel);
-            parameters.Add("@p_Status", objectRequest.SenderObject.StatusId);
-            parameters.Add("@p_createdby", objectRequest.SenderObject.CreateBy);
+            parameters.Add("@agentid", objectRequest.SenderObject.AgentId);
+            parameters.Add("@moduleid", objectRequest.SenderObject.ModuleId);
+            parameters.Add("@skilllevel", objectRequest.SenderObject.SkillLevel);
+            parameters.Add("@prioritylevel", objectRequest.SenderObject.PriorityLevel);
+            parameters.Add("@Status", objectRequest.SenderObject.StatusId);
+            parameters.Add("@createdby", objectRequest.SenderObject.CreateBy);
 
-            CommandParameter queryCommand = new CommandParameter("chat.AgentSkillModule_Insert_pa", parameters);
+            CommandParameter queryCommand = new CommandParameter("chat.AgentSkillModule_Insert_Sp", parameters);
 
             DbManager.Instance.ExecuteCommand(queryCommand);
         }
@@ -62,14 +62,14 @@ namespace xChatDAO
         public void CreateSkillLanguage(ObjectRequest<SkillAgentLanguage> objectRequest)
         {
             ListParameters parameters = new ListParameters();
-            parameters.Add("@p_agentid", objectRequest.SenderObject.AgentId);
-            parameters.Add("@p_languageid", objectRequest.SenderObject.LanguageId);
-            parameters.Add("@p_skilllevel", objectRequest.SenderObject.SkillLevel);
-            parameters.Add("@p_prioritylevel", objectRequest.SenderObject.PriorityLevel);
-            parameters.Add("@p_Status", objectRequest.SenderObject.StatusId);
-            parameters.Add("@p_createdby", objectRequest.SenderObject.CreateBy);
+            parameters.Add("@agentid", objectRequest.SenderObject.AgentId);
+            parameters.Add("@languageid", objectRequest.SenderObject.LanguageId);
+            parameters.Add("@skilllevel", objectRequest.SenderObject.SkillLevel);
+            parameters.Add("@prioritylevel", objectRequest.SenderObject.PriorityLevel);
+            parameters.Add("@Status", objectRequest.SenderObject.StatusId);
+            parameters.Add("@createdby", objectRequest.SenderObject.CreateBy);
 
-            CommandParameter queryCommand = new CommandParameter("chat.AgentSkillLanguage_Insert_pa", parameters);
+            CommandParameter queryCommand = new CommandParameter("chat.AgentSkillLanguage_Insert_Sp", parameters);
 
             DbManager.Instance.ExecuteCommand(queryCommand);
         }
@@ -81,13 +81,13 @@ namespace xChatDAO
         public void UpdateSkillModule(ObjectRequest<SkillAgentModule> objectRequest)
         {
             ListParameters parameters = new ListParameters();
-            parameters.Add("@p_agentid", objectRequest.SenderObject.AgentId);
-            parameters.Add("@p_moduleid", objectRequest.SenderObject.ModuleId);
-            parameters.Add("@p_skilllevel", objectRequest.SenderObject.SkillLevel);
-            parameters.Add("@p_prioritylevel", objectRequest.SenderObject.PriorityLevel);
-            parameters.Add("@p_UpdatedBy", objectRequest.SenderObject.CreateBy);
+            parameters.Add("@agentid", objectRequest.SenderObject.AgentId);
+            parameters.Add("@moduleid", objectRequest.SenderObject.ModuleId);
+            parameters.Add("@skilllevel", objectRequest.SenderObject.SkillLevel);
+            parameters.Add("@prioritylevel", objectRequest.SenderObject.PriorityLevel);
+            parameters.Add("@UpdatedBy", objectRequest.SenderObject.CreateBy);
 
-            CommandParameter queryCommand = new CommandParameter("chat.AgentSkillModule_Update_pa", parameters);
+            CommandParameter queryCommand = new CommandParameter("chat.AgentSkillModule_Update_Sp", parameters);
 
             DbManager.Instance.ExecuteCommand(queryCommand);
         }
@@ -99,13 +99,13 @@ namespace xChatDAO
         public void UpdateSkillLanguage(ObjectRequest<SkillAgentLanguage> objectRequest)
         {
             ListParameters parameters = new ListParameters();
-            parameters.Add("@p_agentid", objectRequest.SenderObject.AgentId);
-            parameters.Add("@p_languageid", objectRequest.SenderObject.LanguageId);
-            parameters.Add("@p_skilllevel", objectRequest.SenderObject.SkillLevel);
-            parameters.Add("@p_prioritylevel", objectRequest.SenderObject.PriorityLevel);
-            parameters.Add("@p_UpdatedBy", objectRequest.SenderObject.CreateBy);
+            parameters.Add("@agentid", objectRequest.SenderObject.AgentId);
+            parameters.Add("@languageid", objectRequest.SenderObject.LanguageId);
+            parameters.Add("@skilllevel", objectRequest.SenderObject.SkillLevel);
+            parameters.Add("@prioritylevel", objectRequest.SenderObject.PriorityLevel);
+            parameters.Add("@UpdatedBy", objectRequest.SenderObject.CreateBy);
 
-            CommandParameter queryCommand = new CommandParameter("chat.AgentSkillLanguage_Update_pa", parameters);
+            CommandParameter queryCommand = new CommandParameter("chat.AgentSkillLanguage_Update_Sp", parameters);
 
             DbManager.Instance.ExecuteCommand(queryCommand);
         }
@@ -117,12 +117,12 @@ namespace xChatDAO
         public void ChangeStateSkillModule(ObjectRequest<SkillAgentModule> objectRequest)
         {
             ListParameters parameters = new ListParameters();
-            parameters.Add("@p_agentid", objectRequest.SenderObject.AgentId);
-            parameters.Add("@p_moduleid", objectRequest.SenderObject.ModuleId);
-            parameters.Add("@p_status", objectRequest.SenderObject.StatusId);
-            parameters.Add("@p_UpdatedBy", objectRequest.SenderObject.CreateBy);
+            parameters.Add("@agentid", objectRequest.SenderObject.AgentId);
+            parameters.Add("@moduleid", objectRequest.SenderObject.ModuleId);
+            parameters.Add("@status", objectRequest.SenderObject.StatusId);
+            parameters.Add("@UpdatedBy", objectRequest.SenderObject.CreateBy);
 
-            CommandParameter queryCommand = new CommandParameter("chat.AgentSkill_ChangeStatusModule_pa", parameters);
+            CommandParameter queryCommand = new CommandParameter("chat.AgentSkill_ChangeStatusModule_Sp", parameters);
 
             DbManager.Instance.ExecuteCommand(queryCommand);
         }
@@ -134,12 +134,12 @@ namespace xChatDAO
         public void ChangeStateSkillLanguage(ObjectRequest<SkillAgentLanguage> objectRequest)
         {
             ListParameters parameters = new ListParameters();
-            parameters.Add("@p_agentid", objectRequest.SenderObject.AgentId);
-            parameters.Add("@p_languageid", objectRequest.SenderObject.LanguageId);
-            parameters.Add("@p_status", objectRequest.SenderObject.StatusId);
-            parameters.Add("@p_UpdatedBy", objectRequest.SenderObject.CreateBy);
+            parameters.Add("@agentid", objectRequest.SenderObject.AgentId);
+            parameters.Add("@languageid", objectRequest.SenderObject.LanguageId);
+            parameters.Add("@status", objectRequest.SenderObject.StatusId);
+            parameters.Add("@UpdatedBy", objectRequest.SenderObject.CreateBy);
 
-            CommandParameter queryCommand = new CommandParameter("chat.AgentSkill_ChangeStatusLanguage_pa", parameters);
+            CommandParameter queryCommand = new CommandParameter("chat.AgentSkill_ChangeStatusLanguage_Sp", parameters);
 
             DbManager.Instance.ExecuteCommand(queryCommand);
         }
@@ -150,7 +150,7 @@ namespace xChatDAO
             ObjectResult<Boolean> result = new ObjectResult<Boolean>();
             try
             {
-                using (ObjCmd = new SqlCommand("chat.AgentSkill_ExistAgentByModule", DbManager.Instance.OpenConnection()))
+                using (ObjCmd = new SqlCommand("chat.AgentSkill_ExistAgentByModule_Sp", DbManager.Instance.OpenConnection()))
                 {
                     ObjCmd.CommandType = CommandType.StoredProcedure;
                     ObjCmd.CommandTimeout = 0;
@@ -178,7 +178,7 @@ namespace xChatDAO
             ObjectResult<Boolean> result = new ObjectResult<Boolean>();
             try
             {
-                using (ObjCmd = new SqlCommand("chat.AgentSkill_ExistAgentByLanguage", DbManager.Instance.OpenConnection()))
+                using (ObjCmd = new SqlCommand("chat.AgentSkill_ExistAgentByLanguage_Sp", DbManager.Instance.OpenConnection()))
                 {
                     ObjCmd.CommandType = CommandType.StoredProcedure;
                     ObjCmd.CommandTimeout = 0;
