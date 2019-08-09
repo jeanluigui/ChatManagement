@@ -17,6 +17,10 @@ namespace xChatEntities
         public string AccountManagerName { get; set; }
         public short IsSendUser { get; set; }
         public short IsMessageRead { get; set; }
+        public string TemplateHtml { get; set; }
+        public string Subject { get; set; }
+        public string Emailto { get; set; }
+
 
         /// <summary>
         /// Modulo solicitado por el cliente para chatear.

@@ -12,7 +12,7 @@ namespace xChatBusiness
     /// </summary>
     public class ServiceSkillAgentBL : IServiceSkillAgentBL
     {
-        private static ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.DataAccessLayer);
+        private static ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.BusinessLayer);
         private IServiceSkillAgentDAO _serviceSkillAgentDAO;
 
         /// <summary>

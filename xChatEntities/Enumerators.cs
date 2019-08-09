@@ -18,6 +18,9 @@ namespace xChatEntities
         Language,
         Module,
         UserAgent,
-        Perspective
+        Perspective,
+        UsersChat,
+        RoleType,
+        UserManager,
     }
 }

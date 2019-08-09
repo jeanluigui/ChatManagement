@@ -98,6 +98,8 @@
     <Compile Include="IServiceFaqDAO.cs" />
     <Compile Include="IServiceMasterEntityDAO.cs" />
     <Compile Include="IServiceSkillAgentDAO.cs" />
+    <Compile Include="IServiceUserAccountGroupDAO.cs" />
+    <Compile Include="IServiceUserDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceChatDAO.cs" />
     <Compile Include="ServiceChatManagerDAO.cs" />
@@ -105,6 +107,8 @@
     <Compile Include="ServiceMasterEntityDAO.cs" />
     <Compile Include="ServiceNotificationDAO.cs" />
     <Compile Include="ServiceSkillAgentDAO.cs" />
+    <Compile Include="ServiceUserAccountGroupDAO.cs" />
+    <Compile Include="ServiceUserDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\xChatEntities\xChatEntities.csproj">

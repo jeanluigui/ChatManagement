@@ -33,6 +33,12 @@ namespace xChatWebApi
             container.Register<IServiceFaqBL, ServiceFaqBL>(Lifestyle.Scoped);
             container.Register<IServiceFaqDAO, ServiceFaqDAO>(Lifestyle.Scoped);
 
+            container.Register<IServiceUserBL, ServiceUserBL>(Lifestyle.Singleton);
+            container.Register<IServiceUserDAO, ServiceUserDAO>(Lifestyle.Singleton);
+
+            container.Register<IServiceUserAccountGroupBL, ServiceUserAccountGroupBL>(Lifestyle.Singleton);
+            container.Register<IServiceUserAccountGroupDAO, ServiceUserAccountGroupDAO>(Lifestyle.Singleton);
+
             // Es una extensión del método para integración con el paquete.
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 

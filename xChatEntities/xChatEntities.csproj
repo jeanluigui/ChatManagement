@@ -69,7 +69,9 @@
     <Compile Include="SkillAgentFilter.cs" />
     <Compile Include="SkillAgentLanguage.cs" />
     <Compile Include="SkillAgentModule.cs" />
+    <Compile Include="UserAccountGroups.cs" />
     <Compile Include="UserConnect.cs" />
+    <Compile Include="UserRoleType.cs" />
     <Compile Include="UtilEntity.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>

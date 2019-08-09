@@ -35,12 +35,9 @@ namespace xChatDAO
 
             DataRow drresult = DbManager.Instance.ExecuteRegister(queryCommand);
 
-            if (drresult != null && !drresult.IsNull("emailTo"))
-            {
-                emailTo = drresult["emailTo"].ToString();
-                emailSubject = drresult["emailSubject"].ToString();
-                emailBody = drresult["emailBody"].ToString();
-            }
+               emailTo = conversationEntity.Emailto;
+               emailSubject = conversationEntity.Subject;
+               emailBody = conversationEntity.TemplateHtml;
 
             return (emailTo, emailSubject, emailBody);
         }
