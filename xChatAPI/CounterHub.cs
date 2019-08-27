@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
 using xChatBusiness;
 using xChatEntities;
@@ -21,7 +22,18 @@ namespace xChatAPI
         /// <returns></returns>
         public override Task OnDisconnected(bool stopCalled)
         {
+            /*Actualiza la lista de agentes de la vista Manager*/
+            ConversationEntity obj = ServiceChatBL.Instancia.GetAgentAndManagerIdByToken(Context.ConnectionId);
+            string managerToken = ServiceChatBL.Instancia.GetManagerTokenValue(obj);
+          
+            /*End*/
+
             ObjectResultList<ChatToken> tokenDestino = ServiceChatBL.Instancia.ChatDisconnected(Context.ConnectionId);
+            if (!String.IsNullOrEmpty(managerToken))
+            {
+                ObjectResultList<AccountManagerConnect> lstAgentResult = ServiceChatBL.Instancia.GetListAgentByManager(obj);
+                Clients.Client(managerToken).receivedListAgentsOfNewConnection(lstAgentResult);
+            }
             if (tokenDestino != null && tokenDestino.Elements != null && tokenDestino.Elements.Count > 0)
             {
                 foreach (ChatToken item in tokenDestino.Elements)
@@ -73,9 +85,7 @@ namespace xChatAPI
             if (conversationEntity.ChatId.Equals(0))
             {
                 conversationEntity.UserToken = Context.ConnectionId;
-                conversationEntity.ChatId = ServiceChatBL
-                    .Instancia
-                    .ChatCreate(conversationEntity);
+                conversationEntity.ChatId = ServiceChatBL.Instancia.ChatCreate(conversationEntity);
 
                 // ------------------------------------------------------------
                 // Si el valor del chatid = -1 es porque no existe agente disponible
@@ -103,12 +113,7 @@ namespace xChatAPI
 
                     return;
                 }
-
-                // ------------------------------------------------------------
-                // Se lanza método en el front del Manager para agregar
-                // un nuevo Chat en su monitor.
-                // ------------------------------------------------------------
-                Clients.Client(conversationEntity.ManagerToken).newUserConnect(conversationEntity);
+                
             }
 
             // ------------------------------------------------------------
@@ -129,9 +134,9 @@ namespace xChatAPI
             conversationEntity.Message = originalMessage;
 
             // ------------------------------------------------------------
-            // Se lanza el método de los mensajes en el front del Manager.
+            // Se lanza el método de los mensajes en el front del Agente.
             // ------------------------------------------------------------
-            Clients.Client(conversationEntity.ManagerToken).receivedFromUser(conversationEntity);
+            Clients.Client(conversationEntity.AgentToken).receivedFromUser(conversationEntity);
 
             // ------------------------------------------------------------
             // Se lanza el método de los mensajes en el front del Usuario.
@@ -139,9 +144,28 @@ namespace xChatAPI
             Clients.Caller.receivedFromManager(conversationEntity);
 
             // ------------------------------------------------------------
-            // Se lanza el método de los mensajes en el front de los Supervisor.
+            // Se lanza método en el front del Manager para agregar
+            // un nuevo Chat en su monitor.
             // ------------------------------------------------------------
-            Clients.All.monitor_ReceivedFromUser(conversationEntity);
+
+            ConversationEntity objConversation = ServiceChatBL.Instancia.GetAgentAndManagerIdByToken(conversationEntity.AgentToken);
+            string managerToken = ServiceChatBL.Instancia.GetManagerTokenValue(objConversation);
+            if (!String.IsNullOrEmpty(managerToken))
+            {
+                Clients.Client(managerToken).reloadNewUserConnectUserConnectByAgent(0);
+            }
+
+            // ------------------------------------------------------------
+            // Se lanza el método de los mensajes en el front de Manager.
+            // ------------------------------------------------------------
+            ConversationEntity objConversation2 = ServiceChatBL.Instancia.GetAgentAndManagerIdByToken(conversationEntity.AgentToken);
+            if(conversationEntity != null) conversationEntity.AgentId = objConversation2.AgentId;            
+            string managerToken2 = ServiceChatBL.Instancia.GetManagerTokenValue(objConversation2);
+            if (!String.IsNullOrEmpty(managerToken2))
+            {
+                Clients.Client(managerToken2).monitor_ReceivedFromUserAndAgentInViewManager(conversationEntity);
+            }
+                
 
         }
 
@@ -175,22 +199,28 @@ namespace xChatAPI
             Clients.Client(conversationEntity.UserToken).receivedFromManager(conversationEntity);
 
             // ------------------------------------------------------------
-            // Se lanza el método de los mensajes en el front del Manager.
+            // Se lanza el método de los mensajes en el front del Agente.
             // ------------------------------------------------------------
             Clients.Caller.receivedFromUser(conversationEntity);
 
             // ------------------------------------------------------------
-            // Se lanza el método de los mensajes en el front del Supervisor.
+            // Se lanza el método de los mensajes en el front de Manager.
             // ------------------------------------------------------------
-            Clients.Caller.monitor_receivedFromManager(conversationEntity);
+            ConversationEntity objConversation = ServiceChatBL.Instancia.GetAgentAndManagerIdByToken(conversationEntity.AgentToken);
+            if (conversationEntity != null) conversationEntity.AgentId = objConversation.AgentId;
+            string managerToken = ServiceChatBL.Instancia.GetManagerTokenValue(objConversation);
+            if (!String.IsNullOrEmpty(managerToken))
+            {
+                Clients.Client(managerToken).monitor_ReceivedFromUserAndAgentInViewManager(conversationEntity);
+            }
         }
 
         /// <summary>
-        /// Método que se ejecuta cuando se conecta un MANAGER.
+        /// Método que se ejecuta cuando se conecta un Usuario ya sea agente o manager.
         /// Se genera su Identificador (ID) de la comunicación.
         /// </summary>
         /// <param name="accountManagerEntity"></param>
-        public void AccountManagerConnect(AccountManagerEntity accountManagerEntity)
+        public void AccountUserConnect(AccountManagerEntity accountManagerEntity)
         {
             accountManagerEntity.Token = Context.ConnectionId;
             ServiceChatBL.Instancia.AccountManagerConnect(accountManagerEntity);
@@ -256,5 +286,49 @@ namespace xChatAPI
             // ------------------------------------------------------------
             //Clients.Caller.MessageRead(conversationEntity);
         }
+
+        public void ReloadLoadListAgentConnect(ConversationEntity objChat)
+        {
+            string managerToken = ServiceChatBL.Instancia.GetManagerTokenValue(objChat);
+            if (!String.IsNullOrEmpty(managerToken))
+            {
+                ObjectResultList<AccountManagerConnect> lstAgentResult = ServiceChatBL.Instancia.GetListAgentByManager(objChat);
+                Clients.Client(managerToken).receivedListAgentsOfNewConnection(lstAgentResult);
+            } 
+            
+
+        }
+
+        public void MoveChatToAgent(ConversationEntity conversationEntity)
+        {
+            //Obtiene el token del agente Destino
+            String tokenAgentOrigin = ServiceChatBL.Instancia.GetManagerToken(conversationEntity);
+            
+            Int32 success =  ServiceChatBL.Instancia.ConversationMoveTo(conversationEntity);
+            if (success  == 1) // Update succesfull
+            {
+               // Registrar mensaje de transferencia de chat en la DB. 
+                ServiceChatBL.Instancia.ChatMessageCreate(conversationEntity);
+                //Recarga lista de usuarios de agente en vista de Manager
+                Clients.Caller.reloadNewUserConnectUserConnectByAgent(success);
+
+                //Obtiene el token del agente Destino
+                String tokenAgentTarget = ServiceChatBL.Instancia.GetManagerToken(conversationEntity);
+                if(!String.IsNullOrEmpty(tokenAgentTarget))
+                //Recarga lista de usuarios de agente en vista de agente Destino
+                Clients.Client(tokenAgentTarget).reloadNewUserConnectUserConnectByAgent(success);
+
+                if (!String.IsNullOrEmpty(tokenAgentOrigin))
+                //Recarga lista de usuarios de agente en vista de agente Destino
+                Clients.Client(tokenAgentOrigin).reloadNewUserConnectUserConnectByAgent(success);
+            }
+            else
+            {
+                if (success == -1) {
+                    Clients.Caller.monitor_messageAgentNotConnectInViewManager();
+                }
+            }
+        }
+
     }
 }

@@ -6,6 +6,7 @@ namespace xChatEntities
     public class UserConnect : EntityBaseClass
     {
         public int ChatId { get; set; }
+        public int AgentId { get; set; }
         public string UserToken { get; set; }
         public string UserName { get; set; }
         public string UserEmail { get; set; }

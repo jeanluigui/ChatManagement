@@ -4,7 +4,7 @@ namespace xChatEntities
 {
     public class AccountManagerEntity
     {
-        public int AccountManagerId { get; set; }
+        public int AccountUserId { get; set; }
         public short ModuloAppId { get; set; }
 	   public string EMail { get; set; }
         public string Password { get; set; }

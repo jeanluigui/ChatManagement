@@ -23,4 +23,9 @@ namespace xChatEntities
         RoleType,
         UserManager,
     }
+    public enum EnumRolTypeChat
+    {
+        Agent = 1,
+        Manager = 2
+    }
 }

@@ -57,6 +57,44 @@ namespace xChatDAO
         }
 
         /// <summary>
+        /// Obtiene la lista de usuarios de un Agente.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        public ObjectResultList<UserConnect> GetListUserByAccountManagerId(ObjectRequest<int> objectRequest)
+        {
+            ObjectResultList<UserConnect> listUserConnect = new ObjectResultList<UserConnect>();
+
+            try
+            {
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@accountmanagerid", objectRequest.SenderObject);
+
+                CommandParameter queryCommand = new CommandParameter("chat.ManagerConnect_GetListUser_sp ", parameters);
+                DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
+
+                listUserConnect = new ObjectResultList<UserConnect>(dtresult);
+
+            }
+            catch (TimeoutException tout)
+            {
+                listUserConnect.Id = 2;
+                listUserConnect.Message = tout.Message;
+
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                listUserConnect.Id = 1;
+                listUserConnect.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return listUserConnect;
+        }
+
+        /// <summary>
         /// Devuelve conversación de un Chat.
         /// </summary>
         /// <param name="objectRequest"></param>
@@ -93,32 +131,6 @@ namespace xChatDAO
             return listUserConnect;
         }
 
-        /// <summary>
-        /// Mueve una conversación de un chat a otro.
-        /// </summary>
-        /// <param name="objectRequest"></param>
-        public void ConversationMoveTo(ObjectRequest<ConversationMoveEntity> objectRequest)
-        {
-            try
-            {
-                ListParameters parameters = new ListParameters();
-                parameters.Add("@chatidsource", objectRequest.SenderObject.ChatIdSource);
-                parameters.Add("@chatidtarget", objectRequest.SenderObject.ChatIdTarget);
-
-                CommandParameter queryCommand = new CommandParameter("chat.Conversation_MoveTo_Sp", parameters);
-
-                DbManager.Instance.ExecuteCommand(queryCommand);
-            }
-            catch (TimeoutException tout)
-            {
-                log.Save(EnumLogLevel.Fatal, tout.Message);
-            }
-            catch (Exception ex)
-            {
-                log.Save(EnumLogLevel.Fatal, ex);
-            }
-
-        }
 
         /// <summary>
         /// Obtener conversación para un Report.
@@ -375,5 +387,103 @@ namespace xChatDAO
 
             return listUserConnect;
         }
+
+        public ObjectResult<UserRoleType> UsersGetRoleType(ObjectRequest<string> objectRequest)
+        {
+            SqlCommand ObjCmd = null;
+            ObjectResult<UserRoleType> result = new ObjectResult<UserRoleType>();
+            String parmUserId = Encryption.Decrypt(objectRequest.SenderObject.Split(';')[0].ToString());
+            try
+            {
+                using (ObjCmd = new SqlCommand("chat.Users_GetRoleType_Sp", DbManager.Instance.OpenConnection()))
+                {
+                    ObjCmd.CommandType = CommandType.StoredProcedure;
+                    ObjCmd.CommandTimeout = 0;
+                    #region ParametersOutPut
+                    SqlParameter outputParam = ObjCmd.Parameters.Add("@rolOutput", SqlDbType.Int);
+                    outputParam.Direction = ParameterDirection.Output;
+                    #endregion ParametersOutPut
+                    ObjCmd.Parameters.AddWithValue("@userId", parmUserId);
+                    ObjCmd.ExecuteNonQuery();
+                    result.Id = Convert.ToInt32(ObjCmd.Parameters["@rolOutput"].Value);
+                };
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+                result.Id = -1;
+            }
+            return result;
+        }
+
+        public ObjectResultList<AccountManagerConnect> GetListAgentByManager(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
+
+            try
+            {
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@managerId", Encryption.Decrypt(objectRequest.SenderObject.Split(';')[0].ToString()));
+
+                CommandParameter queryCommand = new CommandParameter("chat.Accountmanagerconnect_Getbymanagerid_Sp", parameters);
+
+                DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
+
+                result = new ObjectResultList<AccountManagerConnect>(dtresult);
+                result.Id = Convert.ToInt32(Encryption.Decrypt(objectRequest.SenderObject.Split(';')[0].ToString()));
+                ListAccountManagerConnect listAMC = new ListAccountManagerConnect(dtresult);
+
+            }
+            catch (TimeoutException tout)
+            {
+                result.Id = 2;
+                result.Message = tout.Message;
+
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return result;
+        }
+
+        public ObjectResultList<ConversationResponseEntity> GetListConversationByChatAndAgentId(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<ConversationResponseEntity> listUserConnect = new ObjectResultList<ConversationResponseEntity>();
+
+            try
+            {
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@chatid", objectRequest.SenderObject.Split(';')[0].ToString());
+                parameters.Add("@agentid", objectRequest.SenderObject.Split(';')[1].ToString());
+
+                CommandParameter queryCommand = new CommandParameter("chat.AccountManager_GetListConversationsByChatAndAgentId_Sp", parameters);
+                DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
+
+                listUserConnect = new ObjectResultList<ConversationResponseEntity>(dtresult);
+            }
+            catch (TimeoutException tout)
+            {
+                listUserConnect.Id = 2;
+                listUserConnect.Message = tout.Message;
+
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                listUserConnect.Id = 1;
+                listUserConnect.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return listUserConnect;
+        }
+
     }
 }

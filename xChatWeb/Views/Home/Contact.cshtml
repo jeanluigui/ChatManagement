@@ -1,189 +1,53 @@
-﻿@*@{
-        ViewBag.Title = "Contact";
-    }
-    <h2>@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
-
-    <address>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br />
-        <abbr title="Phone">P:</abbr>
-        425.555.0100
-    </address>
-
-    <address>
-        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-    </address>*@
+﻿
 @Model xChatEntities.ListUserConnect;
 
 @{
     ViewBag.Title = "Home Page";
 }
+<p>Content here. <a class="alert" href=#>Alert!</a></p>
 
-<div class="container">
 
-    <div class="row">
-        <div class="col-lg-4">
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
-            @foreach (var userConnect in Model.Data.Elementos)
-            {
-                <p>@userConnect.UserName</p>
+<script>
+    $(document).on("click", ".alert", function (e) {
+        bootbox.confirm({
+            title: "Trasferencia de Chat",
+            message: "Desea transferir el Chat de " + "luigui" + " a " + "jose" + " ?.",
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times"></i> Aceptar'
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"></i> Confirmar'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    console.log('Se confirmo la transferencia de Chat');
+                } else {
+                    console.log('Se cancelo la transferencia de Chat');
+                }
+
             }
+        });
+    });
+</script>
 
-            @*<div class="list-group-item-info" id="item1">
-                <div class="titulo"><p>User 01</p></div>
-            </div>
-            <div class="list-group-item-info" id="item2">
-                <div class="titulo"><p>User 01</p></div>
-            </div>
-            <div class="list-group-item-info" id="item3">
-                <div class="titulo"><p>User 01</p></div>
-            </div>
-            <div class="list-group-item-info" id="item4">
-                <div class="titulo"><p>User 01</p></div>
-            </div>*@
-        </div>
-        <div class="col-lg-8">
-
-        </div>
-    </div>
-
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <input type="text" class="form-control" id="AccountManagerId" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <input type="text" class="form-control" id="ModuloAppId" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <input type="text" class="form-control" id="EMail" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <input type="text" class="form-control" id="Password" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <input type="button" class="btn btn-success" id="btnconnect" value="Conectar" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <input type="text" class="form-control" id="message" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <input type="button" class="btn btn-success" id="btnsendmessage" value="enviar" />
-        </div>
-    </div>
-    <p>Listado de Mensajes</p>
-    <div class="row">
-        <ul id="discussion"></ul>
-    </div>
-</div>
-
-<input type="hidden" id="displayname" value=""/>
-<input type="hidden" id="chatId" value="0"/>
+<input type="hidden" id="displayname" value="" />
+<input type="hidden" id="chatId" value="0" />
 <input type="hidden" id="AccountManagerId" value="0" />
-<input type="hidden" id="ModuleAppId" value="0"/>
-<input type="hidden" id="UserName" value=""/>
-<input type="hidden" id="UserEmail" value=""/>
-<input type="hidden" id="UserToken" value=""/>
-<input type="hidden" id="ManagerToken" value=""/>
+<input type="hidden" id="ModuleAppId" value="0" />
+<input type="hidden" id="UserName" value="" />
+<input type="hidden" id="UserEmail" value="" />
+<input type="hidden" id="UserToken" value="" />
+<input type="hidden" id="ManagerToken" value="" />
 
 @section scripts{
 
     <script src="~/Scripts/jquery.signalR-2.4.0.js"></script>
     <script src="@xChatEntities.Constants.Url.SignalRHub"></script>
 
-    <script type="text/javascript">
 
-        $(function ()
-        {
-            $.support.cors = true;
-
-            $.connection.hub.url = "@xChatEntities.Constants.Url.SignalR";
-
-            var Counter = $.connection.counterHub;
-
-            // Chat recibido del usuario.
-            Counter.client.receivedFromUser = function (obj) {
-
-                var divName = $("<div />").text(obj.UserName).html();
-                var divMessage = $("<div />").text(obj.Message).html();
-
-                $("#chatId").val(obj.ChatId);
-                $("#AccountManagerId").val(obj.AccountManagerId);
-                $("#ModuleAppId").val(obj.ModuleAppId);
-                $("#UserName").val(obj.UserName);
-                $("#UserEmail").val(obj.UserEmail);
-                $("#UserToken").val(obj.UserToken);
-                $("#ManagaerToken").val(obj.ManagerToken);
-
-                $("#discussion").append("<li><strong>" + divName + ": </strong> " + divMessage + "</li>");
-            };
-
-            // Conexión Satisfactoria.
-            Counter.client.sucessConnect = function (token) {
-
-                var divToken = $("<div />").text(token).html();
-
-                $("#discussion").append("<li><strong>" + divToken + ": </strong></li>");
-            };
-
-            // Iniciar conexión con Concentrador.
-            $.connection.hub.start().done(function () {
-
-                // Botón Login Connect Account Manager.
-                $("#btnconnect").click(function () {
-
-                    var obj = {
-                        AccountManagerId: $("#AccountManagerId").val(),
-                        ModuloAppId: $("#ModuloAppId").val(),
-                        EMail: $("#UserEmail").val(),
-                        Password: "12345678",
-                        Token: ""
-                    };
-
-                    Counter.server.accountManagerConnect(obj);
-
-                });
-
-                // Botón chatear.
-                $("#btnsendmessage").click(function () {
-
-                    var objChat = {
-                        ChatId: $("#chatId").val(),
-                        ModuleAppId: "1",
-                        AccountManagerId: "1",
-                        UserName: "1",
-                        UserEmail: "1",
-                        Message: $("#message").val(),
-                        DateMessage: "",
-                        UserToken: "",
-                        ManagerToken: ""
-                    };
-
-                    Counter.server.sendToUser(objChat);
-
-                });
-
-            });
-
-
-        });
-
-    </script>
 
 }

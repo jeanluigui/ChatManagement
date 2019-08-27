@@ -111,7 +111,8 @@ namespace xChatDAO
                 chatMessageId = Convert.ToInt32(rowResult["chatMessageId"]);
 
                 conversationEntity.UserToken = rowResult["UserToken"].ToString();
-                conversationEntity.ManagerToken = rowResult["AccountManagerToken"].ToString();
+                conversationEntity.AgentToken = rowResult["AccountManagerToken"].ToString();
+                conversationEntity.AgentId = Convert.ToInt32(rowResult["AccountManagerId"]);
             }
             catch (TimeoutException tout)
             {
@@ -205,6 +206,62 @@ namespace xChatDAO
 
             return managerToken;
         }
+        /// <summary>
+        /// Obtener el tocken de un manager conectado.
+        /// </summary>
+        /// <param name="conversationEntity"></param>
+        /// <returns></returns>
+        public static string GetManagerTokenValue(ConversationEntity conversationEntity)
+        {
+            string managerToken = string.Empty;
+
+            try
+            {
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@agentid", conversationEntity.AgentId);
+
+                CommandParameter queryCommand = new CommandParameter("chat.ManagerConnect_GetTokenActive_Sp", parameters);
+                DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
+
+                managerToken = rowResult["AccountManagerToken"].ToString();
+            }
+            catch (TimeoutException tout)
+            {
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return managerToken;
+        }
+        public static ConversationEntity GetAgentAndManagerIdByToken(string token)
+        {
+            ConversationEntity obj = new ConversationEntity();
+            try
+            {
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@token", token);
+
+                CommandParameter queryCommand = new CommandParameter("chat.ManagerConnect_GetAgentIdActive_Sp", parameters);
+                DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
+                
+                obj.ManagerId = Convert.ToInt32(rowResult["AccountManagerId"].ToString());
+                obj.AgentId = Convert.ToInt32(rowResult["AgentId"].ToString());
+                
+            }
+            catch (TimeoutException tout)
+            {
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return obj;
+        }
 
         /// <summary>
         /// Desconectar a un manager.
@@ -215,7 +272,7 @@ namespace xChatDAO
             try
             {
                 ListParameters parameters = new ListParameters();
-                parameters.Add("@accountmanagerid", accountManagerEntity.AccountManagerId);
+                parameters.Add("@accountmanagerid", accountManagerEntity.AccountUserId);
                 parameters.Add("@moduleappid", accountManagerEntity.ModuloAppId);
 
                 CommandParameter queryCommand = new CommandParameter("chat.ManagerAccountConnect_GetTokenActive_Sp", parameters);
@@ -243,7 +300,7 @@ namespace xChatDAO
 
                 ListParameters parameters = new ListParameters();
                 parameters.Add("@moduleappid", accountManagerEntity.ModuloAppId);
-                parameters.Add("@accountmanagerid", accountManagerEntity.AccountManagerId);
+                parameters.Add("@accountmanagerid", accountManagerEntity.AccountUserId);
                 parameters.Add("@accountmanagertoken", accountManagerEntity.Token);
                 parameters.Add("@accountmanagerconnectdatestart", DateTime.Now);
 
@@ -285,7 +342,7 @@ namespace xChatDAO
                 if (drresult != null && !drresult.IsNull("AccountManagerConnectId"))
                 {
                     accountManagerConnectId = Convert.ToInt32(drresult["AccountManagerConnectId"]);
-                    conversationEntity.ManagerToken = drresult["AccountManagerToken"].ToString();
+                    conversationEntity.AgentToken = drresult["AccountManagerToken"].ToString();
                 }
             }
             catch (TimeoutException tout)
@@ -321,7 +378,7 @@ namespace xChatDAO
                 if (drresult != null && !drresult.IsNull("AccountManagerConnectId"))
                 {
                     accountManagerConnectId = Convert.ToInt32(drresult["AccountManagerConnectId"]);
-                    conversationEntity.ManagerToken = drresult["accountmanagertoken"].ToString();
+                    conversationEntity.AgentToken = drresult["accountmanagertoken"].ToString();
                 }
             }
             catch (TimeoutException tout)
@@ -407,7 +464,78 @@ namespace xChatDAO
             }
         }
 
+        public static ObjectResultList<AccountManagerConnect> GetListAgentByManager(ConversationEntity objectRequest)
+        {
+            ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
+
+            try
+            {
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@managerId", objectRequest.ManagerId);
+
+                CommandParameter queryCommand = new CommandParameter("chat.Accountmanagerconnect_Getbymanagerid_Sp", parameters);
+
+                DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
+
+                result = new ObjectResultList<AccountManagerConnect>(dtresult);
+
+                ListAccountManagerConnect listAMC = new ListAccountManagerConnect(dtresult);
+
+            }
+            catch (TimeoutException tout)
+            {
+                result.Id = 2;
+                result.Message = tout.Message;
+
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return result;
+        }
         #endregion
+
+        /// <summary>
+        /// Mueve una conversación de un chat a otro.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        public static Int32 ConversationMoveTo(ConversationEntity conversationEntity)
+        {
+            Int32 success = 0;
+            try
+            {
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@accountManagerId", conversationEntity.AgentId); //Agente a quien se le transfiere
+                parameters.Add("@chatid", conversationEntity.ChatId);           // Chat de usuario
+
+                CommandParameter queryCommand = new CommandParameter("chat.Conversation_MoveTo_Sp", parameters);
+                DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
+                if (rowResult != null)
+                {
+                    conversationEntity.AgentToken = rowResult["AccountManagerToken"].ToString(); //Token del agente que se le transfirio chat
+                    conversationEntity.AgentId = Convert.ToInt32(rowResult["AccountManagerId"].ToString());  //Id del agente que se le transfirio chat
+                    success = Convert.ToInt32(rowResult["RowsAffect"].ToString());
+                }              
+            }
+            catch (TimeoutException tout)
+            {
+                success = 0;
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                success = 0; 
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+            return success;
+
+        }
 
     }
 

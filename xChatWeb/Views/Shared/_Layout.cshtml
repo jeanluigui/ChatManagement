@@ -16,7 +16,7 @@
             margin: 0px;
             padding: 0px;
             height: 100%;
-            width: 100%;
+            /*width: 100%;*/
         }
 
         .haveMessageActive {
@@ -67,6 +67,7 @@
             height: 120px;
             -webkit-animation: spin 2s linear infinite;
             animation: spin 2s linear infinite;
+
         }
 
         @@-webkit-keyframes spin {
@@ -138,20 +139,23 @@
             right: 15px;
             display: none;
         }
-        .action_menu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .action_menu ul li {
-            width: 100%;
-            padding: 10px 15px;
-            margin-bottom: 5px;
-        }
-        .action_menu ul li:hover {
-            cursor: pointer;
-            background-color: rgba(0,0,0,0.2);
-        }
+
+            .action_menu ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+                .action_menu ul li {
+                    width: 100%;
+                    padding: 10px 15px;
+                    margin-bottom: 5px;
+                }
+
+                    .action_menu ul li:hover {
+                        cursor: pointer;
+                        background-color: rgba(0,0,0,0.2);
+                    }
 
         /*param el chat*/
 
@@ -161,7 +165,7 @@
             border-radius: 5px;
             padding: 10px;
             margin: 10px 0;
-            width:auto;
+            width: auto;
         }
 
         .darker_chat {
@@ -202,35 +206,40 @@
 </head>
 <body>
     @*<div class="navbar navbar-inverse navbar-fixed-top" style="display:none">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Chat Manager", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Chat Manager", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                    </ul>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>*@
-    <div style="width:100%; height:100%; position:absolute">
+        </div>*@
+    
+    <div class="container-fluid" style="min-height: 100%; height: auto !important; height: 100%!important;">
         @RenderBody()
-        @*<hr />*@
-        @*<footer style="display:none">
+    </div>
+      
+        @*<div style="width:100%; height:100%; position:absolute">
+
+            @*<hr />*@
+    @*<footer style="display:none">
             <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
         </footer>*@
-    </div>
+    @*</div>*@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-
+    <script src="~/Scripts/bootbox.min.js"></script>
 
     <script type="text/javascript">
 
@@ -264,47 +273,31 @@
                 class_send = "receiver";
             }
 
-            var content = '<div class="row message-body">' + 
-                '<div class="col-sm-12 ' + class_main + '">' + 
-                                    '<div class="' + class_send + '">' +
-                                        '<div class="message-text">' +
-                                            obj.Message
-                                            '</div>' +
-                                        '<span class="message-time pull-right">' +
-                                            'today' + 
-                                        '</span>' + 
-                                    '</div>' + 
-                                '</div>' + 
+            var content = '<div class="row message-body">' +
+                '<div class="col-sm-12 ' + class_main + '">' +
+                '<div class="' + class_send + '">' +
+                '<div class="message-text">' +
+                obj.Message
+            '</div>' +
+                '<span class="message-time pull-right">' +
+                'today' +
+                '</span>' +
+                '</div>' +
+                '</div>' +
                 '</div>';
 
             return content;
         }
 
+
+
     </script>
+
+
     <script src="~/Scripts/Base.js"></script>
     <script src="~/Content/handlebars/handlebars-v4.0.12.js"></script>
     @RenderSection("scripts", required: false)
 
-    @*<script src="~/Scripts/jquery.signalR-2.4.0.js"></script>
-        <script src="@xChatEntities.Constants.Url.SignalRHub"></script>*@
-
-    @*<script>
-            $(function ()
-            {
-                $.support.cors = true;
-
-                $.connection.hub.url = "@xChatEntities.Constants.Url.SignalR";
-
-                var Counter = $.connection.counterHub;
-
-                Counter.client.enterUser = function () {
-                    alert("entro alguien!");
-                };
-
-                $.connection.hub.start().done();
-
-            });
-        </script>*@
 
     <script type="text/x-handlebars-template" id="messageUser">
         @*{{# each lstMessageUser}}
@@ -324,8 +317,8 @@
         </div>
         <div class="row message-body">
             <div class="col-sm-12 message-main-receiver">
-                <div class="receiver">
-                    <div class="message-text">
+                <div class="receiver" style="background:#f7f7f7">
+                    <div class="message-text" style="font-family: sans-serif">
                         {{message}}
                     </div>
                     <span class="message-time pull-right">
@@ -351,7 +344,7 @@
         <div class="row message-body">
             <div class="col-sm-12 message-main-sender">
                 <div class="sender">
-                    <div class="message-text">
+                    <div class="message-text" style="font-family: sans-serif">
                         {{message}}
                     </div>
                     <span class="message-time pull-right">
@@ -392,6 +385,75 @@
                             </span>
                         </div>
                         {{/if}}
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        {{/each}}
+    </script>
+
+    <script type="text/x-handlebars-template" id="userActiveViewManager">
+        {{# each lstUsers}}
+        <a href="#" class="listUser" id="{{userId}}">
+            <div class="row sideBar-body" data-userid="{{userId}}" data-username="{{userName}}" data-chatid="{{ChatId}}" id="lstUserData" draggable="true" ondragstart="drag(event)">
+                <div class="col-sm-3 col-xs-3 sideBar-avatar">
+                    <div class="avatar-icon">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                    </div>
+                </div>
+                <div class="col-sm-9 col-xs-9 sideBar-main">
+                    <div class="row">
+                        <div class="col-sm-8 col-xs-8 sideBar-name">
+                            <span class="name-meta">
+                                {{userName}}
+                            </span>
+                        </div>
+                        {{#if ChatIsReadForManager}}
+                        <div class="col-sm-4 col-xs-4 pull-right sideBar-time" style="margin-top: 10px;">
+                            <span class="time-meta pull-right">
+                                @*{{ChatIsReadForManager}}*@
+                            </span>
+                        </div>
+                        {{else}}
+                        <div class="col-sm-1 col-xs-1 pull-right sideBar-time haveMessageActive" style="margin-top: 10px;">
+                            <span class="time-meta pull-right">
+                                @*{{ChatIsReadForManager}}*@
+                            </span>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        {{/each}}
+    </script>
+
+    <script type="text/x-handlebars-template" id="AgentsHandlebars">
+        {{# each lstAgents}}
+        <a href="#" class="listAgent" id="btnconnect" data-AgentValueId="{{AgentId}}" data-IsAgent="{{AccountManagerIsAgent}}" data-agentname="{{AccountAgentName}}" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="row sideBar-body" data-id="{{AgentId}}" id="lstAgentData">
+                <div class="col-sm-3 col-xs-3 sideBar-avatar" style="width: 42px;">
+                    <div class="avatar-icon">
+                        <img src="/Content/Imagenes/user-profile.png" />
+                        {{#if AccountManagerIsActive}}
+                        <span id="idOnline" class="online_icon" style="margin-right: -8px;"></span>
+                        {{else}}
+                        <span id="idOnline" class="Disconectonline_icon" style="margin-right: -8px;"></span>
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="col-sm-9 col-xs-9 sideBar-main">
+                    <div class="row">
+                        <div class="col-sm-7 col-xs-7 sideBar-name">
+                            <span class="name-meta">
+                                {{AccountAgentName}}
+                            </span>
+                        </div>
+                        <div class="col-sm-5 col-xs-5 pull-right sideBar-time">
+
+                        </div>
                     </div>
                 </div>
             </div>

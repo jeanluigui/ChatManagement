@@ -159,6 +159,36 @@ namespace xChatBusiness
 
             return managerToken;
         }
+        public string GetManagerTokenValue(ConversationEntity conversationEntity)
+        {
+            string managerToken = string.Empty;
+
+            try
+            {
+                managerToken = ServiceChatDAO.GetManagerTokenValue(conversationEntity);
+            }
+            catch (Exception ex)
+            {
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return managerToken;
+        }
+        public ConversationEntity GetAgentAndManagerIdByToken(String token)
+        {
+            ConversationEntity ConversationEntity = new ConversationEntity();
+
+            try
+            {
+                ConversationEntity = ServiceChatDAO.GetAgentAndManagerIdByToken(token);
+            }
+            catch (Exception ex)
+            {
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return ConversationEntity;
+        }
 
         /// <summary>
         /// Desconectar a un agente.
@@ -233,6 +263,59 @@ namespace xChatBusiness
         }
 
         #endregion
+
+        public ObjectResultList<AccountManagerConnect> GetListAgentByManager(ConversationEntity objectRequest)
+        {
+            ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
+
+            try
+            {
+                if (objectRequest.ManagerId <= 0)
+                {
+                    throw new Exception("Debe especificar valor de filtro.");
+                }
+
+                result = ServiceChatDAO.GetListAgentByManager(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Mover una conversación a otro chat.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        public int ConversationMoveTo(ConversationEntity objChat)
+        {
+            int success = 0;
+            try
+            {
+                if (objChat.AgentId < 1)
+                {
+                    throw new Exception("Debe especificar valor para AgentId.");
+                }
+                if (objChat.ChatId < 1)
+                {
+                    throw new Exception("Debe especificar valor para ChatId.");
+                }
+
+                success = ServiceChatDAO.ConversationMoveTo(objChat);
+            }
+            catch (Exception ex)
+            {
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return success;
+        }
 
     }
 }

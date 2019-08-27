@@ -52,6 +52,30 @@ namespace xChatBusiness
         }
 
         /// <summary>
+        /// Obtener la lista de usuarios de un Manager.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        public ObjectResultList<UserConnect> GetListUserByAccountManagerId(ObjectRequest<int> objectRequest)
+        {
+            ObjectResultList<UserConnect> result = new ObjectResultList<UserConnect>();
+
+            try
+            {
+                result = _IServiceChatManagerDAO.GetListUserByAccountManagerId(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Obtener listado de conversación de un chat.
         /// </summary>
         /// <param name="objectRequest"></param>
@@ -82,35 +106,7 @@ namespace xChatBusiness
             return result;
         }
 
-        /// <summary>
-        /// Mover una conversación a otro chat.
-        /// </summary>
-        /// <param name="objectRequest"></param>
-        /// <returns></returns>
-        public int ConversationMoveTo(ObjectRequest<ConversationMoveEntity> objectRequest)
-        {
-            try
-            {
-                if (objectRequest.SenderObject.ChatIdSource < 1)
-                {
-                    throw new Exception("Debe especificar valor para ChatIdSource.");
-                }
-
-                if (objectRequest.SenderObject.ChatIdTarget < 1)
-                {
-                    throw new Exception("Debe especificar valor para ChatIdTarget.");
-                }
-
-                _IServiceChatManagerDAO.ConversationMoveTo(objectRequest);
-            }
-            catch (Exception ex)
-            {
-                log.Save(EnumLogLevel.Fatal, ex);
-            }
-
-            return 1;
-        }
-
+       
         /// <summary>
         /// Obtener la lista de agentes por Módulo.
         /// </summary>
@@ -323,5 +319,80 @@ namespace xChatBusiness
 
             return result;
         }
+
+        public ObjectResult<UserRoleType> UsersGetRoleType(ObjectRequest<string> objectRequest)
+        {
+            ObjectResult<UserRoleType> result = new ObjectResult<UserRoleType>();
+            try
+            {
+                if (string.IsNullOrEmpty(objectRequest.SenderObject))
+                    throw new Exception("Debe enviar un valor para el UserId.");
+                               
+                result = _IServiceChatManagerDAO.UsersGetRoleType(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                result.Id = -1;
+                result.Message = "NoOk";
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+            return result;
+        }
+
+        public ObjectResultList<AccountManagerConnect> GetListAgentByManager(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
+
+            try
+            {
+                if (string.IsNullOrEmpty(objectRequest.SenderObject))
+                {
+                    throw new Exception("Debe especificar valor de filtro.");
+                }
+
+                result = _IServiceChatManagerDAO.GetListAgentByManager(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Obtener listado de conversación de un chat.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        public ObjectResultList<ConversationResponseEntity> GetListConversationByChatAndAgentId(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<ConversationResponseEntity> result = new ObjectResultList<ConversationResponseEntity>();
+
+            try
+            {
+                if (string.IsNullOrEmpty(objectRequest.SenderObject))
+                {
+                    throw new Exception("Debe especificar valor de filtro.");
+                }
+
+                result = _IServiceChatManagerDAO.GetListConversationByChatAndAgentId(objectRequest);
+
+                result.Elements.ForEach(x => x.Message = encryp.Encryption.Decrypt(x.Message));
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return result;
+        }
+
     }
 }

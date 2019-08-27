@@ -3,56 +3,58 @@
 @{
     ViewBag.Title = "Manager";
 }
+@using xChatEntities;
 
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="~/Content/StyleWhatsapp/styleWhatsapp.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<div style="width:100%; height:100%">
-
-    <div class="app-one" style="overflow-y:scroll;">
-
-        <div class="col-sm-3 side">
-
+<style type="text/css">
+    .bootbox-close-button close {
+        display: none;
+    }
+</style>
+<div class="row" style="height:100%">
+    @if (ViewBag.RolType == (Int32)EnumRolTypeChat.Manager)
+    {
+        <div class="col-sm side">
             <div class="side-one">
-
-                <div class="row heading" style="font-weight: 700">
+                <div class="row heading" style="font-weight: 700;">
                     Agentes
                 </div>
+                <div class="sideBar" style=" overflow-y: scroll;height: 94%;" id="divListAgents">
 
-                <div class="sideBar" style="overflow-y: scroll;">
-
-                    @if (Model != null && Model.Count > 0)
+                    @if (ViewBag.ListAgentByManager.Elements != null && ViewBag.ListAgentByManager.Elements.Count > 0)
                     {
-                        foreach (xChatEntities.AccountManagerConnect item in Model)
+                        for (int i = 0; i < ViewBag.ListAgentByManager.Elements.Count; i++)
                         {
-                            <div class="sideBar-main sideBar-body">
-
-                                <div class="js-reload-details row" 
-                                     data-agentid="@item.AccountManagerId" 
-                                     data-url='@Url.Action("GetUsers", "Manager", new { agentId = item.AccountManagerId })'>
-
+                            <a href="#" class="listAgent" id="btnconnect" data-AgentValueId="@ViewBag.ListAgentByManager.Elements[i].AgentId" data-IsAgent="@ViewBag.ListAgentByManager.Elements[i].AccountManagerIsAgent" data-agentname="@ViewBag.ListAgentByManager.Elements[i].AccountAgentName" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                <div class="row sideBar-body" data-id="@ViewBag.ListAgentByManager.Elements[i].AgentId" id="lstAgentData">
                                     <div class="col-sm-3 col-xs-3 sideBar-avatar" style="width: 42px;">
                                         <div class="avatar-icon">
                                             <img src="~/Content/Imagenes/user-profile.png" />
+                                            @if (@ViewBag.ListAgentByManager.Elements[i].AccountManagerIsActive == 1)
+                                            {
+                                                <span id="idOnline" class="online_icon" style="margin-right: -8px;"></span>
+                                            }
+                                            else
+                                            {
+                                                <span id="idOnline" class="Disconectonline_icon" style="margin-right: -8px;"></span>
+                                            }
                                         </div>
                                     </div>
                                     <div class="col-sm-9 col-xs-9 sideBar-main">
                                         <div class="row">
                                             <div class="col-sm-7 col-xs-7 sideBar-name">
                                                 <span class="name-meta">
-                                                    @item.AccountManagerName
+                                                    @ViewBag.ListAgentByManager.Elements[i].AccountAgentName
                                                 </span>
                                             </div>
                                             <div class="col-sm-5 col-xs-5 pull-right sideBar-time">
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row" style="justify-content:flex-end">
-                                    <a href="#" class="badge badge-primary">Move To</a>
-                                </div>
-                            </div>
+                            </a>
                         }
                     }
 
@@ -60,20 +62,17 @@
             </div>
             <div id="loader" style="display:none"></div>
         </div>
-
-        <div class="col-sm-3 side">
+        <div class="col-sm side">
             <div class="side-one">
                 <div class="row heading" style="font-weight: 700">
                     Usuarios
                 </div>
-                <div class="sideBar" id="userActiveShow" style="overflow-y: scroll;">
+                <div class="sideBar" id="userActiveShow" style=" overflow-y: scroll;height: 94%;">
 
                 </div>
             </div>
-            <div id="loader" style="display:none"></div>
         </div>
-
-        <div class="col-sm-6 conversation">
+        <div class="col-sm conversation">
             <div class="heading" style="font-weight: 700">
 
                 <div class="heading-avatar-icon">
@@ -91,121 +90,300 @@
             <div class="action_menu selected" style="display: none;">
                 <ul id="optionMenu">
                     <li data-input="1">Cerrar Chat</li>
-                    <li data-input="2">Mover Chat</li>
-                    <li data-input="3">Capturar Chat</li>
-                    <li data-input="4">Descargar Chat</li>
+                    <li data-input="2">Mover a un Manager</li>
                 </ul>
             </div>
-            <div class="message" id="divConversations" style=" overflow-y: scroll;">
+            <div class="message" id="conversation" style=" overflow-y: scroll;height: 90%;">
 
             </div>
-
-
+            <div class="row">
+                <div class="col-sm-10"><textarea class="form-control" rows="1" id="message" name="message" placeholder="Escriba su mensaje ..." style="overflow-y: scroll"></textarea></div>
+                <div class="col-sm-2"> <i class="fa fa-send fa-2x" aria-hidden="true" id="btnsendmessage"></i></div>
+            </div>
+            @*<div class="reply">
+                    <div class="col-sm-9 col-xs-9 col-lg-11 reply-main">
+                        <textarea class="form-control" rows="1" id="message" name="message" placeholder="Escriba su mensaje ..." style="overflow-y: scroll"></textarea>
+                    </div>
+                    <div class="col-sm-1 col-xs-1 reply-send">
+                        <i class="fa fa-send fa-2x" aria-hidden="true" id="btnsendmessage"></i>
+                    </div>
+                </div>*@
         </div>
-    </div>
+    }
+
+
 </div>
 
 <input type="hidden" id="displayname" value="" />
 <input type="hidden" id="AgentId" value="0" />
 <input type="hidden" id="ChatId" value="0" />
-<input type="hidden" id="AccountManagerId" value="0" />
 <input type="hidden" id="ModuleAppId" value="0" />
 <input type="hidden" id="UserName" value="" />
 <input type="hidden" id="UserEmail" value="" />
 <input type="hidden" id="UserToken" value="" />
-<input type="hidden" id="ManagerToken" value="" />
-<input type="hidden" id="AccountManagerName" value="" />
+<input type="hidden" id="AgentToken" value="" />
+<input type="hidden" id="AccountAgentName" value="" />
+
+<input type="hidden" id="hfRolType" value="@(@ViewBag.RolType == null ? 0 : ViewBag.RolType)" />
+<input type="hidden" id="hfManagerId" value="@(ViewBag.ManagetId == null ? 0 : ViewBag.ManagetId)" />
+@*<input type="hidden" id="haveMessageFromChatId" value="0" />*@
 
 @section scripts{
 
-    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script src="~/Scripts/jquery.signalR-2.4.0.js"></script>
     <script src="@xChatEntities.Constants.Url.SignalRHub"></script>
 
     <script type="text/javascript">
+
         var Counter;
         var chatIdCurrent;
 
+
+
         function Fn_Init() {
-
-            $('.js-reload-details').on('click', function (evt) {
-                evt.preventDefault();
-                evt.stopPropagation();
-
-                // ---------------------------------------------
-                // guardar parámetros del item seleccionado.
-                // ---------------------------------------------
-                var $detailDiv = $('#userActiveShow'),
-                    url = $(this).data('url'),
-                    agentId = $(this).data('agentid');
-
-                alert("agentId: " + agentId);
-
-                $("#AccountManagerId").val(agentId);
-
-                // ----------------------------------------------
-                // llamar al servicio.
-                // ----------------------------------------------
-                $.get(url, function (data) {
-                    $detailDiv.html(data);
-
-                });
-            });
-
-            $(document).on('click', '#action_menu_btn', function () {
-                $('.action_menu').toggle();
-            });
+            Fn_Bind("");
+    
         }
 
-        $(function () {
+        function Fn_Bind(agentid) {
+            $('.listUser').on('click', function (e) {
+                e.preventDefault();
+                $('.listUser div').each(function (i, e) {
+                    $(e).removeClass('active_chat');
+                });
+                $($(this).children()[0]).addClass("active_chat");
+                var chatid = $(this).attr("id")
+                Fn_MessageUser(chatid, agentid)
 
+                var conversationEntity = { ChatId: chatid }
+                Counter.server.setMessageReadForManager(conversationEntity);
+                $(this).find('.haveMessageActive').removeClass();
+            });
+
+        }
+
+        // ------------------------------------------------
+        // Funcion para cerrar chat de un usuario.
+        // ------------------------------------------------
+        function Fn_CloseChatUser() {
+
+            var chatId = $("input[id$=ChatId]").val();
+
+            if (chatId == "0") {
+                alert("No hay chat disponible");
+                return;
+            }
+
+            var objChat = {
+                ChatId: $("input[id$=ChatId]").val(),
+                ModuleAppId: $("input[id$=ModuleAppId]").val(),
+                AgentId: $("input[id$=AgentId]").val(),
+                UserName: $("input[id$=UserName]").val(),
+                UserEmail: $("input[id$=UserEmail]").val(),
+                Message: $("#message").val(),
+                DateMessage: "",
+                UserToken: $("input[id$=UserToken]").val(),
+                AgentToken: $("input[id$=AgentToken]").val(),
+                AccountAgentName: $("input[id$=AccountAgentName]").val(),
+            };
+
+            Counter.server.userDisconnectForMangaer(objChat);
+
+        }
+
+        // ------------------------------------------------
+        // Pinta nuevamente la lista de usuarios.
+        // ------------------------------------------------
+        function Fn_UserActiveByAgent(agentId)
+        {
+          if (agentId != undefined && agentId > 0)
+          {
+            var lstUserActive = [];
+            var lstUsers = [];
+
+            var objUserConnect =
+            {
+                AccountUserId: agentId
+            };
+
+            var objData = JSON.stringify({ AccountManagerEntity: objUserConnect});
+            success = function (response) {
+                try {
+                    //ChatIsReadForManager si es 1 es leido si es 0 no leido (agregar marca)
+                    lstUserActive = response.Elements;
+
+                    if (lstUserActive != null && lstUserActive != "") {
+                        $("#userActiveShow a").remove();
+                        lstUsers = [];
+                        for (var i = 0; i < lstUserActive.length; i++) {
+                            lstUsers = [];
+                            if (lstUserActive[i].ChatIsReadForManager == 1)
+                            {
+                                lstUsers.push({
+                                    userId: lstUserActive[i].ChatId,
+                                    userName: lstUserActive[i].UserName,
+                                    userEmail: lstUserActive[i].UserEmail,
+                                    ChatIsReadForManager: lstUserActive[i].ChatIsReadForManager,
+                                    ChatId: lstUserActive[i].ChatId
+                                });
+                            }
+                            else
+                            {
+                                lstUsers.push({
+                                    userId: lstUserActive[i].ChatId,
+                                    userName: lstUserActive[i].UserName,
+                                    userEmail: lstUserActive[i].UserEmail,
+                                    ChatIsReadForManager: lstUserActive[i].ChatIsReadForManager,
+                                    ChatId: lstUserActive[i].ChatId
+                                });
+                            }
+
+                            $("#userActiveShow").append(Fn_LoadHandlebars("userActiveViewManager", { lstUsers }));
+                        }
+                        Fn_Bind(agentId);
+
+
+                        //Mantiene el chat Actual activa
+                        $('.listUser').each(function (i, e) {
+                            if ($(e)[0].id == chatIdCurrent) {                       //Valido si es el chat actual
+                                $($($(e)[0]).children()[0]).addClass("active_chat")
+                            }
+                        });
+
+
+                    } else {
+                        $("#userActiveShow").append(Fn_LoadHandlebars("userActiveViewManager", { lstUsers }));
+                        $("#userActiveShow").empty();
+                        $("#conversation div").remove();
+                        //fn_message("i", "No tiene Usuarios activos.");
+                     }
+                }
+                catch (e) {
+                    fn_message("e", "Se produjo un error al cargar datos.");
+                }
+                $("#loader").css('display', 'none');
+            };
+            error = function (xhr, ajaxOptions, thrownError) {
+                $("#loader").css('display', 'none');
+                fn_message("e", "Se produjo un error al cargar datos.");
+            };
+
+            Fn_CallMethod("@(Url.Action("GetListUserByAgent", "Manager"))", { data: objData }, success, error);
+          } else {
+              return;
+          }
+
+        }
+
+        function Fn_MessageUser(chatid, agentid)
+        {
+            var lstMessageUser = [];
+            var lstMessageManager = [];
+            var lstChat = [];
+            if (chatid == undefined || chatid <= 0 || agentid == undefined || agentid <= 0)
+            {
+                alert("Se debe especificar chat y Agente");
+                return;
+            }
+            var objChat =
+            {
+                ChatId: chatid,
+                AgentId: agentid
+            };
+
+            var objData = JSON.stringify({ UserConnect: objChat});
+            success = function (response) {
+                try {
+                    lstChat = response.Elements;
+                    if (lstChat != null) {
+                        $("#conversation div").remove();
+                        for (var i = 0; i < lstChat.length; i++) {
+                            if (lstChat[i].IsUser == 1) {
+                                lstMessageUser = [];
+                                lstMessageUser.push({
+                                    message: lstChat[i].Message,
+                                });
+                                $("#conversation").append(Fn_LoadHandlebars("messageUser", { lstMessageUser }));
+                                $("#conversation").scrollTop($("#conversation")[0].scrollHeight);
+                            }
+                            else {
+                                lstMessageManager = [];
+                                lstMessageManager.push({
+                                    message: lstChat[i].Message,
+                                });
+                                $("#conversation").append(Fn_LoadHandlebars("messageManager", { lstMessageManager }));
+                                $("#conversation").scrollTop($("#conversation")[0].scrollHeight);
+                            }
+                            $("input[id$=ChatId]").val(lstChat[i].ChatId);
+                            $("input[id$=AgentId]").val(lstChat[i].AccountManagerId);//Of Agent
+                            $("input[id$=ModuleAppId]").val(lstChat[i].ModuleAppId);
+                            $("input[id$=UserName]").val(lstChat[i].UserName);
+                            $("input[id$=UserEmail]").val(lstChat[i].UserEmail);
+                            $("input[id$=UserToken]").val(lstChat[i].UserToken);
+                            $("input[id$=AgentToken]").val(lstChat[i].AccountManagerToken);//Of Agent
+                            $("input[id$=AccountAgentName]").val(lstChat[i].AccountManagerName);//Of Agent
+                        }
+                     } else {
+                        alert("Error ");
+                     }
+                }
+                catch (e) {
+                    alert("Error ");
+                }
+            };
+            error = function (xhr, ajaxOptions, thrownError) {
+                alert("Error ");
+            };
+
+            Fn_CallMethod("@(Url.Action("MyConversationShow", "Manager"))", { data: objData }, success, error);
+        }
+
+        $(function ()
+        {
             Fn_Init();
 
-            $.support.cors = true;
+             $.support.cors = true;
 
             $.connection.hub.url = "@xChatEntities.Constants.Url.SignalR";
 
             Counter = $.connection.counterHub;
 
-            // -----------------------------------------
             // Iniciar conexión con Concentrador.
-            // -----------------------------------------
-            $.connection.hub.start().done(function () {
+            $.connection.hub.start().done(function ()
+            {
 
                 // Botón Login Connect Account Manager.
-                $(document).on('click', '#btnconnect', function () {
-                    if ($(this).attr("data-IsAgent") == "True") {
+                $(document).on('click', '#btnconnect', function ()
+                {
+                    if ($(this).attr("data-IsAgent") == "True" || $(this).attr("data-IsAgent") == "true")
+                    {
                         if (Counter == undefined) {
                             alert("No existe conexión al servidor...");
                             return;
                         }
 
-                        $("#loader").css('display', 'block');
-                        var obj = {
-                            AccountManagerId: $(this).attr("data-agentvalueid"),
-                            ModuloAppId: 1,
-                            EMail: $("#UserEmail").val(),
-                            Password: "",
-                            Token: ""
-                        };
+                       $("#loader").css('display', 'block');
 
-                        Counter.server.accountManagerConnect(obj);
-                        var agentId = $(this).attr("data-agentvalueid")
-                        $("#AgentId").val(agentId);
+                       var agentId = $(this).attr("data-agentvalueid")
+                        $("input[id$=AgentId]").val(agentId);
+                        Fn_UserActiveByAgent($("input[id$=AgentId]").val())
+                        $("#conversation div").remove();
                     }
-                    else {
-                        //$("#loader").css('display', 'block');
-                        var obj = {
-                            AccountManagerId: $(this).attr("data-agentvalueid"),
-                            ModuloAppId: 1,
-                            EMail: $("#UserEmail").val(),
-                            Password: "",
-                            Token: ""
-                        };
+                });
 
-                        var agentId = $(this).attr("data-agentvalueid")
-                        $("#AgentId").val(agentId);
-                        Fn_UserActiveByAgent($("#AgentId").val())
+                // Botón chatear.
+                $("#btnsendmessage").click(function () {
+                    Fn_SendMenssage();
+                    $("#message").val("");
+                });
+
+                $('#message').keypress(function (e) {
+                    var keycode = (e.keyCode ? e.keyCode : e.which);
+                    if (keycode == '13') {
+                        Fn_SendMenssage();
+                        e.preventDefault();
+                        $("#message").val("");
+                        return false;
                     }
                 });
 
@@ -213,34 +391,245 @@
                     $('.action_menu').toggle();
                 });
 
+                function Fn_SendMenssage() {
+                    if ($("#message").val().trim() == "") {
+                        return false;
+                    }
+                    var objChat = {
+                        ChatId: $("input[id$=ChatId]").val(),
+                        ModuleAppId: $("input[id$=ModuleAppId]").val(),
+                        AgentId: $("input[id$=AgentId]").val(),
+                        UserName: $("input[id$=UserName]").val(),
+                        UserEmail: $("input[id$=UserEmail]").val(),
+                        Message: $("#message").val(),
+                        DateMessage: "",
+                        UserToken: $("input[id$=UserToken]").val(),
+                        AgentToken: $("input[id$=AgentToken]").val(),
+                        AccountAgentName: $("#AccountAgentName").val(),
+                    };
+                    Counter.server.sendToUser(objChat);
+                    $("#message").text("");
+                }
+
+                $(document).on('click', '#optionMenu li', function () {
+
+                    var optionId = $(this).attr('data-input');
+                    $('.action_menu').toggle()
+                    if (optionId == 1)
+                        Fn_CloseChatUser();
+
+
+                });
+
+                /*Aqui inicia conexion manager*/
+                var obj = {
+                    AccountUserId: $("input[id$=hfManagerId]").val(),
+                    ModuloAppId: 1,
+                    EMail: "",
+                    Password: "",
+                    Token: ""
+                };
+                Counter.server.accountUserConnect(obj);
+
             });
 
-            // ------------------------------------------------------
-            // Recibe mensajes del usuario.
-            // ------------------------------------------------------
-            Counter.client.monitor_receivedFromUser = function (obj) {
+            // Chat recibido del usuario.
+            Counter.client.monitor_ReceivedFromUserAndAgentInViewManager = function (obj) {
 
                 if (obj.ChatId > 0) {
 
-                    chatIdCurrent = $("#ChatId").val();
+                     chatIdCurrent = $("#ChatId").val();
 
-                    // Si el ChatID pertenece a la ventana actual
-                    // entonces se muestra la conversación,
-                    // caso contrario se ejecuta lo siguiente:
-                    //  1.- se muestra el mensaje en una ventana emergente en la parte inferior derecha.
-                    //  2.- el item del chatId correspondiente, debe cambiar de color.
-                    if (obj.ChatId == chatIdCurrent) {
+                    if (obj.ChatId == chatIdCurrent && obj.AgentId == $("input[id$=AgentId]").val()) {
 
-                        $("#divConversations").append(Fn_SetConversation(obj));
-                        $("#divConversations").scrollTop($("#divConversations")[0].scrollHeight);
-
+                        if (obj.IsSendUser == 1) {
+                            lstMessageUser = [];
+                            lstMessageUser.push({
+                                message: obj.Message,
+                            });
+                            $("#conversation").append(Fn_LoadHandlebars("messageUser", { lstMessageUser }));
+                            $("#conversation").scrollTop($("#conversation")[0].scrollHeight);
+                        }
+                        else {
+                            lstMessageManager = [];
+                            lstMessageManager.push({
+                                message: obj.Message,
+                            });
+                            $("#conversation").append(Fn_LoadHandlebars("messageManager", { lstMessageManager }));
+                            $("#conversation").scrollTop($("#conversation")[0].scrollHeight);
+                        }
+                        $("#ChatId").val(obj.ChatId);
+                        $("#ManagerId").val(obj.ManagerId);
+                        $("#ModuleAppId").val(obj.ModuleAppId);
+                        $("#UserName").val(obj.UserName);
+                        $("#UserEmail").val(obj.UserEmail);
+                        $("#UserToken").val(obj.UserToken);
+                        $("#AgentToken").val(obj.AgentToken);
                     }
                 }
 
-                Fn_UserActiveByAgent($("#AgentId").val())
+                Fn_UserActiveByAgent($("input[id$=AgentId]").val())
+            };
+
+            Counter.client.receivedFromUserDisconnect = function (obj) {
+                if (obj.ChatId > 0) {
+                    if (obj.IsSendUser == 1) {
+                        lstMessageUser = [];
+                        lstMessageUser.push({
+                            message: obj.Message,
+                        });
+                        $("#conversation").append(Fn_LoadHandlebars("messageUser", { lstMessageUser }));
+                        $("#conversation").scrollTop($("#conversation")[0].scrollHeight);
+                    }
+                    else {
+                        lstMessageManager = [];
+                        lstMessageManager.push({
+                            message: obj.Message,
+                        });
+                        $("#conversation").append(Fn_LoadHandlebars("messageManager", { lstMessageManager }));
+                        $("#conversation").scrollTop($("#conversation")[0].scrollHeight);
+                    }
+                    $("#ChatId").val(obj.ChatId);
+                    $("#ManagerId").val(obj.ManagerId);
+                    $("#ModuleAppId").val(obj.ModuleAppId);
+                    $("#UserName").val(obj.UserName);
+                    $("#UserEmail").val(obj.UserEmail);
+                    $("#UserToken").val(obj.UserToken);
+                    $("#AgentToken").val(obj.AgentToken);
+                    //$("#AccountAgentName").val(obj.AccountAgentName);
+                }
+                Fn_UserActiveByAgent($("input[id$=AgentId]").val())
+            };
+            // Conexión Satisfactoria.
+            Counter.client.sucessConnect = function (token) {
+
+                $("#AgentToken").val(token);
+                $("#ChatId").val("0");
+
+
+            };
+
+            // Lista actualizada de usuarios.
+            Counter.client.receivedListAgentsOfNewConnection = function (obj) {
+                var lstAgents = [];
+                lstAgents = obj.Elements;
+                if (lstAgents != null && lstAgents.length > 0)
+                {
+                    $("#divListAgents").empty();
+                    $("#divListAgents").append(Fn_LoadHandlebars("AgentsHandlebars", { lstAgents }));
+                }
+
+            };
+
+            // Actualiza la lista de usuarios de Agente
+            Counter.client.reloadNewUserConnectUserConnectByAgent = function (success) {
+                if ($("input[id$=AgentId]").val() != undefined && $("input[id$=AgentId]").val() > 0)
+                {
+                    Fn_UserActiveByAgent($("input[id$=AgentId]").val())
+                }
+                if (success == 1)
+                {
+                    $("#loader").css('display', 'none');
+                    bootbox.alert({
+                        message: "Transferencia correcta.",
+                        size: 'small'
+                    });
+                }
+
+            };
+            //Mensaje de agente no disponible en vist Manager
+            Counter.client.monitor_messageAgentNotConnectInViewManager = function ()
+            {
+                try {
+                    $("#loader").css('display', 'none');
+                    bootbox.alert({
+                        message: "Agente no disponible.",
+                        size: 'small'
+                    });
+                } catch (e) {
+                    $("#loader").css('display', 'none');
+                }
+
             };
 
         });
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            var userid = $(ev.currentTarget).data("userid");
+            var username = $(ev.currentTarget).data("username");
+            var chatid = $(ev.currentTarget).data("chatid");
+            var objUser = {
+                Userid: userid,
+                Username: username,
+                ChatId:chatid
+            }
+            var jsonUser = JSON.stringify(objUser);
+            ev.dataTransfer.setData("text", jsonUser);
+        }
+        function drop(ev) {
+            ev.preventDefault();
+
+            var agentId = $(ev.currentTarget).data("agentvalueid");
+            var agentname = $(ev.currentTarget).data("agentname");
+
+            var objUser = JSON.parse(ev.dataTransfer.getData("text"));
+            var username = objUser.Username;
+            var chatid = objUser.ChatId;
+
+
+            bootbox.confirm({
+                //title: "Trasferencia de Chat",
+                message: "Desea transferir el Chat de " + username.toUpperCase() + " a " + agentname.toUpperCase() + "?",
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> Cancelar'
+                    },
+                    confirm: {
+                        label: '<i class="fa fa-check"></i> Confirmar'
+                    }
+                },
+                callback: function (result) {
+                    if (result)
+                    {
+                       $("#loader").css('display', 'block');
+                       //Confirm
+                        var objChat = {
+                            ChatId: chatid,
+                            ModuleAppId: $("input[id$=ModuleAppId]").val(),
+                            AgentId: agentId,                                    //Agente destino
+                            AgentOrigin: $("input[id$=AgentId]").val(),          //Agente origen
+                            ManagerId: $("input[id$=hfManagerId]").val(),
+                            UserName: username,
+                            Message: "Tranferencia chat de " + username.toUpperCase() + " a " + agentname.toUpperCase(),
+                            UserEmail: "",
+                            DateMessage: "",
+                            UserToken: "",
+                            AgentToken: "",
+                            AccountAgentName: ""
+
+                        };
+
+                        Fn_MoveChatToAgent(objChat);
+                    } else {
+                        console.log('Se cancelo la transferencia de Chat');
+                    }
+
+                }
+            });
+
+        }
+            // ------------------------------------------------
+            // Funcion para mover un chat a un Agente.
+            // ------------------------------------------------
+            function Fn_MoveChatToAgent(objChat) {
+                Counter.server.moveChatToAgent(objChat);
+            }
+
+
 
     </script>
 

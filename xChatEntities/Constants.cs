@@ -64,6 +64,7 @@ namespace xChatEntities
             {
                 get { return URL_API_SERVICE + "api/Conversation/GetListUserConnectByAccountManagerId/"; }
             }
+            
             public static string GetListConversationByChatId
             {
                 get { return URL_API_SERVICE + "api/Conversation/GetListConversationByChatId/"; }
@@ -90,6 +91,22 @@ namespace xChatEntities
             public static string GetReportChat
             {
                 get { return URL_API_SERVICE + "api/Conversation/GetReport/"; }
+            }
+            public static string UsersGetRoleType
+            {
+                get { return URL_API_SERVICE + "api/Conversation/UsersGetRoleType/"; }
+            }
+            public static string GetListAgentByManager
+            {
+                get { return URL_API_SERVICE + "api/Conversation/GetListAgentByManager/"; }
+            }
+            public static string GetListUserByAccountManagerId
+            {
+                get { return URL_API_SERVICE + "api/Conversation/GetListUserByAccountManagerId/"; }
+            }
+            public static string GetListConversationByChatAndAgentId
+            {
+                get { return URL_API_SERVICE + "api/Conversation/GetListConversationByChatAndAgentId/"; }
             }
         }
     }

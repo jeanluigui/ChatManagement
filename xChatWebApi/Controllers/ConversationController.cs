@@ -48,6 +48,7 @@ namespace xChatWebApi.Controllers
             return result;
         }
 
+       
         /// <summary>
         /// Devuelve la conversación de un ChatId.
         /// </summary>
@@ -99,36 +100,36 @@ namespace xChatWebApi.Controllers
         }
 
 
-        /// <summary>
-        /// Mueve una conversación hacia otro Agente.
-        /// </summary>
-        /// <param name="objectRequest"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [ActionName("ConversationMoveTo")]
-        [Route("api/Conversation/ConversationMoveTo/")]
-        public ObjectResult<int> ConversationMoveTo(ObjectRequest<ConversationMoveEntity> objectRequest)
-        {
-            ObjectResult<int> result = new ObjectResult<int>();
+        ///// <summary>
+        ///// Mueve una conversación hacia otro Agente.
+        ///// </summary>
+        ///// <param name="objectRequest"></param>
+        ///// <returns></returns>
+        //[HttpPost]
+        //[ActionName("ConversationMoveTo")]
+        //[Route("api/Conversation/ConversationMoveTo/")]
+        //public ObjectResult<int> ConversationMoveTo(ObjectRequest<ConversationMoveEntity> objectRequest)
+        //{
+        //    ObjectResult<int> result = new ObjectResult<int>();
 
-            try
-            {
-                result = new ObjectResult<int>()
-                {
-                    Data = _serviceChatManagerBL.ConversationMoveTo(objectRequest),
-                    Id = 0,
-                    Message = string.Empty
-                };
-            }
-            catch (Exception ex)
-            {
-                result.Data = 0;
-                result.Id = 1;
-                result.Message = ex.Message;
-            }
+        //    try
+        //    {
+        //        result = new ObjectResult<int>()
+        //        {
+        //            Data = _serviceChatManagerBL.ConversationMoveTo(objectRequest),
+        //            Id = 0,
+        //            Message = string.Empty
+        //        };
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result.Data = 0;
+        //        result.Id = 1;
+        //        result.Message = ex.Message;
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
         /// <summary>
         /// Retorna lista de agentes conectados de un determinado módulo.
@@ -299,5 +300,106 @@ namespace xChatWebApi.Controllers
 
             return list;
         }
+
+        /// <summary>
+        /// Método para obtener rol de usuario.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// 
+        [HttpPost]
+        [ActionName("UsersGetRoleType")]
+        [Route("api/Conversation/UsersGetRoleType/")]
+        public ObjectResult<UserRoleType> UsersGetRoleType(ObjectRequest<string> objectRequest)
+        {
+            ObjectResult<UserRoleType> result = new ObjectResult<UserRoleType>();
+
+            try
+            {
+                result = _serviceChatManagerBL.UsersGetRoleType(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                result.Id = -1;
+                result.Message = ex.Message;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Método Obtener lista de agentes por Manager.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// 
+        [HttpPost]
+        [ActionName("GetListAgentByManager")]
+        [Route("api/Conversation/GetListAgentByManager/")]
+        public ObjectResultList<AccountManagerConnect> GetListAgentByManager(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
+
+            try
+            {
+                result = _serviceChatManagerBL.GetListAgentByManager(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Devuelve la lista de usuarios asociados al Account Manager.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ActionName("GetListUserByAccountManagerId")]
+        [Route("api/Conversation/GetListUserByAccountManagerId/")]
+        public ObjectResultList<UserConnect> GetListUserByAccountManagerId(ObjectRequest<int> objectRequest)
+        {
+            ObjectResultList<UserConnect> result = new ObjectResultList<UserConnect>();
+
+            try
+            {
+                result = _serviceChatManagerBL.GetListUserByAccountManagerId(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Devuelve la conversación de un ChatId para vista Manager.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ActionName("GetListConversationByChatAndAgentId")]
+        [Route("api/Conversation/GetListConversationByChatAndAgentId/")]
+        public ObjectResultList<ConversationResponseEntity> GetListConversationByChatAndAgentId(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<ConversationResponseEntity> list = new ObjectResultList<ConversationResponseEntity>();
+
+            try
+            {
+                list = _serviceChatManagerBL.GetListConversationByChatAndAgentId(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                list.Id = 1;
+                list.Message = ex.Message;
+            }
+
+            return list;
+        }
+
     }
 }

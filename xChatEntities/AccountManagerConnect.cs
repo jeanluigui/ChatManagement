@@ -10,13 +10,13 @@ namespace xChatEntities
     public class AccountManagerConnect : EntityBaseClass
     {
         public int AccountManagerConnectId { get; set; }
-        public int AccountManagerId { get; set; }
-        public string AccountManagerName { get; set; }
+        public int AgentId { get; set; }
+        public string AccountAgentName { get; set; }
         public string AccountManagerConnectDateStart { get; set; }
         public int AccountManagerConnecChatActive { get; set; }
         public short AccountManagerIsActive { get; set; }
         public Boolean AccountManagerIsAgent { get; set; }
-
+        public int ManagerId { get; set; }
         public AccountManagerConnect() { }
 
         public override void Fill(DataRow dataRow)
@@ -24,12 +24,13 @@ namespace xChatEntities
             if (!DataRowValidate(dataRow)) return;
 
             AccountManagerConnectId = Convert.ToInt32(dataRow["AccountManagerConnectId"]);
-            AccountManagerId = Convert.ToInt32(dataRow["AccountManagerId"]);
-            AccountManagerName = Convert.ToString(dataRow["AccountManagerName"]);
+            AgentId = Convert.ToInt32(dataRow["AccountManagerId"]);
+            AccountAgentName = Convert.ToString(dataRow["AccountManagerName"]);
             AccountManagerConnectDateStart = Convert.ToString(dataRow["AccountManagerConnectDateStart"]);
             AccountManagerConnecChatActive = Convert.ToInt32(dataRow["AccountManagerConnecChatActive"]);
             AccountManagerIsActive = Convert.ToInt16(dataRow["AccountManagerIsActive"]);
             AccountManagerIsAgent = Convert.ToBoolean(dataRow["AccountManageIsAgent"]);
+            ManagerId = Convert.ToInt32(dataRow["ManagerId"]);
         }
 
     }

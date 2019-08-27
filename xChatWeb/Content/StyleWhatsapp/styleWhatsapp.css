@@ -72,8 +72,9 @@ body {
     margin: 0;
     height: 60px;
     width: 100%;
-    background-color: #eee;
-    z-index: 1000;
+    /*background-color: #eee;*/
+    background-color: #009688;
+    color: white; z-index: 1000;
 }
 
 .heading-avatar {
