@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using xChatDAO;
 using xChatEntities;
 using xss.Logger.Enums;
@@ -380,8 +381,14 @@ namespace xChatBusiness
                 }
 
                 result = _IServiceChatManagerDAO.GetListConversationByChatAndAgentId(objectRequest);
-
-                result.Elements.ForEach(x => x.Message = encryp.Encryption.Decrypt(x.Message));
+                if (result.Id == 0 && result.Elements != null) {
+                    result.Elements.ForEach(x => x.Message = encryp.Encryption.Decrypt(x.Message));
+                }
+                else
+                {
+                    result.Elements = new List<ConversationResponseEntity>();
+                }
+                
             }
             catch (Exception ex)
             {
@@ -393,6 +400,42 @@ namespace xChatBusiness
 
             return result;
         }
+        /// <summary>
+        /// Obtener listado de conversación de un chat de manager.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        public ObjectResultList<ConversationResponseEntity> GetListConversationByChatAndManagerId(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<ConversationResponseEntity> result = new ObjectResultList<ConversationResponseEntity>();
 
+            try
+            {
+                if (string.IsNullOrEmpty(objectRequest.SenderObject))
+                {
+                    throw new Exception("Debe especificar valor de filtro.");
+                }
+
+                result = _IServiceChatManagerDAO.GetListConversationByChatAndManagerId(objectRequest);
+                if (result.Id == 0 && result.Elements != null)
+                {
+                    result.Elements.ForEach(x => x.Message = encryp.Encryption.Decrypt(x.Message));
+                }
+                else
+                {
+                    result.Elements = new List<ConversationResponseEntity>();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return result;
+        }
     }
 }

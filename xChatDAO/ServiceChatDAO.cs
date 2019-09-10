@@ -104,6 +104,7 @@ namespace xChatDAO
                 parameters.Add("@chatmessagesentry", conversationEntity.Message);
                 parameters.Add("@chatdate", DateTime.Now);
                 parameters.Add("@chatmessageisusersend", conversationEntity.IsSendUser);
+                parameters.Add("@managertoken", conversationEntity.ManagerToken);
 
                 CommandParameter queryCommand = new CommandParameter("chat.ChatMessages_Insert_Sp", parameters);
                 DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
@@ -155,8 +156,9 @@ namespace xChatDAO
         /// Registrar desconexión de un usuario.
         /// </summary>
         /// <param name="conversationEntity"></param>
-        public static void UserDisconnectForManager(ConversationEntity conversationEntity)
+        public static Int32 UserDisconnectForManager(ConversationEntity conversationEntity)
         {
+            Int32 success = 0;
             try
             {
                 ListParameters parameters = new ListParameters();
@@ -164,16 +166,23 @@ namespace xChatDAO
                 parameters.Add("@chatdate", DateTime.Now);
 
                 CommandParameter queryCommand = new CommandParameter("chat.Chat_UserDisconnect_Sp", parameters);
-                DbManager.Instance.ExecuteCommand(queryCommand);
+                DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
+                if (rowResult != null)
+                {
+                    success = Convert.ToInt32(rowResult["RowsAffect"].ToString());
+                }
             }
             catch (TimeoutException tout)
             {
+                success = 0;
                 log.Save(EnumLogLevel.Fatal, tout.Message);
             }
             catch (Exception ex)
             {
+                success = 0;
                 log.Save(EnumLogLevel.Fatal, ex);
             }
+            return success;
         }
 
         /// <summary>
@@ -520,6 +529,7 @@ namespace xChatDAO
                 {
                     conversationEntity.AgentToken = rowResult["AccountManagerToken"].ToString(); //Token del agente que se le transfirio chat
                     conversationEntity.AgentId = Convert.ToInt32(rowResult["AccountManagerId"].ToString());  //Id del agente que se le transfirio chat
+                    conversationEntity.UserToken = rowResult["Accountusertoken"].ToString();  //Token del usuario del chat
                     success = Convert.ToInt32(rowResult["RowsAffect"].ToString());
                 }              
             }

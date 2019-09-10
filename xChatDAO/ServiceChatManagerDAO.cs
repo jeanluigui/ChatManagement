@@ -70,7 +70,7 @@ namespace xChatDAO
                 ListParameters parameters = new ListParameters();
                 parameters.Add("@accountmanagerid", objectRequest.SenderObject);
 
-                CommandParameter queryCommand = new CommandParameter("chat.ManagerConnect_GetListUser_sp ", parameters);
+                CommandParameter queryCommand = new CommandParameter("chat.ManagerConnect_GetListUser_sp", parameters);
                 DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
 
                 listUserConnect = new ObjectResultList<UserConnect>(dtresult);
@@ -463,6 +463,39 @@ namespace xChatDAO
                 parameters.Add("@agentid", objectRequest.SenderObject.Split(';')[1].ToString());
 
                 CommandParameter queryCommand = new CommandParameter("chat.AccountManager_GetListConversationsByChatAndAgentId_Sp", parameters);
+                DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
+
+                listUserConnect = new ObjectResultList<ConversationResponseEntity>(dtresult);
+            }
+            catch (TimeoutException tout)
+            {
+                listUserConnect.Id = 2;
+                listUserConnect.Message = tout.Message;
+
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                listUserConnect.Id = 1;
+                listUserConnect.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return listUserConnect;
+        }
+
+        public ObjectResultList<ConversationResponseEntity> GetListConversationByChatAndManagerId(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<ConversationResponseEntity> listUserConnect = new ObjectResultList<ConversationResponseEntity>();
+
+            try
+            {
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@chatid", objectRequest.SenderObject.Split(';')[0].ToString());
+                parameters.Add("@managerId", objectRequest.SenderObject.Split(';')[1].ToString());
+
+                CommandParameter queryCommand = new CommandParameter("chat.AccountManager_GetListConversationsByChatAndManagerId_Sp", parameters);
                 DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
 
                 listUserConnect = new ObjectResultList<ConversationResponseEntity>(dtresult);

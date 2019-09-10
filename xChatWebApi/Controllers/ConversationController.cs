@@ -401,5 +401,30 @@ namespace xChatWebApi.Controllers
             return list;
         }
 
+        /// <summary>
+        /// Devuelve la conversación del manager (chat) para vista Manager.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ActionName("GetListConversationByChatAndManagerId")]
+        [Route("api/Conversation/GetListConversationByChatAndManagerId/")]
+        public ObjectResultList<ConversationResponseEntity> GetListConversationByChatAndManagerId(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<ConversationResponseEntity> list = new ObjectResultList<ConversationResponseEntity>();
+
+            try
+            {
+                list = _serviceChatManagerBL.GetListConversationByChatAndManagerId(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                list.Id = 1;
+                list.Message = ex.Message;
+            }
+
+            return list;
+        }
+
     }
 }

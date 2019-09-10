@@ -17,6 +17,7 @@ namespace xChatEntities
         public short AccountManagerIsActive { get; set; }
         public Boolean AccountManagerIsAgent { get; set; }
         public int ManagerId { get; set; }
+        public String ManagerName { get; set; }
         public AccountManagerConnect() { }
 
         public override void Fill(DataRow dataRow)
@@ -31,6 +32,7 @@ namespace xChatEntities
             AccountManagerIsActive = Convert.ToInt16(dataRow["AccountManagerIsActive"]);
             AccountManagerIsAgent = Convert.ToBoolean(dataRow["AccountManageIsAgent"]);
             ManagerId = Convert.ToInt32(dataRow["ManagerId"]);
+            ManagerName = Convert.ToString(dataRow["ManageName"]);
         }
 
     }

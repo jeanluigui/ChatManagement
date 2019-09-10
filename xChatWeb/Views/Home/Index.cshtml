@@ -3,157 +3,36 @@
 
 }
 @using xChatEntities;
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="~/Content/StyleWhatsapp/styleWhatsapp.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div style="width:100%; height:100%;margin-top:10px">
-    <div class="app-one" style="overflow-y:scroll;">
-        @if (ViewBag.RolType == (Int32)EnumRolTypeChat.Manager)
-        {
-            <div class="col-sm-3 side">
-                <div class="side-one">
-                    <div class="row heading" style="font-weight: 700">
-                        Agentes
-                    </div>
-                    <div class="sideBar" style=" overflow-y: scroll;">
-
-                        @if (ViewBag.ListAgentByManager.Elements != null && ViewBag.ListAgentByManager.Elements.Count > 0)
-                        {
-                            for (int i = 0; i < ViewBag.ListAgentByManager.Elements.Count; i++)
-                            {
-                                <a href="#" class="listAgent" id="btnconnect" data-AgentValueId="@ViewBag.ListAgentByManager.Elements[i].AgentId" data-IsAgent="@ViewBag.ListAgentByManager.Elements[i].AccountManagerIsAgent">
-                                    <div class="row sideBar-body" data-id="@ViewBag.ListAgentByManager.Elements[i].AgentId" id="lstAgentData">
-                                        <div class="col-sm-3 col-xs-3 sideBar-avatar" style="width: 42px;">
-                                            <div class="avatar-icon">
-                                                <img src="~/Content/Imagenes/user-profile.png" />
-                                                @if (@ViewBag.ListAgentByManager.Elements[i].AccountManagerIsActive == 1)
-                                                {
-                                                    <span id="idOnline" class="online_icon" style="margin-right: -8px;"></span>
-                                                }
-                                                else
-                                                {
-                                                    <span id="idOnline" class="Disconectonline_icon" style="margin-right: -8px;"></span>
-                                                }
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-9 col-xs-9 sideBar-main">
-                                            <div class="row">
-                                                <div class="col-sm-7 col-xs-7 sideBar-name">
-                                                    <span class="name-meta">
-                                                        @ViewBag.ListAgentByManager.Elements[i].AccountAgentName
-                                                    </span>
-                                                </div>
-                                                <div class="col-sm-5 col-xs-5 pull-right sideBar-time">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            }
-                        }
-
-                    </div>
-                </div>
-                <div id="loader" style="display:none"></div>
-            </div>
-            <div class="col-sm-3 side">
-                <div class="side-one">
-                    <div class="row heading" style="font-weight: 700">
-                        Usuarios
-                    </div>
-                    <div class="sideBar" id="userActiveShow" style=" overflow-y: scroll;">
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 conversation">
-                <div class="heading" style="font-weight: 700">
-
-                    <div class="heading-avatar-icon">
-                        Chat
-                        <img src="~/Content/Imagenes/imgMessage.png" />
-                        <div class="col-sm-1 col-xs-1  heading-dot pull-right">
-                            <span id="action_menu_btn">
-                                <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true"></i>
-                            </span>
-
-                        </div>
-                    </div>
-                    @*<div class="col-sm-2 col-md-1 col-xs-3 heading-avatar">
-                            <div class="heading-avatar-icon">
-                                <img src="~/Content/Imagenes/imgMessage.png" />
-                            </div>
-                        </div>
-                            <a class="heading-name-meta" id="idNameUser">
-                                Chat
-                            </a>
-                            <span class="heading-online"></span>
-                        </div>*@
-
-                </div>
-                <div class="action_menu selected" style="display: none;">
-                    <ul id="optionMenu">
-                        <li data-input="1">Cerrar Chat</li>
-                        <li data-input="2">Mover a un Manager</li>
-                    </ul>
-                </div>
-                <div class="message" id="conversation" style=" overflow-y: scroll;">
-
-                </div>
-
-                <div class="reply">
-                    @*<div class="col-sm-1 col-xs-1 reply-emojis">
-                            <i class="fa fa-smile-o fa-2x"></i>
-                        </div>*@
-                    <div class="col-sm-9 col-xs-9 col-lg-11 reply-main">
-                        <textarea class="form-control" rows="1" id="message" name="message" placeholder="Escriba su mensaje ..." style="overflow-y: scroll"></textarea>
-                    </div>
-                    @*<div class="col-sm-1 col-xs-1 reply-recording">
-                            <i class="fa fa-microphone fa-2x" aria-hidden="true"></i>
-                        </div>*@
-                    <div class="col-sm-1 col-xs-1 reply-send">
-                        <i class="fa fa-send fa-2x" aria-hidden="true" id="btnsendmessage"></i>
-                    </div>
-                </div>
-            </div>
-        }
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
+<style type="text/css">
+    .bootbox-close-button close {
+        display: none;
+    }
+    .disableposession {
+        pointer-events: none !important;
+        opacity: 0.4;
+    }
+</style>
+<div class="row" style="height:100%">
+      
         @if (ViewBag.RolType == (Int32)EnumRolTypeChat.Agent)
         {
-            @*<div class="col-sm-3 side">
-                    <div class="side-one">
-                        <div class="row heading" style="font-weight: 700">
-
-                        </div>
-                    </div>
-                    <div id="loader" style="display:none"></div>
-                </div>*@
             <div class="col-sm-3 side">
                 <div class="side-one">
-                    <div class="row heading" style="font-weight: 700" id="divListAgents">
+                    <div class="heading" style="font-weight: 700;" id="divListAgents">
                         @if (ViewBag.AgentActive.Elements != null && ViewBag.AgentActive.Elements.Count > 0)
                         {
                             for (int i = 0; i < ViewBag.AgentActive.Elements.Count; i++)
                             {
                                 <a href="#" class="listAgent" id="btnconnect" data-AgentValueId="@ViewBag.AgentActive.Elements[i].AgentId" data-IsAgent="@ViewBag.AgentActive.Elements[i].AccountManagerIsAgent" data-managerid="@ViewBag.AgentActive.Elements[i].ManagerId">
                                     <div class="" data-id="@ViewBag.AgentActive.Elements[i].AgentId" id="lstAgentData">
-                                        <div class="col-sm-3 col-xs-3 sideBar-avatar" style="width: 42px;">
+                                        <div class="col-sm-12 col-xs-12 sideBar-avatar" style="color:white;">
                                             <div class="avatar-icon">
-                                                <img src="~/Content/Imagenes/user-profile.png" />
-                                                <span id="idOnline" class="Disconectonline_icon" style="margin-right: -8px;"></span>
+                                                @*<img src="~/Content/Imagenes/user-profile.png" />*@
+                                                <span id="idOnline" class="Disconectonline_icon" style="bottom: -1.1em;"></span>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-9 col-xs-9 sideBar-main">
-                                            <div class="row">
-                                                <div class="col-sm-7 col-xs-7 sideBar-name">
-                                                    <span class="name-meta" style="color: white;">
-                                                        @ViewBag.AgentActive.Elements[i].AccountAgentName
-                                                    </span>
-                                                </div>
-                                                <div class="col-sm-5 col-xs-5 pull-right sideBar-time">
-
-                                                </div>
-                                            </div>
+                                            @ViewBag.AgentActive.Elements[i].AccountAgentName
                                         </div>
                                     </div>
                                 </a>
@@ -161,12 +40,12 @@
                         }
                     </div>
                     <div id="loader" style="display:none"></div>
-                    <div class="sideBar" id="userActiveShow" style=" overflow-y: scroll;height:94%">
+                    <div class="sideBar" id="userActiveShow" style=" overflow-y: auto;height:94%">
 
                     </div>
                 </div>
             </div>
-            <div class="col-sm-9 conversation">
+            <div class="col-sm conversation">
                 <div class="heading" style="font-weight: 700">
 
                     <div class="heading-avatar-icon">
@@ -183,31 +62,30 @@
                 <div class="action_menu selected" style="display: none;">
                     <ul id="optionMenu">
                         <li data-input="1">Cerrar Chat</li>
-                        <li data-input="2">Mover a un Manager</li>
                     </ul>
                 </div>
-                <div class="message" id="conversation" style=" overflow-y: scroll;">
+                <div class="col-sm message" id="conversation" style="overflow-y: auto;height: 86%;background:hsla(0, 0%, 80%, 0.22)">
 
                 </div>
-
-                <div class="reply">
-                    <div class="col-sm-9 col-xs-9 col-lg-11 reply-main">
-                        <textarea class="form-control" rows="1" id="message" name="message" placeholder="Escriba su mensaje ..." style="overflow-y: scroll"></textarea>
-                    </div>
-                    <div class="col-sm-1 col-xs-1 reply-send">
-                        <i class="fa fa-send fa-2x" aria-hidden="true" id="btnsendmessage"></i>
+                <div class="card-footer">
+                    <div id="divSendMessage" class="input-group disableposession">
+                        <div class="input-group-append">
+                            <span class="input-group-text attach_btn"><i class="fa fa-smile-o"></i></span>
+                        </div>
+                        <textarea id="message" class="form-control type_msg disableposession" placeholder="Escriba un mensaje aquí"></textarea>
+                        <div class="input-group-append">
+                            <span class="input-group-text send_btn"><i class="fa fa-paper-plane" id="btnsendmessage"></i></span>
+                        </div>
                     </div>
                 </div>
             </div>
         }
 
-    </div>
 </div>
 
 <input type="hidden" id="displayname" value="" />
 <input type="hidden" id="AgentId" value="0" />
 <input type="hidden" id="ChatId" value="0" />
-@*<input type="hidden" id="AccountManagerId" value="0" />*@
 <input type="hidden" id="ModuleAppId" value="0" />
 <input type="hidden" id="UserName" value="" />
 <input type="hidden" id="UserEmail" value="" />
@@ -217,7 +95,6 @@
 
 <input type="hidden" id="hfRolType" value="@(@ViewBag.RolType == null ? 0 : ViewBag.RolType)" />
 <input type="hidden" id="hfManagerId" value="@(ViewBag.ManagetId == null ? 0 : ViewBag.ManagetId)" />
-@*<input type="hidden" id="haveMessageFromChatId" value="0" />*@
 
 @section scripts{
 
@@ -226,11 +103,12 @@
 
     <script type="text/javascript">
         var Counter;
-        var chatIdCurrent;
+        var chatIdCurrent = 0;
 
 
 
         function Fn_Init() {
+            $("#message").focus();
             Fn_Bind("");
         }
 
@@ -243,6 +121,22 @@
                 });
                 $($(this).children()[0]).addClass("active_chat");
                 var chatid = $(this).attr("id")
+                var status = $(this).attr("data-statusid");
+                if (status == 2)
+                {
+                    $("#divSendMessage").addClass("disableposession");
+                    $("#message").addClass("disableposession");
+                    $(this).addClass("disableuser"); 
+                    $("input[id$=ChatId]").val(0);
+                    chatIdCurrent = 0;
+                }
+                else
+                {
+                    $("#divSendMessage").removeClass("disableposession");
+                    $("#message").removeClass("disableposession");
+                    $(this).removeClass("disableuser");
+                }
+                chatIdCurrent = chatid;
                 Fn_MessageUser(chatid, agentId)
 
                 var conversationEntity = { ChatId: chatid }
@@ -260,7 +154,7 @@
             var chatId = $("input[id$=ChatId]").val();
 
             if (chatId == "0") {
-                alert("No hay chat disponible");
+             alert("Debe seleccionar un Chat.");
                 return;
             }
 
@@ -277,16 +171,14 @@
                 AccountAgentName: $("input[id$=AccountAgentName]").val(),
             };
 
-            Counter.server.userDisconnectForMangaer(objChat);
+            Counter.server.userDisconnectForAgent(objChat);
 
         }
-
-       
-
+        
         // ------------------------------------------------
-        // Pinta nuevamente la lista de usuarios.
+        // Lista de Usuarios de Agente
         // ------------------------------------------------
-        function Fn_UserActiveByAgent(agentId) {
+        function Fn_UserActiveByAgent(agentId, chatpossesion, chattransfer, chatdisconect) {
             var lstUserActive = [];
             var lstUsers = [];
             if (agentId == undefined || agentId <= 0) {
@@ -304,10 +196,12 @@
                     //ChatIsReadForManager si es 1 es leido si es 0 no leido (agregar marca)
                     lstUserActive = response.Elements;
 
-                    if (lstUserActive != null && lstUserActive != "") {
+                    if (lstUserActive != null && lstUserActive != "")
+                    {
                         $("#userActiveShow a").remove();
                         lstUsers = [];
-                        for (var i = 0; i < lstUserActive.length; i++) {
+                        for (var i = 0; i < lstUserActive.length; i++)
+                        {
                             lstUsers = [];
                             if (lstUserActive[i].ChatIsReadForManager == 1)
                             {
@@ -315,7 +209,8 @@
                                     userId: lstUserActive[i].ChatId,
                                     userName: lstUserActive[i].UserName,
                                     userEmail: lstUserActive[i].UserEmail,
-                                    ChatIsReadForManager: lstUserActive[i].ChatIsReadForManager
+                                    ChatIsReadForManager: lstUserActive[i].ChatIsReadForManager,
+                                    Status: lstUserActive[i].Status
                                 });
                             }
                             else
@@ -324,11 +219,12 @@
                                     userId: lstUserActive[i].ChatId,
                                     userName: lstUserActive[i].UserName,
                                     userEmail: lstUserActive[i].UserEmail,
-                                    ChatIsReadForManager: lstUserActive[i].ChatIsReadForManager
+                                    ChatIsReadForManager: lstUserActive[i].ChatIsReadForManager,
+                                    Status: lstUserActive[i].Status
                                 });
                             }
 
-                            $("#userActiveShow").append(Fn_LoadHandlebars("userActive", { lstUsers }));
+                            $("#userActiveShow").append(fn_LoadTemplates("userActive", { lstUsers }));
                         }
                         Fn_Bind(agentId);
                      
@@ -337,14 +233,49 @@
                             if ($(e)[0].id == chatIdCurrent) {                       //Valido si es el chat actual
                                 $($($(e)[0]).children()[0]).addClass("active_chat")
                             }
-                        });
-
-
-                    } else {
-                        $("#userActiveShow").append(Fn_LoadHandlebars("userActive", { lstUsers }));
+                        });         
+                        //validacion para bloquear chat tomado por Manager
+                        if (chatpossesion != "" && chatpossesion != 0)
+                        {                            
+                            if ($("input[id$=ChatId]").val() == chatpossesion)
+                            {
+                                $("#divSendMessage").addClass("disableposession");
+                                $("#message").addClass("disableposession");
+                                $("#conversation div").remove();
+                                $("input[id$=ChatId]").val(0);
+                                chatIdCurrent = 0;
+                            }
+                        }    
+                        //validacion para tranferencia chat hecha por Manager
+                        if (chattransfer != "" && chattransfer != 0) {
+                            if ($("input[id$=ChatId]").val() == chattransfer) {
+                                $("#divSendMessage").addClass("disableposession");
+                                $("#message").addClass("disableposession");
+                                $("#conversation div").remove();
+                                $("input[id$=ChatId]").val(0);
+                                chatIdCurrent = 0;
+                            }
+                        }
+                        //validacion para desconexion de Usuario(Chat)
+                        if (chatdisconect != "" && chatdisconect != 0) {
+                            if ($("input[id$=ChatId]").val() == chatdisconect) {
+                                $("#divSendMessage").addClass("disableposession");
+                                $("#message").addClass("disableposession");
+                                $("#conversation div").remove();
+                                $("input[id$=ChatId]").val(0);
+                                chatIdCurrent = 0;
+                            }
+                        }  
+                    }
+                    else
+                    {                        
+                        $("#userActiveShow").append(fn_LoadTemplates("userActive", { lstUsers }));
                         $("#userActiveShow").empty();
                         $("#conversation div").remove();
-                        //fn_message("i", "No tiene Usuarios activos.");
+                        $("#divSendMessage").addClass("disableposession");
+                        $("#message").addClass("disableposession");
+                        $("input[id$=ChatId]").val(0);
+                        chatIdCurrent = 0;
                      }
                 }
                 catch (e) {
@@ -378,7 +309,7 @@
             success = function (response) {
                 try {
                     lstChat = response.Elements;
-                    if (lstChat != null) {
+                    if (lstChat != null && lstChat.length > 0) {
                         $("#conversation div").remove();
                         for (var i = 0; i < lstChat.length; i++) {
                             if (lstChat[i].IsUser == 1) {
@@ -386,7 +317,7 @@
                                 lstMessageUser.push({
                                     message: lstChat[i].Message,
                                 });
-                                $("#conversation").append(Fn_LoadHandlebars("messageUser", { lstMessageUser }));
+                                $("#conversation").append(fn_LoadTemplates("messageUser", { lstMessageUser }));
                                 $("#conversation").scrollTop($("#conversation")[0].scrollHeight);
                             }
                             else {
@@ -394,7 +325,7 @@
                                 lstMessageManager.push({
                                     message: lstChat[i].Message,
                                 });
-                                $("#conversation").append(Fn_LoadHandlebars("messageManager", { lstMessageManager }));
+                                $("#conversation").append(fn_LoadTemplates("messageManager", { lstMessageManager }));
                                 $("#conversation").scrollTop($("#conversation")[0].scrollHeight);
                             }
                             $("input[id$=ChatId]").val(lstChat[i].ChatId);
@@ -407,15 +338,15 @@
                             $("input[id$=AccountAgentName]").val(lstChat[i].AccountManagerName);//Of Agent
                         }
                      } else {
-                        alert("Error ");
+                        $("#conversation div").remove();
                      }
                 }
                 catch (e) {
-                    alert("Error ");
+                    alert("Error");
                 }
             };
             error = function (xhr, ajaxOptions, thrownError) {
-                alert("Error ");
+                alert("Error");
             };
 
             Fn_CallMethod("@(Url.Action("MyConversationShow", "Home"))", { data: objData }, success, error);
@@ -453,7 +384,7 @@
                                 Password: "",
                                 Token: ""
                             };
-
+                            chatIdCurrent = 0;
                             var agentId = $(this).attr("data-agentvalueid")
                             $("input[id$=AgentId]").val(agentId);
                             $("input[id$=hfManagerId]").val($(this).attr("data-managerid"));
@@ -497,16 +428,15 @@
                         DateMessage: "",
                         UserToken: $("input[id$=UserToken]").val(),
                         AgentToken: $("input[id$=AgentToken]").val(),
-                        AccountAgentName: $("input[id$=AccountAgentName]").val()
+                        AccountAgentName: $("input[id$=AccountAgentName]").val(),
+                        ManagerToken: ""
                     };
                     Counter.server.sendToUser(objChat);
                     $("#message").text("");
                 }
 
                 $(document).on('click', '#optionMenu li', function () {
-
-                    //alert($(this).attr('data-input'));	// this will alert data-input value.
-
+                    
                     var optionId = $(this).attr('data-input');
                     $('.action_menu').toggle()
                     if (optionId == 1)
@@ -516,17 +446,13 @@
                 });
 
             });
-            //.fail(function () { alert('No fue posible establecer la conexion'); });
-            //        console.log('Could not Connect!');
-
            
-
             // Chat recibido del usuario.
             Counter.client.receivedFromUser = function (obj) {
 
                 if (obj.ChatId > 0) {
 
-                     chatIdCurrent = $("input[id$=ChatId]").val();
+                     //chatIdCurrent = $("input[id$=ChatId]").val(); esto comente 6-9-2019
                     
                     if (obj.ChatId == chatIdCurrent) {
 
@@ -535,7 +461,7 @@
                             lstMessageUser.push({
                                 message: obj.Message,
                             });
-                            $("#conversation").append(Fn_LoadHandlebars("messageUser", { lstMessageUser }));
+                            $("#conversation").append(fn_LoadTemplates("messageUser", { lstMessageUser }));
                             $("#conversation").scrollTop($("#conversation")[0].scrollHeight);
                         }
                         else {
@@ -543,7 +469,7 @@
                             lstMessageManager.push({
                                 message: obj.Message,
                             });
-                            $("#conversation").append(Fn_LoadHandlebars("messageManager", { lstMessageManager }));
+                            $("#conversation").append(fn_LoadTemplates("messageManager", { lstMessageManager }));
                             $("#conversation").scrollTop($("#conversation")[0].scrollHeight);
                         }
                         $("input[id$=ChatId]").val(obj.ChatId);
@@ -556,7 +482,7 @@
                     }                    
                 }
 
-                Fn_UserActiveByAgent($("input[id$=AgentId]").val())
+                Fn_UserActiveByAgent($("input[id$=AgentId]").val(), "", "", "")
             };
 
             Counter.client.receivedFromUserDisconnect = function (obj) {
@@ -566,7 +492,7 @@
                         lstMessageUser.push({
                             message: obj.Message,
                         });
-                        $("#conversation").append(Fn_LoadHandlebars("messageUser", { lstMessageUser }));
+                        $("#conversation").append(fn_LoadTemplates("messageUser", { lstMessageUser }));
                         $("#conversation").scrollTop($("#conversation")[0].scrollHeight);
                     }
                     else {
@@ -574,7 +500,7 @@
                         lstMessageManager.push({
                             message: obj.Message,
                         });
-                        $("#conversation").append(Fn_LoadHandlebars("messageManager", { lstMessageManager }));
+                        $("#conversation").append(fn_LoadTemplates("messageManager", { lstMessageManager }));
                         $("#conversation").scrollTop($("#conversation")[0].scrollHeight);
                     }
                     $("input[id$=ChatId]").val(obj.ChatId);
@@ -586,7 +512,7 @@
                     $("input[id$=AgentToken]").val(obj.AgentToken);
                     //$("input[id$=AccountAgentName]").val(obj.AccountAgentName);
                 }
-                Fn_UserActiveByAgent($("input[id$=AgentId]").val())
+                Fn_UserActiveByAgent($("input[id$=AgentId]").val(), "", "", "")
             };
             // Conexión Satisfactoria.
             Counter.client.sucessConnect = function (token) {
@@ -594,14 +520,12 @@
                 if (token != undefined && token != "") {
                     $('.listAgent').each(function (i, e) {
                         if ($($(e)[0]).attr("data-agentvalueid") == $("input[id$=AgentId]").val()) {
-                            //$($($(e)[0]).children()[0]).find("#idConnect").addClass('btn btn-success btn-xs pull-right')
-                            $($($(e)[0]).children()[0]).addClass("active_chat");
                             $($($(e)[0]).children()[0]).find('#idOnline').removeClass();
                             $($($(e)[0]).children()[0]).find('#idOnline').addClass('online_icon')
                         }
                     });
 
-                    Fn_UserActiveByAgent($("input[id$=AgentId]").val())
+                    Fn_UserActiveByAgent($("input[id$=AgentId]").val(), "", "", "")
                 }
                 $("input[id$=ChatId]").val("0");
                 $("#loader").css('display', 'none');
@@ -628,12 +552,123 @@
 
             // Actualiza la lista de usuarios de Agente
             Counter.client.reloadNewUserConnectUserConnectByAgent = function (success) {
-                if ($("input[id$=AgentId]").val() != undefined && $("input[id$=AgentId]").val() > 0) {
-                    Fn_UserActiveByAgent($("input[id$=AgentId]").val())
+                if ($("input[id$=AgentId]").val() != undefined && $("input[id$=AgentId]").val() > 0)
+                {
+                    Fn_UserActiveByAgent($("input[id$=AgentId]").val(), "", "", "")
+                }
+                if (success != "") {
+                    $("#loader").css('display', 'none');
+                    bootbox.alert({
+                        message: "Se le ah transfirio el Usuario: " + success,
+                        size: 'small'
+                    });
+                }
+            };
+
+            // Actualiza la lista de usuarios de Agente en origen despues de transferencia
+            Counter.client.reloadNewUserConnectUserConnectByAgentAfterTransfer = function (chatIdTransfer) {
+
+                try {
+                    if (chatIdTransfer > 0) {
+                        //if ($("input[id$=ChatId]").val() == 0 || $("input[id$=ChatId]").val() == chatIdTransfer)
+                            $("#loader").css('display', 'none');
+                            Fn_UserActiveByAgent($("input[id$=AgentId]").val(), "", chatIdTransfer, "");                                
+                        
+                    }
+                } catch (e) {
+                    $("#loader").css('display', 'none');
                 }
 
             };
-            
+
+            //Mensaje de agente no disponible en vista Agent
+            Counter.client.monitor_messageAgentNotConnectInViewAgent = function (success) {
+                try {
+                    if (success == -1) {
+                        $("#loader").css('display', 'none');
+                        bootbox.alert({
+                            message: "Agente no disponible.",
+                            size: 'small'
+                        });
+                    }
+                    else {
+                        $("#loader").css('display', 'none');
+                    }
+                } catch (e) {
+                    $("#loader").css('display', 'none');
+                }
+            };
+            //Accion despues de que manager toma posesion de chat
+            Counter.client.reloadUserConnectByAgentAfterPossesionInViewAgent = function (obj)
+            {
+                try {
+                    if (obj.ChatId > 0)
+                    {
+                        if ($("input[id$=ChatId]").val() == 0 || $("input[id$=ChatId]").val() == obj.ChatId) {
+                            if (obj != null)
+                            {
+                                $("#loader").css('display', 'none');                               
+                                Fn_UserActiveByAgent($("input[id$=AgentId]").val(), obj.ChatId, "", "")
+                                bootbox.alert({
+                                    message: "El Manager " + obj.AccountManagerName.toUpperCase() + " a tomado posesión del chat de " + obj.UserName.toUpperCase(),
+                                    size: 'small'
+                                });
+                              
+                            }
+                            else {
+                                $("#loader").css('display', 'none');
+                            }
+                        }
+                    }
+                                      
+                } catch (e) {
+                    $("#loader").css('display', 'none');
+                }
+            };
+
+            // Actualiza la lista de usuarios de Agente despues de desconexion de usuario(chat)
+            Counter.client.chatUserDisconnect = function (obtUser) {
+                try {
+                    if ($("input[id$=AgentId]").val() != undefined && $("input[id$=AgentId]").val() > 0) {
+                        if (obtUser != null && obtUser.ChatId > 0) {
+                            Fn_UserActiveByAgent($("input[id$=AgentId]").val(), "", "", obtUser.ChatId)
+                            $("#loader").css('display', 'none');
+                            bootbox.alert({
+                                message: "Se ah desconectado el Usuario: " + obtUser.UserName,
+                                size: 'small'
+                            });
+                        } else {
+                            $("#loader").css('display', 'none');
+                        }
+                    }
+                } catch (e) {
+                    $("#loader").css('display', 'none');
+                }               
+            };
+            // Actualiza la lista de usuarios despues de desconexion de usuario (Chat) por medio de agente
+            Counter.client.chatUserDisconnectAfterDisconectForAgent = function (obtUser) {
+                try {
+                    if ($("input[id$=AgentId]").val() != undefined && $("input[id$=AgentId]").val() > 0) {
+                        if (obtUser != null && obtUser.ChatId > 0) {
+                            Fn_UserActiveByAgent($("input[id$=AgentId]").val(), "", "", obtUser.ChatId)
+                            $("#loader").css('display', 'none');
+                            bootbox.alert({
+                                message: "Se ah desconectado el Usuario: " + obtUser.UserName,
+                                size: 'small'
+                            });
+                        } else {
+                            bootbox.alert({
+                                message: "No se pudo Finalizar el Chat.",
+                                size: 'small'
+                            });                           
+                        }
+                        $("#loader").css('display', 'none');
+                    }
+                } catch (e) {
+                    $("#loader").css('display', 'none');
+                }
+            };
+
         });
 
     </script>

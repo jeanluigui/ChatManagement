@@ -18,5 +18,6 @@ namespace xChatDAO
         ObjectResult<UserRoleType> UsersGetRoleType(ObjectRequest<string> objectRequest);
         ObjectResultList<AccountManagerConnect> GetListAgentByManager(ObjectRequest<string> objectRequest);
         ObjectResultList<ConversationResponseEntity> GetListConversationByChatAndAgentId(ObjectRequest<string> objectRequest);
+        ObjectResultList<ConversationResponseEntity> GetListConversationByChatAndManagerId(ObjectRequest<string> objectRequest);
     }
 }

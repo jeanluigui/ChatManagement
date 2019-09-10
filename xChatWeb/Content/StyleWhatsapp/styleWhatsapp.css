@@ -9,7 +9,7 @@ span {
 }
 
 body {
-    background: url("http://shurl.esy.es/y") no-repeat fixed center;
+    /*background: url("http://shurl.esy.es/y") no-repeat fixed center;*/
     background-size: cover;
 }
 
@@ -131,7 +131,7 @@ body {
     .heading-dot i {
         text-align: right;
         padding: 5px;
-        color: #93918f;
+        color: white;
         cursor: pointer;
     }
 
@@ -326,9 +326,19 @@ body {
 .message {
     padding: 0 !important;
     margin: 0 !important;
-    background: url("w.jpg") no-repeat fixed center;
+    /*background: url("w.jpg") no-repeat fixed center;*/
     background-size: cover;
     overflow-y: auto;
+    border: 1px solid #f7f7f7;
+    height: calc(100% - 120px);
+}
+
+.messageAgent {
+    padding: 0 !important;
+    margin: 0 !important;
+    /*background: url("w.jpg") no-repeat fixed center;*/
+    background-size: cover;
+    /*overflow-y: auto;*/
     border: 1px solid #f7f7f7;
     height: calc(100% - 120px);
 }
@@ -479,7 +489,7 @@ body {
             box-shadow: none;
         }
 
-@@media screen and (max-width: 700px) {
+@media screen and (max-width: 700px) {
     .app {
         top: 0;
         height: 100%;

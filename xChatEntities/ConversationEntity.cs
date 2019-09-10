@@ -22,7 +22,8 @@ namespace xChatEntities
         public string TemplateHtml { get; set; }
         public string Subject { get; set; }
         public string Emailto { get; set; }
-
+        public string ManagerToken { get; set; }
+        public string AccountManagerName { get; set; }
         /// <summary>
         /// Modulo solicitado por el cliente para chatear.
         /// </summary>

@@ -24,7 +24,7 @@ namespace xChatAPI
         {
             /*Actualiza la lista de agentes de la vista Manager*/
             ConversationEntity obj = ServiceChatBL.Instancia.GetAgentAndManagerIdByToken(Context.ConnectionId);
-            string managerToken = ServiceChatBL.Instancia.GetManagerTokenValue(obj);
+            String managerToken = ServiceChatBL.Instancia.GetManagerTokenValue(obj);
           
             /*End*/
 
@@ -33,21 +33,29 @@ namespace xChatAPI
             {
                 ObjectResultList<AccountManagerConnect> lstAgentResult = ServiceChatBL.Instancia.GetListAgentByManager(obj);
                 Clients.Client(managerToken).receivedListAgentsOfNewConnection(lstAgentResult);
+
             }
             if (tokenDestino != null && tokenDestino.Elements != null && tokenDestino.Elements.Count > 0)
             {
                 foreach (ChatToken item in tokenDestino.Elements)
                 {
-                    // Tipo 1: Usuario desconectado.  Notificar a Manager.
-                    // Tipo 2: Manager desconectado.  Notificar a Usuarios.
+                    // Tipo 1: Se desconecta Usuario.  Notificar a Manager.
+                    // Tipo 2: Se desconecta Manager.  Notificar a Usuarios.
                     if (item.TypeToken.Equals(1))
-                        Clients.Client(item.Token).chatUserDisconnect();
+                    {
+                        Clients.Client(item.Token).chatUserDisconnect(item); //token del agente
+                        ConversationEntity objChat = ServiceChatBL.Instancia.GetAgentAndManagerIdByToken(item.Token);
+                        String tokenManager = ServiceChatBL.Instancia.GetManagerTokenValue(objChat);
+                        if (!String.IsNullOrEmpty(tokenManager)) {
+                            Clients.Client(tokenManager).chatUserDisconnect(item); //token del Manager
+                        } 
+                    }
                     else
+                    {
                         Clients.Client(item.Token).chatManagerDisconnect("The agent has been disconnected...");
+                    }
                 }
             }
-            
-
             return base.OnDisconnected(stopCalled);
         }
 
@@ -152,20 +160,27 @@ namespace xChatAPI
             string managerToken = ServiceChatBL.Instancia.GetManagerTokenValue(objConversation);
             if (!String.IsNullOrEmpty(managerToken))
             {
-                Clients.Client(managerToken).reloadNewUserConnectUserConnectByAgent(0);
+                Clients.Client(managerToken).reloadNewUserConnectUserConnectByAgent(String.Empty);
             }
 
             // ------------------------------------------------------------
             // Se lanza el método de los mensajes en el front de Manager.
             // ------------------------------------------------------------
-            ConversationEntity objConversation2 = ServiceChatBL.Instancia.GetAgentAndManagerIdByToken(conversationEntity.AgentToken);
-            if(conversationEntity != null) conversationEntity.AgentId = objConversation2.AgentId;            
-            string managerToken2 = ServiceChatBL.Instancia.GetManagerTokenValue(objConversation2);
-            if (!String.IsNullOrEmpty(managerToken2))
+
+            if (!String.IsNullOrEmpty(conversationEntity.ManagerToken))
             {
-                Clients.Client(managerToken2).monitor_ReceivedFromUserAndAgentInViewManager(conversationEntity);
+                Clients.Client(conversationEntity.ManagerToken).monitor_ReceivedFromUserAndManagerInViewManager(conversationEntity);
             }
-                
+            else
+            {
+                ConversationEntity objConversation2 = ServiceChatBL.Instancia.GetAgentAndManagerIdByToken(conversationEntity.AgentToken);
+                if (conversationEntity != null) conversationEntity.AgentId = objConversation2.AgentId;
+                string managerToken2 = ServiceChatBL.Instancia.GetManagerTokenValue(objConversation2);
+                if (!String.IsNullOrEmpty(managerToken2))
+                {
+                    Clients.Client(managerToken2).monitor_ReceivedFromUserAndAgentInViewManager(conversationEntity);
+                }
+            }                
 
         }
 
@@ -206,13 +221,22 @@ namespace xChatAPI
             // ------------------------------------------------------------
             // Se lanza el método de los mensajes en el front de Manager.
             // ------------------------------------------------------------
-            ConversationEntity objConversation = ServiceChatBL.Instancia.GetAgentAndManagerIdByToken(conversationEntity.AgentToken);
-            if (conversationEntity != null) conversationEntity.AgentId = objConversation.AgentId;
-            string managerToken = ServiceChatBL.Instancia.GetManagerTokenValue(objConversation);
-            if (!String.IsNullOrEmpty(managerToken))
+
+            if (!String.IsNullOrEmpty(conversationEntity.ManagerToken))
             {
-                Clients.Client(managerToken).monitor_ReceivedFromUserAndAgentInViewManager(conversationEntity);
+                Clients.Client(conversationEntity.ManagerToken).monitor_ReceivedFromUserAndManagerInViewManager(conversationEntity);
             }
+            else
+            {
+                ConversationEntity objConversation = ServiceChatBL.Instancia.GetAgentAndManagerIdByToken(conversationEntity.AgentToken);
+                if (conversationEntity != null) conversationEntity.AgentId = objConversation.AgentId;
+                string managerToken = ServiceChatBL.Instancia.GetManagerTokenValue(objConversation);
+                if (!String.IsNullOrEmpty(managerToken))
+                {
+                    Clients.Client(managerToken).monitor_ReceivedFromUserAndAgentInViewManager(conversationEntity);
+                }
+            }
+           
         }
 
         /// <summary>
@@ -249,19 +273,58 @@ namespace xChatAPI
             // ------------------------------------------------------------
             // Registrar mensaje en la DB.
             // ------------------------------------------------------------
-            ServiceChatBL.Instancia.UserDisconnectForManager(conversationEntity);
+            Int32 success = ServiceChatBL.Instancia.UserDisconnectForManager(conversationEntity);
+            if (success == 1)// Update succesfull
+            {
+                // ------------------------------------------------------------
+                // Se lanza el método de los mensajes en el front del Usuario.
+                // ------------------------------------------------------------
+                Clients.Client(conversationEntity.UserToken).serverOrderDisconnect("Gracias por su gentil atención.");
+                // ------------------------------------------------------------
+                // Se lanza el método de los mensajes en el front del Manager.
+                // ------------------------------------------------------------
+                //Clients.Caller.receivedFromUserDisconnect(conversationEntity);
+                conversationEntity.ChatId = 0;
+                Clients.Caller.reloadConnectUserConnectByAgentAfterPossesionFinish(conversationEntity);
 
-            // ------------------------------------------------------------
-            // Se lanza el método de los mensajes en el front del Usuario.
-            // ------------------------------------------------------------
-            Clients.Client(conversationEntity.UserToken).serverOrderDisconnect("Gracias por su gentil atención.");
-
-            // ------------------------------------------------------------
-            // Se lanza el método de los mensajes en el front del Manager.
-            // ------------------------------------------------------------
-            Clients.Caller.receivedFromUserDisconnect(conversationEntity);
+            }
+            else
+            {
+                conversationEntity = null;
+                Clients.Caller.reloadConnectUserConnectByAgentAfterPossesionFinish(conversationEntity);
+            }
         }
+        /// <summary>
+        /// Método que se ejecuta cuando el AGENTE desconecta a un usuario.
+        /// </summary>
+        /// <param name="conversationEntity"></param>
+        public void UserDisconnectForAgent(ConversationEntity conversationEntity)
+        {
+            conversationEntity.IsSendUser = 0;
 
+            // ------------------------------------------------------------
+            // Registrar mensaje en la DB.
+            // ------------------------------------------------------------
+            Int32 success = ServiceChatBL.Instancia.UserDisconnectForManager(conversationEntity);
+            if (success == 1)// Update succesfull
+            {
+                // ------------------------------------------------------------
+                // Se lanza el método de los mensajes en el front del Usuario.
+                // ------------------------------------------------------------
+                Clients.Client(conversationEntity.UserToken).serverOrderDisconnect("Gracias por su gentil atención.");
+                // ------------------------------------------------------------
+                // Se lanza el método de los mensajes en el front del Agente.
+                // ------------------------------------------------------------
+                //Clients.Caller.receivedFromUserDisconnect(conversationEntity);
+                Clients.Caller.chatUserDisconnectAfterDisconectForAgent(conversationEntity); //token del agente
+            }
+            else
+            {
+                conversationEntity = null;
+                Clients.Caller.chatUserDisconnectAfterDisconectForAgent(conversationEntity);
+            }
+        }
+        
         /// <summary>
         /// Establecer el CHATID como Leído por el MANAGER.
         /// Se notifica al Agente y Usuario que el mensaje ha sido Leído.
@@ -301,34 +364,71 @@ namespace xChatAPI
 
         public void MoveChatToAgent(ConversationEntity conversationEntity)
         {
-            //Obtiene el token del agente Destino
-            String tokenAgentOrigin = ServiceChatBL.Instancia.GetManagerToken(conversationEntity);
-            
-            Int32 success =  ServiceChatBL.Instancia.ConversationMoveTo(conversationEntity);
-            if (success  == 1) // Update succesfull
-            {
-               // Registrar mensaje de transferencia de chat en la DB. 
-                ServiceChatBL.Instancia.ChatMessageCreate(conversationEntity);
-                //Recarga lista de usuarios de agente en vista de Manager
-                Clients.Caller.reloadNewUserConnectUserConnectByAgent(success);
-
+            if (!String.IsNullOrEmpty(conversationEntity.ManagerToken))
+            { 
                 //Obtiene el token del agente Destino
                 String tokenAgentTarget = ServiceChatBL.Instancia.GetManagerToken(conversationEntity);
-                if(!String.IsNullOrEmpty(tokenAgentTarget))
-                //Recarga lista de usuarios de agente en vista de agente Destino
-                Clients.Client(tokenAgentTarget).reloadNewUserConnectUserConnectByAgent(success);
 
-                if (!String.IsNullOrEmpty(tokenAgentOrigin))
-                //Recarga lista de usuarios de agente en vista de agente Destino
-                Clients.Client(tokenAgentOrigin).reloadNewUserConnectUserConnectByAgent(success);
+                Int32 success = ServiceChatBL.Instancia.ConversationMoveTo(conversationEntity);
+                if (success == 1) // Update succesfull
+                {
+                    // Registrar mensaje de transferencia de chat en la DB. 
+                    ServiceChatBL.Instancia.ChatMessageCreate(conversationEntity);
+                    
+                    if (!String.IsNullOrEmpty(tokenAgentTarget))
+                    //Envia un mensaje indicando que Manager esta tomando posesión del Chat en la vista de agente Destino
+                    Clients.Client(tokenAgentTarget).reloadUserConnectByAgentAfterPossesionInViewAgent(conversationEntity);
+
+                    if (!String.IsNullOrEmpty(conversationEntity.ManagerToken))
+                    //Recarga lista de usuarios de agente en vista de Manager (Origen) 
+                    Clients.Caller.reloadConnectUserConnectByAgentAfterPossesion(conversationEntity);
+
+                    //Mensaje en vista de Usuario - Posesion correcta
+                    Clients.Client(conversationEntity.UserToken).messagePosessionChatToAgent(conversationEntity.ManagerToken);
+                }
+                else
+                {
+                    Clients.Caller.monitor_messageAgentNotPosesionInViewManager(-1);
+                }
             }
             else
             {
-                if (success == -1) {
-                    Clients.Caller.monitor_messageAgentNotConnectInViewManager();
-                }
-            }
-        }
+                //Obtiene el token del agente Origen
+                String tokenAgentOrigin = ServiceChatBL.Instancia.GetManagerToken(conversationEntity);
 
+                Int32 success = ServiceChatBL.Instancia.ConversationMoveTo(conversationEntity);
+                if (success == 1) // Update succesfull
+                {
+                    // Registrar mensaje de transferencia de chat en la DB. 
+                    ServiceChatBL.Instancia.ChatMessageCreate(conversationEntity);
+                    //Recarga lista de usuarios de agente en vista de Manager
+                    Clients.Caller.reloadNewUserConnectUserConnectByAgentAfterTransfer(conversationEntity);
+
+                    //Obtiene el token del agente Destino
+                    String tokenAgentTarget = ServiceChatBL.Instancia.GetManagerToken(conversationEntity);
+                    if (!String.IsNullOrEmpty(tokenAgentTarget))
+                        //Recarga lista de usuarios de agente en vista de agente Destino
+                        Clients.Client(tokenAgentTarget).reloadNewUserConnectUserConnectByAgent((conversationEntity.UserName == null ? String.Empty : conversationEntity.UserName));
+
+                    if (!String.IsNullOrEmpty(tokenAgentOrigin))
+                        //Recarga lista de usuarios de agente en vista de agente Origen
+                        Clients.Client(tokenAgentOrigin).reloadNewUserConnectUserConnectByAgentAfterTransfer(conversationEntity.ChatId);
+
+                    //Mensaje en vista de Usuario - Transferencia correcta
+                    Clients.Client(conversationEntity.UserToken).messageTransferSuccessToAgent();
+                }
+                else
+                {
+                    if (success == -1)
+                    {
+                        Clients.Caller.monitor_messageAgentNotConnectInViewManager(-1);
+                    }
+                    else
+                    {
+                        Clients.Caller.monitor_messageAgentNotConnectInViewManager(0);
+                    }
+                }
+            }            
+        }
     }
 }

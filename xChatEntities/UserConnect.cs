@@ -12,6 +12,7 @@ namespace xChatEntities
         public string UserEmail { get; set; }
         public short ChatIsReadForManager { get; set; }
         public short ChatIsReadForUser { get; set; } //por el momento esto no lo utilizo
+        public Int16 Status { get; set; }
 
         public UserConnect() { }
 
@@ -26,6 +27,7 @@ namespace xChatEntities
             UserEmail = dataRow["UserEMail"].ToString();
             ChatIsReadForManager = Convert.ToInt16(dataRow["ChatIsReadForManager"]);
             ChatIsReadForUser = Convert.ToInt16(dataRow["ChatIsReadForUser"]);
+            Status = Convert.ToInt16(dataRow["StatusId"]);
         }
 
     }

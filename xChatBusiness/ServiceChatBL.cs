@@ -210,16 +210,19 @@ namespace xChatBusiness
         /// Desconectar a un usuario.
         /// </summary>
         /// <param name="conversationEntity"></param>
-        public void UserDisconnectForManager(ConversationEntity conversationEntity)
+        public Int32 UserDisconnectForManager(ConversationEntity conversationEntity)
         {
+            Int32 success = 0;
             try
             {
-                ServiceChatDAO.UserDisconnectForManager(conversationEntity);
+                success = ServiceChatDAO.UserDisconnectForManager(conversationEntity);
             }
             catch (Exception ex)
             {
+                success = 0;
                 log.Save(EnumLogLevel.Fatal, ex);
             }
+            return success;
         }
 
         /// <summary>
@@ -293,7 +296,7 @@ namespace xChatBusiness
         /// </summary>
         /// <param name="objectRequest"></param>
         /// <returns></returns>
-        public int ConversationMoveTo(ConversationEntity objChat)
+        public Int32 ConversationMoveTo(ConversationEntity objChat)
         {
             int success = 0;
             try
@@ -311,6 +314,7 @@ namespace xChatBusiness
             }
             catch (Exception ex)
             {
+                 success = 0;
                 log.Save(EnumLogLevel.Fatal, ex);
             }
 

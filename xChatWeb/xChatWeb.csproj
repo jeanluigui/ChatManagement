@@ -207,8 +207,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap3.0.0.min.css.css" />
+    <Content Include="Content\chatWindowManager.css" />
     <Content Include="Content\handlebars\handlebars-v4.0.12.js" />
     <Content Include="Content\Imagenes\Disk-1.9s-89px.gif" />
+    <Content Include="Content\Imagenes\imgdefault.png" />
     <Content Include="Content\Imagenes\imgMessage.png" />
     <Content Include="Content\Imagenes\Loading_1.gif" />
     <Content Include="Content\Imagenes\user-profile.png" />
@@ -316,8 +318,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -346,7 +346,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Business\" />
     <Folder Include="Utils\" />
   </ItemGroup>
   <ItemGroup>
