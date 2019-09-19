@@ -33,6 +33,8 @@ namespace xChatEntities
         public List<Int32> ListIdsAgents { get; set; }
         public tBaseProducFiltersList ListMarkets { get; set; }
         public tBaseProducFiltersList ListAgents { get; set; }
+        public Int32 LanguageId { get; set; }
+        public Int32 ModuleId { get; set; }
         public ConversationResponseEntity() { }
 
         public override void Fill(DataRow dataRow)
@@ -60,6 +62,8 @@ namespace xChatEntities
             Language = Utilities.ValidateDataRowKey(dataRow, "Languagename", typeof(String)); 
             Module = Utilities.ValidateDataRowKey(dataRow, "Modulename", typeof(String));
             WritedBy = Utilities.ValidateDataRowKey(dataRow, "WritedBy", typeof(String));
+            ModuleId = Convert.ToInt32(Utilities.ValidateDataRowKey(dataRow, "ModuleId", typeof(Int32)));
+            LanguageId = Convert.ToInt32(Utilities.ValidateDataRowKey(dataRow, "LanguageId", typeof(Int32)));
 
             //UserConnect = new UserConnect(item);
         }

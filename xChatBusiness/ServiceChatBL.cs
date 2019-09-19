@@ -159,7 +159,7 @@ namespace xChatBusiness
 
             return managerToken;
         }
-        public string GetManagerTokenValue(ConversationEntity conversationEntity)
+        public string GetManagerTokenValueByAgentId(ConversationEntity conversationEntity)
         {
             string managerToken = string.Empty;
 
@@ -174,6 +174,22 @@ namespace xChatBusiness
 
             return managerToken;
         }
+        public string GetManagerTokenValueByManagerId(ConversationEntity conversationEntity)
+        {
+            string managerToken = string.Empty;
+
+            try
+            {
+                managerToken = ServiceChatDAO.GetManagerTokenValueByManagerId(conversationEntity);
+            }
+            catch (Exception ex)
+            {
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return managerToken;
+        }
+        
         public ConversationEntity GetAgentAndManagerIdByToken(String token)
         {
             ConversationEntity ConversationEntity = new ConversationEntity();

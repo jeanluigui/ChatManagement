@@ -112,6 +112,11 @@ namespace xChatEntities
             {
                 get { return URL_API_SERVICE + "api/Conversation/GetListConversationByChatAndManagerId/"; }
             }
+            public static string Manager_GetListAgent
+            {
+                get { return URL_API_SERVICE + "api/Conversation/Manager_GetListAgent/"; }
+            }
+            
         }
     }
 

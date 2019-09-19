@@ -350,6 +350,30 @@ namespace xChatWebApi.Controllers
 
             return result;
         }
+        /// <summary>
+        /// Lista de agentes por Manager(Id sin encriptacion).
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// 
+        [HttpPost]
+        [ActionName("Manager_GetListAgent")]
+        [Route("api/Conversation/Manager_GetListAgent/")]
+        public ObjectResultList<AccountManagerConnect> Manager_GetListAgent(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
+
+            try
+            {
+                result = _serviceChatManagerBL.Manager_GetListAgent(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+            }
+
+            return result;
+        }
 
         /// <summary>
         /// Devuelve la lista de usuarios asociados al Account Manager.
@@ -425,6 +449,6 @@ namespace xChatWebApi.Controllers
 
             return list;
         }
-
+    
     }
 }

@@ -105,6 +105,8 @@ namespace xChatDAO
                 parameters.Add("@chatdate", DateTime.Now);
                 parameters.Add("@chatmessageisusersend", conversationEntity.IsSendUser);
                 parameters.Add("@managertoken", conversationEntity.ManagerToken);
+                parameters.Add("@module", conversationEntity.ChatBySkillModuleId);
+                parameters.Add("@language", conversationEntity.ChatBySkillLanguageId);
 
                 CommandParameter queryCommand = new CommandParameter("chat.ChatMessages_Insert_Sp", parameters);
                 DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
@@ -216,7 +218,7 @@ namespace xChatDAO
             return managerToken;
         }
         /// <summary>
-        /// Obtener el tocken de un manager conectado.
+        /// Obtener el token de un manager conectado por medio del id del agente.
         /// </summary>
         /// <param name="conversationEntity"></param>
         /// <returns></returns>
@@ -230,6 +232,37 @@ namespace xChatDAO
                 parameters.Add("@agentid", conversationEntity.AgentId);
 
                 CommandParameter queryCommand = new CommandParameter("chat.ManagerConnect_GetTokenActive_Sp", parameters);
+                DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
+
+                managerToken = rowResult["AccountManagerToken"].ToString();
+            }
+            catch (TimeoutException tout)
+            {
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return managerToken;
+        }
+
+        /// <summary>
+        /// Obtener el token de manager conectado por medio del su IdManager.
+        /// </summary>
+        /// <param name="conversationEntity"></param>
+        /// <returns></returns>
+        public static string GetManagerTokenValueByManagerId(ConversationEntity conversationEntity)
+        {
+            string managerToken = string.Empty;
+
+            try
+            {
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@managerid", conversationEntity.ManagerId);
+
+                CommandParameter queryCommand = new CommandParameter("chat.ManagerConnect_GetTokenActiveByManagerId_Sp", parameters);
                 DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
 
                 managerToken = rowResult["AccountManagerToken"].ToString();

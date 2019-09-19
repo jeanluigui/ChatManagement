@@ -40,23 +40,11 @@ namespace xChatWeb.Controllers
             {
                 if (resultRolUser.Id == (Int32)EnumRolTypeChat.Manager)
                 {
-                    // ----------------------------------------------
-                    // Obtener lista de agentes de determinado Manager.
-                    // ----------------------------------------------     
-
-                    ObjectRequest<string> objectRequest = new ObjectRequest<string>()
-                    {
-                        //userId
-                        SenderObject = $"{originalParamId};"
-                    };
-
-                    ObjectResultList<AccountManagerConnect> lstAgentsByManager = RequestService.ExecuteList<AccountManagerConnect, string>(Constants.UrlApiService.GetListAgentByManager
-                        , "POST"
-                        , objectRequest
-                        );
-
+                    // Obtener lista de agentes de determinado Manager.   
+                    ObjectRequest<string> objectRequest = new ObjectRequest<string>(){ SenderObject = $"{originalParamId};" };
+                    ObjectResultList<AccountManagerConnect> lstAgentsByManager = RequestService.ExecuteList<AccountManagerConnect, string>(Constants.UrlApiService.GetListAgentByManager, "POST" , objectRequest );
                     ObjectResultList<AccountManagerConnect> lstAgentResult = lstAgentsByManager;
-                    ViewBag.ListAgentByManager = lstAgentResult;
+                    //ViewBag.ListAgentByManager = lstAgentResult;
                     ViewBag.RolType = (Int32)EnumRolTypeChat.Manager;
                     ViewBag.ManagetId = lstAgentsByManager.Id;
                     ViewBag.ManageName = (lstAgentsByManager.Elements == null || lstAgentsByManager.Elements.Count == 0) ? "" : lstAgentsByManager.Elements[0].ManagerName; 
@@ -157,6 +145,29 @@ namespace xChatWeb.Controllers
                 throw ex;
             }
             return Json(lstUserConnect);
+        }
+
+        [HttpPost]
+        public JsonResult GetListAgentByManager(String ManagerId)
+        {
+            ObjectResultList<AccountManagerConnect> lstAgentsByManager = null;
+            try
+            {                
+                if (!String.IsNullOrEmpty(ManagerId))
+                {
+                   ObjectRequest<string> objectRequest = new ObjectRequest<string>()
+                   {
+                       SenderObject = $"{ManagerId}"
+                   };
+                   lstAgentsByManager = RequestService.ExecuteList<AccountManagerConnect, string>(Constants.UrlApiService.Manager_GetListAgent, "POST", objectRequest);
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return Json(lstAgentsByManager);
         }
 
         public ActionResult About()

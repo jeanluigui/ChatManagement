@@ -1,0 +1,11 @@
+H
+?D:\repositoriosGit\Chat\Chat\xChatAPI\App_Start\WebApiConfig.csutf-8T
+KD:\repositoriosGit\Chat\Chat\xChatAPI\Controllers\ConversationController.csutf-8[
+RD:\repositoriosGit\Chat\Chat\xChatAPI\Controllers\ManagerMasterEntityController.csutf-8R
+ID:\repositoriosGit\Chat\Chat\xChatAPI\Controllers\SkillAgentController.csutf-8L
+CD:\repositoriosGit\Chat\Chat\xChatAPI\Controllers\UserController.csutf-8<
+3D:\repositoriosGit\Chat\Chat\xChatAPI\CounterHub.csutf-8=
+4D:\repositoriosGit\Chat\Chat\xChatAPI\Global.asax.csutf-8I
+@D:\repositoriosGit\Chat\Chat\xChatAPI\Properties\AssemblyInfo.csutf-89
+0D:\repositoriosGit\Chat\Chat\xChatAPI\Startup.csutf-8d
+YC:\Users\pplasencia\AppData\Local\Temp\.NETFramework,Version=v4.7.2.AssemblyAttributes.csutf-8

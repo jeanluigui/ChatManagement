@@ -53,36 +53,11 @@ namespace xChatWeb.Controllers
                         );
 
                     ObjectResultList<AccountManagerConnect> lstAgentResult = lstAgents;
+                    ViewBag.ManagetId = (lstAgentResult.Elements == null || lstAgentResult.Elements.Count == 0) ? "" : lstAgentResult.Elements[0].ManagerId.ToString();
                     ViewBag.AgentActive = lstAgentResult;
                     ViewBag.RolType = (Int32)EnumRolTypeChat.Agent;
                 }
                 
-                if (resultRolUser.Id == (Int32)EnumRolTypeChat.Manager)
-                {
-                    // ----------------------------------------------
-                    // Obtener lista de agentes de determinado Manager.
-                    // ----------------------------------------------     
-
-                    ObjectRequest<string> objectRequest = new ObjectRequest<string>()
-                    {
-                        //userId
-                        SenderObject = $"{originalParamId};"
-                    };
-
-                    ObjectResultList<AccountManagerConnect> lstAgentsByManager = RequestService.ExecuteList<AccountManagerConnect, string>(Constants.UrlApiService.GetListAgentByManager
-                        , "POST"
-                        , objectRequest
-                        );
-
-                    ObjectResultList<AccountManagerConnect> lstAgentResult = lstAgentsByManager;
-                    ViewBag.ListAgentByManager = lstAgentResult;
-                    ViewBag.RolType = (Int32)EnumRolTypeChat.Manager;
-                    ViewBag.ManagetId = lstAgentsByManager.Id;
-
-
-                }
-
-
             }
             #endregion
             

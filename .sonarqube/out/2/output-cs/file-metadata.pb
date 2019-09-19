@@ -1,0 +1,17 @@
+H
+?D:\repositoriosGit\Chat\Chat\xChatDAO\IServiceChatManagerDAO.csutf-8@
+7D:\repositoriosGit\Chat\Chat\xChatDAO\IServiceFaqDAO.csutf-8I
+@D:\repositoriosGit\Chat\Chat\xChatDAO\IServiceMasterEntityDAO.csutf-8G
+>D:\repositoriosGit\Chat\Chat\xChatDAO\IServiceSkillAgentDAO.csutf-8M
+DD:\repositoriosGit\Chat\Chat\xChatDAO\IServiceUserAccountGroupDAO.csutf-8A
+8D:\repositoriosGit\Chat\Chat\xChatDAO\IServiceUserDAO.csutf-8I
+@D:\repositoriosGit\Chat\Chat\xChatDAO\Properties\AssemblyInfo.csutf-8@
+7D:\repositoriosGit\Chat\Chat\xChatDAO\ServiceChatDAO.csutf-8G
+>D:\repositoriosGit\Chat\Chat\xChatDAO\ServiceChatManagerDAO.csutf-8?
+6D:\repositoriosGit\Chat\Chat\xChatDAO\ServiceFaqDAO.csutf-8H
+?D:\repositoriosGit\Chat\Chat\xChatDAO\ServiceMasterEntityDAO.csutf-8H
+?D:\repositoriosGit\Chat\Chat\xChatDAO\ServiceNotificationDAO.csutf-8F
+=D:\repositoriosGit\Chat\Chat\xChatDAO\ServiceSkillAgentDAO.csutf-8L
+CD:\repositoriosGit\Chat\Chat\xChatDAO\ServiceUserAccountGroupDAO.csutf-8@
+7D:\repositoriosGit\Chat\Chat\xChatDAO\ServiceUserDAO.csutf-8d
+YC:\Users\pplasencia\AppData\Local\Temp\.NETFramework,Version=v4.7.2.AssemblyAttributes.csutf-8

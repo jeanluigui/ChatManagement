@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using xChatEntities;
@@ -431,6 +432,41 @@ namespace xChatDAO
 
                 result = new ObjectResultList<AccountManagerConnect>(dtresult);
                 result.Id = Convert.ToInt32(Encryption.Decrypt(objectRequest.SenderObject.Split(';')[0].ToString()));
+                ListAccountManagerConnect listAMC = new ListAccountManagerConnect(dtresult);
+
+            }
+            catch (TimeoutException tout)
+            {
+                result.Id = 2;
+                result.Message = tout.Message;
+
+                log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return result;
+        }
+        public ObjectResultList<AccountManagerConnect> Manager_GetListAgent(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
+            result.Elements = new List<AccountManagerConnect>();
+            try
+            {
+                ListParameters parameters = new ListParameters();
+                parameters.Add("@managerId", objectRequest.SenderObject.ToString());
+
+                CommandParameter queryCommand = new CommandParameter("chat.Accountmanagerconnect_Getbymanagerid_Sp", parameters);
+
+                DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
+
+                result = new ObjectResultList<AccountManagerConnect>(dtresult);
+                result.Id = Convert.ToInt32(objectRequest.SenderObject.ToString());
                 ListAccountManagerConnect listAMC = new ListAccountManagerConnect(dtresult);
 
             }

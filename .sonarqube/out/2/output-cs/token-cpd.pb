@@ -1,0 +1,13149 @@
+´
+?D:\repositoriosGit\Chat\Chat\xChatDAO\IServiceChatManagerDAO.cs
+	namespace 	
+xChatDAO
+ 
+{ 
+public 
+
+	interface "
+IServiceChatManagerDAO +
+{ 
+bool		 $
+AccountManagerDisconnect		 %
+(		% &
+ObjectRequest		& 3
+<		3 4
+int		4 7
+>		7 8
+objectRequest		9 F
+)		F G
+;		G H
+ObjectResultList
+
+ 
+<
+
+ !
+AccountManagerConnect
+
+ .
+>
+
+. /!
+GetAccountManagerById
+
+0 E
+(
+
+E F
+ObjectRequest
+
+F S
+<
+
+S T
+string
+
+T Z
+>
+
+Z [
+objectRequest
+
+\ i
+)
+
+i j
+;
+
+j k
+ObjectResultList 
+< !
+AccountManagerConnect .
+>. /5
+)GetListAccountManagerConnectByModuleAppId0 Y
+(Y Z
+ObjectRequestZ g
+<g h
+stringh n
+>n o
+objectRequestp }
+)} ~
+;~ 
+ObjectResultList 
+< &
+ConversationResponseEntity 3
+>3 4'
+GetListConversationByChatId5 P
+(P Q
+ObjectRequestQ ^
+<^ _
+int_ b
+>b c
+objectRequestd q
+)q r
+;r s
+ObjectResultList 
+< &
+ConversationResponseEntity 3
+>3 4'
+GetListConversationByReport5 P
+(P Q
+stringQ W
+senderObjectX d
+)d e
+;e f
+ObjectResultList 
+< 
+UserConnect $
+>$ %0
+$GetListUserConnectByAccountManagerId& J
+(J K
+ObjectRequestK X
+<X Y
+intY \
+>\ ]
+objectRequest^ k
+)k l
+;l m
+ObjectResultList 
+< 
+UserConnect $
+>$ %)
+GetListUserByAccountManagerId& C
+(C D
+ObjectRequestD Q
+<Q R
+intR U
+>U V
+objectRequestW d
+)d e
+;e f
+ObjectResultList 
+< 
+
+ReportChat #
+># $
+	GetReport% .
+(. /
+ReportFilter/ ;
+senderObject< H
+)H I
+;I J
+ObjectResultList 
+< &
+ConversationResponseEntity 3
+>3 4'
+GetListConversationByFilter5 P
+(P Q
+ObjectRequestQ ^
+<^ _&
+ConversationResponseEntity_ y
+>y z
+objectRequest	{ à
+)
+à â
+;
+â ä
+ObjectResult 
+< 
+UserRoleType !
+>! "
+UsersGetRoleType# 3
+(3 4
+ObjectRequest4 A
+<A B
+stringB H
+>H I
+objectRequestJ W
+)W X
+;X Y
+ObjectResultList 
+< !
+AccountManagerConnect .
+>. /!
+GetListAgentByManager0 E
+(E F
+ObjectRequestF S
+<S T
+stringT Z
+>Z [
+objectRequest\ i
+)i j
+;j k
+ObjectResultList 
+< &
+ConversationResponseEntity 3
+>3 4/
+#GetListConversationByChatAndAgentId5 X
+(X Y
+ObjectRequestY f
+<f g
+stringg m
+>m n
+objectRequesto |
+)| }
+;} ~
+ObjectResultList 
+< &
+ConversationResponseEntity 3
+>3 41
+%GetListConversationByChatAndManagerId5 Z
+(Z [
+ObjectRequest[ h
+<h i
+stringi o
+>o p
+objectRequestq ~
+)~ 
+;	 Ä
+} 
+} ∑
+7D:\repositoriosGit\Chat\Chat\xChatDAO\IServiceFaqDAO.cs
+	namespace 	
+xChatDAO
+ 
+{ 
+public 
+
+	interface 
+IServiceFaqDAO #
+{ 
+void 
+Insert 
+( 
+	FaqEntity 
+	faqEntity '
+)' (
+;( )
+void 
+Update 
+( 
+	FaqEntity 
+	faqEntity '
+)' (
+;( )
+void		 
+Delete		 
+(		 
+	FaqEntity		 
+	faqEntity		 '
+)		' (
+;		( )
+ObjectResultList
+
+ 
+<
+
+ 
+	FaqEntity
+
+ "
+>
+
+" #
+GetListByLanguajeId
+
+$ 7
+(
+
+7 8
+int
+
+8 ;
+
+languageId
+
+< F
+)
+
+F G
+;
+
+G H
+	FaqEntity 
+GetById 
+( 
+	FaqEntity #
+	faqEntity$ -
+)- .
+;. /
+} 
+} È
+@D:\repositoriosGit\Chat\Chat\xChatDAO\IServiceMasterEntityDAO.cs
+	namespace 	
+xChatDAO
+ 
+{ 
+public 
+
+	interface #
+IServiceMasterEntityDAO ,
+{ 
+ObjectResultList 
+< 
+EntityMaster %
+>% &
+GetList' .
+(. /
+EntityMasterEnum/ ?
+entityMasterEnum@ P
+)P Q
+;Q R
+ObjectResultList		 
+<		 
+EntityMaster		 %
+>		% &
+SearchMasterGetList		' :
+(		: ;
+string		; A
+masterEntity		B N
+,		N O
+string		P V
+masterAction		W c
+,		c d
+string		e k
+masterParametersSet		l 
+,			 Ä
+string
+		Å á!
+masterParametersAdd
+		à õ
+)
+		õ ú
+;
+		ú ù
+}
+
+ 
+} ß
+>D:\repositoriosGit\Chat\Chat\xChatDAO\IServiceSkillAgentDAO.cs
+	namespace 	
+xChatDAO
+ 
+{ 
+public 
+
+	interface !
+IServiceSkillAgentDAO *
+{ 
+void $
+ChangeStateSkillLanguage %
+(% &
+ObjectRequest& 3
+<3 4
+SkillAgentLanguage4 F
+>F G
+objectRequestH U
+)U V
+;V W
+void		 "
+ChangeStateSkillModule		 #
+(		# $
+ObjectRequest		$ 1
+<		1 2
+SkillAgentModule		2 B
+>		B C
+objectRequest		D Q
+)		Q R
+;		R S
+void
+
+ 
+CreateSkillLanguage
+
+  
+(
+
+  !
+ObjectRequest
+
+! .
+<
+
+. /
+SkillAgentLanguage
+
+/ A
+>
+
+A B
+objectRequest
+
+C P
+)
+
+P Q
+;
+
+Q R
+void 
+CreateSkillModule 
+( 
+ObjectRequest ,
+<, -
+SkillAgentModule- =
+>= >
+objectRequest? L
+)L M
+;M N
+ObjectResultList 
+< 
+
+SkillAgent #
+># $
+GetListSkillByAgent% 8
+(8 9
+ObjectRequest9 F
+<F G
+SkillAgentFilterG W
+>W X
+objectRequestY f
+)f g
+;g h
+void 
+UpdateSkillLanguage  
+(  !
+ObjectRequest! .
+<. /
+SkillAgentLanguage/ A
+>A B
+objectRequestC P
+)P Q
+;Q R
+void 
+UpdateSkillModule 
+( 
+ObjectRequest ,
+<, -
+SkillAgentModule- =
+>= >
+objectRequest? L
+)L M
+;M N
+ObjectResult 
+< 
+Boolean 
+> &
+ValidateSkillByAgentModule 8
+(8 9
+ObjectRequest9 F
+<F G
+SkillAgentModuleG W
+>W X
+objectRequestY f
+)f g
+;g h
+ObjectResult 
+< 
+Boolean 
+> (
+ValidateSkillByAgentLanguage :
+(: ;
+ObjectRequest; H
+<H I
+SkillAgentLanguageI [
+>[ \
+objectRequest] j
+)j k
+;k l
+} 
+} ≤
+DD:\repositoriosGit\Chat\Chat\xChatDAO\IServiceUserAccountGroupDAO.cs
+	namespace 	
+xChatDAO
+ 
+{		 
+public
+
+ 
+
+	interface
+
+ '
+IServiceUserAccountGroupDAO
+
+ 0
+{ 
+void "
+CreateUserAccountGroup #
+(# $
+ObjectRequest$ 1
+<1 2
+UserAccountGroups2 C
+>C D
+objectRequestE R
+)R S
+;S T
+void "
+UpdateUserAccountGroup #
+(# $
+ObjectRequest$ 1
+<1 2
+UserAccountGroups2 C
+>C D
+objectRequestE R
+)R S
+;S T
+void "
+DeleteUserAccountGroup #
+(# $
+ObjectRequest$ 1
+<1 2
+UserAccountGroups2 C
+>C D
+objectRequestE R
+)R S
+;S T
+ObjectResultList 
+< 
+UserAccountGroups *
+>* +#
+GetListUserAccountGroup, C
+(C D
+ObjectRequestD Q
+<Q R
+UserAccountGroupsR c
+>c d
+objectRequeste r
+)r s
+;s t
+ObjectResult 
+< 
+Boolean 
+> $
+ValidateUserAccountGroup 6
+(6 7
+ObjectRequest7 D
+<D E
+UserAccountGroupsE V
+>V W
+objectRequestX e
+)e f
+;f g
+} 
+} Ì
+
+8D:\repositoriosGit\Chat\Chat\xChatDAO\IServiceUserDAO.cs
+	namespace 	
+xChatDAO
+ 
+{		 
+public
+
+ 
+
+	interface
+
+ 
+IServiceUserDAO
+
+ $
+{ 
+void 
+CreateUsersRoleType  
+(  !
+ObjectRequest! .
+<. /
+UserRoleType/ ;
+>; <
+objectRequest= J
+)J K
+;K L
+void 
+UpdateUsersRoleType  
+(  !
+ObjectRequest! .
+<. /
+UserRoleType/ ;
+>; <
+objectRequest= J
+)J K
+;K L
+void 
+DeleteUsersRoleType  
+(  !
+ObjectRequest! .
+<. /
+UserRoleType/ ;
+>; <
+objectRequest= J
+)J K
+;K L
+ObjectResultList 
+< 
+UserRoleType %
+>% & 
+GetListUsersRoleType' ;
+(; <
+ObjectRequest< I
+<I J
+UserRoleTypeJ V
+>V W
+objectRequestX e
+)e f
+;f g
+ObjectResult 
+< 
+Boolean 
+> !
+ValidateUsersRoleType 3
+(3 4
+ObjectRequest4 A
+<A B
+UserRoleTypeB N
+>N O
+objectRequestP ]
+)] ^
+;^ _
+} 
+} Î
+@D:\repositoriosGit\Chat\Chat\xChatDAO\Properties\AssemblyInfo.cs
+[ 
+assembly 	
+:	 
+
+AssemblyTitle 
+( 
+$str #
+)# $
+]$ %
+[		 
+assembly		 	
+:			 
+
+AssemblyDescription		 
+(		 
+$str		 !
+)		! "
+]		" #
+[
+
+ 
+assembly
+
+ 	
+:
+
+	 
+!
+AssemblyConfiguration
+
+  
+(
+
+  !
+$str
+
+! #
+)
+
+# $
+]
+
+$ %
+[ 
+assembly 	
+:	 
+
+AssemblyCompany 
+( 
+$str 
+) 
+] 
+[ 
+assembly 	
+:	 
+
+AssemblyProduct 
+( 
+$str %
+)% &
+]& '
+[ 
+assembly 	
+:	 
+
+AssemblyCopyright 
+( 
+$str 0
+)0 1
+]1 2
+[ 
+assembly 	
+:	 
+
+AssemblyTrademark 
+( 
+$str 
+)  
+]  !
+[ 
+assembly 	
+:	 
+
+AssemblyCulture 
+( 
+$str 
+) 
+] 
+[ 
+assembly 	
+:	 
+
+
+ComVisible 
+( 
+false 
+) 
+] 
+[ 
+assembly 	
+:	 
+
+Guid 
+( 
+$str 6
+)6 7
+]7 8
+[## 
+assembly## 	
+:##	 
+
+AssemblyVersion## 
+(## 
+$str## $
+)##$ %
+]##% &
+[$$ 
+assembly$$ 	
+:$$	 
+
+AssemblyFileVersion$$ 
+($$ 
+$str$$ (
+)$$( )
+]$$) *òÂ
+7D:\repositoriosGit\Chat\Chat\xChatDAO\ServiceChatDAO.cs
+	namespace 	
+xChatDAO
+ 
+{ 
+public 
+
+static 
+class 
+ServiceChatDAO &
+{ 
+private 
+static 
+ILoggerHandler %
+log& )
+=* +
+LoggerFactory, 9
+.9 :
+Get: =
+(= >
+EnumLayerIdentifier> Q
+.Q R
+DataAccessLayerR a
+)a b
+;b c
+public 
+static 
+int 
+
+ChatCreate $
+($ %
+ConversationEntity% 7
+conversationEntity8 J
+,J K
+Int32L Q#
+accountManagerConnectIdR i
+)i j
+{ 	
+Int32 
+chatId 
+= 
+$num 
+; 
+try 
+{ 
+ListParameters   
+
+parameters   )
+=  * +
+new  , /
+ListParameters  0 >
+(  > ?
+)  ? @
+;  @ A
+
+parameters!! 
+.!! 
+Add!! 
+(!! 
+$str!! /
+,!!/ 0
+conversationEntity!!1 C
+.!!C D
+DistributorId!!D Q
+)!!Q R
+;!!R S
+
+parameters"" 
+."" 
+Add"" 
+("" 
+$str"" *
+,""* +
+conversationEntity"", >
+.""> ?
+UserName""? G
+)""G H
+;""H I
+
+parameters## 
+.## 
+Add## 
+(## 
+$str## +
+,##+ ,
+conversationEntity##- ?
+.##? @
+	UserEmail##@ I
+)##I J
+;##J K
+
+parameters$$ 
+.$$ 
+Add$$ 
+($$ 
+$str$$ +
+,$$+ ,
+conversationEntity$$- ?
+.$$? @
+	UserToken$$@ I
+)$$I J
+;$$J K
+
+parameters%% 
+.%% 
+Add%% 
+(%% 
+$str%% -
+,%%- .
+conversationEntity%%/ A
+.%%A B
+ModuleAppId%%B M
+)%%M N
+;%%N O
+
+parameters&& 
+.&& 
+Add&& 
+(&& 
+$str&& 9
+,&&9 :#
+accountManagerConnectId&&; R
+)&&R S
+;&&S T
+
+parameters(( 
+.(( 
+Add(( 
+((( 
+$str(( *
+,((* +
+conversationEntity((, >
+.((> ?!
+ChatBySkillLanguageId((? T
+)((T U
+;((U V
+
+parameters)) 
+.)) 
+Add)) 
+()) 
+$str)) (
+,))( )
+conversationEntity))* <
+.))< =
+ChatBySkillModuleId))= P
+)))P Q
+;))Q R
+CommandParameter++  
+queryCommand++! -
+=++. /
+new++0 3
+CommandParameter++4 D
+(++D E
+$str++E Z
+,++Z [
+
+parameters++\ f
+)++f g
+;++g h
+DataRow,, 
+	rowResult,, !
+=,," #
+	DbManager,,$ -
+.,,- .
+Instance,,. 6
+.,,6 7
+ExecuteRegister,,7 F
+(,,F G
+queryCommand,,G S
+),,S T
+;,,T U
+chatId.. 
+=.. 
+Convert..  
+...  !
+ToInt32..! (
+(..( )
+	rowResult..) 2
+[..2 3
+$str..3 ;
+]..; <
+)..< =
+;..= >
+}// 
+catch00 
+(00 
+TimeoutException00 #
+tout00$ (
+)00( )
+{11 
+log22 
+.22 
+Save22 
+(22 
+EnumLogLevel22 %
+.22% &
+Fatal22& +
+,22+ ,
+tout22- 1
+.221 2
+Message222 9
+)229 :
+;22: ;
+}33 
+catch44 
+(44 
+	Exception44 
+ex44 
+)44  
+{55 
+log66 
+.66 
+Save66 
+(66 
+EnumLogLevel66 %
+.66% &
+Fatal66& +
+,66+ ,
+ex66- /
+)66/ 0
+;660 1
+}77 
+return99 
+chatId99 
+;99 
+}:: 	
+publicAA 
+staticAA 
+ObjectResultListAA &
+<AA& '
+	ChatTokenAA' 0
+>AA0 1
+ChatDisconnectedAA2 B
+(AAB C
+stringAAC I
+connectionIdAAJ V
+)AAV W
+{BB 	
+ObjectResultListCC 
+<CC 
+	ChatTokenCC &
+>CC& '
+tokenDestinoCC( 4
+=CC5 6
+newCC7 :
+ObjectResultListCC; K
+<CCK L
+	ChatTokenCCL U
+>CCU V
+(CCV W
+)CCW X
+;CCX Y
+tryEE 
+{FF 
+ListParametersGG 
+
+parametersGG )
+=GG* +
+newGG, /
+ListParametersGG0 >
+(GG> ?
+)GG? @
+;GG@ A
+
+parametersHH 
+.HH 
+AddHH 
+(HH 
+$strHH +
+,HH+ ,
+connectionIdHH- 9
+)HH9 :
+;HH: ;
+CommandParameterJJ  
+queryCommandJJ! -
+=JJ. /
+newJJ0 3
+CommandParameterJJ4 D
+(JJD E
+$strJJE `
+,JJ` a
+
+parametersJJb l
+)JJl m
+;JJm n
+	DataTableKK 
+	dataTableKK #
+=KK$ %
+	DbManagerKK& /
+.KK/ 0
+InstanceKK0 8
+.KK8 9
+ExecuteTableKK9 E
+(KKE F
+queryCommandKKF R
+)KKR S
+;KKS T
+tokenDestinoMM 
+=MM 
+newMM "
+ObjectResultListMM# 3
+<MM3 4
+	ChatTokenMM4 =
+>MM= >
+(MM> ?
+	dataTableMM? H
+)MMH I
+;MMI J
+}NN 
+catchOO 
+(OO 
+TimeoutExceptionOO #
+toutOO$ (
+)OO( )
+{PP 
+logQQ 
+.QQ 
+SaveQQ 
+(QQ 
+EnumLogLevelQQ %
+.QQ% &
+FatalQQ& +
+,QQ+ ,
+toutQQ- 1
+.QQ1 2
+MessageQQ2 9
+)QQ9 :
+;QQ: ;
+}RR 
+catchSS 
+(SS 
+	ExceptionSS 
+exSS 
+)SS  
+{TT 
+logUU 
+.UU 
+SaveUU 
+(UU 
+EnumLogLevelUU %
+.UU% &
+FatalUU& +
+,UU+ ,
+exUU- /
+)UU/ 0
+;UU0 1
+}VV 
+returnXX 
+tokenDestinoXX 
+;XX  
+}YY 	
+public`` 
+static`` 
+int`` 
+ChatMessageCreate`` +
+(``+ ,
+ConversationEntity``, >
+conversationEntity``? Q
+)``Q R
+{aa 	
+intbb 
+chatMessageIdbb 
+=bb 
+$numbb  !
+;bb! "
+trydd 
+{ee 
+ListParametersff 
+
+parametersff )
+=ff* +
+newff, /
+ListParametersff0 >
+(ff> ?
+)ff? @
+;ff@ A
+
+parametersgg 
+.gg 
+Addgg 
+(gg 
+$strgg (
+,gg( )
+conversationEntitygg* <
+.gg< =
+ChatIdgg= C
+)ggC D
+;ggD E
+
+parametershh 
+.hh 
+Addhh 
+(hh 
+$strhh 3
+,hh3 4
+conversationEntityhh5 G
+.hhG H
+MessagehhH O
+)hhO P
+;hhP Q
+
+parametersii 
+.ii 
+Addii 
+(ii 
+$strii *
+,ii* +
+DateTimeii, 4
+.ii4 5
+Nowii5 8
+)ii8 9
+;ii9 :
+
+parametersjj 
+.jj 
+Addjj 
+(jj 
+$strjj 7
+,jj7 8
+conversationEntityjj9 K
+.jjK L
+
+IsSendUserjjL V
+)jjV W
+;jjW X
+
+parameterskk 
+.kk 
+Addkk 
+(kk 
+$strkk .
+,kk. /
+conversationEntitykk0 B
+.kkB C
+ManagerTokenkkC O
+)kkO P
+;kkP Q
+CommandParametermm  
+queryCommandmm! -
+=mm. /
+newmm0 3
+CommandParametermm4 D
+(mmD E
+$strmmE b
+,mmb c
+
+parametersmmd n
+)mmn o
+;mmo p
+DataRownn 
+	rowResultnn !
+=nn" #
+	DbManagernn$ -
+.nn- .
+Instancenn. 6
+.nn6 7
+ExecuteRegisternn7 F
+(nnF G
+queryCommandnnG S
+)nnS T
+;nnT U
+chatMessageIdpp 
+=pp 
+Convertpp  '
+.pp' (
+ToInt32pp( /
+(pp/ 0
+	rowResultpp0 9
+[pp9 :
+$strpp: I
+]ppI J
+)ppJ K
+;ppK L
+conversationEntityrr "
+.rr" #
+	UserTokenrr# ,
+=rr- .
+	rowResultrr/ 8
+[rr8 9
+$strrr9 D
+]rrD E
+.rrE F
+ToStringrrF N
+(rrN O
+)rrO P
+;rrP Q
+conversationEntityss "
+.ss" #
+
+AgentTokenss# -
+=ss. /
+	rowResultss0 9
+[ss9 :
+$strss: O
+]ssO P
+.ssP Q
+ToStringssQ Y
+(ssY Z
+)ssZ [
+;ss[ \
+conversationEntitytt "
+.tt" #
+AgentIdtt# *
+=tt+ ,
+Converttt- 4
+.tt4 5
+ToInt32tt5 <
+(tt< =
+	rowResulttt= F
+[ttF G
+$strttG Y
+]ttY Z
+)ttZ [
+;tt[ \
+}uu 
+catchvv 
+(vv 
+TimeoutExceptionvv #
+toutvv$ (
+)vv( )
+{ww 
+logxx 
+.xx 
+Savexx 
+(xx 
+EnumLogLevelxx %
+.xx% &
+Fatalxx& +
+,xx+ ,
+toutxx- 1
+.xx1 2
+Messagexx2 9
+)xx9 :
+;xx: ;
+}yy 
+catchzz 
+(zz 
+	Exceptionzz 
+exzz 
+)zz  
+{{{ 
+log|| 
+.|| 
+Save|| 
+(|| 
+EnumLogLevel|| %
+.||% &
+Fatal||& +
+,||+ ,
+ex||- /
+)||/ 0
+;||0 1
+}}} 
+return 
+chatMessageId  
+;  !
+}
+ÄÄ 	
+public
+ÜÜ 
+static
+ÜÜ 
+void
+ÜÜ &
+SetMessageReadForManager
+ÜÜ 3
+(
+ÜÜ3 4 
+ConversationEntity
+ÜÜ4 F 
+conversationEntity
+ÜÜG Y
+)
+ÜÜY Z
+{
+áá 	
+try
+àà 
+{
+ââ 
+ListParameters
+ää 
+
+parameters
+ää )
+=
+ää* +
+new
+ää, /
+ListParameters
+ää0 >
+(
+ää> ?
+)
+ää? @
+;
+ää@ A
+
+parameters
+ãã 
+.
+ãã 
+Add
+ãã 
+(
+ãã 
+$str
+ãã (
+,
+ãã( ) 
+conversationEntity
+ãã* <
+.
+ãã< =
+ChatId
+ãã= C
+)
+ããC D
+;
+ããD E
+
+parameters
+åå 
+.
+åå 
+Add
+åå 
+(
+åå 
+$str
+åå *
+,
+åå* +
+DateTime
+åå, 4
+.
+åå4 5
+Now
+åå5 8
+)
+åå8 9
+;
+åå9 :
+CommandParameter
+éé  
+queryCommand
+éé! -
+=
+éé. /
+new
+éé0 3
+CommandParameter
+éé4 D
+(
+ééD E
+$str
+ééE l
+,
+éél m
+
+parameters
+één x
+)
+ééx y
+;
+ééy z
+	DbManager
+èè 
+.
+èè 
+Instance
+èè "
+.
+èè" #
+ExecuteCommand
+èè# 1
+(
+èè1 2
+queryCommand
+èè2 >
+)
+èè> ?
+;
+èè? @
+}
+êê 
+catch
+ëë 
+(
+ëë 
+TimeoutException
+ëë #
+tout
+ëë$ (
+)
+ëë( )
+{
+íí 
+log
+ìì 
+.
+ìì 
+Save
+ìì 
+(
+ìì 
+EnumLogLevel
+ìì %
+.
+ìì% &
+Fatal
+ìì& +
+,
+ìì+ ,
+tout
+ìì- 1
+.
+ìì1 2
+Message
+ìì2 9
+)
+ìì9 :
+;
+ìì: ;
+}
+îî 
+catch
+ïï 
+(
+ïï 
+	Exception
+ïï 
+ex
+ïï 
+)
+ïï  
+{
+ññ 
+log
+óó 
+.
+óó 
+Save
+óó 
+(
+óó 
+EnumLogLevel
+óó %
+.
+óó% &
+Fatal
+óó& +
+,
+óó+ ,
+ex
+óó- /
+)
+óó/ 0
+;
+óó0 1
+}
+òò 
+}
+ôô 	
+public
+üü 
+static
+üü 
+Int32
+üü &
+UserDisconnectForManager
+üü 4
+(
+üü4 5 
+ConversationEntity
+üü5 G 
+conversationEntity
+üüH Z
+)
+üüZ [
+{
+†† 	
+Int32
+°° 
+success
+°° 
+=
+°° 
+$num
+°° 
+;
+°° 
+try
+¢¢ 
+{
+££ 
+ListParameters
+§§ 
+
+parameters
+§§ )
+=
+§§* +
+new
+§§, /
+ListParameters
+§§0 >
+(
+§§> ?
+)
+§§? @
+;
+§§@ A
+
+parameters
+•• 
+.
+•• 
+Add
+•• 
+(
+•• 
+$str
+•• (
+,
+••( ) 
+conversationEntity
+••* <
+.
+••< =
+ChatId
+••= C
+)
+••C D
+;
+••D E
+
+parameters
+¶¶ 
+.
+¶¶ 
+Add
+¶¶ 
+(
+¶¶ 
+$str
+¶¶ *
+,
+¶¶* +
+DateTime
+¶¶, 4
+.
+¶¶4 5
+Now
+¶¶5 8
+)
+¶¶8 9
+;
+¶¶9 :
+CommandParameter
+®®  
+queryCommand
+®®! -
+=
+®®. /
+new
+®®0 3
+CommandParameter
+®®4 D
+(
+®®D E
+$str
+®®E b
+,
+®®b c
+
+parameters
+®®d n
+)
+®®n o
+;
+®®o p
+DataRow
+©© 
+	rowResult
+©© !
+=
+©©" #
+	DbManager
+©©$ -
+.
+©©- .
+Instance
+©©. 6
+.
+©©6 7
+ExecuteRegister
+©©7 F
+(
+©©F G
+queryCommand
+©©G S
+)
+©©S T
+;
+©©T U
+if
+™™ 
+(
+™™ 
+	rowResult
+™™ 
+!=
+™™  
+null
+™™! %
+)
+™™% &
+{
+´´ 
+success
+¨¨ 
+=
+¨¨ 
+Convert
+¨¨ %
+.
+¨¨% &
+ToInt32
+¨¨& -
+(
+¨¨- .
+	rowResult
+¨¨. 7
+[
+¨¨7 8
+$str
+¨¨8 D
+]
+¨¨D E
+.
+¨¨E F
+ToString
+¨¨F N
+(
+¨¨N O
+)
+¨¨O P
+)
+¨¨P Q
+;
+¨¨Q R
+}
+≠≠ 
+}
+ÆÆ 
+catch
+ØØ 
+(
+ØØ 
+TimeoutException
+ØØ #
+tout
+ØØ$ (
+)
+ØØ( )
+{
+∞∞ 
+success
+±± 
+=
+±± 
+$num
+±± 
+;
+±± 
+log
+≤≤ 
+.
+≤≤ 
+Save
+≤≤ 
+(
+≤≤ 
+EnumLogLevel
+≤≤ %
+.
+≤≤% &
+Fatal
+≤≤& +
+,
+≤≤+ ,
+tout
+≤≤- 1
+.
+≤≤1 2
+Message
+≤≤2 9
+)
+≤≤9 :
+;
+≤≤: ;
+}
+≥≥ 
+catch
+¥¥ 
+(
+¥¥ 
+	Exception
+¥¥ 
+ex
+¥¥ 
+)
+¥¥  
+{
+µµ 
+success
+∂∂ 
+=
+∂∂ 
+$num
+∂∂ 
+;
+∂∂ 
+log
+∑∑ 
+.
+∑∑ 
+Save
+∑∑ 
+(
+∑∑ 
+EnumLogLevel
+∑∑ %
+.
+∑∑% &
+Fatal
+∑∑& +
+,
+∑∑+ ,
+ex
+∑∑- /
+)
+∑∑/ 0
+;
+∑∑0 1
+}
+∏∏ 
+return
+ππ 
+success
+ππ 
+;
+ππ 
+}
+∫∫ 	
+public
+¡¡ 
+static
+¡¡ 
+string
+¡¡ 
+GetManagerToken
+¡¡ ,
+(
+¡¡, - 
+ConversationEntity
+¡¡- ? 
+conversationEntity
+¡¡@ R
+)
+¡¡R S
+{
+¬¬ 	
+string
+√√ 
+managerToken
+√√ 
+=
+√√  !
+string
+√√" (
+.
+√√( )
+Empty
+√√) .
+;
+√√. /
+try
+≈≈ 
+{
+∆∆ 
+ListParameters
+«« 
+
+parameters
+«« )
+=
+««* +
+new
+««, /
+ListParameters
+««0 >
+(
+««> ?
+)
+««? @
+;
+««@ A
+
+parameters
+»» 
+.
+»» 
+Add
+»» 
+(
+»» 
+$str
+»» (
+,
+»»( ) 
+conversationEntity
+»»* <
+.
+»»< =
+ChatId
+»»= C
+)
+»»C D
+;
+»»D E
+CommandParameter
+    
+queryCommand
+  ! -
+=
+  . /
+new
+  0 3
+CommandParameter
+  4 D
+(
+  D E
+$str
+  E s
+,
+  s t
+
+parameters
+  u 
+)   Ä
+;  Ä Å
+DataRow
+ÀÀ 
+	rowResult
+ÀÀ !
+=
+ÀÀ" #
+	DbManager
+ÀÀ$ -
+.
+ÀÀ- .
+Instance
+ÀÀ. 6
+.
+ÀÀ6 7
+ExecuteRegister
+ÀÀ7 F
+(
+ÀÀF G
+queryCommand
+ÀÀG S
+)
+ÀÀS T
+;
+ÀÀT U
+managerToken
+ÕÕ 
+=
+ÕÕ 
+	rowResult
+ÕÕ (
+[
+ÕÕ( )
+$str
+ÕÕ) >
+]
+ÕÕ> ?
+.
+ÕÕ? @
+ToString
+ÕÕ@ H
+(
+ÕÕH I
+)
+ÕÕI J
+;
+ÕÕJ K
+}
+ŒŒ 
+catch
+œœ 
+(
+œœ 
+TimeoutException
+œœ #
+tout
+œœ$ (
+)
+œœ( )
+{
+–– 
+log
+—— 
+.
+—— 
+Save
+—— 
+(
+—— 
+EnumLogLevel
+—— %
+.
+——% &
+Fatal
+——& +
+,
+——+ ,
+tout
+——- 1
+.
+——1 2
+Message
+——2 9
+)
+——9 :
+;
+——: ;
+}
+““ 
+catch
+”” 
+(
+”” 
+	Exception
+”” 
+ex
+”” 
+)
+””  
+{
+‘‘ 
+log
+’’ 
+.
+’’ 
+Save
+’’ 
+(
+’’ 
+EnumLogLevel
+’’ %
+.
+’’% &
+Fatal
+’’& +
+,
+’’+ ,
+ex
+’’- /
+)
+’’/ 0
+;
+’’0 1
+}
+÷÷ 
+return
+ÿÿ 
+managerToken
+ÿÿ 
+;
+ÿÿ  
+}
+ŸŸ 	
+public
+ﬂﬂ 
+static
+ﬂﬂ 
+string
+ﬂﬂ "
+GetManagerTokenValue
+ﬂﬂ 1
+(
+ﬂﬂ1 2 
+ConversationEntity
+ﬂﬂ2 D 
+conversationEntity
+ﬂﬂE W
+)
+ﬂﬂW X
+{
+‡‡ 	
+string
+·· 
+managerToken
+·· 
+=
+··  !
+string
+··" (
+.
+··( )
+Empty
+··) .
+;
+··. /
+try
+„„ 
+{
+‰‰ 
+ListParameters
+ÂÂ 
+
+parameters
+ÂÂ )
+=
+ÂÂ* +
+new
+ÂÂ, /
+ListParameters
+ÂÂ0 >
+(
+ÂÂ> ?
+)
+ÂÂ? @
+;
+ÂÂ@ A
+
+parameters
+ÊÊ 
+.
+ÊÊ 
+Add
+ÊÊ 
+(
+ÊÊ 
+$str
+ÊÊ )
+,
+ÊÊ) * 
+conversationEntity
+ÊÊ+ =
+.
+ÊÊ= >
+AgentId
+ÊÊ> E
+)
+ÊÊE F
+;
+ÊÊF G
+CommandParameter
+ËË  
+queryCommand
+ËË! -
+=
+ËË. /
+new
+ËË0 3
+CommandParameter
+ËË4 D
+(
+ËËD E
+$str
+ËËE l
+,
+ËËl m
+
+parameters
+ËËn x
+)
+ËËx y
+;
+ËËy z
+DataRow
+ÈÈ 
+	rowResult
+ÈÈ !
+=
+ÈÈ" #
+	DbManager
+ÈÈ$ -
+.
+ÈÈ- .
+Instance
+ÈÈ. 6
+.
+ÈÈ6 7
+ExecuteRegister
+ÈÈ7 F
+(
+ÈÈF G
+queryCommand
+ÈÈG S
+)
+ÈÈS T
+;
+ÈÈT U
+managerToken
+ÎÎ 
+=
+ÎÎ 
+	rowResult
+ÎÎ (
+[
+ÎÎ( )
+$str
+ÎÎ) >
+]
+ÎÎ> ?
+.
+ÎÎ? @
+ToString
+ÎÎ@ H
+(
+ÎÎH I
+)
+ÎÎI J
+;
+ÎÎJ K
+}
+ÏÏ 
+catch
+ÌÌ 
+(
+ÌÌ 
+TimeoutException
+ÌÌ #
+tout
+ÌÌ$ (
+)
+ÌÌ( )
+{
+ÓÓ 
+log
+ÔÔ 
+.
+ÔÔ 
+Save
+ÔÔ 
+(
+ÔÔ 
+EnumLogLevel
+ÔÔ %
+.
+ÔÔ% &
+Fatal
+ÔÔ& +
+,
+ÔÔ+ ,
+tout
+ÔÔ- 1
+.
+ÔÔ1 2
+Message
+ÔÔ2 9
+)
+ÔÔ9 :
+;
+ÔÔ: ;
+}
+ 
+catch
+ÒÒ 
+(
+ÒÒ 
+	Exception
+ÒÒ 
+ex
+ÒÒ 
+)
+ÒÒ  
+{
+ÚÚ 
+log
+ÛÛ 
+.
+ÛÛ 
+Save
+ÛÛ 
+(
+ÛÛ 
+EnumLogLevel
+ÛÛ %
+.
+ÛÛ% &
+Fatal
+ÛÛ& +
+,
+ÛÛ+ ,
+ex
+ÛÛ- /
+)
+ÛÛ/ 0
+;
+ÛÛ0 1
+}
+ÙÙ 
+return
+ˆˆ 
+managerToken
+ˆˆ 
+;
+ˆˆ  
+}
+˜˜ 	
+public
+¯¯ 
+static
+¯¯  
+ConversationEntity
+¯¯ ()
+GetAgentAndManagerIdByToken
+¯¯) D
+(
+¯¯D E
+string
+¯¯E K
+token
+¯¯L Q
+)
+¯¯Q R
+{
+˘˘ 	 
+ConversationEntity
+˙˙ 
+obj
+˙˙ "
+=
+˙˙# $
+new
+˙˙% ( 
+ConversationEntity
+˙˙) ;
+(
+˙˙; <
+)
+˙˙< =
+;
+˙˙= >
+try
+˚˚ 
+{
+¸¸ 
+ListParameters
+˝˝ 
+
+parameters
+˝˝ )
+=
+˝˝* +
+new
+˝˝, /
+ListParameters
+˝˝0 >
+(
+˝˝> ?
+)
+˝˝? @
+;
+˝˝@ A
+
+parameters
+˛˛ 
+.
+˛˛ 
+Add
+˛˛ 
+(
+˛˛ 
+$str
+˛˛ '
+,
+˛˛' (
+token
+˛˛) .
+)
+˛˛. /
+;
+˛˛/ 0
+CommandParameter
+ÄÄ  
+queryCommand
+ÄÄ! -
+=
+ÄÄ. /
+new
+ÄÄ0 3
+CommandParameter
+ÄÄ4 D
+(
+ÄÄD E
+$str
+ÄÄE n
+,
+ÄÄn o
+
+parameters
+ÄÄp z
+)
+ÄÄz {
+;
+ÄÄ{ |
+DataRow
+ÅÅ 
+	rowResult
+ÅÅ !
+=
+ÅÅ" #
+	DbManager
+ÅÅ$ -
+.
+ÅÅ- .
+Instance
+ÅÅ. 6
+.
+ÅÅ6 7
+ExecuteRegister
+ÅÅ7 F
+(
+ÅÅF G
+queryCommand
+ÅÅG S
+)
+ÅÅS T
+;
+ÅÅT U
+obj
+ÉÉ 
+.
+ÉÉ 
+	ManagerId
+ÉÉ 
+=
+ÉÉ 
+Convert
+ÉÉ  '
+.
+ÉÉ' (
+ToInt32
+ÉÉ( /
+(
+ÉÉ/ 0
+	rowResult
+ÉÉ0 9
+[
+ÉÉ9 :
+$str
+ÉÉ: L
+]
+ÉÉL M
+.
+ÉÉM N
+ToString
+ÉÉN V
+(
+ÉÉV W
+)
+ÉÉW X
+)
+ÉÉX Y
+;
+ÉÉY Z
+obj
+ÑÑ 
+.
+ÑÑ 
+AgentId
+ÑÑ 
+=
+ÑÑ 
+Convert
+ÑÑ %
+.
+ÑÑ% &
+ToInt32
+ÑÑ& -
+(
+ÑÑ- .
+	rowResult
+ÑÑ. 7
+[
+ÑÑ7 8
+$str
+ÑÑ8 A
+]
+ÑÑA B
+.
+ÑÑB C
+ToString
+ÑÑC K
+(
+ÑÑK L
+)
+ÑÑL M
+)
+ÑÑM N
+;
+ÑÑN O
+}
+ÜÜ 
+catch
+áá 
+(
+áá 
+TimeoutException
+áá #
+tout
+áá$ (
+)
+áá( )
+{
+àà 
+log
+ââ 
+.
+ââ 
+Save
+ââ 
+(
+ââ 
+EnumLogLevel
+ââ %
+.
+ââ% &
+Fatal
+ââ& +
+,
+ââ+ ,
+tout
+ââ- 1
+.
+ââ1 2
+Message
+ââ2 9
+)
+ââ9 :
+;
+ââ: ;
+}
+ää 
+catch
+ãã 
+(
+ãã 
+	Exception
+ãã 
+ex
+ãã 
+)
+ãã  
+{
+åå 
+log
+çç 
+.
+çç 
+Save
+çç 
+(
+çç 
+EnumLogLevel
+çç %
+.
+çç% &
+Fatal
+çç& +
+,
+çç+ ,
+ex
+çç- /
+)
+çç/ 0
+;
+çç0 1
+}
+éé 
+return
+êê 
+obj
+êê 
+;
+êê 
+}
+ëë 	
+public
+óó 
+static
+óó 
+void
+óó &
+AccountManagerDisconnect
+óó 3
+(
+óó3 4"
+AccountManagerEntity
+óó4 H"
+accountManagerEntity
+óóI ]
+)
+óó] ^
+{
+òò 	
+try
+ôô 
+{
+öö 
+ListParameters
+õõ 
+
+parameters
+õõ )
+=
+õõ* +
+new
+õõ, /
+ListParameters
+õõ0 >
+(
+õõ> ?
+)
+õõ? @
+;
+õõ@ A
+
+parameters
+úú 
+.
+úú 
+Add
+úú 
+(
+úú 
+$str
+úú 2
+,
+úú2 3"
+accountManagerEntity
+úú4 H
+.
+úúH I
+AccountUserId
+úúI V
+)
+úúV W
+;
+úúW X
+
+parameters
+ùù 
+.
+ùù 
+Add
+ùù 
+(
+ùù 
+$str
+ùù -
+,
+ùù- ."
+accountManagerEntity
+ùù/ C
+.
+ùùC D
+ModuloAppId
+ùùD O
+)
+ùùO P
+;
+ùùP Q
+CommandParameter
+üü  
+queryCommand
+üü! -
+=
+üü. /
+new
+üü0 3
+CommandParameter
+üü4 D
+(
+üüD E
+$str
+üüE s
+,
+üüs t
+
+parameters
+üüu 
+)üü Ä
+;üüÄ Å
+	DbManager
+°° 
+.
+°° 
+Instance
+°° "
+.
+°°" #
+ExecuteCommand
+°°# 1
+(
+°°1 2
+queryCommand
+°°2 >
+)
+°°> ?
+;
+°°? @
+}
+¢¢ 
+catch
+££ 
+(
+££ 
+TimeoutException
+££ #
+tout
+££$ (
+)
+££( )
+{
+§§ 
+log
+•• 
+.
+•• 
+Save
+•• 
+(
+•• 
+EnumLogLevel
+•• %
+.
+••% &
+Fatal
+••& +
+,
+••+ ,
+tout
+••- 1
+.
+••1 2
+Message
+••2 9
+)
+••9 :
+;
+••: ;
+}
+¶¶ 
+catch
+ßß 
+(
+ßß 
+	Exception
+ßß 
+ex
+ßß 
+)
+ßß  
+{
+®® 
+log
+©© 
+.
+©© 
+Save
+©© 
+(
+©© 
+EnumLogLevel
+©© %
+.
+©©% &
+Fatal
+©©& +
+,
+©©+ ,
+ex
+©©- /
+)
+©©/ 0
+;
+©©0 1
+}
+™™ 
+}
+´´ 	
+public
+±± 
+static
+±± 
+void
+±± #
+AccountManagerConnect
+±± 0
+(
+±±0 1"
+AccountManagerEntity
+±±1 E"
+accountManagerEntity
+±±F Z
+)
+±±Z [
+{
+≤≤ 	
+try
+≥≥ 
+{
+¥¥ 
+ListParameters
+∂∂ 
+
+parameters
+∂∂ )
+=
+∂∂* +
+new
+∂∂, /
+ListParameters
+∂∂0 >
+(
+∂∂> ?
+)
+∂∂? @
+;
+∂∂@ A
+
+parameters
+∑∑ 
+.
+∑∑ 
+Add
+∑∑ 
+(
+∑∑ 
+$str
+∑∑ -
+,
+∑∑- ."
+accountManagerEntity
+∑∑/ C
+.
+∑∑C D
+ModuloAppId
+∑∑D O
+)
+∑∑O P
+;
+∑∑P Q
+
+parameters
+∏∏ 
+.
+∏∏ 
+Add
+∏∏ 
+(
+∏∏ 
+$str
+∏∏ 2
+,
+∏∏2 3"
+accountManagerEntity
+∏∏4 H
+.
+∏∏H I
+AccountUserId
+∏∏I V
+)
+∏∏V W
+;
+∏∏W X
+
+parameters
+ππ 
+.
+ππ 
+Add
+ππ 
+(
+ππ 
+$str
+ππ 5
+,
+ππ5 6"
+accountManagerEntity
+ππ7 K
+.
+ππK L
+Token
+ππL Q
+)
+ππQ R
+;
+ππR S
+
+parameters
+∫∫ 
+.
+∫∫ 
+Add
+∫∫ 
+(
+∫∫ 
+$str
+∫∫ @
+,
+∫∫@ A
+DateTime
+∫∫B J
+.
+∫∫J K
+Now
+∫∫K N
+)
+∫∫N O
+;
+∫∫O P
+CommandParameter
+ºº  
+queryCommand
+ºº! -
+=
+ºº. /
+new
+ºº0 3
+CommandParameter
+ºº4 D
+(
+ººD E
+$str
+ººE k
+,
+ººk l
+
+parameters
+ººm w
+)
+ººw x
+;
+ººx y
+	DbManager
+ææ 
+.
+ææ 
+Instance
+ææ "
+.
+ææ" #
+ExecuteCommand
+ææ# 1
+(
+ææ1 2
+queryCommand
+ææ2 >
+)
+ææ> ?
+;
+ææ? @
+}
+øø 
+catch
+¿¿ 
+(
+¿¿ 
+TimeoutException
+¿¿ #
+tout
+¿¿$ (
+)
+¿¿( )
+{
+¡¡ 
+log
+¬¬ 
+.
+¬¬ 
+Save
+¬¬ 
+(
+¬¬ 
+EnumLogLevel
+¬¬ %
+.
+¬¬% &
+Fatal
+¬¬& +
+,
+¬¬+ ,
+tout
+¬¬- 1
+.
+¬¬1 2
+Message
+¬¬2 9
+)
+¬¬9 :
+;
+¬¬: ;
+}
+√√ 
+catch
+ƒƒ 
+(
+ƒƒ 
+	Exception
+ƒƒ 
+ex
+ƒƒ 
+)
+ƒƒ  
+{
+≈≈ 
+log
+∆∆ 
+.
+∆∆ 
+Save
+∆∆ 
+(
+∆∆ 
+EnumLogLevel
+∆∆ %
+.
+∆∆% &
+Fatal
+∆∆& +
+,
+∆∆+ ,
+ex
+∆∆- /
+)
+∆∆/ 0
+;
+∆∆0 1
+}
+«« 
+}
+»» 	
+public
+—— 
+static
+—— 
+int
+—— 2
+$GetAccountManagerConnectBySkillLevel
+—— >
+(
+——> ? 
+ConversationEntity
+——? Q 
+conversationEntity
+——R d
+)
+——d e
+{
+““ 	
+Int32
+”” %
+accountManagerConnectId
+”” )
+=
+””* +
+-
+””, -
+$num
+””- .
+;
+””. /
+try
+’’ 
+{
+÷÷ 
+ListParameters
+◊◊ 
+
+parameters
+◊◊ )
+=
+◊◊* +
+new
+◊◊, /
+ListParameters
+◊◊0 >
+(
+◊◊> ?
+)
+◊◊? @
+;
+◊◊@ A
+
+parameters
+ÿÿ 
+.
+ÿÿ 
+Add
+ÿÿ 
+(
+ÿÿ 
+$str
+ÿÿ ,
+,
+ÿÿ, - 
+conversationEntity
+ÿÿ. @
+.
+ÿÿ@ A#
+ChatBySkillLanguageId
+ÿÿA V
+)
+ÿÿV W
+;
+ÿÿW X
+
+parameters
+ŸŸ 
+.
+ŸŸ 
+Add
+ŸŸ 
+(
+ŸŸ 
+$str
+ŸŸ *
+,
+ŸŸ* + 
+conversationEntity
+ŸŸ, >
+.
+ŸŸ> ?!
+ChatBySkillModuleId
+ŸŸ? R
+)
+ŸŸR S
+;
+ŸŸS T
+CommandParameter
+€€  
+queryCommand
+€€! -
+=
+€€. /
+new
+€€0 3
+CommandParameter
+€€4 D
+(
+€€D E
+$str
+€€E k
+,
+€€k l
+
+parameters
+€€m w
+)
+€€w x
+;
+€€x y
+DataRow
+›› 
+drresult
+››  
+=
+››! "
+	DbManager
+››# ,
+.
+››, -
+Instance
+››- 5
+.
+››5 6
+ExecuteRegister
+››6 E
+(
+››E F
+queryCommand
+››F R
+)
+››R S
+;
+››S T
+if
+ﬂﬂ 
+(
+ﬂﬂ 
+drresult
+ﬂﬂ 
+!=
+ﬂﬂ 
+null
+ﬂﬂ  $
+&&
+ﬂﬂ% '
+!
+ﬂﬂ( )
+drresult
+ﬂﬂ) 1
+.
+ﬂﬂ1 2
+IsNull
+ﬂﬂ2 8
+(
+ﬂﬂ8 9
+$str
+ﬂﬂ9 R
+)
+ﬂﬂR S
+)
+ﬂﬂS T
+{
+‡‡ %
+accountManagerConnectId
+·· +
+=
+··, -
+Convert
+··. 5
+.
+··5 6
+ToInt32
+··6 =
+(
+··= >
+drresult
+··> F
+[
+··F G
+$str
+··G `
+]
+··` a
+)
+··a b
+;
+··b c 
+conversationEntity
+‚‚ &
+.
+‚‚& '
+
+AgentToken
+‚‚' 1
+=
+‚‚2 3
+drresult
+‚‚4 <
+[
+‚‚< =
+$str
+‚‚= R
+]
+‚‚R S
+.
+‚‚S T
+ToString
+‚‚T \
+(
+‚‚\ ]
+)
+‚‚] ^
+;
+‚‚^ _
+}
+„„ 
+}
+‰‰ 
+catch
+ÂÂ 
+(
+ÂÂ 
+TimeoutException
+ÂÂ #
+tout
+ÂÂ$ (
+)
+ÂÂ( )
+{
+ÊÊ 
+log
+ÁÁ 
+.
+ÁÁ 
+Save
+ÁÁ 
+(
+ÁÁ 
+EnumLogLevel
+ÁÁ %
+.
+ÁÁ% &
+Fatal
+ÁÁ& +
+,
+ÁÁ+ ,
+tout
+ÁÁ- 1
+.
+ÁÁ1 2
+Message
+ÁÁ2 9
+)
+ÁÁ9 :
+;
+ÁÁ: ;
+}
+ËË 
+catch
+ÈÈ 
+(
+ÈÈ 
+	Exception
+ÈÈ 
+ex
+ÈÈ 
+)
+ÈÈ  
+{
+ÍÍ 
+log
+ÎÎ 
+.
+ÎÎ 
+Save
+ÎÎ 
+(
+ÎÎ 
+EnumLogLevel
+ÎÎ %
+.
+ÎÎ% &
+Fatal
+ÎÎ& +
+,
+ÎÎ+ ,
+ex
+ÎÎ- /
+)
+ÎÎ/ 0
+;
+ÎÎ0 1
+}
+ÏÏ 
+return
+ÓÓ %
+accountManagerConnectId
+ÓÓ *
+;
+ÓÓ* +
+}
+ÔÔ 	
+public
+ˆˆ 
+static
+ˆˆ 
+int
+ˆˆ (
+GetAccountManagerConnectId
+ˆˆ 4
+(
+ˆˆ4 5 
+ConversationEntity
+ˆˆ5 G 
+conversationEntity
+ˆˆH Z
+)
+ˆˆZ [
+{
+˜˜ 	
+Int32
+¯¯ %
+accountManagerConnectId
+¯¯ )
+=
+¯¯* +
+$num
+¯¯, -
+;
+¯¯- .
+try
+˙˙ 
+{
+˚˚ 
+ListParameters
+¸¸ 
+
+parameters
+¸¸ )
+=
+¸¸* +
+new
+¸¸, /
+ListParameters
+¸¸0 >
+(
+¸¸> ?
+)
+¸¸? @
+;
+¸¸@ A
+
+parameters
+˝˝ 
+.
+˝˝ 
+Add
+˝˝ 
+(
+˝˝ 
+$str
+˝˝ -
+,
+˝˝- . 
+conversationEntity
+˝˝/ A
+.
+˝˝A B
+ModuleAppId
+˝˝B M
+)
+˝˝M N
+;
+˝˝N O
+CommandParameter
+ˇˇ  
+queryCommand
+ˇˇ! -
+=
+ˇˇ. /
+new
+ˇˇ0 3
+CommandParameter
+ˇˇ4 D
+(
+ˇˇD E
+$str
+ˇˇE l
+,
+ˇˇl m
+
+parameters
+ˇˇn x
+)
+ˇˇx y
+;
+ˇˇy z
+DataRow
+ÅÅ 
+drresult
+ÅÅ  
+=
+ÅÅ! "
+	DbManager
+ÅÅ# ,
+.
+ÅÅ, -
+Instance
+ÅÅ- 5
+.
+ÅÅ5 6
+ExecuteRegister
+ÅÅ6 E
+(
+ÅÅE F
+queryCommand
+ÅÅF R
+)
+ÅÅR S
+;
+ÅÅS T
+if
+ÉÉ 
+(
+ÉÉ 
+drresult
+ÉÉ 
+!=
+ÉÉ 
+null
+ÉÉ  $
+&&
+ÉÉ% '
+!
+ÉÉ( )
+drresult
+ÉÉ) 1
+.
+ÉÉ1 2
+IsNull
+ÉÉ2 8
+(
+ÉÉ8 9
+$str
+ÉÉ9 R
+)
+ÉÉR S
+)
+ÉÉS T
+{
+ÑÑ %
+accountManagerConnectId
+ÖÖ +
+=
+ÖÖ, -
+Convert
+ÖÖ. 5
+.
+ÖÖ5 6
+ToInt32
+ÖÖ6 =
+(
+ÖÖ= >
+drresult
+ÖÖ> F
+[
+ÖÖF G
+$str
+ÖÖG `
+]
+ÖÖ` a
+)
+ÖÖa b
+;
+ÖÖb c 
+conversationEntity
+ÜÜ &
+.
+ÜÜ& '
+
+AgentToken
+ÜÜ' 1
+=
+ÜÜ2 3
+drresult
+ÜÜ4 <
+[
+ÜÜ< =
+$str
+ÜÜ= R
+]
+ÜÜR S
+.
+ÜÜS T
+ToString
+ÜÜT \
+(
+ÜÜ\ ]
+)
+ÜÜ] ^
+;
+ÜÜ^ _
+}
+áá 
+}
+àà 
+catch
+ââ 
+(
+ââ 
+TimeoutException
+ââ #
+tout
+ââ$ (
+)
+ââ( )
+{
+ää 
+log
+ãã 
+.
+ãã 
+Save
+ãã 
+(
+ãã 
+EnumLogLevel
+ãã %
+.
+ãã% &
+Fatal
+ãã& +
+,
+ãã+ ,
+tout
+ãã- 1
+.
+ãã1 2
+Message
+ãã2 9
+)
+ãã9 :
+;
+ãã: ;
+}
+åå 
+catch
+çç 
+(
+çç 
+	Exception
+çç 
+ex
+çç 
+)
+çç  
+{
+éé 
+log
+èè 
+.
+èè 
+Save
+èè 
+(
+èè 
+EnumLogLevel
+èè %
+.
+èè% &
+Fatal
+èè& +
+,
+èè+ ,
+ex
+èè- /
+)
+èè/ 0
+;
+èè0 1
+}
+êê 
+return
+íí %
+accountManagerConnectId
+íí *
+;
+íí* +
+}
+ìì 	
+public
+öö 
+static
+öö 
+List
+öö 
+<
+öö  
+ConversationEntity
+öö -
+>
+öö- .
+GetAllMessages
+öö/ =
+(
+öö= >
+)
+öö> ?
+{
+õõ 	
+List
+úú 
+<
+úú  
+ConversationEntity
+úú #
+>
+úú# $
+result
+úú% +
+=
+úú, -
+new
+úú. 1
+List
+úú2 6
+<
+úú6 7 
+ConversationEntity
+úú7 I
+>
+úúI J
+(
+úúJ K
+)
+úúK L
+;
+úúL M
+try
+ûû 
+{
+üü 
+ListParameters
+†† 
+
+parameters
+†† )
+=
+††* +
+new
+††, /
+ListParameters
+††0 >
+(
+††> ?
+)
+††? @
+;
+††@ A
+CommandParameter
+¢¢  
+queryCommand
+¢¢! -
+=
+¢¢. /
+new
+¢¢0 3
+CommandParameter
+¢¢4 D
+(
+¢¢D E
+$str
+¢¢E b
+,
+¢¢b c
+
+parameters
+¢¢d n
+)
+¢¢n o
+;
+¢¢o p
+	DataTable
+§§ 
+dtresult
+§§ "
+=
+§§# $
+	DbManager
+§§% .
+.
+§§. /
+Instance
+§§/ 7
+.
+§§7 8
+ExecuteTable
+§§8 D
+(
+§§D E
+queryCommand
+§§E Q
+)
+§§Q R
+;
+§§R S
+foreach
+¶¶ 
+(
+¶¶ 
+DataRow
+¶¶  
+dataRow
+¶¶! (
+in
+¶¶) +
+dtresult
+¶¶, 4
+.
+¶¶4 5
+Rows
+¶¶5 9
+)
+¶¶9 :
+{
+ßß 
+result
+®® 
+.
+®® 
+Add
+®® 
+(
+®® 
+new
+®® " 
+ConversationEntity
+®®# 5
+(
+®®5 6
+)
+®®6 7
+{
+©© 
+Message
+™™ 
+=
+™™  !
+dataRow
+™™" )
+[
+™™) *
+$str
+™™* 6
+]
+™™6 7
+.
+™™7 8
+ToString
+™™8 @
+(
+™™@ A
+)
+™™A B
+,
+™™B C
+ChatId
+´´ 
+=
+´´  
+Convert
+´´! (
+.
+´´( )
+ToInt32
+´´) 0
+(
+´´0 1
+dataRow
+´´1 8
+[
+´´8 9
+$str
+´´9 I
+]
+´´I J
+)
+´´J K
+}
+¨¨ 
+)
+≠≠ 
+;
+≠≠ 
+}
+ÆÆ 
+}
+ØØ 
+catch
+∞∞ 
+(
+∞∞ 
+TimeoutException
+∞∞ #
+tout
+∞∞$ (
+)
+∞∞( )
+{
+±± 
+log
+≤≤ 
+.
+≤≤ 
+Save
+≤≤ 
+(
+≤≤ 
+EnumLogLevel
+≤≤ %
+.
+≤≤% &
+Fatal
+≤≤& +
+,
+≤≤+ ,
+tout
+≤≤- 1
+.
+≤≤1 2
+Message
+≤≤2 9
+)
+≤≤9 :
+;
+≤≤: ;
+}
+≥≥ 
+catch
+¥¥ 
+(
+¥¥ 
+	Exception
+¥¥ 
+ex
+¥¥ 
+)
+¥¥  
+{
+µµ 
+log
+∂∂ 
+.
+∂∂ 
+Save
+∂∂ 
+(
+∂∂ 
+EnumLogLevel
+∂∂ %
+.
+∂∂% &
+Fatal
+∂∂& +
+,
+∂∂+ ,
+ex
+∂∂- /
+)
+∂∂/ 0
+;
+∂∂0 1
+}
+∑∑ 
+return
+ππ 
+result
+ππ 
+;
+ππ 
+}
+∫∫ 	
+public
+øø 
+static
+øø 
+void
+øø 
+SetEncrypMessages
+øø ,
+(
+øø, -
+List
+øø- 1
+<
+øø1 2 
+ConversationEntity
+øø2 D
+>
+øøD E
+listaConversation
+øøF W
+)
+øøW X
+{
+¿¿ 	
+try
+¡¡ 
+{
+¬¬ 
+ListParameters
+√√ 
+
+parameters
+√√ )
+=
+√√* +
+new
+√√, /
+ListParameters
+√√0 >
+(
+√√> ?
+)
+√√? @
+;
+√√@ A
+foreach
+≈≈ 
+(
+≈≈  
+ConversationEntity
+≈≈ + 
+conversationEntity
+≈≈, >
+in
+≈≈? A
+listaConversation
+≈≈B S
+)
+≈≈S T
+{
+∆∆ 
+
+parameters
+«« 
+=
+««  
+new
+««! $
+ListParameters
+««% 3
+(
+««3 4
+)
+««4 5
+;
+««5 6
+
+parameters
+…… 
+.
+…… 
+Add
+…… "
+(
+……" #
+$str
+……# (
+,
+……( ) 
+conversationEntity
+……* <
+.
+……< =
+ChatId
+……= C
+)
+……C D
+;
+……D E
+
+parameters
+   
+.
+   
+Add
+   "
+(
+  " #
+$str
+  # -
+,
+  - . 
+conversationEntity
+  / A
+.
+  A B
+Message
+  B I
+)
+  I J
+;
+  J K
+CommandParameter
+ÃÃ $
+queryCommand
+ÃÃ% 1
+=
+ÃÃ2 3
+new
+ÃÃ4 7
+CommandParameter
+ÃÃ8 H
+(
+ÃÃH I
+$str
+ÃÃI h
+,
+ÃÃh i
+
+parameters
+ÃÃj t
+)
+ÃÃt u
+;
+ÃÃu v
+	DbManager
+ŒŒ 
+.
+ŒŒ 
+Instance
+ŒŒ &
+.
+ŒŒ& '
+ExecuteCommand
+ŒŒ' 5
+(
+ŒŒ5 6
+queryCommand
+ŒŒ6 B
+)
+ŒŒB C
+;
+ŒŒC D
+}
+œœ 
+}
+—— 
+catch
+““ 
+(
+““ 
+TimeoutException
+““ #
+tout
+““$ (
+)
+““( )
+{
+”” 
+log
+‘‘ 
+.
+‘‘ 
+Save
+‘‘ 
+(
+‘‘ 
+EnumLogLevel
+‘‘ %
+.
+‘‘% &
+Fatal
+‘‘& +
+,
+‘‘+ ,
+tout
+‘‘- 1
+.
+‘‘1 2
+Message
+‘‘2 9
+)
+‘‘9 :
+;
+‘‘: ;
+}
+’’ 
+catch
+÷÷ 
+(
+÷÷ 
+	Exception
+÷÷ 
+ex
+÷÷ 
+)
+÷÷  
+{
+◊◊ 
+log
+ÿÿ 
+.
+ÿÿ 
+Save
+ÿÿ 
+(
+ÿÿ 
+EnumLogLevel
+ÿÿ %
+.
+ÿÿ% &
+Fatal
+ÿÿ& +
+,
+ÿÿ+ ,
+ex
+ÿÿ- /
+)
+ÿÿ/ 0
+;
+ÿÿ0 1
+}
+ŸŸ 
+}
+⁄⁄ 	
+public
+‹‹ 
+static
+‹‹ 
+ObjectResultList
+‹‹ &
+<
+‹‹& '#
+AccountManagerConnect
+‹‹' <
+>
+‹‹< =#
+GetListAgentByManager
+‹‹> S
+(
+‹‹S T 
+ConversationEntity
+‹‹T f
+objectRequest
+‹‹g t
+)
+‹‹t u
+{
+›› 	
+ObjectResultList
+ﬁﬁ 
+<
+ﬁﬁ #
+AccountManagerConnect
+ﬁﬁ 2
+>
+ﬁﬁ2 3
+result
+ﬁﬁ4 :
+=
+ﬁﬁ; <
+new
+ﬁﬁ= @
+ObjectResultList
+ﬁﬁA Q
+<
+ﬁﬁQ R#
+AccountManagerConnect
+ﬁﬁR g
+>
+ﬁﬁg h
+(
+ﬁﬁh i
+)
+ﬁﬁi j
+;
+ﬁﬁj k
+try
+‡‡ 
+{
+·· 
+ListParameters
+‚‚ 
+
+parameters
+‚‚ )
+=
+‚‚* +
+new
+‚‚, /
+ListParameters
+‚‚0 >
+(
+‚‚> ?
+)
+‚‚? @
+;
+‚‚@ A
+
+parameters
+„„ 
+.
+„„ 
+Add
+„„ 
+(
+„„ 
+$str
+„„ +
+,
+„„+ ,
+objectRequest
+„„- :
+.
+„„: ;
+	ManagerId
+„„; D
+)
+„„D E
+;
+„„E F
+CommandParameter
+ÂÂ  
+queryCommand
+ÂÂ! -
+=
+ÂÂ. /
+new
+ÂÂ0 3
+CommandParameter
+ÂÂ4 D
+(
+ÂÂD E
+$str
+ÂÂE s
+,
+ÂÂs t
+
+parameters
+ÂÂu 
+)ÂÂ Ä
+;ÂÂÄ Å
+	DataTable
+ÁÁ 
+dtresult
+ÁÁ "
+=
+ÁÁ# $
+	DbManager
+ÁÁ% .
+.
+ÁÁ. /
+Instance
+ÁÁ/ 7
+.
+ÁÁ7 8
+ExecuteTable
+ÁÁ8 D
+(
+ÁÁD E
+queryCommand
+ÁÁE Q
+)
+ÁÁQ R
+;
+ÁÁR S
+result
+ÈÈ 
+=
+ÈÈ 
+new
+ÈÈ 
+ObjectResultList
+ÈÈ -
+<
+ÈÈ- .#
+AccountManagerConnect
+ÈÈ. C
+>
+ÈÈC D
+(
+ÈÈD E
+dtresult
+ÈÈE M
+)
+ÈÈM N
+;
+ÈÈN O'
+ListAccountManagerConnect
+ÎÎ )
+listAMC
+ÎÎ* 1
+=
+ÎÎ2 3
+new
+ÎÎ4 7'
+ListAccountManagerConnect
+ÎÎ8 Q
+(
+ÎÎQ R
+dtresult
+ÎÎR Z
+)
+ÎÎZ [
+;
+ÎÎ[ \
+}
+ÌÌ 
+catch
+ÓÓ 
+(
+ÓÓ 
+TimeoutException
+ÓÓ #
+tout
+ÓÓ$ (
+)
+ÓÓ( )
+{
+ÔÔ 
+result
+ 
+.
+ 
+Id
+ 
+=
+ 
+$num
+ 
+;
+ 
+result
+ÒÒ 
+.
+ÒÒ 
+Message
+ÒÒ 
+=
+ÒÒ  
+tout
+ÒÒ! %
+.
+ÒÒ% &
+Message
+ÒÒ& -
+;
+ÒÒ- .
+log
+ÛÛ 
+.
+ÛÛ 
+Save
+ÛÛ 
+(
+ÛÛ 
+EnumLogLevel
+ÛÛ %
+.
+ÛÛ% &
+Fatal
+ÛÛ& +
+,
+ÛÛ+ ,
+tout
+ÛÛ- 1
+.
+ÛÛ1 2
+Message
+ÛÛ2 9
+)
+ÛÛ9 :
+;
+ÛÛ: ;
+}
+ÙÙ 
+catch
+ıı 
+(
+ıı 
+	Exception
+ıı 
+ex
+ıı 
+)
+ıı  
+{
+ˆˆ 
+result
+˜˜ 
+.
+˜˜ 
+Id
+˜˜ 
+=
+˜˜ 
+$num
+˜˜ 
+;
+˜˜ 
+result
+¯¯ 
+.
+¯¯ 
+Message
+¯¯ 
+=
+¯¯  
+ex
+¯¯! #
+.
+¯¯# $
+Message
+¯¯$ +
+;
+¯¯+ ,
+log
+˙˙ 
+.
+˙˙ 
+Save
+˙˙ 
+(
+˙˙ 
+EnumLogLevel
+˙˙ %
+.
+˙˙% &
+Fatal
+˙˙& +
+,
+˙˙+ ,
+ex
+˙˙- /
+)
+˙˙/ 0
+;
+˙˙0 1
+}
+˚˚ 
+return
+˝˝ 
+result
+˝˝ 
+;
+˝˝ 
+}
+˛˛ 	
+public
+ÖÖ 
+static
+ÖÖ 
+Int32
+ÖÖ  
+ConversationMoveTo
+ÖÖ .
+(
+ÖÖ. / 
+ConversationEntity
+ÖÖ/ A 
+conversationEntity
+ÖÖB T
+)
+ÖÖT U
+{
+ÜÜ 	
+Int32
+áá 
+success
+áá 
+=
+áá 
+$num
+áá 
+;
+áá 
+try
+àà 
+{
+ââ 
+ListParameters
+ää 
+
+parameters
+ää )
+=
+ää* +
+new
+ää, /
+ListParameters
+ää0 >
+(
+ää> ?
+)
+ää? @
+;
+ää@ A
+
+parameters
+ãã 
+.
+ãã 
+Add
+ãã 
+(
+ãã 
+$str
+ãã 2
+,
+ãã2 3 
+conversationEntity
+ãã4 F
+.
+ããF G
+AgentId
+ããG N
+)
+ããN O
+;
+ããO P
+
+parameters
+åå 
+.
+åå 
+Add
+åå 
+(
+åå 
+$str
+åå (
+,
+åå( ) 
+conversationEntity
+åå* <
+.
+åå< =
+ChatId
+åå= C
+)
+ååC D
+;
+ååD E
+CommandParameter
+éé  
+queryCommand
+éé! -
+=
+éé. /
+new
+éé0 3
+CommandParameter
+éé4 D
+(
+ééD E
+$str
+ééE b
+,
+ééb c
+
+parameters
+ééd n
+)
+één o
+;
+ééo p
+DataRow
+èè 
+	rowResult
+èè !
+=
+èè" #
+	DbManager
+èè$ -
+.
+èè- .
+Instance
+èè. 6
+.
+èè6 7
+ExecuteRegister
+èè7 F
+(
+èèF G
+queryCommand
+èèG S
+)
+èèS T
+;
+èèT U
+if
+êê 
+(
+êê 
+	rowResult
+êê 
+!=
+êê  
+null
+êê! %
+)
+êê% &
+{
+ëë  
+conversationEntity
+íí &
+.
+íí& '
+
+AgentToken
+íí' 1
+=
+íí2 3
+	rowResult
+íí4 =
+[
+íí= >
+$str
+íí> S
+]
+ííS T
+.
+ííT U
+ToString
+ííU ]
+(
+íí] ^
+)
+íí^ _
+;
+íí_ ` 
+conversationEntity
+ìì &
+.
+ìì& '
+AgentId
+ìì' .
+=
+ìì/ 0
+Convert
+ìì1 8
+.
+ìì8 9
+ToInt32
+ìì9 @
+(
+ìì@ A
+	rowResult
+ììA J
+[
+ììJ K
+$str
+ììK ]
+]
+ìì] ^
+.
+ìì^ _
+ToString
+ìì_ g
+(
+ììg h
+)
+ììh i
+)
+ììi j
+;
+ììj k 
+conversationEntity
+îî &
+.
+îî& '
+	UserToken
+îî' 0
+=
+îî1 2
+	rowResult
+îî3 <
+[
+îî< =
+$str
+îî= O
+]
+îîO P
+.
+îîP Q
+ToString
+îîQ Y
+(
+îîY Z
+)
+îîZ [
+;
+îî[ \
+success
+ïï 
+=
+ïï 
+Convert
+ïï %
+.
+ïï% &
+ToInt32
+ïï& -
+(
+ïï- .
+	rowResult
+ïï. 7
+[
+ïï7 8
+$str
+ïï8 D
+]
+ïïD E
+.
+ïïE F
+ToString
+ïïF N
+(
+ïïN O
+)
+ïïO P
+)
+ïïP Q
+;
+ïïQ R
+}
+ññ 
+}
+óó 
+catch
+òò 
+(
+òò 
+TimeoutException
+òò #
+tout
+òò$ (
+)
+òò( )
+{
+ôô 
+success
+öö 
+=
+öö 
+$num
+öö 
+;
+öö 
+log
+õõ 
+.
+õõ 
+Save
+õõ 
+(
+õõ 
+EnumLogLevel
+õõ %
+.
+õõ% &
+Fatal
+õõ& +
+,
+õõ+ ,
+tout
+õõ- 1
+.
+õõ1 2
+Message
+õõ2 9
+)
+õõ9 :
+;
+õõ: ;
+}
+úú 
+catch
+ùù 
+(
+ùù 
+	Exception
+ùù 
+ex
+ùù 
+)
+ùù  
+{
+ûû 
+success
+üü 
+=
+üü 
+$num
+üü 
+;
+üü 
+log
+†† 
+.
+†† 
+Save
+†† 
+(
+†† 
+EnumLogLevel
+†† %
+.
+††% &
+Fatal
+††& +
+,
+††+ ,
+ex
+††- /
+)
+††/ 0
+;
+††0 1
+}
+°° 
+return
+¢¢ 
+success
+¢¢ 
+;
+¢¢ 
+}
+§§ 	
+}
+¶¶ 
+}®® ìó
+>D:\repositoriosGit\Chat\Chat\xChatDAO\ServiceChatManagerDAO.cs
+	namespace 	
+xChatDAO
+ 
+{ 
+public 
+
+class !
+ServiceChatManagerDAO &
+:' ("
+IServiceChatManagerDAO) ?
+{ 
+private 
+ILoggerHandler 
+log "
+=# $
+LoggerFactory% 2
+.2 3
+Get3 6
+(6 7
+EnumLayerIdentifier7 J
+.J K
+DataAccessLayerK Z
+)Z [
+;[ \
+public 
+ObjectResultList 
+<  
+UserConnect  +
+>+ ,0
+$GetListUserConnectByAccountManagerId- Q
+(Q R
+ObjectRequestR _
+<_ `
+int` c
+>c d
+objectRequeste r
+)r s
+{ 	
+ObjectResultList 
+< 
+UserConnect (
+>( )
+listUserConnect* 9
+=: ;
+new< ?
+ObjectResultList@ P
+<P Q
+UserConnectQ \
+>\ ]
+(] ^
+)^ _
+;_ `
+try 
+{ 
+ListParameters   
+
+parameters   )
+=  * +
+new  , /
+ListParameters  0 >
+(  > ?
+)  ? @
+;  @ A
+
+parameters!! 
+.!! 
+Add!! 
+(!! 
+$str!! 2
+,!!2 3
+objectRequest!!4 A
+.!!A B
+SenderObject!!B N
+)!!N O
+;!!O P
+CommandParameter##  
+queryCommand##! -
+=##. /
+new##0 3
+CommandParameter##4 D
+(##D E
+$str##E p
+,##p q
+
+parameters##r |
+)##| }
+;##} ~
+	DataTable$$ 
+dtresult$$ "
+=$$# $
+	DbManager$$% .
+.$$. /
+Instance$$/ 7
+.$$7 8
+ExecuteTable$$8 D
+($$D E
+queryCommand$$E Q
+)$$Q R
+;$$R S
+listUserConnect&& 
+=&&  !
+new&&" %
+ObjectResultList&&& 6
+<&&6 7
+UserConnect&&7 B
+>&&B C
+(&&C D
+dtresult&&D L
+)&&L M
+;&&M N
+}(( 
+catch)) 
+()) 
+TimeoutException)) #
+tout))$ (
+)))( )
+{** 
+listUserConnect++ 
+.++  
+Id++  "
+=++# $
+$num++% &
+;++& '
+listUserConnect,, 
+.,,  
+Message,,  '
+=,,( )
+tout,,* .
+.,,. /
+Message,,/ 6
+;,,6 7
+log.. 
+... 
+Save.. 
+(.. 
+EnumLogLevel.. %
+...% &
+Fatal..& +
+,..+ ,
+tout..- 1
+...1 2
+Message..2 9
+)..9 :
+;..: ;
+}// 
+catch00 
+(00 
+	Exception00 
+ex00 
+)00  
+{11 
+listUserConnect22 
+.22  
+Id22  "
+=22# $
+$num22% &
+;22& '
+listUserConnect33 
+.33  
+Message33  '
+=33( )
+ex33* ,
+.33, -
+Message33- 4
+;334 5
+log55 
+.55 
+Save55 
+(55 
+EnumLogLevel55 %
+.55% &
+Fatal55& +
+,55+ ,
+ex55- /
+)55/ 0
+;550 1
+}66 
+return88 
+listUserConnect88 "
+;88" #
+}99 	
+public@@ 
+ObjectResultList@@ 
+<@@  
+UserConnect@@  +
+>@@+ ,)
+GetListUserByAccountManagerId@@- J
+(@@J K
+ObjectRequest@@K X
+<@@X Y
+int@@Y \
+>@@\ ]
+objectRequest@@^ k
+)@@k l
+{AA 	
+ObjectResultListBB 
+<BB 
+UserConnectBB (
+>BB( )
+listUserConnectBB* 9
+=BB: ;
+newBB< ?
+ObjectResultListBB@ P
+<BBP Q
+UserConnectBBQ \
+>BB\ ]
+(BB] ^
+)BB^ _
+;BB_ `
+tryDD 
+{EE 
+ListParametersFF 
+
+parametersFF )
+=FF* +
+newFF, /
+ListParametersFF0 >
+(FF> ?
+)FF? @
+;FF@ A
+
+parametersGG 
+.GG 
+AddGG 
+(GG 
+$strGG 2
+,GG2 3
+objectRequestGG4 A
+.GGA B
+SenderObjectGGB N
+)GGN O
+;GGO P
+CommandParameterII  
+queryCommandII! -
+=II. /
+newII0 3
+CommandParameterII4 D
+(IID E
+$strIIE i
+,IIi j
+
+parametersIIk u
+)IIu v
+;IIv w
+	DataTableJJ 
+dtresultJJ "
+=JJ# $
+	DbManagerJJ% .
+.JJ. /
+InstanceJJ/ 7
+.JJ7 8
+ExecuteTableJJ8 D
+(JJD E
+queryCommandJJE Q
+)JJQ R
+;JJR S
+listUserConnectLL 
+=LL  !
+newLL" %
+ObjectResultListLL& 6
+<LL6 7
+UserConnectLL7 B
+>LLB C
+(LLC D
+dtresultLLD L
+)LLL M
+;LLM N
+}NN 
+catchOO 
+(OO 
+TimeoutExceptionOO #
+toutOO$ (
+)OO( )
+{PP 
+listUserConnectQQ 
+.QQ  
+IdQQ  "
+=QQ# $
+$numQQ% &
+;QQ& '
+listUserConnectRR 
+.RR  
+MessageRR  '
+=RR( )
+toutRR* .
+.RR. /
+MessageRR/ 6
+;RR6 7
+logTT 
+.TT 
+SaveTT 
+(TT 
+EnumLogLevelTT %
+.TT% &
+FatalTT& +
+,TT+ ,
+toutTT- 1
+.TT1 2
+MessageTT2 9
+)TT9 :
+;TT: ;
+}UU 
+catchVV 
+(VV 
+	ExceptionVV 
+exVV 
+)VV  
+{WW 
+listUserConnectXX 
+.XX  
+IdXX  "
+=XX# $
+$numXX% &
+;XX& '
+listUserConnectYY 
+.YY  
+MessageYY  '
+=YY( )
+exYY* ,
+.YY, -
+MessageYY- 4
+;YY4 5
+log[[ 
+.[[ 
+Save[[ 
+([[ 
+EnumLogLevel[[ %
+.[[% &
+Fatal[[& +
+,[[+ ,
+ex[[- /
+)[[/ 0
+;[[0 1
+}\\ 
+return^^ 
+listUserConnect^^ "
+;^^" #
+}__ 	
+publicff 
+ObjectResultListff 
+<ff  &
+ConversationResponseEntityff  :
+>ff: ;'
+GetListConversationByChatIdff< W
+(ffW X
+ObjectRequestffX e
+<ffe f
+intfff i
+>ffi j
+objectRequestffk x
+)ffx y
+{gg 	
+ObjectResultListhh 
+<hh &
+ConversationResponseEntityhh 7
+>hh7 8
+listUserConnecthh9 H
+=hhI J
+newhhK N
+ObjectResultListhhO _
+<hh_ `&
+ConversationResponseEntityhh` z
+>hhz {
+(hh{ |
+)hh| }
+;hh} ~
+tryjj 
+{kk 
+ListParametersll 
+
+parametersll )
+=ll* +
+newll, /
+ListParametersll0 >
+(ll> ?
+)ll? @
+;ll@ A
+
+parametersmm 
+.mm 
+Addmm 
+(mm 
+$strmm (
+,mm( )
+objectRequestmm* 7
+.mm7 8
+SenderObjectmm8 D
+)mmD E
+;mmE F
+CommandParameteroo  
+queryCommandoo! -
+=oo. /
+newoo0 3
+CommandParameteroo4 D
+(ooD E
+$strooE z
+,ooz {
+
+parameters	oo| Ü
+)
+ooÜ á
+;
+ooá à
+	DataTablepp 
+dtresultpp "
+=pp# $
+	DbManagerpp% .
+.pp. /
+Instancepp/ 7
+.pp7 8
+ExecuteTablepp8 D
+(ppD E
+queryCommandppE Q
+)ppQ R
+;ppR S
+listUserConnectrr 
+=rr  !
+newrr" %
+ObjectResultListrr& 6
+<rr6 7&
+ConversationResponseEntityrr7 Q
+>rrQ R
+(rrR S
+dtresultrrS [
+)rr[ \
+;rr\ ]
+}ss 
+catchtt 
+(tt 
+TimeoutExceptiontt #
+touttt$ (
+)tt( )
+{uu 
+listUserConnectvv 
+.vv  
+Idvv  "
+=vv# $
+$numvv% &
+;vv& '
+listUserConnectww 
+.ww  
+Messageww  '
+=ww( )
+toutww* .
+.ww. /
+Messageww/ 6
+;ww6 7
+logyy 
+.yy 
+Saveyy 
+(yy 
+EnumLogLevelyy %
+.yy% &
+Fatalyy& +
+,yy+ ,
+toutyy- 1
+.yy1 2
+Messageyy2 9
+)yy9 :
+;yy: ;
+}zz 
+catch{{ 
+({{ 
+	Exception{{ 
+ex{{ 
+){{  
+{|| 
+listUserConnect}} 
+.}}  
+Id}}  "
+=}}# $
+$num}}% &
+;}}& '
+listUserConnect~~ 
+.~~  
+Message~~  '
+=~~( )
+ex~~* ,
+.~~, -
+Message~~- 4
+;~~4 5
+log
+ÄÄ 
+.
+ÄÄ 
+Save
+ÄÄ 
+(
+ÄÄ 
+EnumLogLevel
+ÄÄ %
+.
+ÄÄ% &
+Fatal
+ÄÄ& +
+,
+ÄÄ+ ,
+ex
+ÄÄ- /
+)
+ÄÄ/ 0
+;
+ÄÄ0 1
+}
+ÅÅ 
+return
+ÉÉ 
+listUserConnect
+ÉÉ "
+;
+ÉÉ" #
+}
+ÑÑ 	
+public
+åå 
+ObjectResultList
+åå 
+<
+åå  (
+ConversationResponseEntity
+åå  :
+>
+åå: ;)
+GetListConversationByReport
+åå< W
+(
+ååW X
+string
+ååX ^
+senderObject
+åå_ k
+)
+ååk l
+{
+çç 	
+ObjectResultList
+éé 
+<
+éé (
+ConversationResponseEntity
+éé 7
+>
+éé7 8
+listUserConnect
+éé9 H
+=
+ééI J
+new
+ééK N
+ObjectResultList
+ééO _
+<
+éé_ `(
+ConversationResponseEntity
+éé` z
+>
+ééz {
+(
+éé{ |
+)
+éé| }
+;
+éé} ~
+string
+êê 
+strDateStart
+êê 
+=
+êê  !
+senderObject
+êê" .
+.
+êê. /
+Split
+êê/ 4
+(
+êê4 5
+$char
+êê5 8
+)
+êê8 9
+[
+êê9 :
+$num
+êê: ;
+]
+êê; <
+;
+êê< =
+string
+ëë 
+
+strDateEnd
+ëë 
+=
+ëë 
+senderObject
+ëë  ,
+.
+ëë, -
+Split
+ëë- 2
+(
+ëë2 3
+$char
+ëë3 6
+)
+ëë6 7
+[
+ëë7 8
+$num
+ëë8 9
+]
+ëë9 :
+;
+ëë: ;
+try
+ìì 
+{
+îî 
+if
+ïï 
+(
+ïï 
+!
+ïï 
+DateTime
+ïï 
+.
+ïï 
+TryParse
+ïï &
+(
+ïï& '
+strDateStart
+ïï' 3
+,
+ïï3 4
+result
+ïï5 ;
+:
+ïï; <
+out
+ïï= @
+DateTime
+ïïA I
+	dateStart
+ïïJ S
+)
+ïïS T
+)
+ïïT U
+{
+ññ 
+throw
+óó 
+new
+óó 
+	Exception
+óó '
+(
+óó' (
+$str
+óó( J
+)
+óóJ K
+;
+óóK L
+}
+òò 
+if
+öö 
+(
+öö 
+!
+öö 
+DateTime
+öö 
+.
+öö 
+TryParse
+öö &
+(
+öö& '
+
+strDateEnd
+öö' 1
+,
+öö1 2
+result
+öö3 9
+:
+öö9 :
+out
+öö; >
+DateTime
+öö? G
+dateEnd
+ööH O
+)
+ööO P
+)
+ööP Q
+{
+õõ 
+throw
+úú 
+new
+úú 
+	Exception
+úú '
+(
+úú' (
+$str
+úú( J
+)
+úúJ K
+;
+úúK L
+}
+ùù 
+ListParameters
+üü 
+
+parameters
+üü )
+=
+üü* +
+new
+üü, /
+ListParameters
+üü0 >
+(
+üü> ?
+)
+üü? @
+;
+üü@ A
+
+parameters
+†† 
+.
+†† 
+Add
+†† 
+(
+†† 
+$str
+†† )
+,
+††) *
+senderObject
+††+ 7
+.
+††7 8
+Split
+††8 =
+(
+††= >
+$char
+††> A
+)
+††A B
+[
+††B C
+$num
+††C D
+]
+††D E
+)
+††E F
+;
+††F G
+
+parameters
+°° 
+.
+°° 
+Add
+°° 
+(
+°° 
+$str
+°° (
+,
+°°( )
+senderObject
+°°* 6
+.
+°°6 7
+Split
+°°7 <
+(
+°°< =
+$char
+°°= @
+)
+°°@ A
+[
+°°A B
+$num
+°°B C
+]
+°°C D
+)
+°°D E
+;
+°°E F
+
+parameters
+¢¢ 
+.
+¢¢ 
+Add
+¢¢ 
+(
+¢¢ 
+$str
+¢¢ +
+,
+¢¢+ ,
+	dateStart
+¢¢- 6
+)
+¢¢6 7
+;
+¢¢7 8
+
+parameters
+££ 
+.
+££ 
+Add
+££ 
+(
+££ 
+$str
+££ )
+,
+££) *
+dateEnd
+££+ 2
+)
+££2 3
+;
+££3 4
+CommandParameter
+••  
+queryCommand
+••! -
+=
+••. /
+new
+••0 3
+CommandParameter
+••4 D
+(
+••D E
+$str
+••E n
+,
+••n o
+
+parameters
+••p z
+)
+••z {
+;
+••{ |
+	DataTable
+ßß 
+dtresult
+ßß "
+=
+ßß# $
+	DbManager
+ßß% .
+.
+ßß. /
+Instance
+ßß/ 7
+.
+ßß7 8
+ExecuteTable
+ßß8 D
+(
+ßßD E
+queryCommand
+ßßE Q
+)
+ßßQ R
+;
+ßßR S
+listUserConnect
+©© 
+=
+©©  !
+new
+©©" %
+ObjectResultList
+©©& 6
+<
+©©6 7(
+ConversationResponseEntity
+©©7 Q
+>
+©©Q R
+(
+©©R S
+dtresult
+©©S [
+)
+©©[ \
+;
+©©\ ]
+}
+™™ 
+catch
+´´ 
+(
+´´ 
+TimeoutException
+´´ #
+tout
+´´$ (
+)
+´´( )
+{
+¨¨ 
+listUserConnect
+≠≠ 
+.
+≠≠  
+Id
+≠≠  "
+=
+≠≠# $
+$num
+≠≠% &
+;
+≠≠& '
+listUserConnect
+ÆÆ 
+.
+ÆÆ  
+Message
+ÆÆ  '
+=
+ÆÆ( )
+tout
+ÆÆ* .
+.
+ÆÆ. /
+Message
+ÆÆ/ 6
+;
+ÆÆ6 7
+log
+∞∞ 
+.
+∞∞ 
+Save
+∞∞ 
+(
+∞∞ 
+EnumLogLevel
+∞∞ %
+.
+∞∞% &
+Fatal
+∞∞& +
+,
+∞∞+ ,
+tout
+∞∞- 1
+.
+∞∞1 2
+Message
+∞∞2 9
+)
+∞∞9 :
+;
+∞∞: ;
+}
+±± 
+catch
+≤≤ 
+(
+≤≤ 
+	Exception
+≤≤ 
+ex
+≤≤ 
+)
+≤≤  
+{
+≥≥ 
+listUserConnect
+¥¥ 
+.
+¥¥  
+Id
+¥¥  "
+=
+¥¥# $
+$num
+¥¥% &
+;
+¥¥& '
+listUserConnect
+µµ 
+.
+µµ  
+Message
+µµ  '
+=
+µµ( )
+ex
+µµ* ,
+.
+µµ, -
+Message
+µµ- 4
+;
+µµ4 5
+log
+∑∑ 
+.
+∑∑ 
+Save
+∑∑ 
+(
+∑∑ 
+EnumLogLevel
+∑∑ %
+.
+∑∑% &
+Fatal
+∑∑& +
+,
+∑∑+ ,
+ex
+∑∑- /
+)
+∑∑/ 0
+;
+∑∑0 1
+}
+∏∏ 
+return
+∫∫ 
+listUserConnect
+∫∫ "
+;
+∫∫" #
+}
+ªª 	
+public
+¬¬ 
+ObjectResultList
+¬¬ 
+<
+¬¬  
+
+ReportChat
+¬¬  *
+>
+¬¬* +
+	GetReport
+¬¬, 5
+(
+¬¬5 6
+ReportFilter
+¬¬6 B
+senderObject
+¬¬C O
+)
+¬¬O P
+{
+√√ 	
+ObjectResultList
+ƒƒ 
+<
+ƒƒ 
+
+ReportChat
+ƒƒ '
+>
+ƒƒ' (
+result
+ƒƒ) /
+=
+ƒƒ0 1
+new
+ƒƒ2 5
+ObjectResultList
+ƒƒ6 F
+<
+ƒƒF G
+
+ReportChat
+ƒƒG Q
+>
+ƒƒQ R
+(
+ƒƒR S
+)
+ƒƒS T
+;
+ƒƒT U
+try
+∆∆ 
+{
+«« 
+ListParameters
+»» 
+
+parameters
+»» )
+=
+»»* +
+new
+»», /
+ListParameters
+»»0 >
+(
+»»> ?
+)
+»»? @
+;
+»»@ A
+
+parameters
+…… 
+.
+…… 
+Add
+…… 
+(
+…… 
+$str
+…… )
+,
+……) *
+senderObject
+……+ 7
+.
+……7 8
+AgentId
+……8 ?
+)
+……? @
+;
+……@ A
+
+parameters
+   
+.
+   
+Add
+   
+(
+   
+$str
+   (
+,
+  ( )
+senderObject
+  * 6
+.
+  6 7
+UserId
+  7 =
+)
+  = >
+;
+  > ?
+
+parameters
+ÀÀ 
+.
+ÀÀ 
+Add
+ÀÀ 
+(
+ÀÀ 
+$str
+ÀÀ *
+,
+ÀÀ* +
+senderObject
+ÀÀ, 8
+.
+ÀÀ8 9
+MarketId
+ÀÀ9 A
+)
+ÀÀA B
+;
+ÀÀB C
+
+parameters
+ÃÃ 
+.
+ÃÃ 
+Add
+ÃÃ 
+(
+ÃÃ 
+$str
+ÃÃ +
+,
+ÃÃ+ ,
+senderObject
+ÃÃ- 9
+.
+ÃÃ9 :#
+ConversationDateStart
+ÃÃ: O
+)
+ÃÃO P
+;
+ÃÃP Q
+
+parameters
+ÕÕ 
+.
+ÕÕ 
+Add
+ÕÕ 
+(
+ÕÕ 
+$str
+ÕÕ )
+,
+ÕÕ) *
+senderObject
+ÕÕ+ 7
+.
+ÕÕ7 8!
+ConversationDateEnd
+ÕÕ8 K
+)
+ÕÕK L
+;
+ÕÕL M
+CommandParameter
+œœ  
+queryCommand
+œœ! -
+=
+œœ. /
+new
+œœ0 3
+CommandParameter
+œœ4 D
+(
+œœD E
+$str
+œœE e
+,
+œœe f
+
+parameters
+œœg q
+)
+œœq r
+;
+œœr s
+	DataTable
+—— 
+dtresult
+—— "
+=
+——# $
+	DbManager
+——% .
+.
+——. /
+Instance
+——/ 7
+.
+——7 8
+ExecuteTable
+——8 D
+(
+——D E
+queryCommand
+——E Q
+)
+——Q R
+;
+——R S
+result
+”” 
+=
+”” 
+new
+”” 
+ObjectResultList
+”” -
+<
+””- .
+
+ReportChat
+””. 8
+>
+””8 9
+(
+””9 :
+dtresult
+””: B
+)
+””B C
+;
+””C D
+}
+‘‘ 
+catch
+’’ 
+(
+’’ 
+TimeoutException
+’’ #
+tout
+’’$ (
+)
+’’( )
+{
+÷÷ 
+log
+◊◊ 
+.
+◊◊ 
+Save
+◊◊ 
+(
+◊◊ 
+EnumLogLevel
+◊◊ %
+.
+◊◊% &
+Fatal
+◊◊& +
+,
+◊◊+ ,
+tout
+◊◊- 1
+.
+◊◊1 2
+Message
+◊◊2 9
+)
+◊◊9 :
+;
+◊◊: ;
+}
+ÿÿ 
+catch
+ŸŸ 
+(
+ŸŸ 
+	Exception
+ŸŸ 
+ex
+ŸŸ 
+)
+ŸŸ  
+{
+⁄⁄ 
+result
+€€ 
+.
+€€ 
+Id
+€€ 
+=
+€€ 
+$num
+€€ 
+;
+€€ 
+log
+‹‹ 
+.
+‹‹ 
+Save
+‹‹ 
+(
+‹‹ 
+EnumLogLevel
+‹‹ %
+.
+‹‹% &
+Fatal
+‹‹& +
+,
+‹‹+ ,
+ex
+‹‹- /
+)
+‹‹/ 0
+;
+‹‹0 1
+}
+›› 
+return
+ﬂﬂ 
+result
+ﬂﬂ 
+;
+ﬂﬂ 
+}
+‡‡ 	
+public
+ÁÁ 
+bool
+ÁÁ &
+AccountManagerDisconnect
+ÁÁ ,
+(
+ÁÁ, -
+ObjectRequest
+ÁÁ- :
+<
+ÁÁ: ;
+int
+ÁÁ; >
+>
+ÁÁ> ?
+objectRequest
+ÁÁ@ M
+)
+ÁÁM N
+{
+ËË 	
+bool
+ÈÈ 
+result
+ÈÈ 
+=
+ÈÈ 
+false
+ÈÈ 
+;
+ÈÈ  
+try
+ÎÎ 
+{
+ÏÏ 
+ListParameters
+ÌÌ 
+
+parameters
+ÌÌ )
+=
+ÌÌ* +
+new
+ÌÌ, /
+ListParameters
+ÌÌ0 >
+(
+ÌÌ> ?
+)
+ÌÌ? @
+;
+ÌÌ@ A
+
+parameters
+ÓÓ 
+.
+ÓÓ 
+Add
+ÓÓ 
+(
+ÓÓ 
+$str
+ÓÓ 2
+,
+ÓÓ2 3
+objectRequest
+ÓÓ4 A
+.
+ÓÓA B
+SenderObject
+ÓÓB N
+)
+ÓÓN O
+;
+ÓÓO P
+CommandParameter
+  
+queryCommand
+! -
+=
+. /
+new
+0 3
+CommandParameter
+4 D
+(
+D E
+$str
+E h
+,
+h i
+
+parameters
+j t
+)
+t u
+;
+u v
+	DbManager
+ÚÚ 
+.
+ÚÚ 
+Instance
+ÚÚ "
+.
+ÚÚ" #
+ExecuteCommand
+ÚÚ# 1
+(
+ÚÚ1 2
+queryCommand
+ÚÚ2 >
+)
+ÚÚ> ?
+;
+ÚÚ? @
+result
+ÙÙ 
+=
+ÙÙ 
+true
+ÙÙ 
+;
+ÙÙ 
+}
+ıı 
+catch
+ˆˆ 
+(
+ˆˆ 
+TimeoutException
+ˆˆ #
+tout
+ˆˆ$ (
+)
+ˆˆ( )
+{
+˜˜ 
+log
+¯¯ 
+.
+¯¯ 
+Save
+¯¯ 
+(
+¯¯ 
+EnumLogLevel
+¯¯ %
+.
+¯¯% &
+Fatal
+¯¯& +
+,
+¯¯+ ,
+tout
+¯¯- 1
+.
+¯¯1 2
+Message
+¯¯2 9
+)
+¯¯9 :
+;
+¯¯: ;
+}
+˘˘ 
+catch
+˙˙ 
+(
+˙˙ 
+	Exception
+˙˙ 
+ex
+˙˙ 
+)
+˙˙  
+{
+˚˚ 
+log
+¸¸ 
+.
+¸¸ 
+Save
+¸¸ 
+(
+¸¸ 
+EnumLogLevel
+¸¸ %
+.
+¸¸% &
+Fatal
+¸¸& +
+,
+¸¸+ ,
+ex
+¸¸- /
+)
+¸¸/ 0
+;
+¸¸0 1
+}
+˝˝ 
+return
+ˇˇ 
+result
+ˇˇ 
+;
+ˇˇ 
+}
+ÄÄ 	
+public
+áá 
+ObjectResultList
+áá 
+<
+áá  #
+AccountManagerConnect
+áá  5
+>
+áá5 67
+)GetListAccountManagerConnectByModuleAppId
+áá7 `
+(
+áá` a
+ObjectRequest
+ááa n
+<
+áán o
+string
+ááo u
+>
+ááu v
+objectRequestááw Ñ
+)ááÑ Ö
+{
+àà 	
+ObjectResultList
+ââ 
+<
+ââ #
+AccountManagerConnect
+ââ 2
+>
+ââ2 3
+result
+ââ4 :
+=
+ââ; <
+new
+ââ= @
+ObjectResultList
+ââA Q
+<
+ââQ R#
+AccountManagerConnect
+ââR g
+>
+ââg h
+(
+ââh i
+)
+ââi j
+;
+ââj k
+try
+ãã 
+{
+åå 
+ListParameters
+çç 
+
+parameters
+çç )
+=
+çç* +
+new
+çç, /
+ListParameters
+çç0 >
+(
+çç> ?
+)
+çç? @
+;
+çç@ A
+
+parameters
+éé 
+.
+éé 
+Add
+éé 
+(
+éé 
+$str
+éé (
+,
+éé( )
+
+Encryption
+éé* 4
+.
+éé4 5
+Decrypt
+éé5 <
+(
+éé< =
+objectRequest
+éé= J
+.
+ééJ K
+SenderObject
+ééK W
+.
+ééW X
+Split
+ééX ]
+(
+éé] ^
+$char
+éé^ a
+)
+ééa b
+[
+ééb c
+$num
+ééc d
+]
+ééd e
+.
+éée f
+ToString
+ééf n
+(
+één o
+)
+ééo p
+)
+éép q
+)
+ééq r
+;
+éér s
+
+parameters
+èè 
+.
+èè 
+Add
+èè 
+(
+èè 
+$str
+èè -
+,
+èè- .
+
+Encryption
+èè/ 9
+.
+èè9 :
+Decrypt
+èè: A
+(
+èèA B
+objectRequest
+èèB O
+.
+èèO P
+SenderObject
+èèP \
+.
+èè\ ]
+Split
+èè] b
+(
+èèb c
+$char
+èèc f
+)
+èèf g
+[
+èèg h
+$num
+èèh i
+]
+èèi j
+.
+èèj k
+ToString
+èèk s
+(
+èès t
+)
+èèt u
+)
+èèu v
+)
+èèv w
+;
+èèw x
+
+parameters
+êê 
+.
+êê 
+Add
+êê 
+(
+êê 
+$str
+êê '
+,
+êê' (
+
+Encryption
+êê) 3
+.
+êê3 4
+Decrypt
+êê4 ;
+(
+êê; <
+objectRequest
+êê< I
+.
+êêI J
+SenderObject
+êêJ V
+.
+êêV W
+Split
+êêW \
+(
+êê\ ]
+$char
+êê] `
+)
+êê` a
+[
+êêa b
+$num
+êêb c
+]
+êêc d
+.
+êêd e
+ToString
+êêe m
+(
+êêm n
+)
+êên o
+)
+êêo p
+)
+êêp q
+;
+êêq r
+CommandParameter
+íí  
+queryCommand
+íí! -
+=
+íí. /
+new
+íí0 3
+CommandParameter
+íí4 D
+(
+ííD E
+$str
+ííE l
+,
+ííl m
+
+parameters
+íín x
+)
+ííx y
+;
+ííy z
+	DataTable
+îî 
+dtresult
+îî "
+=
+îî# $
+	DbManager
+îî% .
+.
+îî. /
+Instance
+îî/ 7
+.
+îî7 8
+ExecuteTable
+îî8 D
+(
+îîD E
+queryCommand
+îîE Q
+)
+îîQ R
+;
+îîR S
+result
+ññ 
+=
+ññ 
+new
+ññ 
+ObjectResultList
+ññ -
+<
+ññ- .#
+AccountManagerConnect
+ññ. C
+>
+ññC D
+(
+ññD E
+dtresult
+ññE M
+)
+ññM N
+;
+ññN O'
+ListAccountManagerConnect
+òò )
+listAMC
+òò* 1
+=
+òò2 3
+new
+òò4 7'
+ListAccountManagerConnect
+òò8 Q
+(
+òòQ R
+dtresult
+òòR Z
+)
+òòZ [
+;
+òò[ \
+}
+öö 
+catch
+õõ 
+(
+õõ 
+TimeoutException
+õõ #
+tout
+õõ$ (
+)
+õõ( )
+{
+úú 
+result
+ùù 
+.
+ùù 
+Id
+ùù 
+=
+ùù 
+$num
+ùù 
+;
+ùù 
+result
+ûû 
+.
+ûû 
+Message
+ûû 
+=
+ûû  
+tout
+ûû! %
+.
+ûû% &
+Message
+ûû& -
+;
+ûû- .
+log
+†† 
+.
+†† 
+Save
+†† 
+(
+†† 
+EnumLogLevel
+†† %
+.
+††% &
+Fatal
+††& +
+,
+††+ ,
+tout
+††- 1
+.
+††1 2
+Message
+††2 9
+)
+††9 :
+;
+††: ;
+}
+°° 
+catch
+¢¢ 
+(
+¢¢ 
+	Exception
+¢¢ 
+ex
+¢¢ 
+)
+¢¢  
+{
+££ 
+result
+§§ 
+.
+§§ 
+Id
+§§ 
+=
+§§ 
+$num
+§§ 
+;
+§§ 
+result
+•• 
+.
+•• 
+Message
+•• 
+=
+••  
+ex
+••! #
+.
+••# $
+Message
+••$ +
+;
+••+ ,
+log
+ßß 
+.
+ßß 
+Save
+ßß 
+(
+ßß 
+EnumLogLevel
+ßß %
+.
+ßß% &
+Fatal
+ßß& +
+,
+ßß+ ,
+ex
+ßß- /
+)
+ßß/ 0
+;
+ßß0 1
+}
+®® 
+return
+™™ 
+result
+™™ 
+;
+™™ 
+}
+´´ 	
+public
+≤≤ 
+ObjectResultList
+≤≤ 
+<
+≤≤  #
+AccountManagerConnect
+≤≤  5
+>
+≤≤5 6#
+GetAccountManagerById
+≤≤7 L
+(
+≤≤L M
+ObjectRequest
+≤≤M Z
+<
+≤≤Z [
+string
+≤≤[ a
+>
+≤≤a b
+objectRequest
+≤≤c p
+)
+≤≤p q
+{
+≥≥ 	
+ObjectResultList
+¥¥ 
+<
+¥¥ #
+AccountManagerConnect
+¥¥ 2
+>
+¥¥2 3
+result
+¥¥4 :
+=
+¥¥; <
+new
+¥¥= @
+ObjectResultList
+¥¥A Q
+<
+¥¥Q R#
+AccountManagerConnect
+¥¥R g
+>
+¥¥g h
+(
+¥¥h i
+)
+¥¥i j
+;
+¥¥j k
+try
+∂∂ 
+{
+∑∑ 
+ListParameters
+∏∏ 
+
+parameters
+∏∏ )
+=
+∏∏* +
+new
+∏∏, /
+ListParameters
+∏∏0 >
+(
+∏∏> ?
+)
+∏∏? @
+;
+∏∏@ A
+
+parameters
+ππ 
+.
+ππ 
+Add
+ππ 
+(
+ππ 
+$str
+ππ (
+,
+ππ( )
+
+Encryption
+ππ* 4
+.
+ππ4 5
+Decrypt
+ππ5 <
+(
+ππ< =
+objectRequest
+ππ= J
+.
+ππJ K
+SenderObject
+ππK W
+.
+ππW X
+Split
+ππX ]
+(
+ππ] ^
+$char
+ππ^ a
+)
+ππa b
+[
+ππb c
+$num
+ππc d
+]
+ππd e
+.
+ππe f
+ToString
+ππf n
+(
+ππn o
+)
+ππo p
+)
+ππp q
+)
+ππq r
+;
+ππr s
+
+parameters
+∫∫ 
+.
+∫∫ 
+Add
+∫∫ 
+(
+∫∫ 
+$str
+∫∫ -
+,
+∫∫- .
+
+Encryption
+∫∫/ 9
+.
+∫∫9 :
+Decrypt
+∫∫: A
+(
+∫∫A B
+objectRequest
+∫∫B O
+.
+∫∫O P
+SenderObject
+∫∫P \
+.
+∫∫\ ]
+Split
+∫∫] b
+(
+∫∫b c
+$char
+∫∫c f
+)
+∫∫f g
+[
+∫∫g h
+$num
+∫∫h i
+]
+∫∫i j
+.
+∫∫j k
+ToString
+∫∫k s
+(
+∫∫s t
+)
+∫∫t u
+)
+∫∫u v
+)
+∫∫v w
+;
+∫∫w x
+
+parameters
+ªª 
+.
+ªª 
+Add
+ªª 
+(
+ªª 
+$str
+ªª '
+,
+ªª' (
+
+Encryption
+ªª) 3
+.
+ªª3 4
+Decrypt
+ªª4 ;
+(
+ªª; <
+objectRequest
+ªª< I
+.
+ªªI J
+SenderObject
+ªªJ V
+.
+ªªV W
+Split
+ªªW \
+(
+ªª\ ]
+$char
+ªª] `
+)
+ªª` a
+[
+ªªa b
+$num
+ªªb c
+]
+ªªc d
+.
+ªªd e
+ToString
+ªªe m
+(
+ªªm n
+)
+ªªn o
+)
+ªªo p
+)
+ªªp q
+;
+ªªq r
+CommandParameter
+ΩΩ  
+queryCommand
+ΩΩ! -
+=
+ΩΩ. /
+new
+ΩΩ0 3
+CommandParameter
+ΩΩ4 D
+(
+ΩΩD E
+$str
+ΩΩE l
+,
+ΩΩl m
+
+parameters
+ΩΩn x
+)
+ΩΩx y
+;
+ΩΩy z
+	DataTable
+øø 
+dtresult
+øø "
+=
+øø# $
+	DbManager
+øø% .
+.
+øø. /
+Instance
+øø/ 7
+.
+øø7 8
+ExecuteTable
+øø8 D
+(
+øøD E
+queryCommand
+øøE Q
+)
+øøQ R
+;
+øøR S
+result
+¡¡ 
+=
+¡¡ 
+new
+¡¡ 
+ObjectResultList
+¡¡ -
+<
+¡¡- .#
+AccountManagerConnect
+¡¡. C
+>
+¡¡C D
+(
+¡¡D E
+dtresult
+¡¡E M
+)
+¡¡M N
+;
+¡¡N O'
+ListAccountManagerConnect
+√√ )
+listAMC
+√√* 1
+=
+√√2 3
+new
+√√4 7'
+ListAccountManagerConnect
+√√8 Q
+(
+√√Q R
+dtresult
+√√R Z
+)
+√√Z [
+;
+√√[ \
+}
+≈≈ 
+catch
+∆∆ 
+(
+∆∆ 
+TimeoutException
+∆∆ #
+tout
+∆∆$ (
+)
+∆∆( )
+{
+«« 
+result
+»» 
+.
+»» 
+Id
+»» 
+=
+»» 
+$num
+»» 
+;
+»» 
+result
+…… 
+.
+…… 
+Message
+…… 
+=
+……  
+tout
+……! %
+.
+……% &
+Message
+……& -
+;
+……- .
+log
+ÀÀ 
+.
+ÀÀ 
+Save
+ÀÀ 
+(
+ÀÀ 
+EnumLogLevel
+ÀÀ %
+.
+ÀÀ% &
+Fatal
+ÀÀ& +
+,
+ÀÀ+ ,
+tout
+ÀÀ- 1
+.
+ÀÀ1 2
+Message
+ÀÀ2 9
+)
+ÀÀ9 :
+;
+ÀÀ: ;
+}
+ÃÃ 
+catch
+ÕÕ 
+(
+ÕÕ 
+	Exception
+ÕÕ 
+ex
+ÕÕ 
+)
+ÕÕ  
+{
+ŒŒ 
+result
+œœ 
+.
+œœ 
+Id
+œœ 
+=
+œœ 
+$num
+œœ 
+;
+œœ 
+result
+–– 
+.
+–– 
+Message
+–– 
+=
+––  
+ex
+––! #
+.
+––# $
+Message
+––$ +
+;
+––+ ,
+log
+““ 
+.
+““ 
+Save
+““ 
+(
+““ 
+EnumLogLevel
+““ %
+.
+““% &
+Fatal
+““& +
+,
+““+ ,
+ex
+““- /
+)
+““/ 0
+;
+““0 1
+}
+”” 
+return
+’’ 
+result
+’’ 
+;
+’’ 
+}
+÷÷ 	
+public
+›› 
+ObjectResultList
+›› 
+<
+››  (
+ConversationResponseEntity
+››  :
+>
+››: ;)
+GetListConversationByFilter
+››< W
+(
+››W X
+ObjectRequest
+››X e
+<
+››e f)
+ConversationResponseEntity››f Ä
+>››Ä Å
+senderObject››Ç é
+)››é è
+{
+ﬁﬁ 	
+ObjectResultList
+ﬂﬂ 
+<
+ﬂﬂ (
+ConversationResponseEntity
+ﬂﬂ 7
+>
+ﬂﬂ7 8
+listUserConnect
+ﬂﬂ9 H
+=
+ﬂﬂI J
+new
+ﬂﬂK N
+ObjectResultList
+ﬂﬂO _
+<
+ﬂﬂ_ `(
+ConversationResponseEntity
+ﬂﬂ` z
+>
+ﬂﬂz {
+(
+ﬂﬂ{ |
+)
+ﬂﬂ| }
+;
+ﬂﬂ} ~
+
+SqlCommand
+‡‡ 
+ObjCmd
+‡‡ 
+=
+‡‡ 
+null
+‡‡  $
+;
+‡‡$ %
+	DataTable
+·· 
+dt
+·· 
+=
+·· 
+null
+·· 
+;
+··  
+try
+‚‚ 
+{
+„„ 
+using
+ÂÂ 
+(
+ÂÂ 
+ObjCmd
+ÂÂ 
+=
+ÂÂ 
+new
+ÂÂ  #
+
+SqlCommand
+ÂÂ$ .
+(
+ÂÂ. /
+$str
+ÂÂ/ L
+,
+ÂÂL M
+	DbManager
+ÂÂN W
+.
+ÂÂW X
+Instance
+ÂÂX `
+.
+ÂÂ` a
+OpenConnection
+ÂÂa o
+(
+ÂÂo p
+)
+ÂÂp q
+)
+ÂÂq r
+)
+ÂÂr s
+{
+ÊÊ 
+ObjCmd
+ÁÁ 
+.
+ÁÁ 
+CommandType
+ÁÁ &
+=
+ÁÁ' (
+CommandType
+ÁÁ) 4
+.
+ÁÁ4 5
+StoredProcedure
+ÁÁ5 D
+;
+ÁÁD E
+ObjCmd
+ËË 
+.
+ËË 
+CommandTimeout
+ËË )
+=
+ËË* +
+$num
+ËË, -
+;
+ËË- .
+ObjCmd
+ÈÈ 
+.
+ÈÈ 
+
+Parameters
+ÈÈ %
+.
+ÈÈ% &
+AddWithValue
+ÈÈ& 2
+(
+ÈÈ2 3
+$str
+ÈÈ3 ?
+,
+ÈÈ? @
+senderObject
+ÈÈA M
+.
+ÈÈM N
+SenderObject
+ÈÈN Z
+.
+ÈÈZ [
+	DateStart
+ÈÈ[ d
+)
+ÈÈd e
+;
+ÈÈe f
+ObjCmd
+ÍÍ 
+.
+ÍÍ 
+
+Parameters
+ÍÍ %
+.
+ÍÍ% &
+AddWithValue
+ÍÍ& 2
+(
+ÍÍ2 3
+$str
+ÍÍ3 =
+,
+ÍÍ= >
+senderObject
+ÍÍ? K
+.
+ÍÍK L
+SenderObject
+ÍÍL X
+.
+ÍÍX Y
+DateEnd
+ÍÍY `
+)
+ÍÍ` a
+;
+ÍÍa b
+ObjCmd
+ÎÎ 
+.
+ÎÎ 
+
+Parameters
+ÎÎ %
+.
+ÎÎ% &
+AddWithValue
+ÎÎ& 2
+(
+ÎÎ2 3
+$str
+ÎÎ3 C
+,
+ÎÎC D
+senderObject
+ÎÎE Q
+.
+ÎÎQ R
+SenderObject
+ÎÎR ^
+.
+ÎÎ^ _
+Distributorid
+ÎÎ_ l
+)
+ÎÎl m
+;
+ÎÎm n
+ObjCmd
+ÏÏ 
+.
+ÏÏ 
+
+Parameters
+ÏÏ %
+.
+ÏÏ% &
+AddWithValue
+ÏÏ& 2
+(
+ÏÏ2 3
+$str
+ÏÏ3 >
+,
+ÏÏ> ?
+senderObject
+ÏÏ@ L
+.
+ÏÏL M
+SenderObject
+ÏÏM Y
+.
+ÏÏY Z
+UserName
+ÏÏZ b
+)
+ÏÏb c
+;
+ÏÏc d
+ObjCmd
+ÌÌ 
+.
+ÌÌ 
+
+Parameters
+ÌÌ %
+.
+ÌÌ% &
+Add
+ÌÌ& )
+(
+ÌÌ) *
+new
+ÌÌ* -
+SqlParameter
+ÌÌ. :
+{
+ÌÌ; <
+ParameterName
+ÌÌ= J
+=
+ÌÌK L
+$str
+ÌÌM b
+,
+ÌÌb c
+Value
+ÌÌd i
+=
+ÌÌj k
+senderObject
+ÌÌl x
+.
+ÌÌx y
+SenderObjectÌÌy Ö
+.ÌÌÖ Ü
+ListMarketsÌÌÜ ë
+,ÌÌë í
+	SqlDbTypeÌÌì ú
+=ÌÌù û
+	SqlDbTypeÌÌü ®
+.ÌÌ® ©
+
+StructuredÌÌ© ≥
+,ÌÌ≥ ¥
+TypeNameÌÌµ Ω
+=ÌÌæ ø
+$strÌÌ¿ –
+}ÌÌ— “
+)ÌÌ“ ”
+;ÌÌ” ‘
+ObjCmd
+ÓÓ 
+.
+ÓÓ 
+
+Parameters
+ÓÓ %
+.
+ÓÓ% &
+Add
+ÓÓ& )
+(
+ÓÓ) *
+new
+ÓÓ* -
+SqlParameter
+ÓÓ. :
+{
+ÓÓ; <
+ParameterName
+ÓÓ= J
+=
+ÓÓK L
+$str
+ÓÓM a
+,
+ÓÓa b
+Value
+ÓÓc h
+=
+ÓÓi j
+senderObject
+ÓÓk w
+.
+ÓÓw x
+SenderObjectÓÓx Ñ
+.ÓÓÑ Ö
+
+ListAgentsÓÓÖ è
+,ÓÓè ê
+	SqlDbTypeÓÓë ö
+=ÓÓõ ú
+	SqlDbTypeÓÓù ¶
+.ÓÓ¶ ß
+
+StructuredÓÓß ±
+,ÓÓ± ≤
+TypeNameÓÓ≥ ª
+=ÓÓº Ω
+$strÓÓæ Œ
+}ÓÓœ –
+)ÓÓ– —
+;ÓÓ— “
+dt
+ÔÔ 
+=
+ÔÔ 
+new
+ÔÔ 
+	DataTable
+ÔÔ &
+(
+ÔÔ& '
+)
+ÔÔ' (
+;
+ÔÔ( )
+dt
+ 
+.
+ 
+Load
+ 
+(
+ 
+ObjCmd
+ "
+.
+" #
+ExecuteReader
+# 0
+(
+0 1
+)
+1 2
+)
+2 3
+;
+3 4
+listUserConnect
+ÒÒ #
+=
+ÒÒ$ %
+new
+ÒÒ& )
+ObjectResultList
+ÒÒ* :
+<
+ÒÒ: ;(
+ConversationResponseEntity
+ÒÒ; U
+>
+ÒÒU V
+(
+ÒÒV W
+dt
+ÒÒW Y
+)
+ÒÒY Z
+;
+ÒÒZ [
+}
+ÚÚ 
+;
+ÚÚ 
+}
+ÙÙ 
+catch
+ıı 
+(
+ıı 
+TimeoutException
+ıı #
+tout
+ıı$ (
+)
+ıı( )
+{
+ˆˆ 
+listUserConnect
+˜˜ 
+.
+˜˜  
+Id
+˜˜  "
+=
+˜˜# $
+$num
+˜˜% &
+;
+˜˜& '
+listUserConnect
+¯¯ 
+.
+¯¯  
+Message
+¯¯  '
+=
+¯¯( )
+tout
+¯¯* .
+.
+¯¯. /
+Message
+¯¯/ 6
+;
+¯¯6 7
+log
+˙˙ 
+.
+˙˙ 
+Save
+˙˙ 
+(
+˙˙ 
+EnumLogLevel
+˙˙ %
+.
+˙˙% &
+Fatal
+˙˙& +
+,
+˙˙+ ,
+tout
+˙˙- 1
+.
+˙˙1 2
+Message
+˙˙2 9
+)
+˙˙9 :
+;
+˙˙: ;
+}
+˚˚ 
+catch
+¸¸ 
+(
+¸¸ 
+	Exception
+¸¸ 
+ex
+¸¸ 
+)
+¸¸  
+{
+˝˝ 
+listUserConnect
+˛˛ 
+.
+˛˛  
+Id
+˛˛  "
+=
+˛˛# $
+$num
+˛˛% &
+;
+˛˛& '
+listUserConnect
+ˇˇ 
+.
+ˇˇ  
+Message
+ˇˇ  '
+=
+ˇˇ( )
+ex
+ˇˇ* ,
+.
+ˇˇ, -
+Message
+ˇˇ- 4
+;
+ˇˇ4 5
+log
+ÅÅ 
+.
+ÅÅ 
+Save
+ÅÅ 
+(
+ÅÅ 
+EnumLogLevel
+ÅÅ %
+.
+ÅÅ% &
+Fatal
+ÅÅ& +
+,
+ÅÅ+ ,
+ex
+ÅÅ- /
+)
+ÅÅ/ 0
+;
+ÅÅ0 1
+}
+ÇÇ 
+return
+ÑÑ 
+listUserConnect
+ÑÑ "
+;
+ÑÑ" #
+}
+ÖÖ 	
+public
+áá 
+ObjectResult
+áá 
+<
+áá 
+UserRoleType
+áá (
+>
+áá( )
+UsersGetRoleType
+áá* :
+(
+áá: ;
+ObjectRequest
+áá; H
+<
+ááH I
+string
+ááI O
+>
+ááO P
+objectRequest
+ááQ ^
+)
+áá^ _
+{
+àà 	
+
+SqlCommand
+ââ 
+ObjCmd
+ââ 
+=
+ââ 
+null
+ââ  $
+;
+ââ$ %
+ObjectResult
+ää 
+<
+ää 
+UserRoleType
+ää %
+>
+ää% &
+result
+ää' -
+=
+ää. /
+new
+ää0 3
+ObjectResult
+ää4 @
+<
+ää@ A
+UserRoleType
+ääA M
+>
+ääM N
+(
+ääN O
+)
+ääO P
+;
+ääP Q
+String
+ãã 
+
+parmUserId
+ãã 
+=
+ãã 
+
+Encryption
+ãã  *
+.
+ãã* +
+Decrypt
+ãã+ 2
+(
+ãã2 3
+objectRequest
+ãã3 @
+.
+ãã@ A
+SenderObject
+ããA M
+.
+ããM N
+Split
+ããN S
+(
+ããS T
+$char
+ããT W
+)
+ããW X
+[
+ããX Y
+$num
+ããY Z
+]
+ããZ [
+.
+ãã[ \
+ToString
+ãã\ d
+(
+ããd e
+)
+ããe f
+)
+ããf g
+;
+ããg h
+try
+åå 
+{
+çç 
+using
+éé 
+(
+éé 
+ObjCmd
+éé 
+=
+éé 
+new
+éé  #
+
+SqlCommand
+éé$ .
+(
+éé. /
+$str
+éé/ J
+,
+ééJ K
+	DbManager
+ééL U
+.
+ééU V
+Instance
+ééV ^
+.
+éé^ _
+OpenConnection
+éé_ m
+(
+éém n
+)
+één o
+)
+ééo p
+)
+éép q
+{
+èè 
+ObjCmd
+êê 
+.
+êê 
+CommandType
+êê &
+=
+êê' (
+CommandType
+êê) 4
+.
+êê4 5
+StoredProcedure
+êê5 D
+;
+êêD E
+ObjCmd
+ëë 
+.
+ëë 
+CommandTimeout
+ëë )
+=
+ëë* +
+$num
+ëë, -
+;
+ëë- .
+SqlParameter
+ìì  
+outputParam
+ìì! ,
+=
+ìì- .
+ObjCmd
+ìì/ 5
+.
+ìì5 6
+
+Parameters
+ìì6 @
+.
+ìì@ A
+Add
+ììA D
+(
+ììD E
+$str
+ììE Q
+,
+ììQ R
+	SqlDbType
+ììS \
+.
+ìì\ ]
+Int
+ìì] `
+)
+ìì` a
+;
+ììa b
+outputParam
+îî 
+.
+îî  
+	Direction
+îî  )
+=
+îî* + 
+ParameterDirection
+îî, >
+.
+îî> ?
+Output
+îî? E
+;
+îîE F
+ObjCmd
+ññ 
+.
+ññ 
+
+Parameters
+ññ %
+.
+ññ% &
+AddWithValue
+ññ& 2
+(
+ññ2 3
+$str
+ññ3 <
+,
+ññ< =
+
+parmUserId
+ññ> H
+)
+ññH I
+;
+ññI J
+ObjCmd
+óó 
+.
+óó 
+ExecuteNonQuery
+óó *
+(
+óó* +
+)
+óó+ ,
+;
+óó, -
+result
+òò 
+.
+òò 
+Id
+òò 
+=
+òò 
+Convert
+òò  '
+.
+òò' (
+ToInt32
+òò( /
+(
+òò/ 0
+ObjCmd
+òò0 6
+.
+òò6 7
+
+Parameters
+òò7 A
+[
+òòA B
+$str
+òòB N
+]
+òòN O
+.
+òòO P
+Value
+òòP U
+)
+òòU V
+;
+òòV W
+}
+ôô 
+;
+ôô 
+}
+öö 
+catch
+õõ 
+(
+õõ 
+	Exception
+õõ 
+ex
+õõ 
+)
+õõ  
+{
+úú 
+result
+ùù 
+.
+ùù 
+Message
+ùù 
+=
+ùù  
+ex
+ùù! #
+.
+ùù# $
+Message
+ùù$ +
+;
+ùù+ ,
+result
+ûû 
+.
+ûû 
+Id
+ûû 
+=
+ûû 
+-
+ûû 
+$num
+ûû 
+;
+ûû 
+}
+üü 
+return
+†† 
+result
+†† 
+;
+†† 
+}
+°° 	
+public
+££ 
+ObjectResultList
+££ 
+<
+££  #
+AccountManagerConnect
+££  5
+>
+££5 6#
+GetListAgentByManager
+££7 L
+(
+££L M
+ObjectRequest
+££M Z
+<
+££Z [
+string
+££[ a
+>
+££a b
+objectRequest
+££c p
+)
+££p q
+{
+§§ 	
+ObjectResultList
+•• 
+<
+•• #
+AccountManagerConnect
+•• 2
+>
+••2 3
+result
+••4 :
+=
+••; <
+new
+••= @
+ObjectResultList
+••A Q
+<
+••Q R#
+AccountManagerConnect
+••R g
+>
+••g h
+(
+••h i
+)
+••i j
+;
+••j k
+try
+ßß 
+{
+®® 
+ListParameters
+©© 
+
+parameters
+©© )
+=
+©©* +
+new
+©©, /
+ListParameters
+©©0 >
+(
+©©> ?
+)
+©©? @
+;
+©©@ A
+
+parameters
+™™ 
+.
+™™ 
+Add
+™™ 
+(
+™™ 
+$str
+™™ +
+,
+™™+ ,
+
+Encryption
+™™- 7
+.
+™™7 8
+Decrypt
+™™8 ?
+(
+™™? @
+objectRequest
+™™@ M
+.
+™™M N
+SenderObject
+™™N Z
+.
+™™Z [
+Split
+™™[ `
+(
+™™` a
+$char
+™™a d
+)
+™™d e
+[
+™™e f
+$num
+™™f g
+]
+™™g h
+.
+™™h i
+ToString
+™™i q
+(
+™™q r
+)
+™™r s
+)
+™™s t
+)
+™™t u
+;
+™™u v
+CommandParameter
+¨¨  
+queryCommand
+¨¨! -
+=
+¨¨. /
+new
+¨¨0 3
+CommandParameter
+¨¨4 D
+(
+¨¨D E
+$str
+¨¨E s
+,
+¨¨s t
+
+parameters
+¨¨u 
+)¨¨ Ä
+;¨¨Ä Å
+	DataTable
+ÆÆ 
+dtresult
+ÆÆ "
+=
+ÆÆ# $
+	DbManager
+ÆÆ% .
+.
+ÆÆ. /
+Instance
+ÆÆ/ 7
+.
+ÆÆ7 8
+ExecuteTable
+ÆÆ8 D
+(
+ÆÆD E
+queryCommand
+ÆÆE Q
+)
+ÆÆQ R
+;
+ÆÆR S
+result
+∞∞ 
+=
+∞∞ 
+new
+∞∞ 
+ObjectResultList
+∞∞ -
+<
+∞∞- .#
+AccountManagerConnect
+∞∞. C
+>
+∞∞C D
+(
+∞∞D E
+dtresult
+∞∞E M
+)
+∞∞M N
+;
+∞∞N O
+result
+±± 
+.
+±± 
+Id
+±± 
+=
+±± 
+Convert
+±± #
+.
+±±# $
+ToInt32
+±±$ +
+(
+±±+ ,
+
+Encryption
+±±, 6
+.
+±±6 7
+Decrypt
+±±7 >
+(
+±±> ?
+objectRequest
+±±? L
+.
+±±L M
+SenderObject
+±±M Y
+.
+±±Y Z
+Split
+±±Z _
+(
+±±_ `
+$char
+±±` c
+)
+±±c d
+[
+±±d e
+$num
+±±e f
+]
+±±f g
+.
+±±g h
+ToString
+±±h p
+(
+±±p q
+)
+±±q r
+)
+±±r s
+)
+±±s t
+;
+±±t u'
+ListAccountManagerConnect
+≤≤ )
+listAMC
+≤≤* 1
+=
+≤≤2 3
+new
+≤≤4 7'
+ListAccountManagerConnect
+≤≤8 Q
+(
+≤≤Q R
+dtresult
+≤≤R Z
+)
+≤≤Z [
+;
+≤≤[ \
+}
+¥¥ 
+catch
+µµ 
+(
+µµ 
+TimeoutException
+µµ #
+tout
+µµ$ (
+)
+µµ( )
+{
+∂∂ 
+result
+∑∑ 
+.
+∑∑ 
+Id
+∑∑ 
+=
+∑∑ 
+$num
+∑∑ 
+;
+∑∑ 
+result
+∏∏ 
+.
+∏∏ 
+Message
+∏∏ 
+=
+∏∏  
+tout
+∏∏! %
+.
+∏∏% &
+Message
+∏∏& -
+;
+∏∏- .
+log
+∫∫ 
+.
+∫∫ 
+Save
+∫∫ 
+(
+∫∫ 
+EnumLogLevel
+∫∫ %
+.
+∫∫% &
+Fatal
+∫∫& +
+,
+∫∫+ ,
+tout
+∫∫- 1
+.
+∫∫1 2
+Message
+∫∫2 9
+)
+∫∫9 :
+;
+∫∫: ;
+}
+ªª 
+catch
+ºº 
+(
+ºº 
+	Exception
+ºº 
+ex
+ºº 
+)
+ºº  
+{
+ΩΩ 
+result
+ææ 
+.
+ææ 
+Id
+ææ 
+=
+ææ 
+$num
+ææ 
+;
+ææ 
+result
+øø 
+.
+øø 
+Message
+øø 
+=
+øø  
+ex
+øø! #
+.
+øø# $
+Message
+øø$ +
+;
+øø+ ,
+log
+¡¡ 
+.
+¡¡ 
+Save
+¡¡ 
+(
+¡¡ 
+EnumLogLevel
+¡¡ %
+.
+¡¡% &
+Fatal
+¡¡& +
+,
+¡¡+ ,
+ex
+¡¡- /
+)
+¡¡/ 0
+;
+¡¡0 1
+}
+¬¬ 
+return
+ƒƒ 
+result
+ƒƒ 
+;
+ƒƒ 
+}
+≈≈ 	
+public
+«« 
+ObjectResultList
+«« 
+<
+««  (
+ConversationResponseEntity
+««  :
+>
+««: ;1
+#GetListConversationByChatAndAgentId
+««< _
+(
+««_ `
+ObjectRequest
+««` m
+<
+««m n
+string
+««n t
+>
+««t u
+objectRequest««v É
+)««É Ñ
+{
+»» 	
+ObjectResultList
+…… 
+<
+…… (
+ConversationResponseEntity
+…… 7
+>
+……7 8
+listUserConnect
+……9 H
+=
+……I J
+new
+……K N
+ObjectResultList
+……O _
+<
+……_ `(
+ConversationResponseEntity
+……` z
+>
+……z {
+(
+……{ |
+)
+……| }
+;
+……} ~
+try
+ÀÀ 
+{
+ÃÃ 
+ListParameters
+ÕÕ 
+
+parameters
+ÕÕ )
+=
+ÕÕ* +
+new
+ÕÕ, /
+ListParameters
+ÕÕ0 >
+(
+ÕÕ> ?
+)
+ÕÕ? @
+;
+ÕÕ@ A
+
+parameters
+ŒŒ 
+.
+ŒŒ 
+Add
+ŒŒ 
+(
+ŒŒ 
+$str
+ŒŒ (
+,
+ŒŒ( )
+objectRequest
+ŒŒ* 7
+.
+ŒŒ7 8
+SenderObject
+ŒŒ8 D
+.
+ŒŒD E
+Split
+ŒŒE J
+(
+ŒŒJ K
+$char
+ŒŒK N
+)
+ŒŒN O
+[
+ŒŒO P
+$num
+ŒŒP Q
+]
+ŒŒQ R
+.
+ŒŒR S
+ToString
+ŒŒS [
+(
+ŒŒ[ \
+)
+ŒŒ\ ]
+)
+ŒŒ] ^
+;
+ŒŒ^ _
+
+parameters
+œœ 
+.
+œœ 
+Add
+œœ 
+(
+œœ 
+$str
+œœ )
+,
+œœ) *
+objectRequest
+œœ+ 8
+.
+œœ8 9
+SenderObject
+œœ9 E
+.
+œœE F
+Split
+œœF K
+(
+œœK L
+$char
+œœL O
+)
+œœO P
+[
+œœP Q
+$num
+œœQ R
+]
+œœR S
+.
+œœS T
+ToString
+œœT \
+(
+œœ\ ]
+)
+œœ] ^
+)
+œœ^ _
+;
+œœ_ `
+CommandParameter
+——  
+queryCommand
+——! -
+=
+——. /
+new
+——0 3
+CommandParameter
+——4 D
+(
+——D E
+$str——E Ç
+,——Ç É
+
+parameters——Ñ é
+)——é è
+;——è ê
+	DataTable
+““ 
+dtresult
+““ "
+=
+““# $
+	DbManager
+““% .
+.
+““. /
+Instance
+““/ 7
+.
+““7 8
+ExecuteTable
+““8 D
+(
+““D E
+queryCommand
+““E Q
+)
+““Q R
+;
+““R S
+listUserConnect
+‘‘ 
+=
+‘‘  !
+new
+‘‘" %
+ObjectResultList
+‘‘& 6
+<
+‘‘6 7(
+ConversationResponseEntity
+‘‘7 Q
+>
+‘‘Q R
+(
+‘‘R S
+dtresult
+‘‘S [
+)
+‘‘[ \
+;
+‘‘\ ]
+}
+’’ 
+catch
+÷÷ 
+(
+÷÷ 
+TimeoutException
+÷÷ #
+tout
+÷÷$ (
+)
+÷÷( )
+{
+◊◊ 
+listUserConnect
+ÿÿ 
+.
+ÿÿ  
+Id
+ÿÿ  "
+=
+ÿÿ# $
+$num
+ÿÿ% &
+;
+ÿÿ& '
+listUserConnect
+ŸŸ 
+.
+ŸŸ  
+Message
+ŸŸ  '
+=
+ŸŸ( )
+tout
+ŸŸ* .
+.
+ŸŸ. /
+Message
+ŸŸ/ 6
+;
+ŸŸ6 7
+log
+€€ 
+.
+€€ 
+Save
+€€ 
+(
+€€ 
+EnumLogLevel
+€€ %
+.
+€€% &
+Fatal
+€€& +
+,
+€€+ ,
+tout
+€€- 1
+.
+€€1 2
+Message
+€€2 9
+)
+€€9 :
+;
+€€: ;
+}
+‹‹ 
+catch
+›› 
+(
+›› 
+	Exception
+›› 
+ex
+›› 
+)
+››  
+{
+ﬁﬁ 
+listUserConnect
+ﬂﬂ 
+.
+ﬂﬂ  
+Id
+ﬂﬂ  "
+=
+ﬂﬂ# $
+$num
+ﬂﬂ% &
+;
+ﬂﬂ& '
+listUserConnect
+‡‡ 
+.
+‡‡  
+Message
+‡‡  '
+=
+‡‡( )
+ex
+‡‡* ,
+.
+‡‡, -
+Message
+‡‡- 4
+;
+‡‡4 5
+log
+‚‚ 
+.
+‚‚ 
+Save
+‚‚ 
+(
+‚‚ 
+EnumLogLevel
+‚‚ %
+.
+‚‚% &
+Fatal
+‚‚& +
+,
+‚‚+ ,
+ex
+‚‚- /
+)
+‚‚/ 0
+;
+‚‚0 1
+}
+„„ 
+return
+ÂÂ 
+listUserConnect
+ÂÂ "
+;
+ÂÂ" #
+}
+ÊÊ 	
+public
+ËË 
+ObjectResultList
+ËË 
+<
+ËË  (
+ConversationResponseEntity
+ËË  :
+>
+ËË: ;3
+%GetListConversationByChatAndManagerId
+ËË< a
+(
+ËËa b
+ObjectRequest
+ËËb o
+<
+ËËo p
+string
+ËËp v
+>
+ËËv w
+objectRequestËËx Ö
+)ËËÖ Ü
+{
+ÈÈ 	
+ObjectResultList
+ÍÍ 
+<
+ÍÍ (
+ConversationResponseEntity
+ÍÍ 7
+>
+ÍÍ7 8
+listUserConnect
+ÍÍ9 H
+=
+ÍÍI J
+new
+ÍÍK N
+ObjectResultList
+ÍÍO _
+<
+ÍÍ_ `(
+ConversationResponseEntity
+ÍÍ` z
+>
+ÍÍz {
+(
+ÍÍ{ |
+)
+ÍÍ| }
+;
+ÍÍ} ~
+try
+ÏÏ 
+{
+ÌÌ 
+ListParameters
+ÓÓ 
+
+parameters
+ÓÓ )
+=
+ÓÓ* +
+new
+ÓÓ, /
+ListParameters
+ÓÓ0 >
+(
+ÓÓ> ?
+)
+ÓÓ? @
+;
+ÓÓ@ A
+
+parameters
+ÔÔ 
+.
+ÔÔ 
+Add
+ÔÔ 
+(
+ÔÔ 
+$str
+ÔÔ (
+,
+ÔÔ( )
+objectRequest
+ÔÔ* 7
+.
+ÔÔ7 8
+SenderObject
+ÔÔ8 D
+.
+ÔÔD E
+Split
+ÔÔE J
+(
+ÔÔJ K
+$char
+ÔÔK N
+)
+ÔÔN O
+[
+ÔÔO P
+$num
+ÔÔP Q
+]
+ÔÔQ R
+.
+ÔÔR S
+ToString
+ÔÔS [
+(
+ÔÔ[ \
+)
+ÔÔ\ ]
+)
+ÔÔ] ^
+;
+ÔÔ^ _
+
+parameters
+ 
+.
+ 
+Add
+ 
+(
+ 
+$str
+ +
+,
++ ,
+objectRequest
+- :
+.
+: ;
+SenderObject
+; G
+.
+G H
+Split
+H M
+(
+M N
+$char
+N Q
+)
+Q R
+[
+R S
+$num
+S T
+]
+T U
+.
+U V
+ToString
+V ^
+(
+^ _
+)
+_ `
+)
+` a
+;
+a b
+CommandParameter
+ÚÚ  
+queryCommand
+ÚÚ! -
+=
+ÚÚ. /
+new
+ÚÚ0 3
+CommandParameter
+ÚÚ4 D
+(
+ÚÚD E
+$strÚÚE Ñ
+,ÚÚÑ Ö
+
+parametersÚÚÜ ê
+)ÚÚê ë
+;ÚÚë í
+	DataTable
+ÛÛ 
+dtresult
+ÛÛ "
+=
+ÛÛ# $
+	DbManager
+ÛÛ% .
+.
+ÛÛ. /
+Instance
+ÛÛ/ 7
+.
+ÛÛ7 8
+ExecuteTable
+ÛÛ8 D
+(
+ÛÛD E
+queryCommand
+ÛÛE Q
+)
+ÛÛQ R
+;
+ÛÛR S
+listUserConnect
+ıı 
+=
+ıı  !
+new
+ıı" %
+ObjectResultList
+ıı& 6
+<
+ıı6 7(
+ConversationResponseEntity
+ıı7 Q
+>
+ııQ R
+(
+ııR S
+dtresult
+ııS [
+)
+ıı[ \
+;
+ıı\ ]
+}
+ˆˆ 
+catch
+˜˜ 
+(
+˜˜ 
+TimeoutException
+˜˜ #
+tout
+˜˜$ (
+)
+˜˜( )
+{
+¯¯ 
+listUserConnect
+˘˘ 
+.
+˘˘  
+Id
+˘˘  "
+=
+˘˘# $
+$num
+˘˘% &
+;
+˘˘& '
+listUserConnect
+˙˙ 
+.
+˙˙  
+Message
+˙˙  '
+=
+˙˙( )
+tout
+˙˙* .
+.
+˙˙. /
+Message
+˙˙/ 6
+;
+˙˙6 7
+log
+¸¸ 
+.
+¸¸ 
+Save
+¸¸ 
+(
+¸¸ 
+EnumLogLevel
+¸¸ %
+.
+¸¸% &
+Fatal
+¸¸& +
+,
+¸¸+ ,
+tout
+¸¸- 1
+.
+¸¸1 2
+Message
+¸¸2 9
+)
+¸¸9 :
+;
+¸¸: ;
+}
+˝˝ 
+catch
+˛˛ 
+(
+˛˛ 
+	Exception
+˛˛ 
+ex
+˛˛ 
+)
+˛˛  
+{
+ˇˇ 
+listUserConnect
+ÄÄ 
+.
+ÄÄ  
+Id
+ÄÄ  "
+=
+ÄÄ# $
+$num
+ÄÄ% &
+;
+ÄÄ& '
+listUserConnect
+ÅÅ 
+.
+ÅÅ  
+Message
+ÅÅ  '
+=
+ÅÅ( )
+ex
+ÅÅ* ,
+.
+ÅÅ, -
+Message
+ÅÅ- 4
+;
+ÅÅ4 5
+log
+ÉÉ 
+.
+ÉÉ 
+Save
+ÉÉ 
+(
+ÉÉ 
+EnumLogLevel
+ÉÉ %
+.
+ÉÉ% &
+Fatal
+ÉÉ& +
+,
+ÉÉ+ ,
+ex
+ÉÉ- /
+)
+ÉÉ/ 0
+;
+ÉÉ0 1
+}
+ÑÑ 
+return
+ÜÜ 
+listUserConnect
+ÜÜ "
+;
+ÜÜ" #
+}
+áá 	
+}
+ââ 
+}ää Ÿ
+6D:\repositoriosGit\Chat\Chat\xChatDAO\ServiceFaqDAO.cs
+	namespace 	
+xChatDAO
+ 
+{ 
+public 
+
+class 
+ServiceFaqDAO 
+:  
+IServiceFaqDAO! /
+{ 
+public 
+void 
+Delete 
+( 
+	FaqEntity $
+	faqEntity% .
+). /
+{		 	
+throw
+
+ 
+new
+
+ #
+NotImplementedException
+
+ -
+(
+
+- .
+)
+
+. /
+;
+
+/ 0
+} 	
+public 
+	FaqEntity 
+GetById  
+(  !
+	FaqEntity! *
+	faqEntity+ 4
+)4 5
+{ 	
+throw 
+new #
+NotImplementedException -
+(- .
+). /
+;/ 0
+} 	
+public 
+ObjectResultList 
+<  
+	FaqEntity  )
+>) *
+GetListByLanguajeId+ >
+(> ?
+int? B
+
+languageIdC M
+)M N
+{ 	
+throw 
+new #
+NotImplementedException -
+(- .
+). /
+;/ 0
+} 	
+public 
+void 
+Insert 
+( 
+	FaqEntity $
+	faqEntity% .
+). /
+{ 	
+throw 
+new #
+NotImplementedException -
+(- .
+). /
+;/ 0
+} 	
+public 
+void 
+Update 
+( 
+	FaqEntity $
+	faqEntity% .
+). /
+{ 	
+throw 
+new #
+NotImplementedException -
+(- .
+). /
+;/ 0
+} 	
+}   
+}!! â3
+?D:\repositoriosGit\Chat\Chat\xChatDAO\ServiceMasterEntityDAO.cs
+	namespace 	
+xChatDAO
+ 
+{ 
+public		 
+
+class		 "
+ServiceMasterEntityDAO		 '
+:		( )#
+IServiceMasterEntityDAO		* A
+{
+
+ 
+public "
+ServiceMasterEntityDAO %
+(% &
+)& '
+{( )
+}* +
+public 
+ObjectResultList 
+<  
+EntityMaster  ,
+>, -
+GetList. 5
+(5 6
+EntityMasterEnum6 F
+entityMasterEnumG W
+)W X
+{ 	
+ObjectResultList 
+< 
+EntityMaster )
+>) *
+
+listReturn+ 5
+=6 7
+new8 ;
+ObjectResultList< L
+<L M
+EntityMasterM Y
+>Y Z
+(Z [
+)[ \
+;\ ]
+ListParameters 
+
+parameters %
+=& '
+new( +
+ListParameters, :
+(: ;
+); <
+;< =
+string 
+	procedure 
+= 
+$" !
+chat.! &
+{& '
+entityMasterEnum' 7
+.7 8
+ToString8 @
+(@ A
+)A B
+}B C
+_GetListMaster_spC T
+"T U
+;U V
+CommandParameter 
+queryCommand )
+=* +
+new, /
+CommandParameter0 @
+(@ A
+	procedureA J
+,J K
+
+parametersL V
+)V W
+;W X
+	DataTable 
+dtresult 
+=  
+	DbManager! *
+.* +
+Instance+ 3
+.3 4
+ExecuteTable4 @
+(@ A
+queryCommandA M
+)M N
+;N O
+
+listReturn 
+= 
+new 
+ObjectResultList -
+<- .
+EntityMaster. :
+>: ;
+(; <
+dtresult< D
+)D E
+;E F
+return 
+
+listReturn 
+; 
+} 	
+public 
+ObjectResultList 
+<  
+EntityMaster  ,
+>, -
+SearchMasterGetList. A
+(A B
+stringB H
+masterEntityI U
+,U V
+stringW ]
+masterAction^ j
+,j k
+stringl r 
+masterParametersSet	s Ü
+,
+Ü á
+string
+à é!
+masterParametersAdd
+è ¢
+)
+¢ £
+{ 	
+ObjectResultList   
+<   
+EntityMaster   )
+>  ) *
+
+listReturn  + 5
+=  6 7
+new  8 ;
+ObjectResultList  < L
+<  L M
+EntityMaster  M Y
+>  Y Z
+(  Z [
+)  [ \
+;  \ ]
+ListParameters"" 
+
+parameters"" %
+=""& '
+new""( +
+ListParameters"", :
+("": ;
+)""; <
+;""< =
+if'' 
+('' 
+!'' 
+string'' 
+.'' 
+IsNullOrEmpty'' %
+(''% &
+masterParametersSet''& 9
+)''9 :
+)'': ;
+{(( 
+List** 
+<** 
+string** 
+>** 
+listaClaveValor** ,
+=**- .
+masterParametersSet**/ B
+.**B C
+Split**C H
+(**H I
+$char**I L
+)**L M
+.**M N
+ToList**N T
+(**T U
+)**U V
+;**V W
+foreach-- 
+(-- 
+string-- 
+elemento--  (
+in--) +
+listaClaveValor--, ;
+)--; <
+{.. 
+
+parameters// 
+.// 
+Add// "
+(//" #
+$str//# (
++//) *
+elemento//+ 3
+.//3 4
+Split//4 9
+(//9 :
+$char//: =
+)//= >
+[//> ?
+$num//? @
+]//@ A
+.//A B
+ToString//B J
+(//J K
+)//K L
+,//L M
+elemento//N V
+.//V W
+Split//W \
+(//\ ]
+$char//] `
+)//` a
+[//a b
+$num//b c
+]//c d
+.//d e
+ToString//e m
+(//m n
+)//n o
+)//o p
+;//p q
+}00 
+}22 
+if77 
+(77 
+!77 
+string77 
+.77 
+IsNullOrEmpty77 %
+(77% &
+masterParametersAdd77& 9
+)779 :
+)77: ;
+{88 
+List:: 
+<:: 
+string:: 
+>:: 
+listaClaveValor:: ,
+=::- .
+masterParametersAdd::/ B
+.::B C
+Split::C H
+(::H I
+$char::I L
+)::L M
+.::M N
+ToList::N T
+(::T U
+)::U V
+;::V W
+foreach== 
+(== 
+string== 
+elemento==  (
+in==) +
+listaClaveValor==, ;
+)==; <
+{>> 
+
+parameters?? 
+.?? 
+Add?? "
+(??" #
+$str??# (
++??) *
+elemento??+ 3
+.??3 4
+Split??4 9
+(??9 :
+$char??: =
+)??= >
+[??> ?
+$num??? @
+]??@ A
+.??A B
+ToString??B J
+(??J K
+)??K L
+,??L M
+elemento??N V
+.??V W
+Split??W \
+(??\ ]
+$char??] `
+)??` a
+[??a b
+$num??b c
+]??c d
+.??d e
+ToString??e m
+(??m n
+)??n o
+)??o p
+;??p q
+}@@ 
+}BB 
+stringDD 
+	procedureDD 
+=DD 
+$"DD !
+chat.SearchMasterDD! 2
+{DD2 3
+masterEntityDD3 ?
+}DD? @
+_DD@ A
+{DDA B
+masterActionDDB N
+}DDN O
+_spDDO R
+"DDR S
+;DDS T
+CommandParameterFF 
+queryCommandFF )
+=FF* +
+newFF, /
+CommandParameterFF0 @
+(FF@ A
+	procedureFFA J
+,FFJ K
+
+parametersFFL V
+)FFV W
+;FFW X
+	DataTableHH 
+dtresultHH 
+=HH  
+	DbManagerHH! *
+.HH* +
+InstanceHH+ 3
+.HH3 4
+ExecuteTableHH4 @
+(HH@ A
+queryCommandHHA M
+)HHM N
+;HHN O
+
+listReturnJJ 
+=JJ 
+newJJ 
+ObjectResultListJJ -
+<JJ- .
+EntityMasterJJ. :
+>JJ: ;
+(JJ; <
+dtresultJJ< D
+)JJD E
+;JJE F
+returnLL 
+
+listReturnLL 
+;LL 
+}MM 	
+}NN 
+}OO ≈
+?D:\repositoriosGit\Chat\Chat\xChatDAO\ServiceNotificationDAO.cs
+	namespace
+
+ 	
+xChatDAO
+
+
+ 
+{ 
+public 
+
+class "
+ServiceNotificationDAO '
+:( )#
+IServiceNotificationDAO* A
+{ 
+public 
+( 
+string 
+emailTo 
+, 
+string  &
+emailSubject' 3
+,3 4
+string5 ;
+	emailBody< E
+)E F
+
+GetEmailToG Q
+(Q R
+ConversationEntityR d
+conversationEntitye w
+)w x
+{ 	
+string 
+emailTo 
+= 
+string #
+.# $
+Empty$ )
+;) *
+string 
+emailSubject 
+=  !
+string" (
+.( )
+Empty) .
+;. /
+string 
+	emailBody 
+= 
+string %
+.% &
+Empty& +
+;+ ,
+ListParameters 
+
+parameters %
+=& '
+new( +
+ListParameters, :
+(: ;
+); <
+;< =
+
+parameters 
+. 
+Add 
+( 
+$str &
+,& '
+conversationEntity( :
+.: ;
+UserName; C
+)C D
+;D E
+
+parameters   
+.   
+Add   
+(   
+$str   %
+,  % &
+conversationEntity  ' 9
+.  9 :
+Message  : A
+)  A B
+;  B C
+CommandParameter"" 
+queryCommand"" )
+=""* +
+new"", /
+CommandParameter""0 @
+(""@ A
+$str""A [
+,""[ \
+
+parameters""] g
+)""g h
+;""h i
+DataRow$$ 
+drresult$$ 
+=$$ 
+	DbManager$$ (
+.$$( )
+Instance$$) 1
+.$$1 2
+ExecuteRegister$$2 A
+($$A B
+queryCommand$$B N
+)$$N O
+;$$O P
+emailTo&& 
+=&& 
+conversationEntity&& +
+.&&+ ,
+Emailto&&, 3
+;&&3 4
+emailSubject'' 
+='' 
+conversationEntity'' 0
+.''0 1
+Subject''1 8
+;''8 9
+	emailBody(( 
+=(( 
+conversationEntity(( -
+.((- .
+TemplateHtml((. :
+;((: ;
+return** 
+(** 
+emailTo** 
+,** 
+emailSubject** )
+,**) *
+	emailBody**+ 4
+)**4 5
+;**5 6
+}++ 	
+},, 
+public.. 
+
+	interface.. #
+IServiceNotificationDAO.. ,
+{// 
+(00 	
+string00	 
+emailTo00 
+,00 
+string00 
+emailSubject00  ,
+,00, -
+string00. 4
+	emailBody005 >
+)00> ?
+
+GetEmailTo00@ J
+(00J K
+ConversationEntity00K ]
+conversationEntity00^ p
+)00p q
+;00q r
+}11 
+}22 ”Ø
+=D:\repositoriosGit\Chat\Chat\xChatDAO\ServiceSkillAgentDAO.cs
+	namespace 	
+xChatDAO
+ 
+{ 
+public 
+
+class  
+ServiceSkillAgentDAO %
+:& '!
+IServiceSkillAgentDAO( =
+{ 
+public 
+ObjectResultList 
+<  
+
+SkillAgent  *
+>* +
+GetListSkillByAgent, ?
+(? @
+ObjectRequest@ M
+<M N
+SkillAgentFilterN ^
+>^ _
+objectRequest` m
+)m n
+{ 	
+ObjectResultList 
+< 
+
+SkillAgent '
+>' (
+listUserConnect) 8
+=9 :
+new; >
+ObjectResultList? O
+<O P
+
+SkillAgentP Z
+>Z [
+([ \
+)\ ]
+;] ^
+ListParameters 
+
+parameters %
+=& '
+new( +
+ListParameters, :
+(: ;
+); <
+;< =
+
+parameters 
+. 
+Add 
+( 
+$str +
+,+ ,
+objectRequest- :
+.: ;
+SenderObject; G
+.G H
+PerspectiveIdH U
+)U V
+;V W
+
+parameters 
+. 
+Add 
+( 
+$str %
+,% &
+objectRequest' 4
+.4 5
+SenderObject5 A
+.A B
+AgentIdB I
+)I J
+;J K
+
+parameters 
+. 
+Add 
+( 
+$str &
+,& '
+objectRequest( 5
+.5 6
+SenderObject6 B
+.B C
+ModuleIdC K
+)K L
+;L M
+
+parameters 
+. 
+Add 
+( 
+$str (
+,( )
+objectRequest* 7
+.7 8
+SenderObject8 D
+.D E
+
+LanguageIdE O
+)O P
+;P Q
+
+parameters 
+. 
+Add 
+( 
+$str .
+,. /
+objectRequest0 =
+.= >
+SenderObject> J
+.J K
+SkillLevelModuleK [
+)[ \
+;\ ]
+
+parameters 
+. 
+Add 
+( 
+$str 0
+,0 1
+objectRequest2 ?
+.? @
+SenderObject@ L
+.L M
+SkillLevelLanguageM _
+)_ `
+;` a
+CommandParameter 
+queryCommand )
+=* +
+new, /
+CommandParameter0 @
+(@ A
+$strA k
+,k l
+
+parametersm w
+)w x
+;x y
+	DataTable   
+dtresult   
+=    
+	DbManager  ! *
+.  * +
+Instance  + 3
+.  3 4
+ExecuteTable  4 @
+(  @ A
+queryCommand  A M
+)  M N
+;  N O
+listUserConnect"" 
+="" 
+new"" !
+ObjectResultList""" 2
+<""2 3
+
+SkillAgent""3 =
+>""= >
+(""> ?
+dtresult""? G
+)""G H
+;""H I
+return$$ 
+listUserConnect$$ "
+;$$" #
+}%% 	
+public++ 
+void++ 
+CreateSkillModule++ %
+(++% &
+ObjectRequest++& 3
+<++3 4
+SkillAgentModule++4 D
+>++D E
+objectRequest++F S
+)++S T
+{,, 	
+ListParameters-- 
+
+parameters-- %
+=--& '
+new--( +
+ListParameters--, :
+(--: ;
+)--; <
+;--< =
+
+parameters.. 
+... 
+Add.. 
+(.. 
+$str.. %
+,..% &
+objectRequest..' 4
+...4 5
+SenderObject..5 A
+...A B
+AgentId..B I
+)..I J
+;..J K
+
+parameters// 
+.// 
+Add// 
+(// 
+$str// &
+,//& '
+objectRequest//( 5
+.//5 6
+SenderObject//6 B
+.//B C
+ModuleId//C K
+)//K L
+;//L M
+
+parameters00 
+.00 
+Add00 
+(00 
+$str00 (
+,00( )
+objectRequest00* 7
+.007 8
+SenderObject008 D
+.00D E
+
+SkillLevel00E O
+)00O P
+;00P Q
+
+parameters11 
+.11 
+Add11 
+(11 
+$str11 +
+,11+ ,
+objectRequest11- :
+.11: ;
+SenderObject11; G
+.11G H
+PriorityLevel11H U
+)11U V
+;11V W
+
+parameters22 
+.22 
+Add22 
+(22 
+$str22 $
+,22$ %
+objectRequest22& 3
+.223 4
+SenderObject224 @
+.22@ A
+StatusId22A I
+)22I J
+;22J K
+
+parameters33 
+.33 
+Add33 
+(33 
+$str33 '
+,33' (
+objectRequest33) 6
+.336 7
+SenderObject337 C
+.33C D
+CreateBy33D L
+)33L M
+;33M N
+CommandParameter55 
+queryCommand55 )
+=55* +
+new55, /
+CommandParameter550 @
+(55@ A
+$str55A b
+,55b c
+
+parameters55d n
+)55n o
+;55o p
+	DbManager77 
+.77 
+Instance77 
+.77 
+ExecuteCommand77 -
+(77- .
+queryCommand77. :
+)77: ;
+;77; <
+}88 	
+public>> 
+void>> 
+CreateSkillLanguage>> '
+(>>' (
+ObjectRequest>>( 5
+<>>5 6
+SkillAgentLanguage>>6 H
+>>>H I
+objectRequest>>J W
+)>>W X
+{?? 	
+ListParameters@@ 
+
+parameters@@ %
+=@@& '
+new@@( +
+ListParameters@@, :
+(@@: ;
+)@@; <
+;@@< =
+
+parametersAA 
+.AA 
+AddAA 
+(AA 
+$strAA %
+,AA% &
+objectRequestAA' 4
+.AA4 5
+SenderObjectAA5 A
+.AAA B
+AgentIdAAB I
+)AAI J
+;AAJ K
+
+parametersBB 
+.BB 
+AddBB 
+(BB 
+$strBB (
+,BB( )
+objectRequestBB* 7
+.BB7 8
+SenderObjectBB8 D
+.BBD E
+
+LanguageIdBBE O
+)BBO P
+;BBP Q
+
+parametersCC 
+.CC 
+AddCC 
+(CC 
+$strCC (
+,CC( )
+objectRequestCC* 7
+.CC7 8
+SenderObjectCC8 D
+.CCD E
+
+SkillLevelCCE O
+)CCO P
+;CCP Q
+
+parametersDD 
+.DD 
+AddDD 
+(DD 
+$strDD +
+,DD+ ,
+objectRequestDD- :
+.DD: ;
+SenderObjectDD; G
+.DDG H
+PriorityLevelDDH U
+)DDU V
+;DDV W
+
+parametersEE 
+.EE 
+AddEE 
+(EE 
+$strEE $
+,EE$ %
+objectRequestEE& 3
+.EE3 4
+SenderObjectEE4 @
+.EE@ A
+StatusIdEEA I
+)EEI J
+;EEJ K
+
+parametersFF 
+.FF 
+AddFF 
+(FF 
+$strFF '
+,FF' (
+objectRequestFF) 6
+.FF6 7
+SenderObjectFF7 C
+.FFC D
+CreateByFFD L
+)FFL M
+;FFM N
+CommandParameterHH 
+queryCommandHH )
+=HH* +
+newHH, /
+CommandParameterHH0 @
+(HH@ A
+$strHHA d
+,HHd e
+
+parametersHHf p
+)HHp q
+;HHq r
+	DbManagerJJ 
+.JJ 
+InstanceJJ 
+.JJ 
+ExecuteCommandJJ -
+(JJ- .
+queryCommandJJ. :
+)JJ: ;
+;JJ; <
+}KK 	
+publicQQ 
+voidQQ 
+UpdateSkillModuleQQ %
+(QQ% &
+ObjectRequestQQ& 3
+<QQ3 4
+SkillAgentModuleQQ4 D
+>QQD E
+objectRequestQQF S
+)QQS T
+{RR 	
+ListParametersSS 
+
+parametersSS %
+=SS& '
+newSS( +
+ListParametersSS, :
+(SS: ;
+)SS; <
+;SS< =
+
+parametersTT 
+.TT 
+AddTT 
+(TT 
+$strTT %
+,TT% &
+objectRequestTT' 4
+.TT4 5
+SenderObjectTT5 A
+.TTA B
+AgentIdTTB I
+)TTI J
+;TTJ K
+
+parametersUU 
+.UU 
+AddUU 
+(UU 
+$strUU &
+,UU& '
+objectRequestUU( 5
+.UU5 6
+SenderObjectUU6 B
+.UUB C
+ModuleIdUUC K
+)UUK L
+;UUL M
+
+parametersVV 
+.VV 
+AddVV 
+(VV 
+$strVV (
+,VV( )
+objectRequestVV* 7
+.VV7 8
+SenderObjectVV8 D
+.VVD E
+
+SkillLevelVVE O
+)VVO P
+;VVP Q
+
+parametersWW 
+.WW 
+AddWW 
+(WW 
+$strWW +
+,WW+ ,
+objectRequestWW- :
+.WW: ;
+SenderObjectWW; G
+.WWG H
+PriorityLevelWWH U
+)WWU V
+;WWV W
+
+parametersXX 
+.XX 
+AddXX 
+(XX 
+$strXX '
+,XX' (
+objectRequestXX) 6
+.XX6 7
+SenderObjectXX7 C
+.XXC D
+CreateByXXD L
+)XXL M
+;XXM N
+CommandParameterZZ 
+queryCommandZZ )
+=ZZ* +
+newZZ, /
+CommandParameterZZ0 @
+(ZZ@ A
+$strZZA b
+,ZZb c
+
+parametersZZd n
+)ZZn o
+;ZZo p
+	DbManager\\ 
+.\\ 
+Instance\\ 
+.\\ 
+ExecuteCommand\\ -
+(\\- .
+queryCommand\\. :
+)\\: ;
+;\\; <
+}]] 	
+publiccc 
+voidcc 
+UpdateSkillLanguagecc '
+(cc' (
+ObjectRequestcc( 5
+<cc5 6
+SkillAgentLanguagecc6 H
+>ccH I
+objectRequestccJ W
+)ccW X
+{dd 	
+ListParametersee 
+
+parametersee %
+=ee& '
+newee( +
+ListParametersee, :
+(ee: ;
+)ee; <
+;ee< =
+
+parametersff 
+.ff 
+Addff 
+(ff 
+$strff %
+,ff% &
+objectRequestff' 4
+.ff4 5
+SenderObjectff5 A
+.ffA B
+AgentIdffB I
+)ffI J
+;ffJ K
+
+parametersgg 
+.gg 
+Addgg 
+(gg 
+$strgg (
+,gg( )
+objectRequestgg* 7
+.gg7 8
+SenderObjectgg8 D
+.ggD E
+
+LanguageIdggE O
+)ggO P
+;ggP Q
+
+parametershh 
+.hh 
+Addhh 
+(hh 
+$strhh (
+,hh( )
+objectRequesthh* 7
+.hh7 8
+SenderObjecthh8 D
+.hhD E
+
+SkillLevelhhE O
+)hhO P
+;hhP Q
+
+parametersii 
+.ii 
+Addii 
+(ii 
+$strii +
+,ii+ ,
+objectRequestii- :
+.ii: ;
+SenderObjectii; G
+.iiG H
+PriorityLeveliiH U
+)iiU V
+;iiV W
+
+parametersjj 
+.jj 
+Addjj 
+(jj 
+$strjj '
+,jj' (
+objectRequestjj) 6
+.jj6 7
+SenderObjectjj7 C
+.jjC D
+CreateByjjD L
+)jjL M
+;jjM N
+CommandParameterll 
+queryCommandll )
+=ll* +
+newll, /
+CommandParameterll0 @
+(ll@ A
+$strllA d
+,lld e
+
+parametersllf p
+)llp q
+;llq r
+	DbManagernn 
+.nn 
+Instancenn 
+.nn 
+ExecuteCommandnn -
+(nn- .
+queryCommandnn. :
+)nn: ;
+;nn; <
+}oo 	
+publicuu 
+voiduu "
+ChangeStateSkillModuleuu *
+(uu* +
+ObjectRequestuu+ 8
+<uu8 9
+SkillAgentModuleuu9 I
+>uuI J
+objectRequestuuK X
+)uuX Y
+{vv 	
+ListParametersww 
+
+parametersww %
+=ww& '
+newww( +
+ListParametersww, :
+(ww: ;
+)ww; <
+;ww< =
+
+parametersxx 
+.xx 
+Addxx 
+(xx 
+$strxx %
+,xx% &
+objectRequestxx' 4
+.xx4 5
+SenderObjectxx5 A
+.xxA B
+AgentIdxxB I
+)xxI J
+;xxJ K
+
+parametersyy 
+.yy 
+Addyy 
+(yy 
+$stryy &
+,yy& '
+objectRequestyy( 5
+.yy5 6
+SenderObjectyy6 B
+.yyB C
+ModuleIdyyC K
+)yyK L
+;yyL M
+
+parameterszz 
+.zz 
+Addzz 
+(zz 
+$strzz $
+,zz$ %
+objectRequestzz& 3
+.zz3 4
+SenderObjectzz4 @
+.zz@ A
+StatusIdzzA I
+)zzI J
+;zzJ K
+
+parameters{{ 
+.{{ 
+Add{{ 
+({{ 
+$str{{ '
+,{{' (
+objectRequest{{) 6
+.{{6 7
+SenderObject{{7 C
+.{{C D
+CreateBy{{D L
+){{L M
+;{{M N
+CommandParameter}} 
+queryCommand}} )
+=}}* +
+new}}, /
+CommandParameter}}0 @
+(}}@ A
+$str}}A h
+,}}h i
+
+parameters}}j t
+)}}t u
+;}}u v
+	DbManager 
+. 
+Instance 
+. 
+ExecuteCommand -
+(- .
+queryCommand. :
+): ;
+;; <
+}
+ÄÄ 	
+public
+ÜÜ 
+void
+ÜÜ &
+ChangeStateSkillLanguage
+ÜÜ ,
+(
+ÜÜ, -
+ObjectRequest
+ÜÜ- :
+<
+ÜÜ: ; 
+SkillAgentLanguage
+ÜÜ; M
+>
+ÜÜM N
+objectRequest
+ÜÜO \
+)
+ÜÜ\ ]
+{
+áá 	
+ListParameters
+àà 
+
+parameters
+àà %
+=
+àà& '
+new
+àà( +
+ListParameters
+àà, :
+(
+àà: ;
+)
+àà; <
+;
+àà< =
+
+parameters
+ââ 
+.
+ââ 
+Add
+ââ 
+(
+ââ 
+$str
+ââ %
+,
+ââ% &
+objectRequest
+ââ' 4
+.
+ââ4 5
+SenderObject
+ââ5 A
+.
+ââA B
+AgentId
+ââB I
+)
+ââI J
+;
+ââJ K
+
+parameters
+ää 
+.
+ää 
+Add
+ää 
+(
+ää 
+$str
+ää (
+,
+ää( )
+objectRequest
+ää* 7
+.
+ää7 8
+SenderObject
+ää8 D
+.
+ääD E
+
+LanguageId
+ääE O
+)
+ääO P
+;
+ääP Q
+
+parameters
+ãã 
+.
+ãã 
+Add
+ãã 
+(
+ãã 
+$str
+ãã $
+,
+ãã$ %
+objectRequest
+ãã& 3
+.
+ãã3 4
+SenderObject
+ãã4 @
+.
+ãã@ A
+StatusId
+ããA I
+)
+ããI J
+;
+ããJ K
+
+parameters
+åå 
+.
+åå 
+Add
+åå 
+(
+åå 
+$str
+åå '
+,
+åå' (
+objectRequest
+åå) 6
+.
+åå6 7
+SenderObject
+åå7 C
+.
+ååC D
+CreateBy
+ååD L
+)
+ååL M
+;
+ååM N
+CommandParameter
+éé 
+queryCommand
+éé )
+=
+éé* +
+new
+éé, /
+CommandParameter
+éé0 @
+(
+éé@ A
+$str
+ééA j
+,
+ééj k
+
+parameters
+éél v
+)
+éév w
+;
+ééw x
+	DbManager
+êê 
+.
+êê 
+Instance
+êê 
+.
+êê 
+ExecuteCommand
+êê -
+(
+êê- .
+queryCommand
+êê. :
+)
+êê: ;
+;
+êê; <
+}
+ëë 	
+public
+ìì 
+ObjectResult
+ìì 
+<
+ìì 
+Boolean
+ìì #
+>
+ìì# $(
+ValidateSkillByAgentModule
+ìì% ?
+(
+ìì? @
+ObjectRequest
+ìì@ M
+<
+ììM N
+SkillAgentModule
+ììN ^
+>
+ìì^ _
+objectRequest
+ìì` m
+)
+ììm n
+{
+îî 	
+
+SqlCommand
+ïï 
+ObjCmd
+ïï 
+=
+ïï 
+null
+ïï  $
+;
+ïï$ %
+ObjectResult
+ññ 
+<
+ññ 
+Boolean
+ññ  
+>
+ññ  !
+result
+ññ" (
+=
+ññ) *
+new
+ññ+ .
+ObjectResult
+ññ/ ;
+<
+ññ; <
+Boolean
+ññ< C
+>
+ññC D
+(
+ññD E
+)
+ññE F
+;
+ññF G
+try
+óó 
+{
+òò 
+using
+ôô 
+(
+ôô 
+ObjCmd
+ôô 
+=
+ôô 
+new
+ôô  #
+
+SqlCommand
+ôô$ .
+(
+ôô. /
+$str
+ôô/ V
+,
+ôôV W
+	DbManager
+ôôX a
+.
+ôôa b
+Instance
+ôôb j
+.
+ôôj k
+OpenConnection
+ôôk y
+(
+ôôy z
+)
+ôôz {
+)
+ôô{ |
+)
+ôô| }
+{
+öö 
+ObjCmd
+õõ 
+.
+õõ 
+CommandType
+õõ &
+=
+õõ' (
+CommandType
+õõ) 4
+.
+õõ4 5
+StoredProcedure
+õõ5 D
+;
+õõD E
+ObjCmd
+úú 
+.
+úú 
+CommandTimeout
+úú )
+=
+úú* +
+$num
+úú, -
+;
+úú- .
+SqlParameter
+ûû  
+outputParam
+ûû! ,
+=
+ûû- .
+ObjCmd
+ûû/ 5
+.
+ûû5 6
+
+Parameters
+ûû6 @
+.
+ûû@ A
+Add
+ûûA D
+(
+ûûD E
+$str
+ûûE S
+,
+ûûS T
+	SqlDbType
+ûûU ^
+.
+ûû^ _
+Int
+ûû_ b
+)
+ûûb c
+;
+ûûc d
+outputParam
+üü 
+.
+üü  
+	Direction
+üü  )
+=
+üü* + 
+ParameterDirection
+üü, >
+.
+üü> ?
+Output
+üü? E
+;
+üüE F
+ObjCmd
+°° 
+.
+°° 
+
+Parameters
+°° %
+.
+°°% &
+AddWithValue
+°°& 2
+(
+°°2 3
+$str
+°°3 <
+,
+°°< =
+objectRequest
+°°> K
+.
+°°K L
+SenderObject
+°°L X
+.
+°°X Y
+AgentId
+°°Y `
+)
+°°` a
+;
+°°a b
+ObjCmd
+¢¢ 
+.
+¢¢ 
+
+Parameters
+¢¢ %
+.
+¢¢% &
+AddWithValue
+¢¢& 2
+(
+¢¢2 3
+$str
+¢¢3 >
+,
+¢¢> ?
+objectRequest
+¢¢@ M
+.
+¢¢M N
+SenderObject
+¢¢N Z
+.
+¢¢Z [
+ModuleId
+¢¢[ c
+)
+¢¢c d
+;
+¢¢d e
+ObjCmd
+££ 
+.
+££ 
+ExecuteNonQuery
+££ *
+(
+££* +
+)
+££+ ,
+;
+££, -
+result
+§§ 
+.
+§§ 
+Id
+§§ 
+=
+§§ 
+Convert
+§§  '
+.
+§§' (
+ToInt32
+§§( /
+(
+§§/ 0
+ObjCmd
+§§0 6
+.
+§§6 7
+
+Parameters
+§§7 A
+[
+§§A B
+$str
+§§B P
+]
+§§P Q
+.
+§§Q R
+Value
+§§R W
+)
+§§W X
+;
+§§X Y
+}
+•• 
+;
+•• 
+}
+¶¶ 
+catch
+ßß 
+(
+ßß 
+	Exception
+ßß 
+ex
+ßß 
+)
+ßß  
+{
+®® 
+result
+©© 
+.
+©© 
+Message
+©© 
+=
+©©  
+ex
+©©! #
+.
+©©# $
+Message
+©©$ +
+;
+©©+ ,
+result
+™™ 
+.
+™™ 
+Id
+™™ 
+=
+™™ 
+-
+™™ 
+$num
+™™ 
+;
+™™ 
+}
+´´ 
+return
+¨¨ 
+result
+¨¨ 
+;
+¨¨ 
+}
+≠≠ 	
+public
+ØØ 
+ObjectResult
+ØØ 
+<
+ØØ 
+Boolean
+ØØ #
+>
+ØØ# $*
+ValidateSkillByAgentLanguage
+ØØ% A
+(
+ØØA B
+ObjectRequest
+ØØB O
+<
+ØØO P 
+SkillAgentLanguage
+ØØP b
+>
+ØØb c
+objectRequest
+ØØd q
+)
+ØØq r
+{
+∞∞ 	
+
+SqlCommand
+±± 
+ObjCmd
+±± 
+=
+±± 
+null
+±±  $
+;
+±±$ %
+ObjectResult
+≤≤ 
+<
+≤≤ 
+Boolean
+≤≤  
+>
+≤≤  !
+result
+≤≤" (
+=
+≤≤) *
+new
+≤≤+ .
+ObjectResult
+≤≤/ ;
+<
+≤≤; <
+Boolean
+≤≤< C
+>
+≤≤C D
+(
+≤≤D E
+)
+≤≤E F
+;
+≤≤F G
+try
+≥≥ 
+{
+¥¥ 
+using
+µµ 
+(
+µµ 
+ObjCmd
+µµ 
+=
+µµ 
+new
+µµ  #
+
+SqlCommand
+µµ$ .
+(
+µµ. /
+$str
+µµ/ X
+,
+µµX Y
+	DbManager
+µµZ c
+.
+µµc d
+Instance
+µµd l
+.
+µµl m
+OpenConnection
+µµm {
+(
+µµ{ |
+)
+µµ| }
+)
+µµ} ~
+)
+µµ~ 
+{
+∂∂ 
+ObjCmd
+∑∑ 
+.
+∑∑ 
+CommandType
+∑∑ &
+=
+∑∑' (
+CommandType
+∑∑) 4
+.
+∑∑4 5
+StoredProcedure
+∑∑5 D
+;
+∑∑D E
+ObjCmd
+∏∏ 
+.
+∏∏ 
+CommandTimeout
+∏∏ )
+=
+∏∏* +
+$num
+∏∏, -
+;
+∏∏- .
+SqlParameter
+∫∫  
+outputParam
+∫∫! ,
+=
+∫∫- .
+ObjCmd
+∫∫/ 5
+.
+∫∫5 6
+
+Parameters
+∫∫6 @
+.
+∫∫@ A
+Add
+∫∫A D
+(
+∫∫D E
+$str
+∫∫E S
+,
+∫∫S T
+	SqlDbType
+∫∫U ^
+.
+∫∫^ _
+Int
+∫∫_ b
+)
+∫∫b c
+;
+∫∫c d
+outputParam
+ªª 
+.
+ªª  
+	Direction
+ªª  )
+=
+ªª* + 
+ParameterDirection
+ªª, >
+.
+ªª> ?
+Output
+ªª? E
+;
+ªªE F
+ObjCmd
+ΩΩ 
+.
+ΩΩ 
+
+Parameters
+ΩΩ %
+.
+ΩΩ% &
+AddWithValue
+ΩΩ& 2
+(
+ΩΩ2 3
+$str
+ΩΩ3 <
+,
+ΩΩ< =
+objectRequest
+ΩΩ> K
+.
+ΩΩK L
+SenderObject
+ΩΩL X
+.
+ΩΩX Y
+AgentId
+ΩΩY `
+)
+ΩΩ` a
+;
+ΩΩa b
+ObjCmd
+ææ 
+.
+ææ 
+
+Parameters
+ææ %
+.
+ææ% &
+AddWithValue
+ææ& 2
+(
+ææ2 3
+$str
+ææ3 @
+,
+ææ@ A
+objectRequest
+ææB O
+.
+ææO P
+SenderObject
+ææP \
+.
+ææ\ ]
+
+LanguageId
+ææ] g
+)
+ææg h
+;
+ææh i
+ObjCmd
+øø 
+.
+øø 
+ExecuteNonQuery
+øø *
+(
+øø* +
+)
+øø+ ,
+;
+øø, -
+result
+¿¿ 
+.
+¿¿ 
+Id
+¿¿ 
+=
+¿¿ 
+Convert
+¿¿  '
+.
+¿¿' (
+ToInt32
+¿¿( /
+(
+¿¿/ 0
+ObjCmd
+¿¿0 6
+.
+¿¿6 7
+
+Parameters
+¿¿7 A
+[
+¿¿A B
+$str
+¿¿B P
+]
+¿¿P Q
+.
+¿¿Q R
+Value
+¿¿R W
+)
+¿¿W X
+;
+¿¿X Y
+}
+¡¡ 
+;
+¡¡ 
+}
+¬¬ 
+catch
+√√ 
+(
+√√ 
+	Exception
+√√ 
+ex
+√√ 
+)
+√√  
+{
+ƒƒ 
+result
+≈≈ 
+.
+≈≈ 
+Message
+≈≈ 
+=
+≈≈  
+ex
+≈≈! #
+.
+≈≈# $
+Message
+≈≈$ +
+;
+≈≈+ ,
+result
+∆∆ 
+.
+∆∆ 
+Id
+∆∆ 
+=
+∆∆ 
+-
+∆∆ 
+$num
+∆∆ 
+;
+∆∆ 
+}
+«« 
+return
+»» 
+result
+»» 
+;
+»» 
+}
+…… 	
+}
+   
+}ÀÀ â\
+CD:\repositoriosGit\Chat\Chat\xChatDAO\ServiceUserAccountGroupDAO.cs
+	namespace 	
+xChatDAO
+ 
+{ 
+public 
+
+class &
+ServiceUserAccountGroupDAO +
+:, -'
+IServiceUserAccountGroupDAO. I
+{ 
+private 
+static 
+ILoggerHandler %
+log& )
+=* +
+LoggerFactory, 9
+.9 :
+Get: =
+(= >
+EnumLayerIdentifier> Q
+.Q R
+DataAccessLayerR a
+)a b
+;b c
+public 
+ObjectResultList 
+<  
+UserAccountGroups  1
+>1 2#
+GetListUserAccountGroup3 J
+(J K
+ObjectRequestK X
+<X Y
+UserAccountGroupsY j
+>j k
+objectRequestl y
+)y z
+{ 	
+ObjectResultList 
+< 
+UserAccountGroups .
+>. /
+list0 4
+=5 6
+new7 :
+ObjectResultList; K
+<K L
+UserAccountGroupsL ]
+>] ^
+(^ _
+)_ `
+;` a
+try 
+{ 
+ListParameters 
+
+parameters )
+=* +
+new, /
+ListParameters0 >
+(> ?
+)? @
+;@ A
+
+parameters 
+. 
+Add 
+( 
+$str (
+,( )
+objectRequest* 7
+.7 8
+SenderObject8 D
+.D E
+AccountManagerIdE U
+)U V
+;V W
+CommandParameter  
+queryCommand! -
+=. /
+new0 3
+CommandParameter4 D
+(D E
+$strE l
+,l m
+
+parametersn x
+)x y
+;y z
+	DataTable 
+dtresult "
+=# $
+	DbManager% .
+.. /
+Instance/ 7
+.7 8
+ExecuteTable8 D
+(D E
+queryCommandE Q
+)Q R
+;R S
+list   
+=   
+new   
+ObjectResultList   +
+<  + ,
+UserAccountGroups  , =
+>  = >
+(  > ?
+dtresult  ? G
+)  G H
+;  H I
+}!! 
+catch"" 
+("" 
+	Exception"" 
+ex"" 
+)""  
+{## 
+log$$ 
+.$$ 
+Save$$ 
+($$ 
+EnumLogLevel$$ %
+.$$% &
+Fatal$$& +
+,$$+ ,
+ex$$- /
+)$$/ 0
+;$$0 1
+}%% 
+return'' 
+list'' 
+;'' 
+}(( 	
+public** 
+void** "
+CreateUserAccountGroup** *
+(*** +
+ObjectRequest**+ 8
+<**8 9
+UserAccountGroups**9 J
+>**J K
+objectRequest**L Y
+)**Y Z
+{++ 	
+try,, 
+{-- 
+ListParameters.. 
+
+parameters.. )
+=..* +
+new.., /
+ListParameters..0 >
+(..> ?
+)..? @
+;..@ A
+
+parameters// 
+.// 
+Add// 
+(// 
+$str// 2
+,//2 3
+objectRequest//4 A
+.//A B
+SenderObject//B N
+.//N O
+AccountManagerId//O _
+)//_ `
+;//` a
+
+parameters00 
+.00 
+Add00 
+(00 
+$str00 7
+,007 8
+objectRequest009 F
+.00F G
+SenderObject00G S
+.00S T!
+AccountManagerChildId00T i
+)00i j
+;00j k
+
+parameters11 
+.11 
+Add11 
+(11 
+$str11 (
+,11( )
+objectRequest11* 7
+.117 8
+SenderObject118 D
+.11D E
+StatusId11E M
+)11M N
+;11N O
+
+parameters22 
+.22 
+Add22 
+(22 
+$str22 +
+,22+ ,
+objectRequest22- :
+.22: ;
+SenderObject22; G
+.22G H
+	CreatedBy22H Q
+)22Q R
+;22R S
+CommandParameter44  
+queryCommand44! -
+=44. /
+new440 3
+CommandParameter444 D
+(44D E
+$str44E k
+,44k l
+
+parameters44m w
+)44w x
+;44x y
+	DbManager66 
+.66 
+Instance66 "
+.66" #
+ExecuteCommand66# 1
+(661 2
+queryCommand662 >
+)66> ?
+;66? @
+}77 
+catch88 
+(88 
+	Exception88 
+ex88 
+)88  
+{99 
+log:: 
+.:: 
+Save:: 
+(:: 
+EnumLogLevel:: %
+.::% &
+Fatal::& +
+,::+ ,
+ex::- /
+)::/ 0
+;::0 1
+};; 
+}<< 	
+public>> 
+void>> "
+UpdateUserAccountGroup>> *
+(>>* +
+ObjectRequest>>+ 8
+<>>8 9
+UserAccountGroups>>9 J
+>>>J K
+objectRequest>>L Y
+)>>Y Z
+{?? 	
+try@@ 
+{AA 
+ListParametersBB 
+
+parametersBB )
+=BB* +
+newBB, /
+ListParametersBB0 >
+(BB> ?
+)BB? @
+;BB@ A
+
+parametersCC 
+.CC 
+AddCC 
+(CC 
+$strCC 7
+,CC7 8
+objectRequestCC9 F
+.CCF G
+SenderObjectCCG S
+.CCS T!
+AccountManagerGroupIdCCT i
+)CCi j
+;CCj k
+
+parametersDD 
+.DD 
+AddDD 
+(DD 
+$strDD 2
+,DD2 3
+objectRequestDD4 A
+.DDA B
+SenderObjectDDB N
+.DDN O
+AccountManagerIdDDO _
+)DD_ `
+;DD` a
+
+parametersEE 
+.EE 
+AddEE 
+(EE 
+$strEE 7
+,EE7 8
+objectRequestEE9 F
+.EEF G
+SenderObjectEEG S
+.EES T!
+AccountManagerChildIdEET i
+)EEi j
+;EEj k
+
+parametersFF 
+.FF 
+AddFF 
+(FF 
+$strFF (
+,FF( )
+objectRequestFF* 7
+.FF7 8
+SenderObjectFF8 D
+.FFD E
+StatusIdFFE M
+)FFM N
+;FFN O
+
+parametersGG 
+.GG 
+AddGG 
+(GG 
+$strGG +
+,GG+ ,
+objectRequestGG- :
+.GG: ;
+SenderObjectGG; G
+.GGG H
+	CreatedByGGH Q
+)GGQ R
+;GGR S
+CommandParameterII  
+queryCommandII! -
+=II. /
+newII0 3
+CommandParameterII4 D
+(IID E
+$strIIE k
+,IIk l
+
+parametersIIm w
+)IIw x
+;IIx y
+	DbManagerKK 
+.KK 
+InstanceKK "
+.KK" #
+ExecuteCommandKK# 1
+(KK1 2
+queryCommandKK2 >
+)KK> ?
+;KK? @
+}LL 
+catchMM 
+(MM 
+	ExceptionMM 
+exMM 
+)MM  
+{NN 
+logOO 
+.OO 
+SaveOO 
+(OO 
+EnumLogLevelOO %
+.OO% &
+FatalOO& +
+,OO+ ,
+exOO- /
+)OO/ 0
+;OO0 1
+}PP 
+}QQ 	
+publicSS 
+voidSS "
+DeleteUserAccountGroupSS *
+(SS* +
+ObjectRequestSS+ 8
+<SS8 9
+UserAccountGroupsSS9 J
+>SSJ K
+objectRequestSSL Y
+)SSY Z
+{TT 	
+tryUU 
+{VV 
+ListParametersWW 
+
+parametersWW )
+=WW* +
+newWW, /
+ListParametersWW0 >
+(WW> ?
+)WW? @
+;WW@ A
+
+parametersXX 
+.XX 
+AddXX 
+(XX 
+$strXX 7
+,XX7 8
+objectRequestXX9 F
+.XXF G
+SenderObjectXXG S
+.XXS T!
+AccountManagerGroupIdXXT i
+)XXi j
+;XXj k
+CommandParameterZZ  
+queryCommandZZ! -
+=ZZ. /
+newZZ0 3
+CommandParameterZZ4 D
+(ZZD E
+$strZZE k
+,ZZk l
+
+parametersZZm w
+)ZZw x
+;ZZx y
+	DbManager\\ 
+.\\ 
+Instance\\ "
+.\\" #
+ExecuteCommand\\# 1
+(\\1 2
+queryCommand\\2 >
+)\\> ?
+;\\? @
+}]] 
+catch^^ 
+(^^ 
+	Exception^^ 
+ex^^ 
+)^^  
+{__ 
+log`` 
+.`` 
+Save`` 
+(`` 
+EnumLogLevel`` %
+.``% &
+Fatal``& +
+,``+ ,
+ex``- /
+)``/ 0
+;``0 1
+}aa 
+}bb 	
+publicdd 
+ObjectResultdd 
+<dd 
+Booleandd #
+>dd# $$
+ValidateUserAccountGroupdd% =
+(dd= >
+ObjectRequestdd> K
+<ddK L
+UserAccountGroupsddL ]
+>dd] ^
+objectRequestdd_ l
+)ddl m
+{ee 	
+
+SqlCommandff 
+ObjCmdff 
+=ff 
+nullff  $
+;ff$ %
+ObjectResultgg 
+<gg 
+Booleangg  
+>gg  !
+resultgg" (
+=gg) *
+newgg+ .
+ObjectResultgg/ ;
+<gg; <
+Booleangg< C
+>ggC D
+(ggD E
+)ggE F
+;ggF G
+tryhh 
+{ii 
+usingjj 
+(jj 
+ObjCmdjj 
+=jj 
+newjj  #
+
+SqlCommandjj$ .
+(jj. /
+$strjj/ Y
+,jjY Z
+	DbManagerjj[ d
+.jjd e
+Instancejje m
+.jjm n
+OpenConnectionjjn |
+(jj| }
+)jj} ~
+)jj~ 
+)	jj Ä
+{kk 
+ObjCmdll 
+.ll 
+CommandTypell &
+=ll' (
+CommandTypell) 4
+.ll4 5
+StoredProcedurell5 D
+;llD E
+ObjCmdmm 
+.mm 
+CommandTimeoutmm )
+=mm* +
+$nummm, -
+;mm- .
+SqlParameteroo  
+outputParamoo! ,
+=oo- .
+ObjCmdoo/ 5
+.oo5 6
+
+Parametersoo6 @
+.oo@ A
+AddooA D
+(ooD E
+$strooE S
+,ooS T
+	SqlDbTypeooU ^
+.oo^ _
+Intoo_ b
+)oob c
+;ooc d
+outputParampp 
+.pp  
+	Directionpp  )
+=pp* +
+ParameterDirectionpp, >
+.pp> ?
+Outputpp? E
+;ppE F
+ObjCmdrr 
+.rr 
+
+Parametersrr %
+.rr% &
+AddWithValuerr& 2
+(rr2 3
+$strrr3 F
+,rrF G
+objectRequestrrH U
+.rrU V
+SenderObjectrrV b
+.rrb c
+AccountManagerIdrrc s
+)rrs t
+;rrt u
+ObjCmdss 
+.ss 
+
+Parametersss %
+.ss% &
+AddWithValuess& 2
+(ss2 3
+$strss3 K
+,ssK L
+objectRequestssM Z
+.ssZ [
+SenderObjectss[ g
+.ssg h!
+AccountManagerChildIdssh }
+)ss} ~
+;ss~ 
+ObjCmdtt 
+.tt 
+ExecuteNonQuerytt *
+(tt* +
+)tt+ ,
+;tt, -
+resultuu 
+.uu 
+Iduu 
+=uu 
+Convertuu  '
+.uu' (
+ToInt32uu( /
+(uu/ 0
+ObjCmduu0 6
+.uu6 7
+
+Parametersuu7 A
+[uuA B
+$struuB P
+]uuP Q
+.uuQ R
+ValueuuR W
+)uuW X
+;uuX Y
+}vv 
+;vv 
+}ww 
+catchxx 
+(xx 
+	Exceptionxx 
+exxx 
+)xx  
+{yy 
+resultzz 
+.zz 
+Messagezz 
+=zz  
+exzz! #
+.zz# $
+Messagezz$ +
+;zz+ ,
+result{{ 
+.{{ 
+Id{{ 
+={{ 
+-{{ 
+$num{{ 
+;{{ 
+}|| 
+return}} 
+result}} 
+;}} 
+}~~ 	
+} 
+}ÄÄ ”\
+7D:\repositoriosGit\Chat\Chat\xChatDAO\ServiceUserDAO.cs
+	namespace
+
+ 	
+xChatDAO
+
+
+ 
+{ 
+public 
+
+class 
+ServiceUserDAO 
+:  !
+IServiceUserDAO" 1
+{ 
+private 
+static 
+ILoggerHandler %
+log& )
+=* +
+LoggerFactory, 9
+.9 :
+Get: =
+(= >
+EnumLayerIdentifier> Q
+.Q R
+DataAccessLayerR a
+)a b
+;b c
+public 
+ObjectResultList 
+<  
+UserRoleType  ,
+>, - 
+GetListUsersRoleType. B
+(B C
+ObjectRequestC P
+<P Q
+UserRoleTypeQ ]
+>] ^
+objectRequest_ l
+)l m
+{ 	
+ObjectResultList 
+< 
+UserRoleType )
+>) *
+listUserRol+ 6
+=7 8
+new9 <
+ObjectResultList= M
+<M N
+UserRoleTypeN Z
+>Z [
+([ \
+)\ ]
+;] ^
+try 
+{ 
+ListParameters 
+
+parameters )
+=* +
+new, /
+ListParameters0 >
+(> ?
+)? @
+;@ A
+
+parameters 
+. 
+Add 
+( 
+$str (
+,( )
+objectRequest* 7
+.7 8
+SenderObject8 D
+.D E
+UserIdE K
+)K L
+;L M
+
+parameters 
+. 
+Add 
+( 
+$str %
+,% &
+objectRequest' 4
+.4 5
+SenderObject5 A
+.A B
+
+RoleTypeIdB L
+)L M
+;M N
+CommandParameter  
+queryCommand! -
+=. /
+new0 3
+CommandParameter4 D
+(D E
+$strE e
+,e f
+
+parametersg q
+)q r
+;r s
+	DataTable 
+dtresult "
+=# $
+	DbManager% .
+.. /
+Instance/ 7
+.7 8
+ExecuteTable8 D
+(D E
+queryCommandE Q
+)Q R
+;R S
+listUserRol 
+= 
+new !
+ObjectResultList" 2
+<2 3
+UserRoleType3 ?
+>? @
+(@ A
+dtresultA I
+)I J
+;J K
+} 
+catch 
+( 
+	Exception 
+ex 
+)  
+{   
+log!! 
+.!! 
+Save!! 
+(!! 
+EnumLogLevel!! %
+.!!% &
+Fatal!!& +
+,!!+ ,
+ex!!- /
+)!!/ 0
+;!!0 1
+}"" 
+return$$ 
+listUserRol$$ 
+;$$ 
+}%% 	
+public'' 
+void'' 
+CreateUsersRoleType'' '
+(''' (
+ObjectRequest''( 5
+<''5 6
+UserRoleType''6 B
+>''B C
+objectRequest''D Q
+)''Q R
+{(( 	
+try)) 
+{** 
+ListParameters++ 
+
+parameters++ )
+=++* +
+new++, /
+ListParameters++0 >
+(++> ?
+)++? @
+;++@ A
+
+parameters,, 
+.,, 
+Add,, 
+(,, 
+$str,, ,
+,,,, -
+objectRequest,,. ;
+.,,; <
+SenderObject,,< H
+.,,H I
+
+RoleTypeId,,I S
+),,S T
+;,,T U
+
+parameters-- 
+.-- 
+Add-- 
+(-- 
+$str-- (
+,--( )
+objectRequest--* 7
+.--7 8
+SenderObject--8 D
+.--D E
+UserId--E K
+)--K L
+;--L M
+
+parameters.. 
+... 
+Add.. 
+(.. 
+$str.. (
+,..( )
+objectRequest..* 7
+...7 8
+SenderObject..8 D
+...D E
+StatusId..E M
+)..M N
+;..N O
+
+parameters// 
+.// 
+Add// 
+(// 
+$str// +
+,//+ ,
+objectRequest//- :
+.//: ;
+SenderObject//; G
+.//G H
+	CreatedBy//H Q
+)//Q R
+;//R S
+CommandParameter11  
+queryCommand11! -
+=11. /
+new110 3
+CommandParameter114 D
+(11D E
+$str11E d
+,11d e
+
+parameters11f p
+)11p q
+;11q r
+	DbManager33 
+.33 
+Instance33 "
+.33" #
+ExecuteCommand33# 1
+(331 2
+queryCommand332 >
+)33> ?
+;33? @
+}44 
+catch55 
+(55 
+	Exception55 
+ex55 
+)55  
+{66 
+log77 
+.77 
+Save77 
+(77 
+EnumLogLevel77 %
+.77% &
+Fatal77& +
+,77+ ,
+ex77- /
+)77/ 0
+;770 1
+}88 
+}99 	
+public;; 
+void;; 
+UpdateUsersRoleType;; '
+(;;' (
+ObjectRequest;;( 5
+<;;5 6
+UserRoleType;;6 B
+>;;B C
+objectRequest;;D Q
+);;Q R
+{<< 	
+try== 
+{>> 
+ListParameters?? 
+
+parameters?? )
+=??* +
+new??, /
+ListParameters??0 >
+(??> ?
+)??? @
+;??@ A
+
+parameters@@ 
+.@@ 
+Add@@ 
+(@@ 
+$str@@ /
+,@@/ 0
+objectRequest@@1 >
+.@@> ?
+SenderObject@@? K
+.@@K L
+UserRolTypeId@@L Y
+)@@Y Z
+;@@Z [
+
+parametersAA 
+.AA 
+AddAA 
+(AA 
+$strAA ,
+,AA, -
+objectRequestAA. ;
+.AA; <
+SenderObjectAA< H
+.AAH I
+
+RoleTypeIdAAI S
+)AAS T
+;AAT U
+
+parametersBB 
+.BB 
+AddBB 
+(BB 
+$strBB (
+,BB( )
+objectRequestBB* 7
+.BB7 8
+SenderObjectBB8 D
+.BBD E
+UserIdBBE K
+)BBK L
+;BBL M
+
+parametersCC 
+.CC 
+AddCC 
+(CC 
+$strCC (
+,CC( )
+objectRequestCC* 7
+.CC7 8
+SenderObjectCC8 D
+.CCD E
+StatusIdCCE M
+)CCM N
+;CCN O
+
+parametersDD 
+.DD 
+AddDD 
+(DD 
+$strDD +
+,DD+ ,
+objectRequestDD- :
+.DD: ;
+SenderObjectDD; G
+.DDG H
+	UpdatedByDDH Q
+)DDQ R
+;DDR S
+CommandParameterFF  
+queryCommandFF! -
+=FF. /
+newFF0 3
+CommandParameterFF4 D
+(FFD E
+$strFFE d
+,FFd e
+
+parametersFFf p
+)FFp q
+;FFq r
+	DbManagerHH 
+.HH 
+InstanceHH "
+.HH" #
+ExecuteCommandHH# 1
+(HH1 2
+queryCommandHH2 >
+)HH> ?
+;HH? @
+}II 
+catchJJ 
+(JJ 
+	ExceptionJJ 
+exJJ 
+)JJ  
+{KK 
+logLL 
+.LL 
+SaveLL 
+(LL 
+EnumLogLevelLL %
+.LL% &
+FatalLL& +
+,LL+ ,
+exLL- /
+)LL/ 0
+;LL0 1
+}MM 
+}NN 	
+publicPP 
+voidPP 
+DeleteUsersRoleTypePP '
+(PP' (
+ObjectRequestPP( 5
+<PP5 6
+UserRoleTypePP6 B
+>PPB C
+objectRequestPPD Q
+)PPQ R
+{QQ 	
+tryRR 
+{SS 
+ListParametersTT 
+
+parametersTT )
+=TT* +
+newTT, /
+ListParametersTT0 >
+(TT> ?
+)TT? @
+;TT@ A
+
+parametersUU 
+.UU 
+AddUU 
+(UU 
+$strUU /
+,UU/ 0
+objectRequestUU1 >
+.UU> ?
+SenderObjectUU? K
+.UUK L
+UserRolTypeIdUUL Y
+)UUY Z
+;UUZ [
+CommandParameterWW  
+queryCommandWW! -
+=WW. /
+newWW0 3
+CommandParameterWW4 D
+(WWD E
+$strWWE d
+,WWd e
+
+parametersWWf p
+)WWp q
+;WWq r
+	DbManagerYY 
+.YY 
+InstanceYY "
+.YY" #
+ExecuteCommandYY# 1
+(YY1 2
+queryCommandYY2 >
+)YY> ?
+;YY? @
+}ZZ 
+catch[[ 
+([[ 
+	Exception[[ 
+ex[[ 
+)[[  
+{\\ 
+log]] 
+.]] 
+Save]] 
+(]] 
+EnumLogLevel]] %
+.]]% &
+Fatal]]& +
+,]]+ ,
+ex]]- /
+)]]/ 0
+;]]0 1
+}^^ 
+}__ 	
+publicaa 
+ObjectResultaa 
+<aa 
+Booleanaa #
+>aa# $!
+ValidateUsersRoleTypeaa% :
+(aa: ;
+ObjectRequestaa; H
+<aaH I
+UserRoleTypeaaI U
+>aaU V
+objectRequestaaW d
+)aad e
+{bb 	
+
+SqlCommandcc 
+ObjCmdcc 
+=cc 
+nullcc  $
+;cc$ %
+ObjectResultdd 
+<dd 
+Booleandd  
+>dd  !
+resultdd" (
+=dd) *
+newdd+ .
+ObjectResultdd/ ;
+<dd; <
+Booleandd< C
+>ddC D
+(ddD E
+)ddE F
+;ddF G
+tryee 
+{ff 
+usinggg 
+(gg 
+ObjCmdgg 
+=gg 
+newgg  #
+
+SqlCommandgg$ .
+(gg. /
+$strgg/ U
+,ggU V
+	DbManagerggW `
+.gg` a
+Instancegga i
+.ggi j
+OpenConnectionggj x
+(ggx y
+)ggy z
+)ggz {
+)gg{ |
+{hh 
+ObjCmdii 
+.ii 
+CommandTypeii &
+=ii' (
+CommandTypeii) 4
+.ii4 5
+StoredProcedureii5 D
+;iiD E
+ObjCmdjj 
+.jj 
+CommandTimeoutjj )
+=jj* +
+$numjj, -
+;jj- .
+SqlParameterll  
+outputParamll! ,
+=ll- .
+ObjCmdll/ 5
+.ll5 6
+
+Parametersll6 @
+.ll@ A
+AddllA D
+(llD E
+$strllE S
+,llS T
+	SqlDbTypellU ^
+.ll^ _
+Intll_ b
+)llb c
+;llc d
+outputParammm 
+.mm  
+	Directionmm  )
+=mm* +
+ParameterDirectionmm, >
+.mm> ?
+Outputmm? E
+;mmE F
+ObjCmdoo 
+.oo 
+
+Parametersoo %
+.oo% &
+AddWithValueoo& 2
+(oo2 3
+$stroo3 <
+,oo< =
+objectRequestoo> K
+.ooK L
+SenderObjectooL X
+.ooX Y
+UserIdooY _
+)oo_ `
+;oo` a
+ObjCmdpp 
+.pp 
+
+Parameterspp %
+.pp% &
+AddWithValuepp& 2
+(pp2 3
+$strpp3 9
+,pp9 :
+objectRequestpp; H
+.ppH I
+SenderObjectppI U
+.ppU V
+
+RoleTypeIdppV `
+)pp` a
+;ppa b
+ObjCmdqq 
+.qq 
+ExecuteNonQueryqq *
+(qq* +
+)qq+ ,
+;qq, -
+resultrr 
+.rr 
+Idrr 
+=rr 
+Convertrr  '
+.rr' (
+ToInt32rr( /
+(rr/ 0
+ObjCmdrr0 6
+.rr6 7
+
+Parametersrr7 A
+[rrA B
+$strrrB P
+]rrP Q
+.rrQ R
+ValuerrR W
+)rrW X
+;rrX Y
+}ss 
+;ss 
+}tt 
+catchuu 
+(uu 
+	Exceptionuu 
+exuu 
+)uu  
+{vv 
+resultww 
+.ww 
+Messageww 
+=ww  
+exww! #
+.ww# $
+Messageww$ +
+;ww+ ,
+resultxx 
+.xx 
+Idxx 
+=xx 
+-xx 
+$numxx 
+;xx 
+}yy 
+returnzz 
+resultzz 
+;zz 
+}{{ 	
+}}} 
+}~~ 

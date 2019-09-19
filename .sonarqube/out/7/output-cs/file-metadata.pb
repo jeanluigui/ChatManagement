@@ -1,0 +1,12 @@
+S
+CD:\repositoriosGit\Chat\Chat\xChatWebApi\App_Start\SwaggerConfig.cswindows-1252K
+BD:\repositoriosGit\Chat\Chat\xChatWebApi\App_Start\WebApiConfig.csutf-8W
+ND:\repositoriosGit\Chat\Chat\xChatWebApi\Controllers\ConversationController.csutf-8N
+ED:\repositoriosGit\Chat\Chat\xChatWebApi\Controllers\FAQController.csutf-8^
+UD:\repositoriosGit\Chat\Chat\xChatWebApi\Controllers\ManagerMasterEntityController.csutf-8U
+LD:\repositoriosGit\Chat\Chat\xChatWebApi\Controllers\SkillAgentController.csutf-8[
+RD:\repositoriosGit\Chat\Chat\xChatWebApi\Controllers\UserAccountGroupController.csutf-8R
+ID:\repositoriosGit\Chat\Chat\xChatWebApi\Controllers\UserRolController.csutf-8@
+7D:\repositoriosGit\Chat\Chat\xChatWebApi\Global.asax.csutf-8L
+CD:\repositoriosGit\Chat\Chat\xChatWebApi\Properties\AssemblyInfo.csutf-8d
+YC:\Users\pplasencia\AppData\Local\Temp\.NETFramework,Version=v4.7.2.AssemblyAttributes.csutf-8

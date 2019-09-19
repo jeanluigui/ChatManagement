@@ -363,6 +363,29 @@ namespace xChatBusiness
 
             return result;
         }
+        public ObjectResultList<AccountManagerConnect> Manager_GetListAgent(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
+
+            try
+            {
+                if (string.IsNullOrEmpty(objectRequest.SenderObject))
+                {
+                    throw new Exception("Debe especificar valor de filtro.");
+                }
+
+                result = _IServiceChatManagerDAO.Manager_GetListAgent(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+
+                log.Save(EnumLogLevel.Fatal, ex);
+            }
+
+            return result;
+        }
 
         /// <summary>
         /// Obtener listado de conversación de un chat.

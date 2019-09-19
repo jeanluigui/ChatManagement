@@ -17,7 +17,10 @@ namespace xChatBusiness
         ObjectResultList<ConversationResponseEntity> GetListConversationByFilter(ObjectRequest<ConversationResponseEntity> objectRequest);
         ObjectResult<UserRoleType> UsersGetRoleType(ObjectRequest<string> objectRequest);
         ObjectResultList<AccountManagerConnect> GetListAgentByManager(ObjectRequest<string> objectRequest);
+        ObjectResultList<AccountManagerConnect> Manager_GetListAgent(ObjectRequest<string> objectRequest);
         ObjectResultList<ConversationResponseEntity> GetListConversationByChatAndAgentId(ObjectRequest<string> objectRequest);
         ObjectResultList<ConversationResponseEntity> GetListConversationByChatAndManagerId(ObjectRequest<string> objectRequest);
+   
+        
     }
 }
