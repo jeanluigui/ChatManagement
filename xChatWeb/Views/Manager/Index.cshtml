@@ -233,7 +233,10 @@
         function Fn_CloseChatUser(chatid, managerid)
         {
             if (chatid == 0) {
-                alert("Debe seleccionar un Chat.");
+                  bootbox.alert({
+                           message: "Debe seleccionar un Chat.",
+                           size: 'small'
+                       });
                 return;
             }
 

@@ -5,6 +5,8 @@
 @using xChatEntities;
 <link href="~/Content/StyleWhatsapp/styleWhatsapp.css" rel="stylesheet" />
 @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
+<link href="/Content/Emojis/lib/css/emoji.css" rel="stylesheet" />
+
 <style type="text/css">
     .bootbox-close-button close {
         display: none;
@@ -14,6 +16,9 @@
         pointer-events: none !important;
         opacity: 0.4;
     }
+    /*.emoji-menu {
+    width:100%
+    }*/
 </style>
 <div class="row" style="height:100%">
 
@@ -69,12 +74,15 @@
             <div class="col-sm message" id="conversation" style="overflow-y: auto;height: 86%;background:hsla(0, 0%, 80%, 0.22)">
 
             </div>
+            @*<p class="lead emoji-picker-container">
+              <input type="email" class="form-control" placeholder="Input field" data-emojiable="true">
+            </p>*@
             <div class="card-footer">
                 <div id="divSendMessage" class="input-group disableposession">
                     <div class="input-group-append">
                         <span class="input-group-text attach_btn"><i class="fa fa-smile-o"></i></span>
-                    </div>
-                    <textarea id="message" class="form-control type_msg disableposession" placeholder="Escriba un mensaje aquí"></textarea>
+                    </div>                 
+                        <textarea id="message" class="form-control type_msg disableposession" placeholder="Escriba un mensaje aquí" data-emojiable="true"></textarea>             
                     <div class="input-group-append">
                         <span class="input-group-text send_btn"><i class="fa fa-paper-plane" id="btnsendmessage"></i></span>
                     </div>
@@ -84,6 +92,10 @@
     }
 
 </div>
+<script src="/Content/Emojis/lib/js/config.js"></script>
+<script src="/Content/Emojis/lib/js/util.js"></script>
+<script src="/Content/Emojis/lib/js/jquery.emojiarea.js"></script>
+<script src="/Content/Emojis/lib/js/emoji-picker.js"></script>
 
 <input type="hidden" id="displayname" value="" />
 <input type="hidden" id="AgentId" value="0" />
@@ -114,8 +126,9 @@
 
         //Habilita Chat
         function Fn_EnabledPossession() {
-             $("#divSendMessage").removeClass("disableposession");
-             $("#message").removeClass("disableposession");
+            $("#divSendMessage").removeClass("disableposession");
+            $("#message").removeClass("disableposession");
+            $(".emoji-wysiwyg-editor").removeClass("disableposession");
         }
 
         //Deshabilita Chat
@@ -178,7 +191,10 @@
         function Fn_CloseChatUser()
         {
             if ($("input[id$=ChatId]").val() == 0) {
-             alert("Debe seleccionar un Chat.");
+                  bootbox.alert({
+                           message: "Debe seleccionar un Chat.",
+                           size: 'small'
+                       });
                 return;
             }
             var usernamevalue = $("input[id$=UserName]").val();
@@ -395,7 +411,10 @@
         function Fn_TransferUserToManager()
         {
           if ($("input[id$=ChatId]").val() ==0 ) {
-                     alert("Debe seleccionar un Chat.");
+                   bootbox.alert({
+                           message: "Debe seleccionar un Chat.",
+                           size: 'small'
+                       });
                         return;
                     }
                    var usernamevalue = $("input[id$=UserName]").val();
@@ -467,6 +486,14 @@
 
         $(function ()
         {
+            //Initialize emojis
+            //  window.emojiPicker = new EmojiPicker({
+            //    emojiable_selector: '[data-emojiable=true]',
+            //    assetsPath: '/Content/Emojis/lib/img/',
+            //    popupButtonClasses: 'fa fa-smile-o'
+            //});
+            //window.emojiPicker.discover();
+
             $.support.cors = true;
             $.connection.hub.url = "@xChatEntities.Constants.Url.SignalR";
             Counter = $.connection.counterHub;
