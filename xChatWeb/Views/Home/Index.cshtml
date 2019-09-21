@@ -4,8 +4,7 @@
 }
 @using xChatEntities;
 <link href="~/Content/StyleWhatsapp/styleWhatsapp.css" rel="stylesheet" />
-@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
-<link href="/Content/Emojis/lib/css/emoji.css" rel="stylesheet" />
+@*<link href="/Content/Emojis/lib/css/emoji.css" rel="stylesheet" />*@
 
 <style type="text/css">
     .bootbox-close-button close {
@@ -82,7 +81,7 @@
                     <div class="input-group-append">
                         <span class="input-group-text attach_btn"><i class="fa fa-smile-o"></i></span>
                     </div>                 
-                        <textarea id="message" class="form-control type_msg disableposession" placeholder="Escriba un mensaje aquí" data-emojiable="true"></textarea>             
+                        <textarea id="message" class="form-control type_msg disableposession" placeholder="Escriba un mensaje aquí" @*data-emojiable="true"*@></textarea>             
                     <div class="input-group-append">
                         <span class="input-group-text send_btn"><i class="fa fa-paper-plane" id="btnsendmessage"></i></span>
                     </div>
@@ -92,10 +91,10 @@
     }
 
 </div>
-<script src="/Content/Emojis/lib/js/config.js"></script>
+@*<script src="/Content/Emojis/lib/js/config.js"></script>
 <script src="/Content/Emojis/lib/js/util.js"></script>
 <script src="/Content/Emojis/lib/js/jquery.emojiarea.js"></script>
-<script src="/Content/Emojis/lib/js/emoji-picker.js"></script>
+<script src="/Content/Emojis/lib/js/emoji-picker.js"></script>*@
 
 <input type="hidden" id="displayname" value="" />
 <input type="hidden" id="AgentId" value="0" />
@@ -128,7 +127,7 @@
         function Fn_EnabledPossession() {
             $("#divSendMessage").removeClass("disableposession");
             $("#message").removeClass("disableposession");
-            $(".emoji-wysiwyg-editor").removeClass("disableposession");
+            //$(".emoji-wysiwyg-editor").removeClass("disableposession");
         }
 
         //Deshabilita Chat
