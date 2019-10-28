@@ -526,7 +526,7 @@
                         }
                         $("input[id$=ChatId]").val(0);
                         Fn_HideLoader();
-                        Fn_ReloadListAgentForManager();
+                        //Fn_ReloadListAgentForManager(); //ESTO DESCOMENTAR
                       }
 
                   }
@@ -597,10 +597,10 @@
 
                    });
 
-              $.connection.hub.disconnected(function () {
-                   Fn_HideLoader();
-                   window.location.reload(true);
-               });
+              //$.connection.hub.disconnected(function () {
+              //     Fn_HideLoader();
+              //     window.location.reload(true);
+              // });
 
                // Chat recibido del usuario.
                Counter.client.receivedFromUser = function (obj) {

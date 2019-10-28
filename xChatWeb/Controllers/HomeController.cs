@@ -20,18 +20,18 @@ namespace xChatWeb.Controllers
             // debe ser descriptado.
             // ----------------------------------------------
 
-            String originalParamId = "1"; // Encryption.Decrypt(HttpUtility.UrlDecode(paramId));
-            String originalParamAppId = "1";// Encryption.Decrypt(HttpUtility.UrlDecode(paramAppId));
-            String originalParamRolId = "1"; // Encryption.Decrypt(HttpUtility.UrlDecode(paramRolId));
+            String originalParamId = HttpUtility.UrlDecode(paramId);
+            String originalParamAppId = HttpUtility.UrlDecode(paramAppId);
+            String originalParamRolId = HttpUtility.UrlDecode(paramRolId);
 
             ViewBag.error = "";
 
             #region Get RolType by User
-            ObjectResult<UserRoleType> resultRolUser = new ObjectResult<UserRoleType>();
-            ObjectRequest<string> objectUser = new ObjectRequest<string>()
-            {
-                SenderObject = $"{originalParamId};"
-            };
+            //ObjectResult<UserRoleType> resultRolUser = new ObjectResult<UserRoleType>();
+            //ObjectRequest<string> objectUser = new ObjectRequest<string>()
+            //{
+            //    SenderObject = $"{originalParamId};"
+            //};
             //resultRolUser = RequestService.Execute<UserRoleType, string>(Constants.UrlApiService.UsersGetRoleType, "POST", objectUser);
             //if (resultRolUser.Id > 0)
             //{
