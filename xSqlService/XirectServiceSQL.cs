@@ -82,7 +82,7 @@ namespace xSqlService
         /// <param name="clave"></param>
         /// <param name="parametros"></param>
         /// <returns></returns>
-        public DataRow EjecutarRegistro(string entidad, string clave, Hashtable parametros = null)
+        public DataRow ExecuteRegister(string entidad, string clave, Hashtable parametros = null)
         {
             DataTable dtresultado = EjecutarTabla(entidad, clave, parametros);
 
@@ -181,7 +181,7 @@ namespace xSqlService
         /// <param name="clave"></param>
         /// <param name="parametros"></param>
         /// <returns></returns>
-        public DataRow EjecutarRegistro(SqlConnection osqlcon, string entidad, string clave, Hashtable parametros = null)
+        public DataRow ExecuteRegister(SqlConnection osqlcon, string entidad, string clave, Hashtable parametros = null)
         {
             DataTable dtresultado = EjecutarTabla(osqlcon, entidad, clave, parametros);
 
@@ -260,7 +260,7 @@ namespace xSqlService
         /// <param name="clave"></param>
         /// <param name="parametros"></param>
         /// <returns></returns>
-        public DataRow EjecutarRegistro(SqlTransaction osqltran, string entidad, string clave, Hashtable parametros = null)
+        public DataRow ExecuteRegister(SqlTransaction osqltran, string entidad, string clave, Hashtable parametros = null)
         {
             DataTable dtresultado = EjecutarTabla(osqltran, entidad, clave, parametros);
 

@@ -80,20 +80,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="xss.ConnectionManager, Version=1.5.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\xss.ConnectionManager.1.5.6\lib\netstandard2.0\xss.ConnectionManager.dll</HintPath>
-    </Reference>
-    <Reference Include="xss.EncryptionHandler, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\xss.EncryptionHandler.1.0.7\lib\netstandard2.0\xss.EncryptionHandler.dll</HintPath>
-    </Reference>
-    <Reference Include="xss.Enumeration, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\xss.Enumeration.1.2.2\lib\netstandard2.0\xss.Enumeration.dll</HintPath>
-    </Reference>
-    <Reference Include="xss.Logger, Version=2.1.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\xss.Logger.2.1.8\lib\netstandard2.0\xss.Logger.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsConnection.cs" />
     <Compile Include="IServiceChatManagerDAO.cs" />
     <Compile Include="IServiceFaqDAO.cs" />
     <Compile Include="IServiceMasterEntityDAO.cs" />

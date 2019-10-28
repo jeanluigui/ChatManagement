@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using xChatEntities;
-using xss.ConnectionManager;
+//using xss.ConnectionManager;
 
 namespace xChatDAO
 {
@@ -20,31 +20,31 @@ namespace xChatDAO
         /// </summary>
         /// <param name="conversationEntity"></param>
         /// <returns></returns>
-        public (string emailTo, string emailSubject, string emailBody) GetEmailTo(ConversationEntity conversationEntity)
-        {
-            string emailTo = string.Empty;
-            string emailSubject = string.Empty;
-            string emailBody = string.Empty;
+        //public (string emailTo, string emailSubject, string emailBody) GetEmailTo(ConversationEntity conversationEntity)
+        //{
+        //    string emailTo = string.Empty;
+        //    string emailSubject = string.Empty;
+        //    string emailBody = string.Empty;
 
-            ListParameters parameters = new ListParameters();
+        //    ListParameters parameters = new ListParameters();
 
-            parameters.Add("@userName", conversationEntity.UserName);
-            parameters.Add("@message", conversationEntity.Message);
+        //    parameters.Add("@userName", conversationEntity.UserName);
+        //    parameters.Add("@message", conversationEntity.Message);
 
-            CommandParameter queryCommand = new CommandParameter("chat.Config_GetMailTo_Sp", parameters);
+        //    CommandParameter queryCommand = new CommandParameter("chat.Config_GetMailTo_Sp", parameters);
 
-            DataRow drresult = DbManager.Instance.ExecuteRegister(queryCommand);
+        //    DataRow drresult = DbManager.Instance.ExecuteRegister(queryCommand);
 
-               emailTo = conversationEntity.Emailto;
-               emailSubject = conversationEntity.Subject;
-               emailBody = conversationEntity.TemplateHtml;
+        //       emailTo = conversationEntity.Emailto;
+        //       emailSubject = conversationEntity.Subject;
+        //       emailBody = conversationEntity.TemplateHtml;
 
-            return (emailTo, emailSubject, emailBody);
-        }
+        //    return (emailTo, emailSubject, emailBody);
+        //}
     }
 
     public interface IServiceNotificationDAO
     {
-        (string emailTo, string emailSubject, string emailBody) GetEmailTo(ConversationEntity conversationEntity);
+        //(string emailTo, string emailSubject, string emailBody) GetEmailTo(ConversationEntity conversationEntity);
     }
 }

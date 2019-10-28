@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using xChatDAO;
 using xChatEntities;
-using xss.EmailProvider;
-using xss.Logger.Enums;
-using xss.Logger.Factory;
-using xss.Logger.Interfaces;
+//using xss.EmailProvider;
+//using xss.Logger.Enums;
+//using xss.Logger.Factory;
+//using xss.Logger.Interfaces;
 
 namespace xChatBusiness
 {
@@ -16,7 +16,7 @@ namespace xChatBusiness
     {
         IServiceNotificationDAO _serviceNotificationDAO = new ServiceNotificationDAO();
 
-        private static ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.BusinessLayer);
+        //private static ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.BusinessLayer);
 
         /// <summary>
         /// Constructor donde se inicializa el DAO asociado a la clase.
@@ -29,43 +29,43 @@ namespace xChatBusiness
         /// Método que gestiona el envío del correo.
         /// </summary>
         /// <param name="conversationEntity"></param>
-        public void Send(ConversationEntity conversationEntity)
-        {
-            log.Save(EnumLogLevel.Fatal, "Ingresando a método para envío de correo....");
+        //public void Send(ConversationEntity conversationEntity)
+        //{
+        //    //log.Save(EnumLogLevel.Fatal, "Ingresando a método para envío de correo....");
 
-            try
-            {
-                // -----------------------------------------------------------------
-                // Se obtiene de la DB la información para el envío de correo.
-                // -----------------------------------------------------------------
-                log.Save(EnumLogLevel.Info, "Obteniendo información de correo....");
+        //    try
+        //    {
+        //        // -----------------------------------------------------------------
+        //        // Se obtiene de la DB la información para el envío de correo.
+        //        // -----------------------------------------------------------------
+        //        //log.Save(EnumLogLevel.Info, "Obteniendo información de correo....");
 
-                (string emailTo, string emailSubject, string emailBody) = _serviceNotificationDAO.GetEmailTo(conversationEntity);
+        //        (string emailTo, string emailSubject, string emailBody) = _serviceNotificationDAO.GetEmailTo(conversationEntity);
 
-                log.Save(EnumLogLevel.Info, "Validando información....");
+        //        //log.Save(EnumLogLevel.Info, "Validando información....");
 
-                if (string.IsNullOrEmpty(emailTo) || string.IsNullOrEmpty(emailSubject) || string.IsNullOrEmpty(emailBody))
-                {
-                    throw new Exception("No se configurado parámetros para envío de correo de Chat.");
-                }
+        //        if (string.IsNullOrEmpty(emailTo) || string.IsNullOrEmpty(emailSubject) || string.IsNullOrEmpty(emailBody))
+        //        {
+        //            throw new Exception("No se configurado parámetros para envío de correo de Chat.");
+        //        }
 
-                log.Save(EnumLogLevel.Info, "Enviando correo....");
+        //        //log.Save(EnumLogLevel.Info, "Enviando correo....");
 
-                // -----------------------------------------------------------------
-                // Método del NUGET para envío de correo.
-                // -----------------------------------------------------------------
-                //EmailProvider.SendEmailAsync(emailTo, emailBody, emailSubject);
-                new Task(() => { EmailProvider.SendEmailAsync(emailTo, emailBody, emailSubject); }).Start();
+        //        // -----------------------------------------------------------------
+        //        // Método del NUGET para envío de correo.
+        //        // -----------------------------------------------------------------
+        //        //EmailProvider.SendEmailAsync(emailTo, emailBody, emailSubject);
+        //        //new Task(() => { EmailProvider.SendEmailAsync(emailTo, emailBody, emailSubject); }).Start();
 
            
-                log.Save(EnumLogLevel.Info, "FIN Enviando correo.");
+        //        //log.Save(EnumLogLevel.Info, "FIN Enviando correo.");
 
-            }
-            catch (Exception ex)
-            {
-                log.Save(EnumLogLevel.Fatal, ex);
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //log.Save(EnumLogLevel.Fatal, ex);
+        //    }
+        //}
     }
 
 }

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using xChatEntities;
 using xChatUtilities;
 using xChatWeb.Models;
-using xss.EncryptionHandler;
+//using xss.EncryptionHandler;
 
 namespace xChatWeb.Controllers
 {

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using xChatDAO;
 using xChatEntities;
 using xChatUtilities;
-using xss.Logger.Enums;
-using xss.Logger.Factory;
-using xss.Logger.Interfaces;
-using encryp = xss.EncryptionHandler;
+//using xss.Logger.Enums;
+//using xss.Logger.Factory;
+//using xss.Logger.Interfaces;
+//using encryp = xss.EncryptionHandler;
 
 namespace xChatBusiness
 {
@@ -15,7 +15,7 @@ namespace xChatBusiness
     /// </summary>
     public class ServiceChatBL
     {
-        private static ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.BusinessLayer);
+        //private static ILoggerHandler log = LoggerFactory.Get(EnumLayerIdentifier.BusinessLayer);
 
         private static readonly ServiceChatBL _service = new ServiceChatBL();
 
@@ -48,10 +48,10 @@ namespace xChatBusiness
                 // caso contrario, se obtiene el agente disponible que cumple con las habilidades requeridas.
                 // --------------------------------------------------------------------------------------------
 
-                if (conversationEntity.ChatBySkillLanguageId.Equals(0) || conversationEntity.ChatBySkillModuleId.Equals(0))
-                    accountManagerConnectId = ServiceChatDAO.GetAccountManagerConnectId(conversationEntity);
-                else
-                    accountManagerConnectId = ServiceChatDAO.GetAccountManagerConnectBySkillLevel(conversationEntity);
+                //if (conversationEntity.ChatBySkillLanguageId.Equals(0) || conversationEntity.ChatBySkillModuleId.Equals(0))
+                //    accountManagerConnectId = ServiceChatDAO.GetAccountManagerConnectId(conversationEntity);
+                //else
+                //    accountManagerConnectId = ServiceChatDAO.GetAccountManagerConnectBySkillLevel(conversationEntity);
 
                 // -------------------------------------------------------------
                 // Si no obtiene, entonces se devuelve valor (-1)
@@ -66,7 +66,7 @@ namespace xChatBusiness
             }
             catch(Exception ex)
             {
-                log.Save(EnumLogLevel.Fatal, ex);
+                //log.Save(EnumLogLevel.Fatal, ex);
             }
 
             return chatId;
@@ -87,7 +87,7 @@ namespace xChatBusiness
             }
             catch (Exception ex)
             {
-                log.Save(EnumLogLevel.Fatal, ex);
+                //log.Save(EnumLogLevel.Fatal, ex);
             }
 
             return tokenDestino;
@@ -107,8 +107,8 @@ namespace xChatBusiness
                 // -----------------------------------
                 // Encriptar el mensaje.
                 // -----------------------------------
-                
-                conversationEntity.Message = encryp.Encryption.Encrypt(HtmlSanitizer.SanitizeHtml(conversationEntity.Message));
+
+                conversationEntity.Message = HtmlSanitizer.SanitizeHtml(conversationEntity.Message);/* encryp.Encryption.Encrypt(HtmlSanitizer.SanitizeHtml(conversationEntity.Message));*/
 
                 // -----------------------------------
                 // Guardar.
@@ -117,7 +117,7 @@ namespace xChatBusiness
             }
             catch(Exception ex)
             {
-                log.Save(EnumLogLevel.Fatal, ex);
+                //log.Save(EnumLogLevel.Fatal, ex);
             }
 
             return result;
@@ -135,207 +135,207 @@ namespace xChatBusiness
             }
             catch (Exception ex)
             {
-                log.Save(EnumLogLevel.Fatal, ex);
+                //log.Save(EnumLogLevel.Fatal, ex);
             }
         }
 
-        /// <summary>
-        /// Obtener el token del Agente.
-        /// </summary>
-        /// <param name="conversationEntity"></param>
-        /// <returns></returns>
-        public string GetManagerToken(ConversationEntity conversationEntity)
-        {
-            string managerToken = string.Empty;
+        ///// <summary>
+        ///// Obtener el token del Agente.
+        ///// </summary>
+        ///// <param name="conversationEntity"></param>
+        ///// <returns></returns>
+        //public string GetManagerToken(ConversationEntity conversationEntity)
+        //{
+        //    string managerToken = string.Empty;
 
-            try
-            {
-                managerToken = ServiceChatDAO.GetManagerToken(conversationEntity);
-            }
-            catch (Exception ex)
-            {
-                log.Save(EnumLogLevel.Fatal, ex);
-            }
+        //    try
+        //    {
+        //        managerToken = ServiceChatDAO.GetManagerToken(conversationEntity);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //log.Save(EnumLogLevel.Fatal, ex);
+        //    }
 
-            return managerToken;
-        }
-        public string GetManagerTokenValueByAgentId(ConversationEntity conversationEntity)
-        {
-            string managerToken = string.Empty;
+        //    return managerToken;
+        //}
+        //public string GetManagerTokenValueByAgentId(ConversationEntity conversationEntity)
+        //{
+        //    string managerToken = string.Empty;
 
-            try
-            {
-                managerToken = ServiceChatDAO.GetManagerTokenValue(conversationEntity);
-            }
-            catch (Exception ex)
-            {
-                log.Save(EnumLogLevel.Fatal, ex);
-            }
+        //    try
+        //    {
+        //        managerToken = ServiceChatDAO.GetManagerTokenValue(conversationEntity);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //log.Save(EnumLogLevel.Fatal, ex);
+        //    }
 
-            return managerToken;
-        }
-        public string GetManagerTokenValueByManagerId(ConversationEntity conversationEntity)
-        {
-            string managerToken = string.Empty;
+        //    return managerToken;
+        //}
+        //public string GetManagerTokenValueByManagerId(ConversationEntity conversationEntity)
+        //{
+        //    string managerToken = string.Empty;
 
-            try
-            {
-                managerToken = ServiceChatDAO.GetManagerTokenValueByManagerId(conversationEntity);
-            }
-            catch (Exception ex)
-            {
-                log.Save(EnumLogLevel.Fatal, ex);
-            }
+        //    try
+        //    {
+        //        managerToken = ServiceChatDAO.GetManagerTokenValueByManagerId(conversationEntity);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //log.Save(EnumLogLevel.Fatal, ex);
+        //    }
 
-            return managerToken;
-        }
-        
-        public ConversationEntity GetAgentAndManagerIdByToken(String token)
-        {
-            ConversationEntity ConversationEntity = new ConversationEntity();
+        //    return managerToken;
+        //}
 
-            try
-            {
-                ConversationEntity = ServiceChatDAO.GetAgentAndManagerIdByToken(token);
-            }
-            catch (Exception ex)
-            {
-                log.Save(EnumLogLevel.Fatal, ex);
-            }
+        //public ConversationEntity GetAgentAndManagerIdByToken(String token)
+        //{
+        //    ConversationEntity ConversationEntity = new ConversationEntity();
 
-            return ConversationEntity;
-        }
+        //    try
+        //    {
+        //        ConversationEntity = ServiceChatDAO.GetAgentAndManagerIdByToken(token);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //log.Save(EnumLogLevel.Fatal, ex);
+        //    }
 
-        /// <summary>
-        /// Desconectar a un agente.
-        /// </summary>
-        /// <param name="accountManagerEntity"></param>
-        public void AccountManagerDisconnect(AccountManagerEntity accountManagerEntity)
-        {
-            try
-            {
-                ServiceChatDAO.AccountManagerDisconnect(accountManagerEntity);
-            }
-            catch (Exception ex)
-            {
-                log.Save(EnumLogLevel.Fatal, ex);
-            }
-        }
+        //    return ConversationEntity;
+        //}
 
-        /// <summary>
-        /// Desconectar a un usuario.
-        /// </summary>
-        /// <param name="conversationEntity"></param>
-        public Int32 UserDisconnectForManager(ConversationEntity conversationEntity)
-        {
-            Int32 success = 0;
-            try
-            {
-                success = ServiceChatDAO.UserDisconnectForManager(conversationEntity);
-            }
-            catch (Exception ex)
-            {
-                success = 0;
-                log.Save(EnumLogLevel.Fatal, ex);
-            }
-            return success;
-        }
+        ///// <summary>
+        ///// Desconectar a un agente.
+        ///// </summary>
+        ///// <param name="accountManagerEntity"></param>
+        //public void AccountManagerDisconnect(AccountManagerEntity accountManagerEntity)
+        //{
+        //    try
+        //    {
+        //        ServiceChatDAO.AccountManagerDisconnect(accountManagerEntity);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //log.Save(EnumLogLevel.Fatal, ex);
+        //    }
+        //}
 
-        /// <summary>
-        /// Establecer el mensaje como leído por el Agente.
-        /// </summary>
-        /// <param name="conversationEntity"></param>
-        public void SetMessageReadForManager(ConversationEntity conversationEntity)
-        {
-            try
-            {
-                ServiceChatDAO.SetMessageReadForManager(conversationEntity);
-            }
-            catch (Exception ex)
-            {
-                log.Save(EnumLogLevel.Fatal, ex);
-            }
-        }
+        ///// <summary>
+        ///// Desconectar a un usuario.
+        ///// </summary>
+        ///// <param name="conversationEntity"></param>
+        //public Int32 UserDisconnectForManager(ConversationEntity conversationEntity)
+        //{
+        //    Int32 success = 0;
+        //    try
+        //    {
+        //        success = ServiceChatDAO.UserDisconnectForManager(conversationEntity);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        success = 0;
+        //        //log.Save(EnumLogLevel.Fatal, ex);
+        //    }
+        //    return success;
+        //}
 
-        #region Proceso interno para probar la encriptación de mensajes.
+        ///// <summary>
+        ///// Establecer el mensaje como leído por el Agente.
+        ///// </summary>
+        ///// <param name="conversationEntity"></param>
+        //public void SetMessageReadForManager(ConversationEntity conversationEntity)
+        //{
+        //    try
+        //    {
+        //        ServiceChatDAO.SetMessageReadForManager(conversationEntity);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //log.Save(EnumLogLevel.Fatal, ex);
+        //    }
+        //}
 
-        /// <summary>
-        /// Método para encriptar todos los mensajes de todas las conversaciones.
-        /// </summary>
-        public void ProcessSetEncrypMessage()
-        {
-            // --------------------------------------------------------------------
-            // Establecer encriptación de los mensajes 
-            // --------------------------------------------------------------------
-            List<ConversationEntity> listMess = ServiceChatDAO.GetAllMessages();
+        //#region Proceso interno para probar la encriptación de mensajes.
 
-            listMess.ForEach(x => x.Message = encryp.Encryption.Encrypt(HtmlSanitizer.SanitizeHtml(x.Message)));
+        ///// <summary>
+        ///// Método para encriptar todos los mensajes de todas las conversaciones.
+        ///// </summary>
+        //public void ProcessSetEncrypMessage()
+        //{
+        //    // --------------------------------------------------------------------
+        //    // Establecer encriptación de los mensajes 
+        //    // --------------------------------------------------------------------
+        //    List<ConversationEntity> listMess = ServiceChatDAO.GetAllMessages();
 
-            ServiceChatDAO.SetEncrypMessages(listMess);
+        //    listMess.ForEach(x => x.Message = HtmlSanitizer.SanitizeHtml(x.Message));/* encryp.Encryption.Encrypt(HtmlSanitizer.SanitizeHtml(x.Message)));*/
 
-            // --------------------------------------------------------------------
-            // Recuperar mensajes y desincriptarlos. 
-            // --------------------------------------------------------------------
-            listMess = ServiceChatDAO.GetAllMessages();
+        //    ServiceChatDAO.SetEncrypMessages(listMess);
 
-            listMess.ForEach(x => x.Message = encryp.Encryption.Decrypt(x.Message));
-        }
+        //    // --------------------------------------------------------------------
+        //    // Recuperar mensajes y desincriptarlos. 
+        //    // --------------------------------------------------------------------
+        //    listMess = ServiceChatDAO.GetAllMessages();
 
-        #endregion
+        //    listMess.ForEach(x => x.Message = x.Message);/*encryp.Encryption.Decrypt(x.Message));*/
+        //}
 
-        public ObjectResultList<AccountManagerConnect> GetListAgentByManager(ConversationEntity objectRequest)
-        {
-            ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
+        //#endregion
 
-            try
-            {
-                if (objectRequest.ManagerId <= 0)
-                {
-                    throw new Exception("Debe especificar valor de filtro.");
-                }
+        //public ObjectResultList<AccountManagerConnect> GetListAgentByManager(ConversationEntity objectRequest)
+        //{
+        //    ObjectResultList<AccountManagerConnect> result = new ObjectResultList<AccountManagerConnect>();
 
-                result = ServiceChatDAO.GetListAgentByManager(objectRequest);
-            }
-            catch (Exception ex)
-            {
-                result.Id = 1;
-                result.Message = ex.Message;
+        //    try
+        //    {
+        //        if (objectRequest.ManagerId <= 0)
+        //        {
+        //            throw new Exception("Debe especificar valor de filtro.");
+        //        }
 
-                log.Save(EnumLogLevel.Fatal, ex);
-            }
+        //        result = ServiceChatDAO.GetListAgentByManager(objectRequest);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result.Id = 1;
+        //        result.Message = ex.Message;
 
-            return result;
-        }
+        //        //log.Save(EnumLogLevel.Fatal, ex);
+        //    }
 
-        /// <summary>
-        /// Mover una conversación a otro chat.
-        /// </summary>
-        /// <param name="objectRequest"></param>
-        /// <returns></returns>
-        public Int32 ConversationMoveTo(ConversationEntity objChat)
-        {
-            int success = 0;
-            try
-            {
-                if (objChat.AgentId < 1)
-                {
-                    throw new Exception("Debe especificar valor para AgentId.");
-                }
-                if (objChat.ChatId < 1)
-                {
-                    throw new Exception("Debe especificar valor para ChatId.");
-                }
+        //    return result;
+        //}
 
-                success = ServiceChatDAO.ConversationMoveTo(objChat);
-            }
-            catch (Exception ex)
-            {
-                 success = 0;
-                log.Save(EnumLogLevel.Fatal, ex);
-            }
+        ///// <summary>
+        ///// Mover una conversación a otro chat.
+        ///// </summary>
+        ///// <param name="objectRequest"></param>
+        ///// <returns></returns>
+        //public Int32 ConversationMoveTo(ConversationEntity objChat)
+        //{
+        //    int success = 0;
+        //    try
+        //    {
+        //        if (objChat.AgentId < 1)
+        //        {
+        //            throw new Exception("Debe especificar valor para AgentId.");
+        //        }
+        //        if (objChat.ChatId < 1)
+        //        {
+        //            throw new Exception("Debe especificar valor para ChatId.");
+        //        }
 
-            return success;
-        }
+        //        success = ServiceChatDAO.ConversationMoveTo(objChat);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //         success = 0;
+        //        //log.Save(EnumLogLevel.Fatal, ex);
+        //    }
+
+        //    return success;
+        //}
 
     }
 }

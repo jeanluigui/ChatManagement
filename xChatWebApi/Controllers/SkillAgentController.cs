@@ -27,244 +27,244 @@ namespace xChatWebApi.Controllers
         /// <param name="objectRequest"></param>
         /// <returns></returns>
         /// 
-        [HttpPost]
-        [ActionName("ChangeStateSkillLanguage")]
-        [Route("api/SkillAgent/ChangeStateSkillLanguage/")]
-        public ObjectResult<bool> ChangeStateSkillLanguage(ObjectRequest<SkillAgentLanguage> objectRequest)
-        {
-            ObjectResult<bool> result = new ObjectResult<bool>();
+        //[HttpPost]
+        //[ActionName("ChangeStateSkillLanguage")]
+        //[Route("api/SkillAgent/ChangeStateSkillLanguage/")]
+        //public ObjectResult<bool> ChangeStateSkillLanguage(ObjectRequest<SkillAgentLanguage> objectRequest)
+        //{
+        //    ObjectResult<bool> result = new ObjectResult<bool>();
 
-            try
-            {
-                _IServiceSkillAgentBL.ChangeStateSkillLanguage(objectRequest);
+        //    try
+        //    {
+        //        _IServiceSkillAgentBL.ChangeStateSkillLanguage(objectRequest);
 
-                result.Data = true;
-            }
-            catch (Exception ex)
-            {
-                result.Id = 1;
-                result.Message = ex.Message;
-            }
+        //        result.Data = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result.Id = 1;
+        //        result.Message = ex.Message;
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
-        /// <summary>
-        /// Método para actualizar el estado de una habilidad por Modulo.
-        /// </summary>
-        /// <param name="objectRequest"></param>
-        /// 
-        [HttpPost]
-        [ActionName("ChangeStateSkillModule")]
-        [Route("api/SkillAgent/ChangeStateSkillModule/")]
-        public ObjectResult<bool> ChangeStateSkillModule(ObjectRequest<SkillAgentModule> objectRequest)
-        {
-            ObjectResult<bool> result = new ObjectResult<bool>();
+        ///// <summary>
+        ///// Método para actualizar el estado de una habilidad por Modulo.
+        ///// </summary>
+        ///// <param name="objectRequest"></param>
+        ///// 
+        //[HttpPost]
+        //[ActionName("ChangeStateSkillModule")]
+        //[Route("api/SkillAgent/ChangeStateSkillModule/")]
+        //public ObjectResult<bool> ChangeStateSkillModule(ObjectRequest<SkillAgentModule> objectRequest)
+        //{
+        //    ObjectResult<bool> result = new ObjectResult<bool>();
 
-            try
-            {
-                _IServiceSkillAgentBL.ChangeStateSkillModule(objectRequest);
+        //    try
+        //    {
+        //        _IServiceSkillAgentBL.ChangeStateSkillModule(objectRequest);
 
-                result.Data = true;
-            }
-            catch (Exception ex)
-            {
-                result.Id = 1;
-                result.Message = ex.Message;
-            }
+        //        result.Data = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result.Id = 1;
+        //        result.Message = ex.Message;
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
-        /// <summary>
-        /// Metodo para crear  una habilidad de Lenguaje.
-        /// </summary>
-        /// <param name="objectRequest"></param>
-        /// <returns></returns>
-        /// 
-        [HttpPost]
-        [ActionName("CreateSkillLanguage")]
-        [Route("api/SkillAgent/CreateSkillLanguage/")]
-        public ObjectResult<bool> CreateSkillLanguage(ObjectRequest<SkillAgentLanguage> objectRequest)
-        {
-            ObjectResult<bool> result = new ObjectResult<bool>();
+        ///// <summary>
+        ///// Metodo para crear  una habilidad de Lenguaje.
+        ///// </summary>
+        ///// <param name="objectRequest"></param>
+        ///// <returns></returns>
+        ///// 
+        //[HttpPost]
+        //[ActionName("CreateSkillLanguage")]
+        //[Route("api/SkillAgent/CreateSkillLanguage/")]
+        //public ObjectResult<bool> CreateSkillLanguage(ObjectRequest<SkillAgentLanguage> objectRequest)
+        //{
+        //    ObjectResult<bool> result = new ObjectResult<bool>();
 
-            try
-            {
-                _IServiceSkillAgentBL.CreateSkillLanguage(objectRequest);
+        //    try
+        //    {
+        //        _IServiceSkillAgentBL.CreateSkillLanguage(objectRequest);
 
-                result.Data = true;
-            }
-            catch (Exception ex)
-            {
-                result.Id = 1;
-                result.Message = ex.Message;
-            }
+        //        result.Data = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result.Id = 1;
+        //        result.Message = ex.Message;
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
-        /// <summary>
-        /// Metodo para crear  una habilidad de Módulo.
-        /// </summary>
-        /// <param name="objectRequest"></param>
-        /// <returns></returns>
-        /// 
-        [HttpPost]
-        [ActionName("CreateSkillModule")]
-        [Route("api/SkillAgent/CreateSkillModule/")]
-        public ObjectResult<bool> CreateSkillModule(ObjectRequest<SkillAgentModule> objectRequest)
-        {
-            ObjectResult<bool> result = new ObjectResult<bool>();
+        ///// <summary>
+        ///// Metodo para crear  una habilidad de Módulo.
+        ///// </summary>
+        ///// <param name="objectRequest"></param>
+        ///// <returns></returns>
+        ///// 
+        //[HttpPost]
+        //[ActionName("CreateSkillModule")]
+        //[Route("api/SkillAgent/CreateSkillModule/")]
+        //public ObjectResult<bool> CreateSkillModule(ObjectRequest<SkillAgentModule> objectRequest)
+        //{
+        //    ObjectResult<bool> result = new ObjectResult<bool>();
 
-            try
-            {
-                _IServiceSkillAgentBL.CreateSkillModule(objectRequest);
+        //    try
+        //    {
+        //        _IServiceSkillAgentBL.CreateSkillModule(objectRequest);
 
-                result.Data = true;
-            }
-            catch (Exception ex)
-            {
-                result.Id = 1;
-                result.Message = ex.Message;
-            }
+        //        result.Data = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result.Id = 1;
+        //        result.Message = ex.Message;
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
-        /// <summary>
-        /// Metodo que devuelve una lista con las habilidades de los Agentes por Modulo y Lenguaje.
-        /// </summary>
-        /// <param name="objectRequest"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [ActionName("GetListSkillByAgent")]
-        [Route("api/SkillAgent/GetListSkillByAgent/")]
-        public ObjectResultList<SkillAgent> GetListSkillByAgent(ObjectRequest<SkillAgentFilter> objectRequest)
-        {
-            ObjectResultList<SkillAgent> result = new ObjectResultList<SkillAgent>();
+        ///// <summary>
+        ///// Metodo que devuelve una lista con las habilidades de los Agentes por Modulo y Lenguaje.
+        ///// </summary>
+        ///// <param name="objectRequest"></param>
+        ///// <returns></returns>
+        //[HttpPost]
+        //[ActionName("GetListSkillByAgent")]
+        //[Route("api/SkillAgent/GetListSkillByAgent/")]
+        //public ObjectResultList<SkillAgent> GetListSkillByAgent(ObjectRequest<SkillAgentFilter> objectRequest)
+        //{
+        //    ObjectResultList<SkillAgent> result = new ObjectResultList<SkillAgent>();
 
-            try
-            {
-                result = _IServiceSkillAgentBL.GetListSkillByAgent(objectRequest);
-            }
-            catch (Exception ex)
-            {
-                result.Id = 1;
-                result.Message = ex.Message;
-            }
+        //    try
+        //    {
+        //        result = _IServiceSkillAgentBL.GetListSkillByAgent(objectRequest);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result.Id = 1;
+        //        result.Message = ex.Message;
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
-        /// <summary>
-        /// Actualiza habilidad de Lenguaje.
-        /// </summary>
-        /// <param name="objectRequest"></param>
-        /// <returns></returns>
-        /// 
-        [HttpPost]
-        [ActionName("UpdateSkillLanguage")]
-        [Route("api/SkillAgent/UpdateSkillLanguage/")]
-        public ObjectResult<bool> UpdateSkillLanguage(ObjectRequest<SkillAgentLanguage> objectRequest)
-        {
-            ObjectResult<bool> result = new ObjectResult<bool>();
+        ///// <summary>
+        ///// Actualiza habilidad de Lenguaje.
+        ///// </summary>
+        ///// <param name="objectRequest"></param>
+        ///// <returns></returns>
+        ///// 
+        //[HttpPost]
+        //[ActionName("UpdateSkillLanguage")]
+        //[Route("api/SkillAgent/UpdateSkillLanguage/")]
+        //public ObjectResult<bool> UpdateSkillLanguage(ObjectRequest<SkillAgentLanguage> objectRequest)
+        //{
+        //    ObjectResult<bool> result = new ObjectResult<bool>();
 
-            try
-            {
-                _IServiceSkillAgentBL.UpdateSkillLanguage(objectRequest);
+        //    try
+        //    {
+        //        _IServiceSkillAgentBL.UpdateSkillLanguage(objectRequest);
 
-                result.Data = true;
-            }
-            catch (Exception ex)
-            {
-                result.Id = 1;
-                result.Message = ex.Message;
-            }
+        //        result.Data = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result.Id = 1;
+        //        result.Message = ex.Message;
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
-        /// <summary>
-        /// Actualiza habilidad de Modulo.
-        /// </summary>
-        /// <param name="objectRequest"></param>
-        /// <returns></returns>
-        /// 
-        [HttpPost]
-        [ActionName("UpdateSkillModule")]
-        [Route("api/SkillAgent/UpdateSkillModule/")]
-        public ObjectResult<bool> UpdateSkillModule(ObjectRequest<SkillAgentModule> objectRequest)
-        {
-            ObjectResult<bool> result = new ObjectResult<bool>();
+        ///// <summary>
+        ///// Actualiza habilidad de Modulo.
+        ///// </summary>
+        ///// <param name="objectRequest"></param>
+        ///// <returns></returns>
+        ///// 
+        //[HttpPost]
+        //[ActionName("UpdateSkillModule")]
+        //[Route("api/SkillAgent/UpdateSkillModule/")]
+        //public ObjectResult<bool> UpdateSkillModule(ObjectRequest<SkillAgentModule> objectRequest)
+        //{
+        //    ObjectResult<bool> result = new ObjectResult<bool>();
 
-            try
-            {
-                _IServiceSkillAgentBL.UpdateSkillModule(objectRequest);
+        //    try
+        //    {
+        //        _IServiceSkillAgentBL.UpdateSkillModule(objectRequest);
 
-                result.Data = true;
-            }
-            catch (Exception ex)
-            {
-                result.Id = 1;
-                result.Message = ex.Message;
-            }
+        //        result.Data = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result.Id = 1;
+        //        result.Message = ex.Message;
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
-        /// <summary>
-        /// Valida si agente esta asignado a modulo.
-        /// </summary>
-        /// <param name="objectRequest"></param>
-        /// <returns></returns>
-        /// 
-        [HttpPost]
-        [ActionName("ValidateSkillByAgentModule")]
-        [Route("api/SkillAgent/ValidateSkillByAgentModule/")]
-        public ObjectResult<Boolean> ValidateSkillByAgentModule(ObjectRequest<SkillAgentModule> objectRequest)
-        {
-            ObjectResult<Boolean> result = new ObjectResult<Boolean>();
+        ///// <summary>
+        ///// Valida si agente esta asignado a modulo.
+        ///// </summary>
+        ///// <param name="objectRequest"></param>
+        ///// <returns></returns>
+        ///// 
+        //[HttpPost]
+        //[ActionName("ValidateSkillByAgentModule")]
+        //[Route("api/SkillAgent/ValidateSkillByAgentModule/")]
+        //public ObjectResult<Boolean> ValidateSkillByAgentModule(ObjectRequest<SkillAgentModule> objectRequest)
+        //{
+        //    ObjectResult<Boolean> result = new ObjectResult<Boolean>();
             
-            try
-            {
-                result = _IServiceSkillAgentBL.ValidateSkillByAgentModule(objectRequest);
-                result.Data = true;
-            }
-            catch (Exception ex)
-            {
-                result.Id = -1;
-                result.Message = ex.Message;
-            }
+        //    try
+        //    {
+        //        result = _IServiceSkillAgentBL.ValidateSkillByAgentModule(objectRequest);
+        //        result.Data = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result.Id = -1;
+        //        result.Message = ex.Message;
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
-        /// <summary>
-        /// Valida si agente esta asignado a Lenguage.
-        /// </summary>
-        /// <param name="objectRequest"></param>
-        /// <returns></returns>
-        /// 
-        [HttpPost]
-        [ActionName("ValidateSkillByAgentLanguage")]
-        [Route("api/SkillAgent/ValidateSkillByAgentLanguage/")]
-        public ObjectResult<Boolean> ValidateSkillByAgentLanguage(ObjectRequest<SkillAgentLanguage> objectRequest)
-        {
-            ObjectResult<Boolean> result = new ObjectResult<Boolean>();
+        ///// <summary>
+        ///// Valida si agente esta asignado a Lenguage.
+        ///// </summary>
+        ///// <param name="objectRequest"></param>
+        ///// <returns></returns>
+        ///// 
+        //[HttpPost]
+        //[ActionName("ValidateSkillByAgentLanguage")]
+        //[Route("api/SkillAgent/ValidateSkillByAgentLanguage/")]
+        //public ObjectResult<Boolean> ValidateSkillByAgentLanguage(ObjectRequest<SkillAgentLanguage> objectRequest)
+        //{
+        //    ObjectResult<Boolean> result = new ObjectResult<Boolean>();
 
-            try
-            {
-                result = _IServiceSkillAgentBL.ValidateSkillByAgentLanguage(objectRequest);
-                result.Data = true;
-            }
-            catch (Exception ex)
-            {
-                result.Id = -1;
-                result.Message = ex.Message;
-            }
+        //    try
+        //    {
+        //        result = _IServiceSkillAgentBL.ValidateSkillByAgentLanguage(objectRequest);
+        //        result.Data = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result.Id = -1;
+        //        result.Message = ex.Message;
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
     }
 }

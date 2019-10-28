@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using xChatEntities;
 using xChatUtilities;
 using xChatWeb.Models;
-using xss.EncryptionHandler;
+//using xss.EncryptionHandler;
 
 namespace xChatWeb.Controllers
 {
@@ -20,9 +20,9 @@ namespace xChatWeb.Controllers
             // debe ser descriptado.
             // ----------------------------------------------
 
-            String originalParamId = paramId; // Encryption.Decrypt(HttpUtility.UrlDecode(paramId));
-            String originalParamAppId = paramAppId;// Encryption.Decrypt(HttpUtility.UrlDecode(paramAppId));
-            String originalParamRolId = paramRolId; // Encryption.Decrypt(HttpUtility.UrlDecode(paramRolId));
+            String originalParamId = "1"; // Encryption.Decrypt(HttpUtility.UrlDecode(paramId));
+            String originalParamAppId = "1";// Encryption.Decrypt(HttpUtility.UrlDecode(paramAppId));
+            String originalParamRolId = "1"; // Encryption.Decrypt(HttpUtility.UrlDecode(paramRolId));
 
             ViewBag.error = "";
 
@@ -32,11 +32,11 @@ namespace xChatWeb.Controllers
             {
                 SenderObject = $"{originalParamId};"
             };
-            resultRolUser = RequestService.Execute<UserRoleType, string>(Constants.UrlApiService.UsersGetRoleType, "POST", objectUser);
-            if (resultRolUser.Id > 0)
-            {
-                if (resultRolUser.Id  == (Int32)EnumRolTypeChat.Agent)
-                {
+            //resultRolUser = RequestService.Execute<UserRoleType, string>(Constants.UrlApiService.UsersGetRoleType, "POST", objectUser);
+            //if (resultRolUser.Id > 0)
+            //{
+                //if (resultRolUser.Id  == (Int32)EnumRolTypeChat.Agent)
+                //{
                     // ----------------------------------------------
                     // Obtener lista de agentes conectados de un determinado módulo.
                     // ----------------------------------------------           
@@ -56,9 +56,9 @@ namespace xChatWeb.Controllers
                     ViewBag.ManagetId = (lstAgentResult.Elements == null || lstAgentResult.Elements.Count == 0) ? "" : lstAgentResult.Elements[0].ManagerId.ToString();
                     ViewBag.AgentActive = lstAgentResult;
                     ViewBag.RolType = (Int32)EnumRolTypeChat.Agent;
-                }
+                //}
                 
-            }
+            //}
             #endregion
             
             return View();

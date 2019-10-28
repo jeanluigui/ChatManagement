@@ -26,50 +26,50 @@ namespace xChatWebApi.Controllers
         /// </summary>
         /// <param name="objectRequest"></param>
         /// <returns></returns>
-        [HttpPost]
-        [ActionName("GetListByEntityName")]
-        [Route("api/ManagerMasterEntity/GetListByEntityName/")]
-        public ObjectResultList<EntityMaster> GetListByEntityName(ObjectRequest<EntityMasterEnum> objectRequest)
-        {
-            ObjectResultList<EntityMaster> result = new ObjectResultList<EntityMaster>();
+        //[HttpPost]
+        //[ActionName("GetListByEntityName")]
+        //[Route("api/ManagerMasterEntity/GetListByEntityName/")]
+        //public ObjectResultList<EntityMaster> GetListByEntityName(ObjectRequest<EntityMasterEnum> objectRequest)
+        //{
+        //    ObjectResultList<EntityMaster> result = new ObjectResultList<EntityMaster>();
 
-            try
-            {
-                result = _IServiceMasterEntityBL.GetList(objectRequest.SenderObject);
-            }
-            catch (Exception ex)
-            {
-                result.Id = 1;
-                result.Message = ex.Message;
-            }
+        //    try
+        //    {
+        //        result = _IServiceMasterEntityBL.GetList(objectRequest.SenderObject);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result.Id = 1;
+        //        result.Message = ex.Message;
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="objectRequest"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [ActionName("SearchMasterGetList")]
-        [Route("api/ManagerMasterEntity/SearchMasterGetList/")]
-        public ObjectResultList<EntityMaster> SearchMasterGetList(ObjectRequest<ParamSearchMaster> objectRequest)
-        {
-            ObjectResultList<EntityMaster> result = new ObjectResultList<EntityMaster>();
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="objectRequest"></param>
+        ///// <returns></returns>
+        //[HttpPost]
+        //[ActionName("SearchMasterGetList")]
+        //[Route("api/ManagerMasterEntity/SearchMasterGetList/")]
+        //public ObjectResultList<EntityMaster> SearchMasterGetList(ObjectRequest<ParamSearchMaster> objectRequest)
+        //{
+        //    ObjectResultList<EntityMaster> result = new ObjectResultList<EntityMaster>();
 
-            try
-            {
-                result = _IServiceMasterEntityBL.SearchMasterGetList(objectRequest.SenderObject);
-            }
-            catch (Exception ex)
-            {
-                result.Id = 1;
-                result.Message = ex.Message;
-            }
+        //    try
+        //    {
+        //        result = _IServiceMasterEntityBL.SearchMasterGetList(objectRequest.SenderObject);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result.Id = 1;
+        //        result.Message = ex.Message;
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
 
     }

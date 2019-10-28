@@ -5,7 +5,7 @@ namespace xChatDAO
 {
     public interface IServiceMasterEntityDAO
     {
-        ObjectResultList<EntityMaster> GetList(EntityMasterEnum entityMasterEnum);
-        ObjectResultList<EntityMaster> SearchMasterGetList(string masterEntity, string masterAction, string masterParametersSet, string masterParametersAdd);
+        //ObjectResultList<EntityMaster> GetList(EntityMasterEnum entityMasterEnum);
+        //ObjectResultList<EntityMaster> SearchMasterGetList(string masterEntity, string masterAction, string masterParametersSet, string masterParametersAdd);
     }
 }

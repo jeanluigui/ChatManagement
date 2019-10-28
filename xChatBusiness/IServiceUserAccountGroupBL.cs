@@ -9,10 +9,10 @@ namespace xChatBusiness
 {
     public interface IServiceUserAccountGroupBL
     {
-        void CreateUserAccountGroup(ObjectRequest<UserAccountGroups> objectRequest);
-        void UpdateUserAccountGroup(ObjectRequest<UserAccountGroups> objectRequest);
-        void DeleteUserAccountGroup(ObjectRequest<UserAccountGroups> objectRequest);
-        ObjectResultList<UserAccountGroups> GetListUserAccountGroup(ObjectRequest<UserAccountGroups> objectRequest);
-        ObjectResult<Boolean> ValidateUserAccountGroup(ObjectRequest<UserAccountGroups> objectRequest);
+        //void CreateUserAccountGroup(ObjectRequest<UserAccountGroups> objectRequest);
+        //void UpdateUserAccountGroup(ObjectRequest<UserAccountGroups> objectRequest);
+        //void DeleteUserAccountGroup(ObjectRequest<UserAccountGroups> objectRequest);
+        //ObjectResultList<UserAccountGroups> GetListUserAccountGroup(ObjectRequest<UserAccountGroups> objectRequest);
+        //ObjectResult<Boolean> ValidateUserAccountGroup(ObjectRequest<UserAccountGroups> objectRequest);
     }
 }

@@ -4,6 +4,6 @@ namespace xChatBusiness
 {
     public interface IServiceNotificationBL
     {
-        void Send(ConversationEntity conversationEntity);
+        //void Send(ConversationEntity conversationEntity);
     }
 }
