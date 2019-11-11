@@ -45,13 +45,13 @@ namespace xChatDAO
                 ObjCmd.Parameters.AddWithValue("@language", conversationEntity.ChatBySkillLanguageId);
                 ObjCmd.Parameters.AddWithValue("@module", conversationEntity.ChatBySkillModuleId);
 
-                ObjCmd.ExecuteNonQuery();
+                SqlDataReader datareader = ObjCmd.ExecuteReader();
                 success = true;
 
                 //CommandParameter queryCommand = new CommandParameter("chat.Chat_Insert_Sp", parameters);
                 //DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
 
-                //chatId = Convert.ToInt32(rowResult["ChatId"]);
+                chatId = Convert.ToInt32(datareader["ChatId"]);
             }
             catch (TimeoutException tout)
             {
@@ -105,7 +105,6 @@ namespace xChatDAO
         {
             int chatMessageId = 0;
             SqlCommand ObjCmd = null;
-            Boolean success = false;
             DataTable rowResult = new DataTable();
             try
             {
@@ -415,41 +414,43 @@ namespace xChatDAO
         //    return accountManagerConnectId;
         //}
 
-        ///// <summary>
-        ///// Obtener un Account Manager disponible.
-        ///// </summary>
-        ///// <param name="conversationEntity"></param>
-        ///// <returns></returns>
-        //public static int GetAccountManagerConnectId(ConversationEntity conversationEntity)
-        //{
-        //    Int32 accountManagerConnectId = 0;
+        /// <summary>
+        /// Obtener un Account Manager disponible.
+        /// </summary>
+        /// <param name="conversationEntity"></param>
+        /// <returns></returns>
+        public static int GetAccountManagerConnectId(ConversationEntity conversationEntity)
+        {
+            Int32 accountManagerConnectId = 0;
+            SqlCommand ObjCmd = null;
+            DataTable rowResult = new DataTable();
+            try
+            {
 
-        //    try
-        //    {
-        //        ListParameters parameters = new ListParameters();
-        //        parameters.Add("@moduleappid", conversationEntity.ModuleAppId);
+                ObjCmd = new SqlCommand("chat.AccountManager_SearchByModulo_Sp", clsConnection.GetConnection());
+                ObjCmd.CommandType = CommandType.StoredProcedure;
+                ObjCmd.Parameters.AddWithValue("@moduleappid", conversationEntity.ModuleAppId);
 
-        //        CommandParameter queryCommand = new CommandParameter("chat.AccountManager_SearchByModulo_Sp", parameters);
+                SqlDataAdapter da = new SqlDataAdapter(ObjCmd);
+                da.Fill(rowResult);
 
-        //        DataRow drresult = DbManager.Instance.ExecuteRegister(queryCommand);
+                foreach (DataRow item in rowResult.Rows)
+                {
+                    accountManagerConnectId = Convert.ToInt32(item["AccountManagerConnectId"]);
+                    conversationEntity.AgentToken = item["accountmanagertoken"].ToString();
+                }               
+            }
+            catch (TimeoutException tout)
+            {
+                //log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                //log.Save(EnumLogLevel.Fatal, ex);
+            }
 
-        //        if (drresult != null && !drresult.IsNull("AccountManagerConnectId"))
-        //        {
-        //            accountManagerConnectId = Convert.ToInt32(drresult["AccountManagerConnectId"]);
-        //            conversationEntity.AgentToken = drresult["accountmanagertoken"].ToString();
-        //        }
-        //    }
-        //    catch (TimeoutException tout)
-        //    {
-        //        //log.Save(EnumLogLevel.Fatal, tout.Message);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //log.Save(EnumLogLevel.Fatal, ex);
-        //    }
-
-        //    return accountManagerConnectId;
-        //}
+            return accountManagerConnectId;
+        }
 
         //#region Métodos Util para encriptar las conversaciones.
 

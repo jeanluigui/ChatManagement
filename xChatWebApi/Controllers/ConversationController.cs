@@ -375,30 +375,30 @@ namespace xChatWebApi.Controllers
         //    return result;
         //}
 
-        ///// <summary>
-        ///// Devuelve la lista de usuarios asociados al Account Manager.
-        ///// </summary>
-        ///// <param name="objectRequest"></param>
-        ///// <returns></returns>
-        //[HttpPost]
-        //[ActionName("GetListUserByAccountManagerId")]
-        //[Route("api/Conversation/GetListUserByAccountManagerId/")]
-        //public ObjectResultList<UserConnect> GetListUserByAccountManagerId(ObjectRequest<int> objectRequest)
-        //{
-        //    ObjectResultList<UserConnect> result = new ObjectResultList<UserConnect>();
+        /// <summary>
+        /// Devuelve la lista de usuarios asociados al Account Manager.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ActionName("GetListUserByAccountManagerId")]
+        [Route("api/Conversation/GetListUserByAccountManagerId/")]
+        public ObjectResultList<UserConnect> GetListUserByAccountManagerId(ObjectRequest<int> objectRequest)
+        {
+            ObjectResultList<UserConnect> result = new ObjectResultList<UserConnect>();
 
-        //    try
-        //    {
-        //        result = _serviceChatManagerBL.GetListUserByAccountManagerId(objectRequest);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        result.Id = 1;
-        //        result.Message = ex.Message;
-        //    }
+            try
+            {
+                result = _serviceChatManagerBL.GetListUserByAccountManagerId(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
+            }
 
-        //    return result;
-        //}
+            return result;
+        }
 
         ///// <summary>
         ///// Devuelve la conversación de un ChatId para vista Manager.

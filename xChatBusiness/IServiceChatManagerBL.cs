@@ -12,7 +12,7 @@ namespace xChatBusiness
         //ObjectResultList<ConversationResponseEntity> GetListConversationByChatId(ObjectRequest<int> objectRequest);
         //ObjectResultList<ConversationResponseEntity> GetListConversationByReport(ObjectRequest<string> objectRequest);
         //ObjectResultList<UserConnect> GetListUserConnectByAccountManagerId(ObjectRequest<int> objectRequest);
-        //ObjectResultList<UserConnect> GetListUserByAccountManagerId(ObjectRequest<int> objectRequest);
+        ObjectResultList<UserConnect> GetListUserByAccountManagerId(ObjectRequest<int> objectRequest);
         //ObjectResultList<ReportChat> GetReport(ObjectRequest<ReportFilter> objectRequest);
         //ObjectResultList<ConversationResponseEntity> GetListConversationByFilter(ObjectRequest<ConversationResponseEntity> objectRequest);
         //ObjectResult<UserRoleType> UsersGetRoleType(ObjectRequest<string> objectRequest);

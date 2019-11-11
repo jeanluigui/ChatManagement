@@ -57,24 +57,24 @@ namespace xChatBusiness
         /// </summary>
         /// <param name="objectRequest"></param>
         /// <returns></returns>
-        //public ObjectResultList<UserConnect> GetListUserByAccountManagerId(ObjectRequest<int> objectRequest)
-        //{
-        //    ObjectResultList<UserConnect> result = new ObjectResultList<UserConnect>();
+        public ObjectResultList<UserConnect> GetListUserByAccountManagerId(ObjectRequest<int> objectRequest)
+        {
+            ObjectResultList<UserConnect> result = new ObjectResultList<UserConnect>();
 
-        //    try
-        //    {
-        //        result = _IServiceChatManagerDAO.GetListUserByAccountManagerId(objectRequest);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        result.Id = 1;
-        //        result.Message = ex.Message;
+            try
+            {
+                result = _IServiceChatManagerDAO.GetListUserByAccountManagerId(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
 
-        //        //log.Save(EnumLogLevel.Fatal, ex);
-        //    }
+                //log.Save(EnumLogLevel.Fatal, ex);
+            }
 
-        //    return result;
-        //}
+            return result;
+        }
 
         ///// <summary>
         ///// Obtener listado de conversación de un chat.

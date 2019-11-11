@@ -49,7 +49,7 @@ namespace xChatBusiness
                 // --------------------------------------------------------------------------------------------
 
                 //if (conversationEntity.ChatBySkillLanguageId.Equals(0) || conversationEntity.ChatBySkillModuleId.Equals(0))
-                //    accountManagerConnectId = ServiceChatDAO.GetAccountManagerConnectId(conversationEntity);
+                    accountManagerConnectId = ServiceChatDAO.GetAccountManagerConnectId(conversationEntity);
                 //else
                 //    accountManagerConnectId = ServiceChatDAO.GetAccountManagerConnectBySkillLevel(conversationEntity);
 

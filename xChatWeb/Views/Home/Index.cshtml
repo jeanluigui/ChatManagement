@@ -574,8 +574,8 @@
                        UserToken: $("input[id$=UserToken]").val(),
                        AgentToken: $("input[id$=AgentToken]").val(),
                        AccountAgentName: $("input[id$=AccountAgentName]").val(),
-                       ChatBySkillModuleId: $("input[id$=hfModuleId]").val(),
-                       ChatBySkillLanguageId: $("input[id$=hfLanguageId]").val(),
+                       ChatBySkillModuleId: $("input[id$=hfModuleId]").val(0),
+                       ChatBySkillLanguageId: $("input[id$=hfLanguageId]").val(0),
                        ManagerToken: ""
                    };
                    Counter.server.sendToUser(objChat);

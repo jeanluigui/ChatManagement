@@ -102,12 +102,12 @@ namespace xChatAPI
                 }
 
                 // Si el valor del chatid = -2 es porque no se encontro ningun agente con las habilidades especificadas
-                else if (conversationEntity.ChatId.Equals(-2))
-                {
-                    //_serviceNotification.Send(conversationEntity);
-                    await Clients.Caller.chatManagerNoFoundAgentBySkills("Agent not found with assigned skills....");
-                    return;
-                }                
+                //else if (conversationEntity.ChatId.Equals(-2))
+                //{
+                //    //_serviceNotification.Send(conversationEntity);
+                //    await Clients.Caller.chatManagerNoFoundAgentBySkills("Agent not found with assigned skills....");
+                //    return;
+                //}                
             }
 
             // Obtenemos el mensaje en formato original antes de encriptarlo.

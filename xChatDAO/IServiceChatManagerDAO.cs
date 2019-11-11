@@ -12,7 +12,7 @@ namespace xChatDAO
         //ObjectResultList<ConversationResponseEntity> GetListConversationByChatId(ObjectRequest<int> objectRequest);
         //ObjectResultList<ConversationResponseEntity> GetListConversationByReport(string senderObject);
         ObjectResultList<UserConnect> GetListUserConnectByAccountManagerId(ObjectRequest<int> objectRequest);
-        //ObjectResultList<UserConnect> GetListUserByAccountManagerId(ObjectRequest<int> objectRequest);
+        ObjectResultList<UserConnect> GetListUserByAccountManagerId(ObjectRequest<int> objectRequest);
         //ObjectResultList<ReportChat> GetReport(ReportFilter senderObject);
         //ObjectResultList<ConversationResponseEntity> GetListConversationByFilter(ObjectRequest<ConversationResponseEntity> objectRequest);
         //ObjectResult<UserRoleType> UsersGetRoleType(ObjectRequest<string> objectRequest);

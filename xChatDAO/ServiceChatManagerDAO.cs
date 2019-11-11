@@ -59,43 +59,45 @@ namespace xChatDAO
             return listUserConnect;
         }
 
-        ///// <summary>
-        ///// Obtiene la lista de usuarios de un Agente.
-        ///// </summary>
-        ///// <param name="objectRequest"></param>
-        ///// <returns></returns>
-        //public ObjectResultList<UserConnect> GetListUserByAccountManagerId(ObjectRequest<int> objectRequest)
-        //{
-        //    ObjectResultList<UserConnect> listUserConnect = new ObjectResultList<UserConnect>();
+        /// <summary>
+        /// Obtiene la lista de usuarios de un Agente.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        public ObjectResultList<UserConnect> GetListUserByAccountManagerId(ObjectRequest<int> objectRequest)
+        {
+            ObjectResultList<UserConnect> listUserConnect = new ObjectResultList<UserConnect>();
+            SqlCommand ObjCmd = null;
+            DataTable dtresult = new DataTable();
+            try
+            {
 
-        //    try
-        //    {
-        //        ListParameters parameters = new ListParameters();
-        //        parameters.Add("@accountmanagerid", objectRequest.SenderObject);
 
-        //        CommandParameter queryCommand = new CommandParameter("chat.ManagerConnect_GetListUser_sp", parameters);
-        //        DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
+                ObjCmd = new SqlCommand("chat.ManagerConnect_GetListUser_sp", clsConnection.GetConnection());
+                ObjCmd.CommandType = CommandType.StoredProcedure;
+                ObjCmd.Parameters.AddWithValue("@accountmanagerid", objectRequest.SenderObject);
+                SqlDataAdapter da = new SqlDataAdapter(ObjCmd);
+                da.Fill(dtresult);
+                listUserConnect = new ObjectResultList<UserConnect>(dtresult);
 
-        //        listUserConnect = new ObjectResultList<UserConnect>(dtresult);
+            }
+            catch (TimeoutException tout)
+            {
+                listUserConnect.Id = 2;
+                listUserConnect.Message = tout.Message;
 
-        //    }
-        //    catch (TimeoutException tout)
-        //    {
-        //        listUserConnect.Id = 2;
-        //        listUserConnect.Message = tout.Message;
+                //log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                listUserConnect.Id = 1;
+                listUserConnect.Message = ex.Message;
 
-        //        //log.Save(EnumLogLevel.Fatal, tout.Message);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        listUserConnect.Id = 1;
-        //        listUserConnect.Message = ex.Message;
+                //log.Save(EnumLogLevel.Fatal, ex);
+            }
 
-        //        //log.Save(EnumLogLevel.Fatal, ex);
-        //    }
-
-        //    return listUserConnect;
-        //}
+            return listUserConnect;
+        }
 
         ///// <summary>
         ///// Devuelve conversación de un Chat.
