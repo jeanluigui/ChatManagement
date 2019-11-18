@@ -505,38 +505,42 @@ namespace xChatDAO
         //    return result;
         //}
 
-        //public ObjectResultList<ConversationResponseEntity> GetListConversationByChatAndAgentId(ObjectRequest<string> objectRequest)
-        //{
-        //    ObjectResultList<ConversationResponseEntity> listUserConnect = new ObjectResultList<ConversationResponseEntity>();
+        public ObjectResultList<ConversationResponseEntity> GetListConversationByChatAndAgentId(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<ConversationResponseEntity> listUserConnect = new ObjectResultList<ConversationResponseEntity>();
+            SqlCommand ObjCmd = null;
+            DataTable dtresult = new DataTable();
+            try
+            {
+                ObjCmd = new SqlCommand("chat.AccountManager_GetListConversationsByChatAndAgentId_Sp", clsConnection.GetConnection());
+                ObjCmd.CommandType = CommandType.StoredProcedure;
+                ObjCmd.Parameters.AddWithValue("@chatid", objectRequest.SenderObject.Split(';')[0].ToString());
+                ObjCmd.Parameters.AddWithValue("@agentid", objectRequest.SenderObject.Split(';')[1].ToString());
+                SqlDataAdapter da = new SqlDataAdapter(ObjCmd);
+                da.Fill(dtresult);
+                listUserConnect = new ObjectResultList<ConversationResponseEntity>(dtresult);
+                //CommandParameter queryCommand = new CommandParameter("chat.AccountManager_GetListConversationsByChatAndAgentId_Sp", parameters);
+                //DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
 
-        //    try
-        //    {
-        //        ListParameters parameters = new ListParameters();
-        //        parameters.Add("@chatid", objectRequest.SenderObject.Split(';')[0].ToString());
-        //        parameters.Add("@agentid", objectRequest.SenderObject.Split(';')[1].ToString());
 
-        //        CommandParameter queryCommand = new CommandParameter("chat.AccountManager_GetListConversationsByChatAndAgentId_Sp", parameters);
-        //        DataTable dtresult = DbManager.Instance.ExecuteTable(queryCommand);
+            }
+            catch (TimeoutException tout)
+            {
+                listUserConnect.Id = 2;
+                listUserConnect.Message = tout.Message;
 
-        //        listUserConnect = new ObjectResultList<ConversationResponseEntity>(dtresult);
-        //    }
-        //    catch (TimeoutException tout)
-        //    {
-        //        listUserConnect.Id = 2;
-        //        listUserConnect.Message = tout.Message;
+                //log.Save(EnumLogLevel.Fatal, tout.Message);
+            }
+            catch (Exception ex)
+            {
+                listUserConnect.Id = 1;
+                listUserConnect.Message = ex.Message;
 
-        //        log.Save(EnumLogLevel.Fatal, tout.Message);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        listUserConnect.Id = 1;
-        //        listUserConnect.Message = ex.Message;
+                //log.Save(EnumLogLevel.Fatal, ex);
+            }
 
-        //        log.Save(EnumLogLevel.Fatal, ex);
-        //    }
-
-        //    return listUserConnect;
-        //}
+            return listUserConnect;
+        }
 
         //public ObjectResultList<ConversationResponseEntity> GetListConversationByChatAndManagerId(ObjectRequest<string> objectRequest)
         //{

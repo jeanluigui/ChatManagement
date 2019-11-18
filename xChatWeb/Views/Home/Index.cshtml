@@ -178,7 +178,7 @@
                 Fn_MessageUser(chatid, $("input[id$=AgentId]").val())
 
                 var conversationEntity = { ChatId: chatid }
-                Counter.server.setMessageReadForManager(conversationEntity);
+                //Counter.server.setMessageReadForManager(conversationEntity);
                 $(this).find('.haveMessageActive').removeClass();
             });
 
@@ -574,8 +574,8 @@
                        UserToken: $("input[id$=UserToken]").val(),
                        AgentToken: $("input[id$=AgentToken]").val(),
                        AccountAgentName: $("input[id$=AccountAgentName]").val(),
-                       ChatBySkillModuleId: $("input[id$=hfModuleId]").val(0),
-                       ChatBySkillLanguageId: $("input[id$=hfLanguageId]").val(0),
+                       ChatBySkillModuleId: $("input[id$=hfModuleId]").val(),
+                       ChatBySkillLanguageId: $("input[id$=hfLanguageId]").val(),
                        ManagerToken: ""
                    };
                    Counter.server.sendToUser(objChat);

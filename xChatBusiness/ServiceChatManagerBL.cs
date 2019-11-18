@@ -387,42 +387,43 @@ namespace xChatBusiness
         //    return result;
         //}
 
-        ///// <summary>
-        ///// Obtener listado de conversación de un chat.
-        ///// </summary>
-        ///// <param name="objectRequest"></param>
-        ///// <returns></returns>
-        //public ObjectResultList<ConversationResponseEntity> GetListConversationByChatAndAgentId(ObjectRequest<string> objectRequest)
-        //{
-        //    ObjectResultList<ConversationResponseEntity> result = new ObjectResultList<ConversationResponseEntity>();
+        /// <summary>
+        /// Obtener listado de conversación de un chat.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        public ObjectResultList<ConversationResponseEntity> GetListConversationByChatAndAgentId(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<ConversationResponseEntity> result = new ObjectResultList<ConversationResponseEntity>();
 
-        //    try
-        //    {
-        //        if (string.IsNullOrEmpty(objectRequest.SenderObject))
-        //        {
-        //            throw new Exception("Debe especificar valor de filtro.");
-        //        }
+            try
+            {
+                if (string.IsNullOrEmpty(objectRequest.SenderObject))
+                {
+                    throw new Exception("Debe especificar valor de filtro.");
+                }
 
-        //        result = _IServiceChatManagerDAO.GetListConversationByChatAndAgentId(objectRequest);
-        //        if (result.Id == 0 && result.Elements != null) {
-        //            result.Elements.ForEach(x => x.Message = x.Message/*encryp.Encryption.Decrypt(x.Message)*/);
-        //        }
-        //        else
-        //        {
-        //            result.Elements = new List<ConversationResponseEntity>();
-        //        }
+                result = _IServiceChatManagerDAO.GetListConversationByChatAndAgentId(objectRequest);
+                if (result.Id == 0 && result.Elements != null)
+                {
+                    result.Elements.ForEach(x => x.Message = x.Message/*encryp.Encryption.Decrypt(x.Message)*/);
+                }
+                else
+                {
+                    result.Elements = new List<ConversationResponseEntity>();
+                }
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        result.Id = 1;
-        //        result.Message = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                result.Id = 1;
+                result.Message = ex.Message;
 
-        //        //log.Save(EnumLogLevel.Fatal, ex);
-        //    }
+                //log.Save(EnumLogLevel.Fatal, ex);
+            }
 
-        //    return result;
-        //}
+            return result;
+        }
         ///// <summary>
         ///// Obtener listado de conversación de un chat de manager.
         ///// </summary>

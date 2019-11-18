@@ -31,6 +31,7 @@ namespace xChatDAO
             Int32 chatId = 0;
             SqlCommand ObjCmd = null;
             Boolean success = false;
+            DataTable rowResult = new DataTable();
             try
             {
                 ObjCmd = new SqlCommand("chat.Chat_Insert_Sp", clsConnection.GetConnection());
@@ -45,13 +46,15 @@ namespace xChatDAO
                 ObjCmd.Parameters.AddWithValue("@language", conversationEntity.ChatBySkillLanguageId);
                 ObjCmd.Parameters.AddWithValue("@module", conversationEntity.ChatBySkillModuleId);
 
-                SqlDataReader datareader = ObjCmd.ExecuteReader();
-                success = true;
-
                 //CommandParameter queryCommand = new CommandParameter("chat.Chat_Insert_Sp", parameters);
                 //DataRow rowResult = DbManager.Instance.ExecuteRegister(queryCommand);
-
-                chatId = Convert.ToInt32(datareader["ChatId"]);
+                SqlDataAdapter da = new SqlDataAdapter(ObjCmd);
+                da.Fill(rowResult);
+                success = true;
+                foreach (DataRow item in rowResult.Rows) {
+                    chatId = Convert.ToInt32(item["Chatid"]);
+                }
+                
             }
             catch (TimeoutException tout)
             {

@@ -400,30 +400,30 @@ namespace xChatWebApi.Controllers
             return result;
         }
 
-        ///// <summary>
-        ///// Devuelve la conversación de un ChatId para vista Manager.
-        ///// </summary>
-        ///// <param name="objectRequest"></param>
-        ///// <returns></returns>
-        //[HttpPost]
-        //[ActionName("GetListConversationByChatAndAgentId")]
-        //[Route("api/Conversation/GetListConversationByChatAndAgentId/")]
-        //public ObjectResultList<ConversationResponseEntity> GetListConversationByChatAndAgentId(ObjectRequest<string> objectRequest)
-        //{
-        //    ObjectResultList<ConversationResponseEntity> list = new ObjectResultList<ConversationResponseEntity>();
+        /// <summary>
+        /// Devuelve la conversación de un ChatId para vista Manager.
+        /// </summary>
+        /// <param name="objectRequest"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ActionName("GetListConversationByChatAndAgentId")]
+        [Route("api/Conversation/GetListConversationByChatAndAgentId/")]
+        public ObjectResultList<ConversationResponseEntity> GetListConversationByChatAndAgentId(ObjectRequest<string> objectRequest)
+        {
+            ObjectResultList<ConversationResponseEntity> list = new ObjectResultList<ConversationResponseEntity>();
 
-        //    try
-        //    {
-        //        list = _serviceChatManagerBL.GetListConversationByChatAndAgentId(objectRequest);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        list.Id = 1;
-        //        list.Message = ex.Message;
-        //    }
+            try
+            {
+                list = _serviceChatManagerBL.GetListConversationByChatAndAgentId(objectRequest);
+            }
+            catch (Exception ex)
+            {
+                list.Id = 1;
+                list.Message = ex.Message;
+            }
 
-        //    return list;
-        //}
+            return list;
+        }
 
         ///// <summary>
         ///// Devuelve la conversación del manager (chat) para vista Manager.
