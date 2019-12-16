@@ -212,6 +212,7 @@
     <Content Include="Content\Emojis\lib\js\jquery.emojiarea.js" />
     <Content Include="Content\Emojis\lib\js\util.js" />
     <Content Include="Content\handlebars\handlebars-v4.0.12.js" />
+    <Content Include="Content\Imagenes\clienteImg.png" />
     <Content Include="Content\Imagenes\Disk-1.9s-89px.gif" />
     <Content Include="Content\Imagenes\imgdefault.png" />
     <Content Include="Content\Imagenes\imgMessage.png" />
